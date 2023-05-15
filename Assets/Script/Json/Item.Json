@@ -1,0 +1,29 @@
+{
+  "skul":
+  [
+    {
+      "name": "",
+      "tier": "",
+      "type": "",
+      "intro": "",
+      "detail": "",
+      "ability": "",
+      "skillname": "",
+      "skillspname": ""
+    }
+  ],
+  "essence":
+  [
+    {
+      "name": "",
+      "tier": "",
+      "cooltime": 0,
+      "intro": "",
+      "detail": ""
+    }
+  ],
+  "item":
+  [
+
+  ]
+}
