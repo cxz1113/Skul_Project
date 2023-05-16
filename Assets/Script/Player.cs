@@ -10,22 +10,24 @@ public class Player : MonoBehaviour
         right
     }
     PlayerDir playerDir = PlayerDir.right;
+    PlayerDir playerDir_past;
 
     Rigidbody2D rigid;
     Animator animator;
+    
+    float moveSpeed = 7f;
 
-    int dashCount = 0;
+    int dashCount = 1;
     int maxDashCount = 2;
-    float speed = 7f;
-    float dashSpeed = 30f;
-    float dashDis = 1.5f;
-    float dashDelay = 0;
-    float dashCoolTime = 1.2f;
-    float jumpPower = 9f;
+    float dashPower = 15f;
+    float dashDelay = float.MaxValue;
+    float dashCoolTime = 0.8f;
+
+    float jumpPower = 12f;
     bool isGround = true;
     bool jumped = false;
-    bool isDashCool = false;
 
+    [SerializeField] float tempds = 1.75f;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +45,30 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
             Jump();
 
-        if (Input.GetKeyDown(KeyCode.Z) && !isDashCool)
+        if (Input.GetKey(KeyCode.Z))
         {
-            StartCoroutine("StartDash");
+            Attack();
+        }
+
+
+        dashDelay += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (animator.GetBool("Dash"))
+            {
+                if (dashCount < maxDashCount)
+                {
+                    StopDash();
+                    Dash();
+                    animator.Play("Player Dash",-1,0);
+                    dashCount++;
+                }
+            }
+            else if (dashDelay > dashCoolTime)
+            {
+                Dash();
+                dashDelay = 0f;
+            }
         }
     }
 
@@ -55,12 +78,25 @@ public class Player : MonoBehaviour
         {
             case PlayerDir.right:
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (playerDir_past != playerDir)
+                {
+                    transform.Translate(Vector2.right * 1.75f);
+                    //transform.Translate(Vector2.right * tempds * Time.deltaTime); 
+                }
                 break;
 
             case PlayerDir.left:
                 transform.rotation = Quaternion.Euler(0, 180, 0);
+                if (playerDir_past != playerDir)
+                {
+                    transform.Translate(Vector2.right * 1.75f);
+                    //transform.Translate(Vector2.right * tempds * Time.deltaTime);
+
+                    //transform.position += transform.TransformVector(Vector3.right) * 1.75f * 2;
+                }
                 break;
         }
+        playerDir_past = playerDir;
     }
 
     void JumpAnimation()
@@ -84,23 +120,22 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (animator.GetBool("Dash"))
+            return;
+
         float x = Input.GetAxisRaw("Horizontal");
-        transform.Translate(transform.right * (x * Time.deltaTime * speed));
+        transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
         // transform.Translate(new Vector2(x * Time.deltaTime * speed, 0));
 
         animator.SetBool("Walk", true);
-        if (x > 0)
-        {
-            playerDir = PlayerDir.right;
-        }
-        else if (x < 0)
-        {
-            playerDir = PlayerDir.left;
 
+        if(x == 0)
+        {
+            animator.SetBool("Walk", false);
         }
         else
         {
-            animator.SetBool("Walk", false);
+            playerDir = x > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
         }
     }
 
@@ -116,62 +151,37 @@ public class Player : MonoBehaviour
             }
         }
 
+        StopDash();
+        rigid.velocity = Vector2.zero;
+        rigid.gravityScale = 3f;
+        animator.SetBool("Dash", false);
+
+        rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
     }
 
-    IEnumerator StartDash()
+    void Dash()
     {
-        if (dashCount < maxDashCount)
-        {
-            StartCoroutine("Dash");
-            dashCount++;
-        }
-        
-        if(dashCount >= maxDashCount)
-        {
-            isDashCool = true;  
-            dashDelay = dashCoolTime;
-            while (dashDelay > 0)
-            {
-                dashDelay -= Time.deltaTime;
-                Debug.Log(dashDelay);
-                yield return new WaitForFixedUpdate();
-            }
-            dashCount = 0;
-            isDashCool = false;
-        } 
-    }
-
-    IEnumerator Dash()
-    {
-        float dashed = 0;
-        int dir;
-        dir = playerDir == PlayerDir.right ? 1 : -1;
-
         animator.SetBool("Dash", true);
+        rigid.gravityScale = 0;
+        rigid.velocity = new Vector2(rigid.velocity.x, 0);
 
-        while (dashed < dashDis)
-        {
-            float deltaDash = Time.deltaTime * dashSpeed;
-            transform.Translate(transform.right * (dir * deltaDash));
-            dashed += deltaDash;
-            yield return new WaitForFixedUpdate();
-        }
-        
-        animator.SetBool("Dash", false);
+
+        rigid.AddForce(transform.right * dashPower, ForceMode2D.Impulse);
     }
 
-    IEnumerator CoolDown(float coolTime)
+    void StopDash()
     {
-        float delay = coolTime;
-
-        while (delay > 0)
-        {
-            delay -= Time.deltaTime;
-            yield return new WaitForFixedUpdate();
-        }
+        rigid.velocity = Vector2.zero;
+        rigid.gravityScale = 3f;
+        animator.SetBool("Dash", false);
+        dashCount = 1;
     }
 
+    void Attack()
+    {
+
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
