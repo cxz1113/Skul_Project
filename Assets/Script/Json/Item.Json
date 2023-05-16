@@ -1,29 +1,41 @@
 {
-  "skul":
+  "item": 
   [
     {
       "name": "",
-      "tier": "",
-      "type": "",
       "intro": "",
-      "detail": "",
-      "ability": "",
-      "skillname": "",
-      "skillspname": ""
-    }
-  ],
-  "essence":
-  [
+      "tier": "",
+      "value1": "",
+      "value2": "",
+      "ability1": "",
+      "ability2": "",
+      "physical": 0,
+      "magic": 0,
+      "defence": 0
+    },
     {
       "name": "",
-      "tier": "",
-      "cooltime": 0,
       "intro": "",
-      "detail": ""
+      "tier": "",
+      "value1": "",
+      "value2": "",
+      "ability1": "",
+      "ability2": "",
+      "physical": 0,
+      "magic": 0,
+      "defence": 0
+    },
+    {
+      "name": "",
+      "intro": "",
+      "tier": "",
+      "value1": "",
+      "value2": "",
+      "ability1": "",
+      "ability2": "",
+      "physical": 0,
+      "magic": 0,
+      "defence": 0
     }
-  ],
-  "item":
-  [
-
   ]
 }
