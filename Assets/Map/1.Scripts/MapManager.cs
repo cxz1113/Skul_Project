@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static MapManager Instance;
+    public GameObject gate;
+    public GameObject gold;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Awake() => Instance = this;
+
 }
