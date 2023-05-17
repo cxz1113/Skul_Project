@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkulData : MonoBehaviour
 {
+    
     [System.Serializable]
     public class Data
     {
@@ -15,6 +17,8 @@ public class SkulData : MonoBehaviour
         public string ability;
         public string skillname;
         public string skillspname;
+        public string skillintrodetail;
+        public string skilldetail;
     }
 
     [System.Serializable]
@@ -28,6 +32,11 @@ public class SkulData : MonoBehaviour
     void Start()
     {
         split = JsonUtility.FromJson<Split>(skulJson.text);
+    }
+
+    public void OnSkulData()
+    {
+        SkulUI.Instance.SetData(split.skul[0]);
     }
 
 }

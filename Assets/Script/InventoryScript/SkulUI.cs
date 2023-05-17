@@ -7,6 +7,9 @@ using System.Linq;
 
 public class SkulUI : MonoBehaviour
 {
+
+    public static SkulUI Instance;
+
     [SerializeField] Image mainsSrite;
     [SerializeField] Image skillsprite;
 
@@ -19,6 +22,12 @@ public class SkulUI : MonoBehaviour
     [SerializeField] TMP_Text skillname;
 
     SkulData.Data skulData;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void Init()
     {
         name.text = skulData.name;
@@ -28,7 +37,7 @@ public class SkulUI : MonoBehaviour
         detail.text = skulData.detail;
         ability.text = skulData.ability;
         skillname.text = skulData.skillname;
-        skillsprite.sprite = Resources.Load<Sprite>($"Skill/{skulData.skillspname}");
+        skillsprite.sprite = Resources.Load<Sprite>($"3.UI/Skill/{skulData.skillspname}");
     }
 
     public void SetData(SkulData.Data data)
