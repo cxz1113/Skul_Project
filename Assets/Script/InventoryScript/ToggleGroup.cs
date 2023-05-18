@@ -8,13 +8,34 @@ public class ToggleGroup : MonoBehaviour
     [SerializeField] Toggle[] toggles;
     [SerializeField] GameObject[] frames;
 
+    [SerializeField] private Transform content;
+
+    ItemData.Data itemdata;
+
     void Start()
     {
-        
+        toggles[0].isOn = true;
+        OnToggles(toggles[0]);
     }
 
-    void Update()
+    public void OnToggles(Toggle toggle)
     {
+        if (toggle.isOn)
+        {
+            int count = 0;
+            foreach (var item in toggles)
+            {
+                if (item == toggle)
+                {
+                    frames[count].SetActive(true);
+                }
+                else
+                {
+                    frames[count].SetActive(false);
+                }
+                count++;
+            }
+        }
         
     }
 }

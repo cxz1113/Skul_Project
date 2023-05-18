@@ -36,6 +36,6 @@ public class ItemData : MonoBehaviour
 
     public void OnItemData()
     {
-        ItemUI.Instance.SetData(split.item[0]);
+        //ItemUI.Instance.SetData(split.item[0]);
     }
 }

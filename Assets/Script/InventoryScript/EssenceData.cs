@@ -32,6 +32,6 @@ public class EssenceData : MonoBehaviour
 
     public void OnEssenceData()
     {
-        EssenceUI.Instance.SetData(split.essence[0]);
+        //EssenceUI.Instance.SetData(split.essence[0]);
     }
 }

@@ -11,6 +11,7 @@ public class SkulData : MonoBehaviour
     {
         public string name;
         public string tier;
+        public int tierindex;
         public string type;
         public string intro;
         public string detail;
@@ -36,7 +37,7 @@ public class SkulData : MonoBehaviour
 
     public void OnSkulData()
     {
-        SkulUI.Instance.SetData(split.skul[0]);
+        //SkulUI.Instance.SetData(split.skul[0]);
     }
 
 }
