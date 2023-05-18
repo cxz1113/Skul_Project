@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WayPoint : Environment
 {
-    BoxCollider2D collider2D;
+    public BoxCollider2D collider2D;
+    public Canvas canvas;
     public override void Initialize()
     {
-        //evd.obj = this.gameObject;
+
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Initialize();
@@ -19,11 +20,35 @@ public class WayPoint : Environment
 
     void Update()
     {
-        if(!MapManager.Instance.isActive && MapManager.Instance.isWay)
+        if(gameObject.tag == "WayTown")
         {
-            MapManager.Instance.isWay = false;
-            GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
-            collider2D.enabled = true;
+            if(MapManager.Instance.isPushWay && MapManager.Instance.isPush)
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
+        else if(gameObject.tag == "WayBoss")
+        {
+            if (MapManager.Instance.isPushWay && MapManager.Instance.isPush)
+            {
+                SceneManager.LoadScene(2);
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            canvas.gameObject.SetActive(true);
+            MapManager.Instance.isPushWay = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            canvas.gameObject.SetActive(false);
         }
     }
 }

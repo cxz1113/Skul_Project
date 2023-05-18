@@ -10,14 +10,26 @@ public class MapManager : MonoBehaviour
     public GameObject gold;
     public List<WayPoint> wayPoints = new List<WayPoint>();
     public bool isActive { get; set; }
+
     public bool isPush { get; set; }
 
     public bool isWay { get; set; }
+
+    public bool isPushWay { get; set; }
 
     void Awake() => Instance = this;
 
     void Update()
     {
-        
+        if (!isActive && Instance.isWay)
+        {
+            Instance.isWay = false;
+
+            foreach (var way in wayPoints)
+            {
+                way.GetComponent<SpriteAnimation>().SetSprite(way.GetComponent<WayPoint>().active, 0.1f);
+                way.GetComponent<WayPoint>().collider2D.enabled = true;
+            }
+        }
     }
 }
