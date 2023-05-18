@@ -14,6 +14,7 @@ public class EssenceUI : MonoBehaviour
     [SerializeField] TMP_Text tier;
     [SerializeField] TMP_Text cooltime;
     [SerializeField] TMP_Text intro;
+    [SerializeField] TMP_Text ability;
     [SerializeField] TMP_Text detail;
 
     EssenceData.Data essenceData;
@@ -29,6 +30,7 @@ public class EssenceUI : MonoBehaviour
         tier.text = essenceData.tier;
         cooltime.text = essenceData.cooltime.ToString();
         intro.text = essenceData.intro;
+        ability.text = essenceData.ability;
         detail.text = essenceData.detail;
         essencespname.sprite = Resources.Load<Sprite>($"3.UI/Item/{essenceData.essencespname}");
     }

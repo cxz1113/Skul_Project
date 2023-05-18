@@ -18,9 +18,6 @@ public class ItemUI : MonoBehaviour
     [SerializeField] TMP_Text value2;
     [SerializeField] TMP_Text abillity1;
     [SerializeField] TMP_Text abillity2;
-    [SerializeField] TMP_Text physical;
-    [SerializeField] TMP_Text magic;
-    [SerializeField] TMP_Text defence;
 
     ItemData.Data itemData;
 
@@ -38,9 +35,6 @@ public class ItemUI : MonoBehaviour
         value2.text = itemData.value2;
         abillity1.text = itemData.abillity1;
         abillity2.text = itemData.abillity2;
-        physical.text = itemData.physical.ToString();
-        magic.text = itemData.magic.ToString();
-        defence.text = itemData.defence.ToString();
         itemspname.sprite = Resources.Load<Sprite>($"3.UI/Item/{itemData.itemspname}");
     }
 

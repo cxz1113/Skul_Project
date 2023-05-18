@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ToggleGroup : MonoBehaviour
 {
     [SerializeField] Toggle[] toggles;
+    [SerializeField] GameObject[] frames;
 
     void Start()
     {

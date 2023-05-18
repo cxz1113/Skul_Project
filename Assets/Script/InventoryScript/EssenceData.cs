@@ -12,6 +12,7 @@ public class EssenceData : MonoBehaviour
         public string tier;
         public int cooltime;
         public string intro;
+        public string ability;
         public string detail;
         public string essencespname;
     }
