@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rigid;
     Animator animator;
-    
+    [SerializeField] Skill_Head prefab_Head;
+    [SerializeField] Transform firePos;
+    [SerializeField] Transform head_Parent;
+
     float moveSpeed = 7f;
 
     int maxDashCount = 2;
     float dashPower = 15f;
-    float dashDelay = float.MaxValue;
     float dashCoolTime = 0.8f;
     float dashTime = 0.2f;
     bool canDash = true;
@@ -28,6 +30,8 @@ public class Player : MonoBehaviour
     float jumpPower = 12f;
     bool isGround = true;
     bool jumped = false;
+
+    bool canSkill_1 = true;
 
     //[SerializeField] float tempds = 1.75f;
 
@@ -52,11 +56,14 @@ public class Player : MonoBehaviour
             Attack();
         }
 
-
-        dashDelay += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Z) && canDash)
         {
             StartCoroutine("Dash");
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
+        {
+            StartCoroutine(Skill_1());
         }
     }
 
@@ -108,7 +115,11 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        if (animator.GetBool("Dash") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
+        {
+
+        }
+        else if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             return;
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -149,44 +160,64 @@ public class Player : MonoBehaviour
 
     IEnumerator Dash()
     {
-        int dashCount = 1;
+        float inputDir = Input.GetAxisRaw("Horizontal");
 
         canDash = false;
         isDashing = true;
         //animator.ResetTrigger("Attack");
-        //animator.SetBool("Dash", true);
-
+       
+        animator.SetBool("Dash", true);
         float originalGravity = rigid.gravityScale;
         rigid.gravityScale = 0;
-        rigid.velocity = new Vector2(dashPower, 0);
+        playerDir = inputDir < 0 ? PlayerDir.left : inputDir > 0 ? PlayerDir.right : playerDir;
+        float dir = playerDir == PlayerDir.right ? 1 : -1;
+        LookDir();
+        rigid.velocity = new Vector2(dir * dashPower, 0);
 
-        float continueTime = dashTime;
-
-        while (continueTime > 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Z)&& dashCount < maxDashCount)
-            {
-                continueTime = dashTime;
-                dashCount++;
-            }
-            yield return new WaitForFixedUpdate();
-            continueTime -= Time.deltaTime;
-        }
+        yield return new WaitForSeconds(dashTime);
 
         rigid.gravityScale = originalGravity;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash"))
+            rigid.velocity = Vector2.zero;
+
         isDashing = false;
+        animator.SetBool("Dash", false);
+
         yield return new WaitForSeconds(dashCoolTime);
         canDash = true;
     }
 
     void Attack()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash") || !isGround)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash") /*|| !isGround*/)
         {
             return;
         }
 
         animator.SetTrigger("Attack");
+    }
+
+    IEnumerator Skill_1()
+    {
+        canSkill_1 = false;
+        animator.SetTrigger("Skill_1");
+        yield return new WaitForSeconds(5f);
+        canSkill_1 = true;
+    }
+
+    public void ResetCool()
+    {
+        StopCoroutine("Skill_1");
+        canSkill_1 = true;
+    }
+
+    void EventSkill()
+    {
+        Skill_Head head = Instantiate(prefab_Head, firePos);
+        head.coolTime = 5;
+        head.dir = playerDir == PlayerDir.right ? 1 : -1;
+        head.player = this;
+        head.transform.SetParent(head_Parent);
     }
 
     void EventMoveAttack()
@@ -214,6 +245,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGround = true;
+            animator.SetBool("IsGround", true);
             jumped = false;
         }
     }
@@ -223,6 +255,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGround = false;
+            animator.SetBool("IsGround", false);
         }
     }
 }
