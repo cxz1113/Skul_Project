@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WayPoint : Environment
+public class WayPoint1 : Environment
 {
     BoxCollider2D collider2D;
     public override void Initialize()

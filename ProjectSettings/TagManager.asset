@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Gate
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -41,4 +43,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround4
+    uniqueID: 2381685141
+    locked: 0
+  - name: BackGround3
+    uniqueID: 2002361693
+    locked: 0
+  - name: BackGround2
+    uniqueID: 3600138703
+    locked: 0
+  - name: BackGround1
+    uniqueID: 112410555
+    locked: 0
+  - name: Player
+    uniqueID: 1248052513
+    locked: 0
+  - name: Ground
+    uniqueID: 2303585245
     locked: 0

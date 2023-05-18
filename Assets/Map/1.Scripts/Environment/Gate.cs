@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    bool isGate = false;
     void Start()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,6 +14,7 @@ public class Gate : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             MapManager.Instance.gold.gameObject.SetActive(true);
+            MapManager.Instance.isActive = true;
         }
     }
 }

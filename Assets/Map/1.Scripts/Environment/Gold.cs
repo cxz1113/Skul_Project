@@ -5,10 +5,19 @@ using UnityEngine;
 public class Gold : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
-    bool isOpen = false;
     void Start()
     {
         
+    }
+
+    void Update()
+    {
+        if(MapManager.Instance.isPush)
+        {
+            MapManager.Instance.isActive = false;
+            MapManager.Instance.isWay = true;
+            Destroy(transform.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
