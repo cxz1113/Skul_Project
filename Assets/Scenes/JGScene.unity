@@ -4961,6 +4961,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &280015879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5429,7 +5434,7 @@ GameObject:
   - component: {fileID: 378816962}
   - component: {fileID: 378816965}
   m_Layer: 0
-  m_Name: WayPoint
+  m_Name: WayTown
   m_TagString: WayTown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5515,6 +5520,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!61 &378816965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6590,7 +6600,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6614,7 +6624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.7, y: -39.1, z: -10}
+  m_LocalPosition: {x: 36.16, y: -39.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7556,7 +7566,7 @@ GameObject:
   - component: {fileID: 732532812}
   - component: {fileID: 732532815}
   m_Layer: 0
-  m_Name: 'WayPoint '
+  m_Name: WayBoss
   m_TagString: WayBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7642,6 +7652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!61 &732532815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8906,6 +8921,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!4 &942097586
 Transform:
   m_ObjectHideFlags: 0
@@ -8933,6 +8953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779f209efc3cd8345be7449c7ad11d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
   idle:
   - {fileID: 21300000, guid: f81a30e57da9443469b3bad6ae5b4b12, type: 3}
   - {fileID: 21300000, guid: 7d1de5b1569f8a340a1e6d3ad860340a, type: 3}
@@ -9718,6 +9739,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &1126012073
 GameObject:
   m_ObjectHideFlags: 0
@@ -11803,6 +11829,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &1401674937
 GameObject:
   m_ObjectHideFlags: 0
@@ -11838,6 +11869,11 @@ MonoBehaviour:
   wayPoints:
   - {fileID: 378816966}
   - {fileID: 732532816}
+  <isActive>k__BackingField: 0
+  <isPush>k__BackingField: 0
+  <isWay>k__BackingField: 0
+  <isTown>k__BackingField: 0
+  <isBoss>k__BackingField: 0
 --- !u!4 &1401674939
 Transform:
   m_ObjectHideFlags: 0
@@ -12056,6 +12092,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &1429948052
 GameObject:
   m_ObjectHideFlags: 0
@@ -49428,6 +49469,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &1729636722
 GameObject:
   m_ObjectHideFlags: 0
@@ -76852,6 +76898,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c176012440ff12a47a2fafb04afea2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+  sr: {fileID: 0}
+  spriteDelayTime: 0
+  delayTime: 0
+  spriteIndex: 0
 --- !u!1 &2021481508
 GameObject:
   m_ObjectHideFlags: 0

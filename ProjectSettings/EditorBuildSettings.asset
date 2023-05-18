@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GMScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/JGScene.unity
+    guid: 30d6ca6153d4ac34687c53f7228f44f8
+  - enabled: 1
+    path: Assets/Scenes/JGScene1.unity
+    guid: 166d15ca4dc41c94c9ac1f1c2e6fd396
+  - enabled: 1
+    path: Assets/Scenes/JGScene2.unity
+    guid: 81fc059faadcb5148bfd9ad3f32dc0cb
   m_configObjects: {}
