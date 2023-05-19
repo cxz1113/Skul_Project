@@ -16,7 +16,7 @@ public class Skill_Head : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        Invoke("SetIsFlying", 1f);
+        Invoke("OffFlying", 1f);
         Invoke("Dest", coolTime);
     }
 
@@ -27,7 +27,7 @@ public class Skill_Head : MonoBehaviour
             rigid.velocity = new Vector2(dir * speed, 0);
     }
 
-    void SetIsFlying()
+    void OffFlying()
     {
         isFlying = false;
         rigid.gravityScale = 3;
@@ -41,12 +41,12 @@ public class Skill_Head : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name != "Player")
-            SetIsFlying();
+        if (!collision.gameObject.CompareTag("Player"))
+            OffFlying();
         else if (!isFlying)
         {
-            Dest();
             player.ResetCool();
+            Dest();
         }
     }
 }

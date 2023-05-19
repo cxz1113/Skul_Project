@@ -13,6 +13,7 @@ public abstract class Skul : MonoBehaviour
     {
         public float hp;
         public float speed;
+        public string type;
     }
 
     public abstract void Attack();

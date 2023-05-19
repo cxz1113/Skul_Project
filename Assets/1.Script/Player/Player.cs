@@ -18,7 +18,15 @@ public class Player : MonoBehaviour
     [SerializeField] Transform firePos;
     [SerializeField] Transform head_Parent;
 
+    [SerializeField] List<RuntimeAnimatorController> animators;
+
+    Skill_Head head;
+    IEnumerator cor;
+
+    float originalGravity = 3;
+
     float moveSpeed = 7f;
+    bool canMove = true;
 
     int maxDashCount = 2;
     float dashPower = 15f;
@@ -32,19 +40,19 @@ public class Player : MonoBehaviour
     bool jumped = false;
 
     bool canSkill_1 = true;
+    bool canSkill_2 = true;
 
-    //[SerializeField] float tempds = 1.75f;
-
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
+            return;
+
         Move();
         LookDir();
         JumpAnimation();
@@ -63,7 +71,18 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
         {
-            StartCoroutine(Skill_1());
+            cor = Skill_1();
+            StartCoroutine(cor);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
+        {
+            StartCoroutine(Skill_2());
+        }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            animator.runtimeAnimatorController = animators[1];
         }
     }
 
@@ -115,6 +134,9 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (!canMove)
+            return;
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
         {
 
@@ -124,7 +146,6 @@ public class Player : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
-        // transform.Translate(new Vector2(x * Time.deltaTime * speed, 0));
 
         animator.SetBool("Walk", true);
 
@@ -151,7 +172,7 @@ public class Player : MonoBehaviour
         }
 
         rigid.velocity = Vector2.zero;
-        rigid.gravityScale = 3f;
+        SetGravity(true);
         animator.SetBool("Dash", false);
 
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
@@ -164,11 +185,9 @@ public class Player : MonoBehaviour
 
         canDash = false;
         isDashing = true;
-        //animator.ResetTrigger("Attack");
        
         animator.SetBool("Dash", true);
-        float originalGravity = rigid.gravityScale;
-        rigid.gravityScale = 0;
+        SetGravity(false);
         playerDir = inputDir < 0 ? PlayerDir.left : inputDir > 0 ? PlayerDir.right : playerDir;
         float dir = playerDir == PlayerDir.right ? 1 : -1;
         LookDir();
@@ -176,7 +195,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(dashTime);
 
-        rigid.gravityScale = originalGravity;
+        SetGravity(true);
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash"))
             rigid.velocity = Vector2.zero;
 
@@ -189,10 +208,8 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash") /*|| !isGround*/)
-        {
+        if (isDashing)
             return;
-        }
 
         animator.SetTrigger("Attack");
     }
@@ -205,15 +222,31 @@ public class Player : MonoBehaviour
         canSkill_1 = true;
     }
 
+    IEnumerator Skill_2()
+    {
+        canSkill_2 = false;
+        transform.position = head.transform.position;
+        Destroy(head.gameObject);
+        ResetCool();
+        head = null;
+        yield return new WaitForSeconds(5f);
+        canSkill_2 = true;
+    }
+
     public void ResetCool()
     {
-        StopCoroutine("Skill_1");
+        StopCoroutine(cor);
         canSkill_1 = true;
+    }
+
+    public void SetGravity(bool On)
+    {
+        rigid.gravityScale = On ? originalGravity : 0;
     }
 
     void EventSkill()
     {
-        Skill_Head head = Instantiate(prefab_Head, firePos);
+        head = Instantiate(prefab_Head, firePos);
         head.coolTime = 5;
         head.dir = playerDir == PlayerDir.right ? 1 : -1;
         head.player = this;
@@ -234,7 +267,7 @@ public class Player : MonoBehaviour
 
     void EventStopMoveAttack()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Player Dash"))
+        if (!isDashing)
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
