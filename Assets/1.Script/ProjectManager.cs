@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using TMPro;
 public class ProjectManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static ProjectManager Instacne;
+    public TestJson json;
+    [SerializeField] GameObject textObj;
+    //[SerializeField] private TMP_Text text;
+    void Awake() => Instacne = this;
+
     void Start()
     {
-        
+        textObj.SetActive(false);
+        StartCoroutine(ShowReady());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(Input.anyKey)
+        {
+            SceneManager.LoadScene(1);
+            DontDestroyOnLoad(json);
+            //PlayerDemo playerDemo = GetComponent<PlayerDemo>();
+        }
+    }
+
+    IEnumerator ShowReady()
+    {
+        int count = 0;
+        while(count < 10)
+        {
+            textObj.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            textObj.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            count++;
+        }
     }
 }

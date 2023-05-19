@@ -43,10 +43,10 @@ public class WayPoint : Environment
             switch(gameObject.tag)
             {
                 case "WayTown":
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(2);
                     break;
                 case "WayBoss":
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(3);
                     break;
             }
         }

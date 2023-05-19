@@ -10,6 +10,7 @@ TagManager:
   - Undefined
   - WayTown
   - WayBoss
+  - Ground2
   layers:
   - Default
   - TransparentFX
