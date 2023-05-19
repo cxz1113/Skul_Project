@@ -10,7 +10,6 @@ public class ToggleGroup : MonoBehaviour
 
     [SerializeField] private Transform content;
 
-    ItemData.Data itemdata;
 
     void Start()
     {
