@@ -25,6 +25,7 @@ public class ToggleGroup : MonoBehaviour
             int count = 0;
             foreach (var item in toggles)
             {
+                frames[count].SetActive(true);
                 if (item == toggle)
                 {
                     frames[count].SetActive(true);
@@ -36,6 +37,5 @@ public class ToggleGroup : MonoBehaviour
                 count++;
             }
         }
-        
     }
 }
