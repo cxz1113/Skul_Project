@@ -18,17 +18,7 @@ public class WayPoint : Environment
         collider2D = GetComponent<BoxCollider2D>();
     }
 
-    void Update()
-    {
-        if(gameObject.tag == "WayTown" && MapManager.Instance.isTown && MapManager.Instance.isPush && !MapManager.Instance.isBoss)
-        {
-            SceneManager.LoadScene(1);
-        }
-        else if(gameObject.tag == "WayBoss" && MapManager.Instance.isBoss && MapManager.Instance.isPush && !MapManager.Instance.isTown)
-        {
-            SceneManager.LoadScene(2);
-        }
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -43,6 +33,22 @@ public class WayPoint : Environment
         if (collision.CompareTag("Player"))
         {
             canvas.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(MapManager.Instance.isPush && collision.CompareTag("Player"))
+        {
+            switch(gameObject.tag)
+            {
+                case "WayTown":
+                    SceneManager.LoadScene(1);
+                    break;
+                case "WayBoss":
+                    SceneManager.LoadScene(2);
+                    break;
+            }
         }
     }
 }

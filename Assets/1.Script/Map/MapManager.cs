@@ -35,14 +35,5 @@ public class MapManager : MonoBehaviour
                 isTown = isBoss = false;
             }
         }
-
-        /*if(gameObject.tag == "WayTown" && isPush && isTown)
-        {
-            SceneManager.LoadScene(1);
-        }
-        if(gameObject.tag == "WayBoss" && isPush && isBoss)
-        {
-            SceneManager.LoadScene(2);
-        }*/
     }
 }
