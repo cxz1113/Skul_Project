@@ -156,6 +156,9 @@ MonoBehaviour:
   prefab_Head: {fileID: 8719836836145597690, guid: 7308071d6a302e244ac78fdc54c63cb8, type: 3}
   firePos: {fileID: 4257343673292514352}
   head_Parent: {fileID: 0}
+  animators:
+  - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
+  - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
 --- !u!95 &4257343673998533867
 Animator:
   serializedVersion: 5
