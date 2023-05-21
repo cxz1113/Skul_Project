@@ -28,8 +28,12 @@ public class SkulData : MonoBehaviour
         public List<Data> skul;
     }
 
-    public Split split;
     [SerializeField] TextAsset skulJson;
+    public Split split;
+    public ToggleGroup toggleGroup;
+
+
+
     void Start()
     {
         split = JsonUtility.FromJson<Split>(skulJson.text);
@@ -37,7 +41,6 @@ public class SkulData : MonoBehaviour
 
     public void OnSkulData()
     {
-        //SkulUI.Instance.SetData(split.skul[0]);
+        SkulUI.Instance.SetData(split.skul[0]);
     }
-
 }

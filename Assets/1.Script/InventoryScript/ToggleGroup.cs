@@ -8,9 +8,7 @@ public class ToggleGroup : MonoBehaviour
     [SerializeField] Toggle[] toggles;
     [SerializeField] GameObject[] frames;
 
-    [SerializeField] private Transform content;
-
-
+    public SkulData skuldata;
     void Start()
     {
         toggles[0].isOn = true;
@@ -37,4 +35,6 @@ public class ToggleGroup : MonoBehaviour
             }
         }
     }
+
+
 }
