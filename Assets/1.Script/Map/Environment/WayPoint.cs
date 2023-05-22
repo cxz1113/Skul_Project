@@ -44,9 +44,11 @@ public class WayPoint : Environment
             {
                 case "WayTown":
                     SceneManager.LoadScene(2);
+                    PlayerData.Instance.SaveData();
                     break;
                 case "WayBoss":
                     SceneManager.LoadScene(3);
+                    PlayerData.Instance.SaveData();
                     break;
             }
         }
