@@ -2,50 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
-    enum PlayerDir
+    protected enum PlayerDir
     {
         left,
         right
     }
-    PlayerDir playerDir = PlayerDir.right;
-    PlayerDir playerDir_past;
+    protected PlayerDir playerDir = PlayerDir.right;
+    protected PlayerDir playerDir_past;
 
-    Rigidbody2D rigid;
-    Animator animator;
-    [SerializeField] Skill_Head prefab_Head;
-    [SerializeField] Transform firePos;
-    [SerializeField] Transform head_Parent;
+    protected Rigidbody2D rigid;
+    protected Animator animator;
 
-    [SerializeField] List<RuntimeAnimatorController> animators;
+    public List<RuntimeAnimatorController> animators;
 
-    Skill_Head head;
-    IEnumerator cor;
+    protected Skill_Head head;
+    protected IEnumerator cor;
 
-    float originalGravity = 3;
+    protected float originalGravity = 3;
 
     float moveSpeed = 7f;
-    bool canMove = true;
 
     int maxDashCount = 2;
     float dashPower = 15f;
     float dashCoolTime = 0.8f;
     float dashTime = 0.2f;
-    bool canDash = true;
+    protected bool canDash = true;
     bool isDashing = false;
 
     float jumpPower = 12f;
     bool isGround = true;
     bool jumped = false;
 
-    bool canSkill_1 = true;
-    bool canSkill_2 = true;
+    protected bool canSkill_1 = true;
+    protected bool canSkill_2 = true;
+
+    public bool isSwitched = false;
+
+    protected abstract void Init();
+    
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        rigid = GetComponent<Rigidbody2D>();
+        Init();
     }
 
     void Update()
@@ -86,34 +86,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    void LookDir()
+    protected void LookDir()
     {
         switch (playerDir)
         {
             case PlayerDir.right:
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                if (playerDir_past != playerDir)
-                {
-                    //transform.Translate(Vector2.right * 0.75f);
-                    //transform.Translate(Vector2.right * tempds * Time.deltaTime); 
-                }
                 break;
 
             case PlayerDir.left:
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-                if (playerDir_past != playerDir)
-                {
-                    //transform.Translate(Vector2.right * 0.75f);
-                    //transform.Translate(Vector2.right * tempds * Time.deltaTime);
-
-                    //transform.position += transform.TransformVector(Vector3.right) * 1.75f * 2;
-                }
                 break;
         }
         playerDir_past = playerDir;
     }
 
-    void JumpAnimation()
+    protected void JumpAnimation()
     {
         if (rigid.velocity.y > 0.05f)
         {
@@ -132,34 +120,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Move()
+    protected void Move()
     {
-        if (!canMove)
-            return;
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
-        {
-
-        }
-        else if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
         float x = Input.GetAxisRaw("Horizontal");
         transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
 
-        animator.SetBool("Walk", true);
-
         if(x == 0)
-        {
             animator.SetBool("Walk", false);
-        }
         else
         {
+            animator.SetBool("Walk", true);
             playerDir = x > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
         }
     }
 
-    void Jump()
+    protected void Jump()
     {
         if (!isGround)
         {
@@ -179,7 +157,7 @@ public class Player : MonoBehaviour
         rigid.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
     }
 
-    IEnumerator Dash()
+    protected IEnumerator Dash()
     {
         float inputDir = Input.GetAxisRaw("Horizontal");
 
@@ -206,7 +184,7 @@ public class Player : MonoBehaviour
         canDash = true;
     }
 
-    void Attack()
+    protected void Attack()
     {
         if (isDashing)
             return;
@@ -214,24 +192,9 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    IEnumerator Skill_1()
-    {
-        canSkill_1 = false;
-        animator.SetTrigger("Skill_1");
-        yield return new WaitForSeconds(5f);
-        canSkill_1 = true;
-    }
-
-    IEnumerator Skill_2()
-    {
-        canSkill_2 = false;
-        transform.position = head.transform.position;
-        Destroy(head.gameObject);
-        ResetCool();
-        head = null;
-        yield return new WaitForSeconds(5f);
-        canSkill_2 = true;
-    }
+    protected abstract IEnumerator Skill_1();
+    protected abstract IEnumerator Skill_2();
+    protected abstract void SwitchSkill();
 
     public void ResetCool()
     {
@@ -239,21 +202,19 @@ public class Player : MonoBehaviour
         canSkill_1 = true;
     }
 
-    public void SetGravity(bool On)
+    protected void SkulSwitch()
+    {
+
+    }
+
+    protected void SetGravity(bool On)
     {
         rigid.gravityScale = On ? originalGravity : 0;
     }
 
-    void EventSkill()
-    {
-        head = Instantiate(prefab_Head, firePos);
-        head.coolTime = 5;
-        head.dir = playerDir == PlayerDir.right ? 1 : -1;
-        head.player = this;
-        head.transform.SetParent(head_Parent);
-    }
+    
 
-    void EventMoveAttack()
+    protected void EventMoveAttack()
     {
         if (Input.GetAxisRaw("Horizontal") > 0 && playerDir_past == PlayerDir.right)
         {
@@ -265,7 +226,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void EventStopMoveAttack()
+    protected void EventStopMoveAttack()
     {
         if (!isDashing)
         {
