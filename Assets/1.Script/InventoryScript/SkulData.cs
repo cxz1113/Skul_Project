@@ -11,7 +11,6 @@ public class SkulData : MonoBehaviour
     {
         public string name;
         public string tier;
-        public int tierindex;
         public string type;
         public string intro;
         public string detail;
@@ -30,7 +29,6 @@ public class SkulData : MonoBehaviour
 
     [SerializeField] TextAsset skulJson;
     public Split split;
-    public ToggleGroup toggleGroup;
 
 
 

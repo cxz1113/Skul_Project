@@ -17,9 +17,9 @@
       "skilldetail": ""
     },
     {
-      "name": "",
+      "name": "abc",
       "itemskul": "",
-      "tier": "",
+      "tier": "abc",
       "tierindex": 0,
       "type": "",
       "intro": "",
@@ -32,9 +32,9 @@
       "skilldetail": ""
     },
     {
-      "name": "",
+      "name": "a",
       "itemskul": "",
-      "tier": "",
+      "tier": "b",
       "tierindex": 0,
       "type": "",
       "intro": "",
@@ -47,9 +47,9 @@
       "skilldetail": ""
     },
     {
-      "name": "",
+      "name": "c",
       "itemskul": "",
-      "tier": "",
+      "tier": "d",
       "tierindex": 0,
       "type": "",
       "intro": "",
@@ -62,9 +62,9 @@
       "skilldetail": ""
     },
     {
-      "name": "",
+      "name": "e",
       "itemskul": "",
-      "tier": "",
+      "tier": "f",
       "tierindex": 0,
       "type": "",
       "intro": "",

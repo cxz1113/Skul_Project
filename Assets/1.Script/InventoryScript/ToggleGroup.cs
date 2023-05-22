@@ -5,21 +5,28 @@ using UnityEngine.UI;
 
 public class ToggleGroup : MonoBehaviour
 {
-    [SerializeField] Toggle[] toggles;
-    [SerializeField] GameObject[] frames;
+    [SerializeField] public Toggle[] toggles;
+    [SerializeField] public GameObject[] frames;
 
     public SkulData skuldata;
+    public ItemData itemdata;
+    public EssenceData essencedata;
+
+    public int count;
+    //시작할때 스컬0번째부터 시작
     void Start()
     {
         toggles[0].isOn = true;
         OnToggles(toggles[0]);
     }
 
+    
     public void OnToggles(Toggle toggle)
     {
         if (toggle.isOn)
         {
-            int count = 0;
+            //아이템 프레임 변경
+            count = 0;
             foreach (var item in toggles)
             {
                 frames[count].SetActive(true);
@@ -35,6 +42,4 @@ public class ToggleGroup : MonoBehaviour
             }
         }
     }
-
-
 }

@@ -29,6 +29,7 @@ public class ItemData : MonoBehaviour
 
     public Split split;
     [SerializeField] TextAsset itemJson;
+
     void Start()
     {
         split = JsonUtility.FromJson<Split>(itemJson.text);
