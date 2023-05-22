@@ -8,7 +8,9 @@ public class PlayerDemo : MonoBehaviour
     public List<Sprite> idle;
     public List<Sprite> attack;
     public float hp = 0;
-    public float mp = 0;
+    public int head1 = 0;
+    public int head2 = 0;
+    public int item = 0;
     void Start()
     {
         GetComponent<SpriteAnimation>().SetSprite(idle, 0.2f);

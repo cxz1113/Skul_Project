@@ -12,9 +12,22 @@ public class TestJson : MonoBehaviour
     public class PlayerData
     {
         public int hp;
-        public int mp;
+        public int head1;
+        public int head2;
+        public int item;
     } 
 
+    [Serializable]
+    public class ItemData
+    {
+        public int head;
+    }
+
+    [Serializable]
+    public class SkulData
+    {
+        public int abc;
+    }
     [Serializable]
     public class PlayerTest
     {

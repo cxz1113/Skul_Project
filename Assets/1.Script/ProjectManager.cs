@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+
 public class ProjectManager : MonoBehaviour
 {
     public static ProjectManager Instacne;
-    public TestJson json;
+    public PlayerData json;
     [SerializeField] GameObject textObj;
     //[SerializeField] private TMP_Text text;
     void Awake() => Instacne = this;

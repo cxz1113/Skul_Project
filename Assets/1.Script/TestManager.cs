@@ -5,12 +5,14 @@ using UnityEngine;
 public class TestManager : MonoBehaviour
 {
     public PlayerDemo playerDemo;
-    public TestJson json;
+    public PlayerData json;
     private void Start()
     {
-        json = FindObjectOfType<TestJson>();
+        json = FindObjectOfType<PlayerData>();
         PlayerDemo player = Instantiate(playerDemo, transform);
-        player.hp = json.playerData.player[0].hp;
-        player.mp = json.playerData.player[0].mp;
+        player.hp = json.nowPlayerData.playerdatajsons[0].hp;
+        player.head1 = json.nowPlayerData.playerdatajsons[0].head1;
+        player.head2 = json.nowPlayerData.playerdatajsons[0].head2;
+        player.item = json.nowPlayerData.playerdatajsons[0].item;
     }
 }
