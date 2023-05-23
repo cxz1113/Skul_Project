@@ -7,7 +7,7 @@ public class Player_Wolf : Player
     protected override void Init()
     {
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[1];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.wolf];
         rigid = GetComponent<Rigidbody2D>();
 
         if (isSwitched)
@@ -53,6 +53,7 @@ public class Player_Wolf : Player
             Destroy(GetComponent<Player_Wolf>());
             gameObject.AddComponent<Player_LittleBorn>().animators = animators;
             GetComponent<Player_LittleBorn>().isSwitched = true;
+            GetComponent<Player_LittleBorn>().playerDir = playerDir;
         }
     }
 
@@ -73,6 +74,6 @@ public class Player_Wolf : Player
 
     protected override void SwitchSkill()
     {
-        Debug.Log("웨어울프");
+        
     }
 }

@@ -15,7 +15,7 @@ public class Player_LittleBorn : Player
         head_Parent = GameObject.Find("Head_Parent").transform;
 
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[0];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
         rigid = GetComponent<Rigidbody2D>();
 
         if (isSwitched)
@@ -27,6 +27,12 @@ public class Player_LittleBorn : Player
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
             return;
+        else if(animator.GetCurrentAnimatorStateInfo(0).IsName("Player Switch"))
+        {
+            float dir = playerDir == PlayerDir.right ? 1 : -1;
+            transform.Translate(dir * transform.right * (Time.deltaTime * moveSpeed));
+            return;
+        }
 
         Move();
         LookDir();
@@ -60,6 +66,11 @@ public class Player_LittleBorn : Player
             Destroy(GetComponent<Player_LittleBorn>());
             gameObject.AddComponent<Player_Wolf>().animators = animators;
             GetComponent<Player_Wolf>().isSwitched = true;
+            GetComponent<Player_Wolf>().playerDir = playerDir;
+
+            Destroy(head.gameObject);
+            ResetCool();
+            head = null;
         }
     }
 
@@ -69,6 +80,7 @@ public class Player_LittleBorn : Player
         animator.SetTrigger("Skill_1");
         yield return new WaitForSeconds(5f);
         canSkill_1 = true;
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
     }
 
     protected override IEnumerator Skill_2()
@@ -78,12 +90,14 @@ public class Player_LittleBorn : Player
         Destroy(head.gameObject);
         ResetCool();
         head = null;
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
         yield return new WaitForSeconds(5f);
         canSkill_2 = true;
     }
 
     protected void EventSkill()
     {
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
         head = Instantiate(prefab_Head, firePos);
         head.coolTime = 5;
         head.dir = playerDir == PlayerDir.right ? 1 : -1;
@@ -93,7 +107,7 @@ public class Player_LittleBorn : Player
 
     protected override void SwitchSkill()
     {
-        Debug.Log("¸®Æ²º»");
+        LookDir();
         animator.SetTrigger("Switch");
     }
 

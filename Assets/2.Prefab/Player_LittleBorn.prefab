@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ccb5c43e903ab614695a4057b8bd0ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -137,7 +137,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -153,9 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3703b722a257540aeb8ad9d2e03417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDir: 1
   animators:
   - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
+  - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
   - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
+  moveSpeed: 15
+  isSwitched: 0
   prefab_Head: {fileID: 8719836836145597690, guid: 7308071d6a302e244ac78fdc54c63cb8, type: 3}
   firePos: {fileID: 4257343673292514352}
   head_Parent: {fileID: 0}

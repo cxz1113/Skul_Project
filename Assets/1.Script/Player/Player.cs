@@ -4,12 +4,18 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-    protected enum PlayerDir
+    protected enum AnimationIndex
+    {
+        littleborn,
+        nohead,
+        wolf
+    }
+    public enum PlayerDir
     {
         left,
         right
     }
-    protected PlayerDir playerDir = PlayerDir.right;
+    public PlayerDir playerDir = PlayerDir.right;
     protected PlayerDir playerDir_past;
 
     protected Rigidbody2D rigid;
@@ -20,18 +26,18 @@ public abstract class Player : MonoBehaviour
     protected Skill_Head head;
     protected IEnumerator cor;
 
-    protected float originalGravity = 3;
+    protected float originalGravity = 6;
 
-    float moveSpeed = 7f;
+    public float moveSpeed = 15f;
 
     int maxDashCount = 2;
-    float dashPower = 15f;
+    float dashPower = 30f;
     float dashCoolTime = 0.8f;
     float dashTime = 0.2f;
     protected bool canDash = true;
     bool isDashing = false;
 
-    float jumpPower = 12f;
+    float jumpPower = 24f;
     bool isGround = true;
     bool jumped = false;
 
@@ -236,7 +242,8 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        RaycastHit2D hit = Physics2D.Raycast(rigid.position, Vector2.down, 0.5f);
+        if (collision.gameObject.CompareTag("Ground") && hit.collider != null)
         {
             isGround = true;
             animator.SetBool("IsGround", true);
