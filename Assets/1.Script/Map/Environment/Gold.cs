@@ -12,12 +12,10 @@ public class Gold : MonoBehaviour
 
     void Update()
     {
-        if(MapManager.Instance.isPush)
+        if(PlayerActivity.Instance.isPush)
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
-            TestManager.Instance.playerDemo.hp += 10; 
-            Debug.Log(MapManager.Instance.player.hp);
             Destroy(transform.gameObject);
         }
     }

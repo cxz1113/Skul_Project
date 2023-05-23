@@ -1,1 +1,11 @@
-{"playerdatajsons":[{"hp":100,"head1":0,"head2":0,"item":0}]}
+{
+    "playerdatajsons": [
+        {
+            "curhp": 60.0,
+            "maxhp": 100.0,
+            "head1": 0,
+            "head2": 0,
+            "item": 0
+        }
+    ]
+}

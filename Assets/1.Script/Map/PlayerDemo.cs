@@ -1,13 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class PlayerDemo : MonoBehaviour
 {
     float speed = 5;
     public List<Sprite> idle;
     public List<Sprite> attack;
-    public float hp = 0;
+    public PlayerActivity playerActivity;
+    public float curHp;
+    public float maxHp;
+    public float HP
+    {
+        get { return curHp; }
+        set
+        {
+            curHp = value;
+            PlayerUI.Instance.hpGage.fillAmount = curHp / maxHp;
+        }
+    }
+    /*public float HP
+    {
+        get { return PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp; }
+        set 
+        { 
+            PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp = value;
+            PlayerUI.Instance.hpGage.fillAmount = PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp / PlayerData.Instance.nowPlayerData.playerdatajsons[0].maxhp;
+        }
+    }*/
     public int head1 = 0;
     public int head2 = 0;
     public int item = 0;
@@ -27,13 +47,18 @@ public class PlayerDemo : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F))
         {
-            MapManager.Instance.isPush = true;
+            PlayerActivity.Instance.isPush = true;
         }
         else if(Input.GetKeyUp(KeyCode.F))
         {
-            MapManager.Instance.isPush = false;
+            PlayerActivity.Instance.isPush = false;
         }
 
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            HP -= 20;
+            Debug.Log(HP);
+        }
     }
 
     void Move()

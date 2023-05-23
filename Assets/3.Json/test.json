@@ -1,7 +1,8 @@
 {
   "playerdatajsons": [
     {
-      "hp": 100,
+      "curhp": 100,
+      "maxhp": 100,
       "head1": 0,
       "head2": 0,
       "item": 0

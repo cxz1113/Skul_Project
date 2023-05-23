@@ -10,14 +10,16 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private TextAsset json;
 
     public NowPlayerData nowPlayerData;
-    public Queue<string> saveData = new Queue<string>();
+    public List<string> saveDatas = new List<string>();
+    
     public string data;
     string path;
 
     [Serializable]
     public class PlayerDataJson
     {
-        public int hp;
+        public float curhp;
+        public float maxhp;
         public int head1;
         public int head2;
         public int item;
@@ -47,33 +49,26 @@ public class PlayerData : MonoBehaviour
     }
     void Start()
     {
-        if(saveData == null)
-        {
-            nowPlayerData = JsonUtility.FromJson<NowPlayerData>(json.text);
-        }
-        else if(saveData != null)
-        {
-            path = Path.Combine(Application.dataPath, "database.json");
-            LoadData();
-        }
+        path = Path.Combine(Application.dataPath, "database.json");
+        LoadData();
     }
 
     public void SaveData()
     {
-        data = JsonUtility.ToJson(nowPlayerData);
-        saveData.Enqueue(data);
-        Debug.Log(saveData);
-        File.WriteAllText(path,data);
+        data = JsonUtility.ToJson(nowPlayerData, true);
+        File.WriteAllText(path, data);
     }
 
     public void LoadData()
     {
-        data = File.ReadAllText(path);
-        nowPlayerData = JsonUtility.FromJson<NowPlayerData>(data);
-    }
-
-    public void SaveDataDequeue()
-    {
-        string sd = data;
+        if(!File.Exists(path))
+        {
+            nowPlayerData = JsonUtility.FromJson<NowPlayerData>(json.text);
+        }
+        else
+        {
+            data = File.ReadAllText(path);
+            nowPlayerData = JsonUtility.FromJson<NowPlayerData>(data);
+        }
     }
 }

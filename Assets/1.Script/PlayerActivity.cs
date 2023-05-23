@@ -1,29 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 
-public class ProjectManager : MonoBehaviour
+public class PlayerActivity : MonoBehaviour
 {
-    public static ProjectManager Instance;
+    public static PlayerActivity Instance;
     public PlayerDemo player;
     public PlayerData playerData;
 
-    void Awake()
-    {
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        
-    }
+    public bool isPush { get; set; }
+
+    void Awake() => Instance = this;
 
     void Start()
-    {
-        PlayerSet();
-        PlayerUISet();
-    }
-
-    void PlayerSet()
     {
         playerData = FindObjectOfType<PlayerData>();
         player.curHp = playerData.nowPlayerData.playerdatajsons[0].curhp;
@@ -33,9 +22,8 @@ public class ProjectManager : MonoBehaviour
         player.item = playerData.nowPlayerData.playerdatajsons[0].item;
     }
 
-    void PlayerUISet()
+    void Update()
     {
-        PlayerUI ui = PlayerUI.Instance;
-        ui.curHpTxt.text = string.Format($"{player.HP}");
+
     }
 }

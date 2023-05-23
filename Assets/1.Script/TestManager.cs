@@ -13,7 +13,8 @@ public class TestManager : MonoBehaviour
     {
         json = FindObjectOfType<PlayerData>();
         PlayerDemo player = Instantiate(playerDemo, transform);
-        player.hp = json.nowPlayerData.playerdatajsons[0].hp;
+        player.curHp = json.nowPlayerData.playerdatajsons[0].curhp;
+        player.maxHp = json.nowPlayerData.playerdatajsons[0].maxhp;
         player.head1 = json.nowPlayerData.playerdatajsons[0].head1;
         player.head2 = json.nowPlayerData.playerdatajsons[0].head2;
         player.item = json.nowPlayerData.playerdatajsons[0].item;

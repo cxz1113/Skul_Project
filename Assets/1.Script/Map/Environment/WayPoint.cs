@@ -38,21 +38,23 @@ public class WayPoint : Environment
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(MapManager.Instance.isPush && collision.CompareTag("Player"))
+        if(PlayerActivity.Instance.isPush && collision.CompareTag("Player"))
         {
             switch(gameObject.tag)
             {
                 case "WayTown":
                     SceneManager.LoadScene(2);
-                    if(PlayerData.Instance.saveData == null)
+                    PlayerData.Instance.SaveData();
+                    if(PlayerData.Instance.saveDatas == null)
                     {
                         PlayerData.Instance.SaveData();
                     }
-                    else if(PlayerData.Instance.saveData != null)
+                    else if(PlayerData.Instance.saveDatas != null)
                     {
-                        PlayerData.Instance.saveData.Clear();
-                        PlayerData.Instance.SaveData();
+                        PlayerData.Instance.saveDatas.Clear();
                     }
+                    PlayerData.Instance.SaveData();
+
                     break;
                 case "WayBoss":
                     SceneManager.LoadScene(3);
