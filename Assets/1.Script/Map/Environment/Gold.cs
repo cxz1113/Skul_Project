@@ -16,6 +16,8 @@ public class Gold : MonoBehaviour
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
+            TestManager.Instance.playerDemo.hp += 10; 
+            Debug.Log(MapManager.Instance.player.hp);
             Destroy(transform.gameObject);
         }
     }

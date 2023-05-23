@@ -10,7 +10,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private TextAsset json;
 
     public NowPlayerData nowPlayerData;
-
+    public Queue<string> saveData = new Queue<string>();
+    public string data;
     string path;
 
     [Serializable]
@@ -43,23 +44,36 @@ public class PlayerData : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        //LoadData();
     }
     void Start()
     {
-        path = Path.Combine(Application.dataPath, "database.json");
-        nowPlayerData = JsonUtility.FromJson<NowPlayerData>(json.text);
+        if(saveData == null)
+        {
+            nowPlayerData = JsonUtility.FromJson<NowPlayerData>(json.text);
+        }
+        else if(saveData != null)
+        {
+            path = Path.Combine(Application.dataPath, "database.json");
+            LoadData();
+        }
     }
 
     public void SaveData()
     {
-        string data = JsonUtility.ToJson(nowPlayerData);
+        data = JsonUtility.ToJson(nowPlayerData);
+        saveData.Enqueue(data);
+        Debug.Log(saveData);
         File.WriteAllText(path,data);
     }
 
     public void LoadData()
     {
-        string data = File.ReadAllText(path);
+        data = File.ReadAllText(path);
         nowPlayerData = JsonUtility.FromJson<NowPlayerData>(data);
+    }
+
+    public void SaveDataDequeue()
+    {
+        string sd = data;
     }
 }
