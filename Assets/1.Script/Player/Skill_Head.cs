@@ -7,10 +7,10 @@ public class Skill_Head : MonoBehaviour
     public float coolTime;
     public int dir;
 
-    float speed = 20f;
+    float speed = 40f;
     bool isFlying = true;
     Rigidbody2D rigid;
-    public Player player;
+    public Player_LittleBorn player;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +46,7 @@ public class Skill_Head : MonoBehaviour
         else if (!isFlying)
         {
             player.ResetCool();
+            player.animator.runtimeAnimatorController = player.animators[0];
             Dest();
         }
     }

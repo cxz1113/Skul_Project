@@ -6,7 +6,7 @@ public abstract class Player : MonoBehaviour
 {
     protected enum AnimationIndex
     {
-        littleborn,
+        littlebone,
         nohead,
         wolf
     }
@@ -19,7 +19,7 @@ public abstract class Player : MonoBehaviour
     protected PlayerDir playerDir_past;
 
     protected Rigidbody2D rigid;
-    protected Animator animator;
+    public Animator animator;
 
     public List<RuntimeAnimatorController> animators;
 
@@ -133,6 +133,7 @@ public abstract class Player : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
+        //rigid.velocity = new Vector2( x * moveSpeed, rigid.velocity.y);
 
         if(x == 0)
             animator.SetBool("Walk", false);
@@ -222,22 +223,15 @@ public abstract class Player : MonoBehaviour
 
     protected void EventMoveAttack()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0 && playerDir_past == PlayerDir.right)
-        {
-            rigid.AddForce(transform.right * moveSpeed, ForceMode2D.Impulse);
-        }
-        else if (Input.GetAxisRaw("Horizontal") < 0 && playerDir_past == PlayerDir.left)
-        {
-            rigid.AddForce(transform.right * moveSpeed, ForceMode2D.Impulse);
-        }
+        if ((Input.GetAxisRaw("Horizontal") > 0 && playerDir_past == PlayerDir.right)||
+            (Input.GetAxisRaw("Horizontal") < 0 && playerDir_past == PlayerDir.left))
+            rigid.velocity = transform.right * moveSpeed + transform.up * rigid.velocity.y;
     }
 
     protected void EventStopMoveAttack()
     {
         if (!isDashing)
-        {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

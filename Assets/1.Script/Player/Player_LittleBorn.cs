@@ -15,7 +15,7 @@ public class Player_LittleBorn : Player
         head_Parent = GameObject.Find("Head_Parent").transform;
 
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
         rigid = GetComponent<Rigidbody2D>();
 
         if (isSwitched)
@@ -68,9 +68,8 @@ public class Player_LittleBorn : Player
             GetComponent<Player_Wolf>().isSwitched = true;
             GetComponent<Player_Wolf>().playerDir = playerDir;
 
-            Destroy(head.gameObject);
-            ResetCool();
-            head = null;
+            if (head!=null)
+                Destroy(head.gameObject);
         }
     }
 
@@ -80,7 +79,7 @@ public class Player_LittleBorn : Player
         animator.SetTrigger("Skill_1");
         yield return new WaitForSeconds(5f);
         canSkill_1 = true;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
     }
 
     protected override IEnumerator Skill_2()
@@ -90,19 +89,23 @@ public class Player_LittleBorn : Player
         Destroy(head.gameObject);
         ResetCool();
         head = null;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
         yield return new WaitForSeconds(5f);
         canSkill_2 = true;
     }
 
-    protected void EventSkill()
+    void EventSkill()
     {
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
         head = Instantiate(prefab_Head, firePos);
         head.coolTime = 5;
         head.dir = playerDir == PlayerDir.right ? 1 : -1;
         head.player = this;
         head.transform.SetParent(head_Parent);
+    }
+
+    void EventChangeAnimation()
+    {
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
     }
 
     protected override void SwitchSkill()
