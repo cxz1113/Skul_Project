@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class ArcherMove : MonoBehaviour
 {
     Rigidbody2D rigid;
     Animator anim;
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
         //Platform Check
-        Vector2 frontVec = new Vector2(rigid.position.x -0.5f + nextMove * 0.75f, rigid.position.y);
+        Vector2 frontVec = new Vector2(rigid.position.x - 0.5f + nextMove * 0.75f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
 

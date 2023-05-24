@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class TankerMove : MonoBehaviour
 {
     Rigidbody2D rigid;
     Animator anim;
@@ -21,11 +21,11 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Move
+        //움직임
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
-        //Platform Check
-        Vector2 frontVec = new Vector2(rigid.position.x -0.5f + nextMove * 0.75f, rigid.position.y);
+        //바닥 체크
+        Vector2 frontVec = new Vector2(rigid.position.x - 0.5f + nextMove * 0.75f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
 
@@ -33,7 +33,8 @@ public class Enemy : MonoBehaviour
             Turn();
 
     }
-    // 몬스터 움직임 AI
+
+    //몬스터 움직임 AI
     void Think()
     {
         //다음 움직임 방향 * 속도
