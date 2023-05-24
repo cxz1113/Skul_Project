@@ -7,7 +7,6 @@ using TMPro;
 public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager Instacne;
-    public PlayerData json;
     [SerializeField] GameObject textObj;
 
     void Awake() => Instacne = this;
@@ -23,7 +22,6 @@ public class MainSceneManager : MonoBehaviour
         if (Input.anyKey)
         {
             SceneManager.LoadScene(1);
-            DontDestroyOnLoad(json);
         }
     }
 

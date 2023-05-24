@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 public class PlayerDemo : MonoBehaviour
 {
+    public Head head;
+    public List<Head> heads = new List<Head>();
     float speed = 5;
     public List<Sprite> idle;
     public List<Sprite> attack;
@@ -16,29 +18,25 @@ public class PlayerDemo : MonoBehaviour
         set
         {
             curHp = value;
-            PlayerUI.Instance.hpGage.fillAmount = curHp / maxHp;
+            ProjectManager.Instance.ui.hpGage.fillAmount = curHp / maxHp;
+            ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
         }
     }
-    /*public float HP
-    {
-        get { return PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp; }
-        set 
-        { 
-            PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp = value;
-            PlayerUI.Instance.hpGage.fillAmount = PlayerData.Instance.nowPlayerData.playerdatajsons[0].curhp / PlayerData.Instance.nowPlayerData.playerdatajsons[0].maxhp;
-        }
-    }*/
+
     public int head1 = 0;
     public int head2 = 0;
     public int item = 0;
     void Start()
     {
         GetComponent<SpriteAnimation>().SetSprite(idle, 0.2f);
+        head = heads[0];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (heads.Count > 2)
+            return;
         Move();
         if(Input.GetKeyDown(KeyCode.X))
         {
@@ -57,6 +55,12 @@ public class PlayerDemo : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F1))
         {
             HP -= 20;
+            DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].curhp = curHp;
+            Debug.Log(HP);
+        }
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            HP += 20;
             Debug.Log(HP);
         }
     }

@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        Instantiate(player, playerStart);
+        //Instantiate(player, playerStart);
     }
     void Update()
     {

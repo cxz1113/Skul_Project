@@ -49,6 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c212e66d2356749a5c4031a7e5f01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 0}
+  heads:
+  - {fileID: 7522084485357394253, guid: 46aa6eda1014cf64bb5f38a32b5e2070, type: 3}
+  - {fileID: 5520206839598635109, guid: b704d97c8dbc44e4d9b96e179c900138, type: 3}
   idle:
   - {fileID: 21300000, guid: f81a30e57da9443469b3bad6ae5b4b12, type: 3}
   - {fileID: 21300000, guid: 7d1de5b1569f8a340a1e6d3ad860340a, type: 3}
@@ -61,8 +65,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ae0c8610f4edd374b9d23ddada24454a, type: 3}
   - {fileID: 21300000, guid: 32561098e79166342a1f37fab65cfbf5, type: 3}
   playerActivity: {fileID: 7754154957055299996}
-  curHp: 0
-  maxHp: 0
+  curHp: 60
+  maxHp: 100
   head1: 0
   head2: 0
   item: 0
@@ -222,4 +226,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2798456014967218647}
-  playerData: {fileID: 0}
