@@ -29,6 +29,7 @@ public class PlayerDemo : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteAnimation>().SetSprite(idle, 0.2f);
+        
         head = heads[0];
     }
 

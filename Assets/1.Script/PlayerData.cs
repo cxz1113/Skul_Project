@@ -5,13 +5,9 @@ using System;
 using System.IO;
 public class PlayerData : MonoBehaviour
 {
-
     public TextAsset playerJson;
 
     public NowPlayerData nowPlayerData;
-    
-    public string data;
-    string path;
 
     [Serializable]
     public class PlayerDataJson

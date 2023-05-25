@@ -32,9 +32,13 @@ public class ProjectManager : MonoBehaviour
 
     void PlayerUISet()
     {
+        Head head = GetComponent<Head>();
+        head.Init();
+
         ui.curHpTxt.text = string.Format($"{player.HP}");
         ui.maxHpTxt.text = string.Format($"{player.maxHp}");
-        ui.head1.sprite = player.heads[0].ss.headStatus1;
+        ui.head1.sprite = head.ss.headStatus1;
+        ui.head2.sprite = player.heads[0].ss.headStatus2;
         ui.skill1.sprite = player.heads[0].ss.skill1;
         ui.skill2.sprite = player.heads[0].ss.Skill2;
         if (player.heads.Count >= 2)
