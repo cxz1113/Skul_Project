@@ -12,12 +12,12 @@ public class Gold : MonoBehaviour
 
     void Update()
     {
-        if(PlayerActivity.Instance.isPush)
+        /*if(PlayerActivity.Instance.isPush)
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
             Destroy(transform.gameObject);
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
