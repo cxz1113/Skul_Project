@@ -6,7 +6,7 @@ public abstract class Player : MonoBehaviour
 {
     protected enum AnimationIndex
     {
-        littlebone,
+        littleborn,
         nohead,
         wolf
     }
@@ -15,12 +15,13 @@ public abstract class Player : MonoBehaviour
         left,
         right
     }
-    public PlayerDir playerDir = PlayerDir.right;
+    [HideInInspector] public PlayerDir playerDir = PlayerDir.right;
     protected PlayerDir playerDir_past;
 
     protected Rigidbody2D rigid;
-    public Animator animator;
+    [HideInInspector] public Animator animator;
 
+    public List<Player> players;
     public List<RuntimeAnimatorController> animators;
 
     protected Skill_Head head;
@@ -44,52 +45,47 @@ public abstract class Player : MonoBehaviour
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
 
-    public bool isSwitched = false;
+    [HideInInspector] public bool isSwitched = false;
+    [SerializeField] protected int switchIndex;
 
     protected abstract void Init();
-    
+    public void SwitchInit(Player player)
+    {
+        animators = player.animators;
+        isSwitched = true;
+        playerDir = player.playerDir;
+    }
 
     void Start()
     {
         Init();
     }
 
+
     void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
             return;
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Switch"))
+        {
+            float dir = playerDir == PlayerDir.right ? 1 : -1;
+            transform.Translate(dir * transform.right * (Time.deltaTime * moveSpeed));
+            return;
+        }
 
         Move();
         LookDir();
         JumpAnimation();
-        if (Input.GetKeyDown(KeyCode.C))
-            Jump();
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Attack();
-        }
+        Jump();
+        Attack();
 
         if (Input.GetKeyDown(KeyCode.Z) && canDash)
-        {
             StartCoroutine("Dash");
-        }
 
-        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-        {
-            cor = Skill_1();
-            StartCoroutine(cor);
-        }
+        InputSkill_1();
+        InputSkill_2();
 
-        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
-        {
-            StartCoroutine(Skill_2());
-        }
-
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            animator.runtimeAnimatorController = animators[1];
-        }
+        SkulSwitch();
     }
 
     protected void LookDir()
@@ -132,8 +128,8 @@ public abstract class Player : MonoBehaviour
             return;
 
         float x = Input.GetAxisRaw("Horizontal");
-        transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
-        //rigid.velocity = new Vector2( x * moveSpeed, rigid.velocity.y);
+        //transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
+        rigid.velocity = new Vector2( x * moveSpeed, rigid.velocity.y);
 
         if(x == 0)
             animator.SetBool("Walk", false);
@@ -146,6 +142,9 @@ public abstract class Player : MonoBehaviour
 
     protected void Jump()
     {
+        if (!Input.GetKeyDown(KeyCode.C))
+            return;
+
         if (!isGround)
         {
             if (jumped)
@@ -193,7 +192,7 @@ public abstract class Player : MonoBehaviour
 
     protected void Attack()
     {
-        if (isDashing)
+        if (!Input.GetKeyDown(KeyCode.X) || isDashing)
             return;
 
         animator.SetTrigger("Attack");
@@ -203,6 +202,21 @@ public abstract class Player : MonoBehaviour
     protected abstract IEnumerator Skill_2();
     protected abstract void SwitchSkill();
 
+    protected virtual void InputSkill_1()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
+        {
+            cor = Skill_1();
+            StartCoroutine(cor);
+        }
+    }
+
+    protected virtual void InputSkill_2()
+    {
+        if (Input.GetKeyDown(KeyCode.S) && canSkill_2)
+            StartCoroutine(Skill_2());
+    }
+
     public void ResetCool()
     {
         StopCoroutine(cor);
@@ -211,7 +225,16 @@ public abstract class Player : MonoBehaviour
 
     protected void SkulSwitch()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Player player = Instantiate(players[switchIndex], transform);
+            player.transform.SetParent(null);
+            player.SwitchInit(this);
+            Destroy(gameObject);
 
+            if (head != null)
+                Destroy(head.gameObject);
+        }
     }
 
     protected void SetGravity(bool On)

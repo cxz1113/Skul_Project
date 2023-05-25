@@ -14,48 +14,11 @@ public class Player_Wolf : Player
         {
             SwitchSkill();
         }
+
+        switchIndex = 0;
     }
 
-    private void Update()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
-            return;
-
-        Move();
-        LookDir();
-        JumpAnimation();
-        if (Input.GetKeyDown(KeyCode.C))
-            Jump();
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Attack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z) && canDash)
-        {
-            StartCoroutine("Dash");
-        }
-
-        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-        {
-            cor = Skill_1();
-            StartCoroutine(cor);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
-        {
-            StartCoroutine(Skill_2());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Destroy(GetComponent<Player_Wolf>());
-            gameObject.AddComponent<Player_LittleBorn>().animators = animators;
-            GetComponent<Player_LittleBorn>().isSwitched = true;
-            GetComponent<Player_LittleBorn>().playerDir = playerDir;
-        }
-    }
+    
 
     protected override IEnumerator Skill_1()
     {
@@ -74,6 +37,12 @@ public class Player_Wolf : Player
 
     protected override void SwitchSkill()
     {
-        
+        LookDir();
+        animator.SetTrigger("Switch");
+    }
+
+    void EventSwitchAnimation()
+    {
+
     }
 }

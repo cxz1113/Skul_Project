@@ -15,6 +15,11 @@ public class FollowCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target==null)
+        {
+            target = GameObject.FindWithTag("Player").transform;
+        }
+
         Vector3 pos = target.position;
         pos.z = -10;
         pos.y += 2;

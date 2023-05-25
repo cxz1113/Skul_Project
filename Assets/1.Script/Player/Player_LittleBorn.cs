@@ -15,62 +15,15 @@ public class Player_LittleBorn : Player
         head_Parent = GameObject.Find("Head_Parent").transform;
 
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
         rigid = GetComponent<Rigidbody2D>();
 
         if (isSwitched)
         {
             SwitchSkill();
         }
-    }
-    private void Update()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
-            return;
-        else if(animator.GetCurrentAnimatorStateInfo(0).IsName("Player Switch"))
-        {
-            float dir = playerDir == PlayerDir.right ? 1 : -1;
-            transform.Translate(dir * transform.right * (Time.deltaTime * moveSpeed));
-            return;
-        }
 
-        Move();
-        LookDir();
-        JumpAnimation();
-        if (Input.GetKeyDown(KeyCode.C))
-            Jump();
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Attack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z) && canDash)
-        {
-            StartCoroutine("Dash");
-        }
-
-        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-        {
-            cor = Skill_1();
-            StartCoroutine(cor);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
-        {
-            StartCoroutine(Skill_2());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Destroy(GetComponent<Player_LittleBorn>());
-            gameObject.AddComponent<Player_Wolf>().animators = animators;
-            GetComponent<Player_Wolf>().isSwitched = true;
-            GetComponent<Player_Wolf>().playerDir = playerDir;
-
-            if (head!=null)
-                Destroy(head.gameObject);
-        }
+        switchIndex = 1;
     }
 
     protected override IEnumerator Skill_1()
@@ -79,7 +32,7 @@ public class Player_LittleBorn : Player
         animator.SetTrigger("Skill_1");
         yield return new WaitForSeconds(5f);
         canSkill_1 = true;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
     }
 
     protected override IEnumerator Skill_2()
@@ -89,9 +42,17 @@ public class Player_LittleBorn : Player
         Destroy(head.gameObject);
         ResetCool();
         head = null;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littlebone];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
         yield return new WaitForSeconds(5f);
         canSkill_2 = true;
+    }
+
+    protected override void InputSkill_2()
+    {
+        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
+        {
+            StartCoroutine(Skill_2());
+        }
     }
 
     void EventSkill()
@@ -103,7 +64,7 @@ public class Player_LittleBorn : Player
         head.transform.SetParent(head_Parent);
     }
 
-    void EventChangeAnimation()
+    void EventSwitchAnimation()
     {
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
     }
