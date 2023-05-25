@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
-    public PlayerDemo player;
+    public Player player;
     public Transform playerStart;
     public GameObject gate;
     public GameObject gold;
     public List<WayPoint> wayPoints = new List<WayPoint>();
-    public bool isActive { get; set; }
 
+    public bool isActive { get; set; }
 
     public bool isWay { get; set; }
 
@@ -22,12 +22,9 @@ public class MapManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
-    void Start()
-    {
-        //Instantiate(player, playerStart);
-    }
     void Update()
     {
+        player = ProjectManager.Instance.player;
         // 골드 오브젝트 삭제뒤 웨이 포인트 스프라이트 활설화 및 웨이 포인트 눌렀을때 Scene이동
         if (!isActive && Instance.isWay)
         {

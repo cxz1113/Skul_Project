@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
+    public Player player;
     void Start()
     {
 
+    }
+
+    void Update()
+    {
+        player = ProjectManager.Instance.player;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -62,6 +62,7 @@ public abstract class Player : MonoBehaviour
     public string head1;
     public string head2;
     public int item;
+    public bool isPush;
     protected abstract void Init();
     public void SwitchInit(Player player)
     {
@@ -69,7 +70,6 @@ public abstract class Player : MonoBehaviour
         isSwitched = true;
         playerDir = player.playerDir;
         ProjectManager.Instance.HeadSwap();
-        ProjectManager.Instance.SpriteSwap();
     }
 
     void Start()
@@ -102,6 +102,7 @@ public abstract class Player : MonoBehaviour
         InputSkill_2();
 
         SkulSwitch();
+        Test();
     }
 
     protected void LookDir()
@@ -290,6 +291,28 @@ public abstract class Player : MonoBehaviour
         {
             isGround = false;
             animator.SetBool("IsGround", false);
+        }
+    }
+
+    void Test()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            isPush = true;
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            isPush = false;
+        }
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            HP -= 20;
+            Debug.Log(HP);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            HP += 20;
+            Debug.Log(HP);
         }
     }
 }

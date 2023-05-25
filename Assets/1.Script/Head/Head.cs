@@ -17,6 +17,7 @@ public abstract class Head : MonoBehaviour
     public SkulStatus ss = new SkulStatus();
     public List<Sprite> headSprites = new List<Sprite>();
     public List<Sprite> skillSprites = new List<Sprite>();
+    public Player player;
     public SkulData skuljson;
     public bool isHead { get; set; }
     public abstract void Init();

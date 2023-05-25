@@ -53,6 +53,7 @@ MonoBehaviour:
   skillSprites:
   - {fileID: 21300000, guid: e60f0ce408ea1c7409ed83341095cca5, type: 3}
   - {fileID: 21300000, guid: 8dbce63677b39474abb79baaa6a70e66, type: 3}
+  player: {fileID: 6378543024873178240, guid: 6d520afb13b99534bbc5dc3c6200f927, type: 3}
   skuljson: {fileID: 0}
 --- !u!212 &7522084485357394252
 SpriteRenderer:

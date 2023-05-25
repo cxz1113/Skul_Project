@@ -8,34 +8,32 @@ public class ProjectManager : MonoBehaviour
 {
     public static ProjectManager Instance;
     public Player player;
+    public Transform playerStart;
     public PlayerData playerData;
     public PlayerUI ui;
     public List<Head> heads = new List<Head>();
-    public List<string> headsName = new List<string>();
+
     void Awake() => Instance = this;
 
     void Start()
     {
-        PlayerSet();
+        playerData = FindObjectOfType<PlayerData>();
+        //player = Instantiate(Resources.Load<Player>("Player/Wolf"), playerStart);
+        Init(playerData.nowPlayerData.playerdatajsons[0].head1);
         HeadFrame(playerData.nowPlayerData.playerdatajsons[0].head1, playerData.nowPlayerData.playerdatajsons[0].head2);
+        PlayerSet();
         PlayerUISet();
         HPGage();
-    }
-    void Update()
-    {
     }
 
     void HeadFrame(string main, string sub)
     {
-        headsName.Add(playerData.nowPlayerData.playerdatajsons[0].head1);
-
-        //heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", main)));
-        //heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", sub)));
+        heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", main)));
+        heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", sub)));
     }
     void PlayerSet()
     {
         player = FindObjectOfType<Player>();
-        playerData = FindObjectOfType<PlayerData>();
         PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
         player.curHp = data.curhp;
         player.maxHp = data.maxhp;
@@ -59,6 +57,7 @@ public class ProjectManager : MonoBehaviour
             ui.head2.sprite = heads[1].ss.headStatus2;
         }
         ui.skill1.sprite = heads[0].ss.skill1;
+
         ui.skill2.sprite = heads[0].ss.Skill2;
     }
 
@@ -80,11 +79,15 @@ public class ProjectManager : MonoBehaviour
         heads[1].Init();
     }
 
+    void Init(string main)
+    {
+        player = Instantiate(Resources.Load<Player>(string.Format("Player/{0}",main)), playerStart);
+    }
     public void HeadSwap()
     {
-        string headtemp = heads[0].name;
-        heads[0].name = heads[1].name;
-        heads[1].name = headtemp;
+        Head headTemp = heads[0];
+        heads[0] = heads[1];
+        heads[1] = headTemp;
         player = FindObjectOfType<Player>();
         PlayerHeadSet(heads[0].name, heads[1].name);
         ui.head1.sprite = heads[0].ss.headStatus1;
@@ -92,8 +95,12 @@ public class ProjectManager : MonoBehaviour
         ui.skill1.sprite = heads[0].ss.skill1;
         ui.skill2.sprite = heads[0].ss.Skill2;
     }
-    public void SpriteSwap()
+
+    public void Data()
     {
-        
+        PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
+        data.curhp = player.curHp;
+        data.head1 = heads[0].name;
+        data.head2 = heads[1].name;
     }
 }
