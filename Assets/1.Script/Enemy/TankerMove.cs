@@ -9,6 +9,8 @@ public class TankerMove : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     public int nextMove;
+    bool takcle;
+    public float time;
 
     void Awake()
     {
@@ -16,11 +18,13 @@ public class TankerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Invoke("Think", 3);
+        Invoke("Think", 2);
     }
 
     void FixedUpdate()
     {
+        time += Time.deltaTime;
+
         //움직임
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
@@ -32,6 +36,10 @@ public class TankerMove : MonoBehaviour
         if (rayHit.collider == null)
             Turn();
 
+        if (takcle == true)
+        {
+
+        }
     }
 
     //몬스터 움직임 AI
@@ -60,5 +68,35 @@ public class TankerMove : MonoBehaviour
 
         CancelInvoke();
         Invoke("Think", 2);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (time > 15)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                Debug.Log("player인식");
+                takcle = true;
+                anim.SetBool("Takcle", true);
+
+                Invoke("TakcleCancle", 1.5f);
+            }
+            time = 0.1f;
+        }
+    }
+
+    void TakcleStart()
+    {
+        CancelInvoke();
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
+
+    }
+
+    void TakcleCancle()
+    {
+        anim.SetBool("Takcle", false);
+        takcle = false;
+        gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 }
