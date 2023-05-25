@@ -5,7 +5,6 @@ using TMPro;
 public class PlayerDemo : MonoBehaviour
 {
     public Head head;
-    public List<Head> heads = new List<Head>();
     float speed = 5;
     public List<Sprite> idle;
     public List<Sprite> attack;
@@ -22,22 +21,19 @@ public class PlayerDemo : MonoBehaviour
             ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
         }
     }
+    public string head1;
 
-    public int head1 = 0;
-    public int head2 = 0;
+    public string head2;
     public int item = 0;
     void Start()
     {
         GetComponent<SpriteAnimation>().SetSprite(idle, 0.2f);
-        
-        head = heads[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (heads.Count > 2)
-            return;
+        
         Move();
         if(Input.GetKeyDown(KeyCode.X))
         {

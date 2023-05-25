@@ -14,8 +14,8 @@ public class PlayerData : MonoBehaviour
     {
         public float curhp;
         public float maxhp;
-        public int head1;
-        public int head2;
+        public string head1;
+        public string head2;
         public int item;
     }
 

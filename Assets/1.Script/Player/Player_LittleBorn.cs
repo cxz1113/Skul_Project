@@ -12,7 +12,15 @@ public class Player_LittleBorn : Player
     {
         prefab_Head = Resources.Load<Skill_Head>("Prefab/Head");
         firePos = transform.GetChild(0);
-        head_Parent = GameObject.Find("Head_Parent").transform;
+        
+        if (GameObject.Find("Head_Parent"))
+            head_Parent = GameObject.Find("Head_Parent").transform;
+        else
+        {
+            GameObject head_obj = new GameObject("Head_Parent");
+            head_obj.transform.SetParent(null);
+            head_Parent = head_obj.transform;
+        }
 
         animator = GetComponent<Animator>();
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];

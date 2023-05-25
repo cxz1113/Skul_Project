@@ -14,5 +14,4 @@ public class PlayerUI : MonoBehaviour
     public TMP_Text curHpTxt;
     public TMP_Text maxHpTxt;
     public PlayerDemo player;
-
 }
