@@ -30,6 +30,7 @@ public class Gold : MonoBehaviour
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
+            MapManager.Instance.gate.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(transform.gameObject);
         }
     }

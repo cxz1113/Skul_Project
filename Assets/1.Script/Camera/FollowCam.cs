@@ -15,6 +15,7 @@ public class FollowCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        target = FindObjectOfType<Player>().transform;
         if (target==null)
         {
             target = GameObject.FindWithTag("Player").transform;

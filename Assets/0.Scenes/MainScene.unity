@@ -331,9 +331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press Key
-
-'
+  m_text: "\uC544\uBB34\uD0A4\uB098 \uB204\uB974\uC2DC\uC624\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ba62461c78f0acb4982a2d1bb06b400e, type: 2}
   m_sharedMaterial: {fileID: -1758886015423923175, guid: ba62461c78f0acb4982a2d1bb06b400e, type: 2}
@@ -342,8 +340,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3372220415
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -744,6 +742,7 @@ MonoBehaviour:
   skulData: {fileID: 1963772653}
   itemData: {fileID: 1481486610}
   playerData: {fileID: 2013699551}
+  data: 
 --- !u!4 &1691455551
 Transform:
   m_ObjectHideFlags: 0
@@ -940,4 +939,3 @@ MonoBehaviour:
   playerJson: {fileID: 4900000, guid: 7d5edff877d36ff418dcb7bfe5126263, type: 3}
   nowPlayerData:
     playerdatajsons: []
-  data: 

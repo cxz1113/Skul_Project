@@ -1,10 +1,10 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 0.0,
+            "curhp": 40.0,
             "maxhp": 100.0,
-            "head1": "LittleBorn",
-            "head2": "Wolf",
+            "head1": "Wolf",
+            "head2": "LittleBorn",
             "item": 0
         }
     ]

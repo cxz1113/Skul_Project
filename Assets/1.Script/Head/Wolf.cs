@@ -11,7 +11,7 @@ public class Wolf : Head
         ss.headInven = headSprites[2];
         ss.headItem = headSprites[3];
         ss.skill1 = skillSprites[0];
-        //ss.Skill2 = skillSprites[1];
+        ss.Skill2 = null;
     }
 
     // Start is called before the first frame update

@@ -56,9 +56,7 @@ public class ProjectManager : MonoBehaviour
         {
             ui.head2.sprite = heads[1].ss.headStatus2;
         }
-        ui.skill1.sprite = heads[0].ss.skill1;
-
-        ui.skill2.sprite = heads[0].ss.Skill2;
+        SkillUI();
     }
 
     void HPGage()
@@ -92,10 +90,22 @@ public class ProjectManager : MonoBehaviour
         PlayerHeadSet(heads[0].name, heads[1].name);
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
-        ui.skill1.sprite = heads[0].ss.skill1;
-        ui.skill2.sprite = heads[0].ss.Skill2;
+        SkillUI();
+        //ui.skill1.sprite = heads[0].ss.skill1;
+        //ui.skill2.sprite = heads[0].ss.Skill2;
     }
 
+    void SkillUI()
+    {
+        ui.skill1.sprite = heads[0].ss.skill1;
+        if (heads[0].ss.Skill2 == null)
+            ui.skill2.transform.parent.gameObject.SetActive(false);
+        else
+        {
+            ui.skill2.transform.parent.gameObject.SetActive(true);
+            ui.skill2.sprite = heads[0].ss.Skill2;
+        }
+    }
     public void Data()
     {
         PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
