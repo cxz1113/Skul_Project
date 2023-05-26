@@ -12,6 +12,8 @@ public class TankerMove : MonoBehaviour
     bool takcle;
     public float time;
 
+
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -97,6 +99,6 @@ public class TankerMove : MonoBehaviour
     {
         anim.SetBool("Takcle", false);
         takcle = false;
-        gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        //gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 }
