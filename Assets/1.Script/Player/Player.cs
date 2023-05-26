@@ -47,21 +47,7 @@ public abstract class Player : MonoBehaviour
 
     [HideInInspector] public bool isSwitched = false;
     [SerializeField] protected int switchIndex;
-    public float curHp;
-    public float maxHp;
-    public float HP
-    {
-        get { return curHp; }
-        set
-        {
-            curHp = value;
-            ProjectManager.Instance.ui.hpGage.fillAmount = curHp / maxHp;
-            ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
-        }
-    }
-    public string head1;
-    public string head2;
-    public int item;
+    
     public bool isPush;
     protected abstract void Init();
     public void SwitchInit(Player player)
@@ -306,13 +292,13 @@ public abstract class Player : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            HP -= 20;
-            Debug.Log(HP);
+            PlayerBasket.Instance.HP -= 20;
+            Debug.Log(PlayerBasket.Instance.HP);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            HP += 20;
-            Debug.Log(HP);
+            PlayerBasket.Instance.HP += 20;
+            Debug.Log(PlayerBasket.Instance.HP);
         }
     }
 }

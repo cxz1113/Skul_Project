@@ -8,16 +8,18 @@ public class ProjectManager : MonoBehaviour
 {
     public static ProjectManager Instance;
     public Player player;
+    public PlayerBasket playerBasket;
     public Transform playerStart;
     public PlayerData playerData;
     public PlayerUI ui;
     public List<Head> heads = new List<Head>();
-
+    PlayerData.PlayerDataJson data;
     void Awake() => Instance = this;
 
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
+        data = playerData.nowPlayerData.playerdatajsons[0];
         //player = Instantiate(Resources.Load<Player>("Player/Wolf"), playerStart);
         Init(playerData.nowPlayerData.playerdatajsons[0].head1);
         HeadFrame(playerData.nowPlayerData.playerdatajsons[0].head1, playerData.nowPlayerData.playerdatajsons[0].head2);
@@ -33,20 +35,18 @@ public class ProjectManager : MonoBehaviour
     }
     void PlayerSet()
     {
-        player = FindObjectOfType<Player>();
-        PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
-        player.curHp = data.curhp;
-        player.maxHp = data.maxhp;
-        player.head1 = data.head1;
-        player.head2 = data.head2;
-        player.item = data.item;
+        playerBasket = FindObjectOfType<PlayerBasket>();
+
+        playerBasket.curHp = data.curhp;
+        playerBasket.maxHp = data.maxhp;
+        playerBasket.item = data.item;
     }
 
     void PlayerUISet()
     {
-        PlayerHeadSet(player.head1, player.head2);
-        ui.curHpTxt.text = string.Format($"{player.HP}");
-        ui.maxHpTxt.text = string.Format($"{player.maxHp}");
+        PlayerHeadSet(data.head1, data.head2);
+        ui.curHpTxt.text = string.Format($"{playerBasket.HP}");
+        ui.maxHpTxt.text = string.Format($"{playerBasket.maxHp}");
         ui.head1.sprite = heads[0].ss.headStatus1;
         if (heads[1] == null)
         {
@@ -61,7 +61,7 @@ public class ProjectManager : MonoBehaviour
 
     void HPGage()
     {
-        float hpEnergy = (player.curHp / player.maxHp) * 10f;
+        float hpEnergy = (playerBasket.curHp / playerBasket.maxHp) * 10f;
         hpEnergy = (float)System.Math.Truncate(hpEnergy);
         ui.hpGage.fillAmount = (hpEnergy / 10f);
     }
@@ -88,11 +88,12 @@ public class ProjectManager : MonoBehaviour
         heads[1] = headTemp;
         player = FindObjectOfType<Player>();
         PlayerHeadSet(heads[0].name, heads[1].name);
+        ui.curHpTxt.text = string.Format($"{playerBasket.HP}");
+        ui.maxHpTxt.text = string.Format($"{playerBasket.maxHp}");
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
-        //ui.skill1.sprite = heads[0].ss.skill1;
-        //ui.skill2.sprite = heads[0].ss.Skill2;
+        HPGage();
     }
 
     void SkillUI()
@@ -109,7 +110,7 @@ public class ProjectManager : MonoBehaviour
     public void Data()
     {
         PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
-        data.curhp = player.curHp;
+        data.curhp = playerBasket.curHp;
         data.head1 = heads[0].name;
         data.head2 = heads[1].name;
     }

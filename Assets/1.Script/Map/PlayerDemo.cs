@@ -8,7 +8,6 @@ public class PlayerDemo : MonoBehaviour
     float speed = 5;
     public List<Sprite> idle;
     public List<Sprite> attack;
-    public PlayerActivity playerActivity;
     public float curHp;
     public float maxHp;
     public float HP
@@ -42,11 +41,11 @@ public class PlayerDemo : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F))
         {
-            PlayerActivity.Instance.isPush = true;
+            //PlayerActivity.Instance.isPush = true;
         }
         else if(Input.GetKeyUp(KeyCode.F))
         {
-            PlayerActivity.Instance.isPush = false;
+            //PlayerActivity.Instance.isPush = false;
         }
 
         if(Input.GetKeyDown(KeyCode.F1))
