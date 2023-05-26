@@ -10,6 +10,7 @@ public struct SkulStatus
     public Sprite headItem;
     public Sprite skill1;
     public Sprite Skill2;
+    public SkulData json;
     public int attack;
 }
 public abstract class Head : MonoBehaviour

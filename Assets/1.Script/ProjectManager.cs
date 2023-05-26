@@ -11,6 +11,7 @@ public class ProjectManager : MonoBehaviour
     public PlayerBasket playerBasket;
     public Transform playerStart;
     public PlayerData playerData;
+    public SkulData skulData;
     public PlayerUI ui;
     public List<Head> heads = new List<Head>();
     PlayerData.PlayerDataJson data;
@@ -19,11 +20,12 @@ public class ProjectManager : MonoBehaviour
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
+
         data = playerData.nowPlayerData.playerdatajsons[0];
-        //player = Instantiate(Resources.Load<Player>("Player/Wolf"), playerStart);
         Init(playerData.nowPlayerData.playerdatajsons[0].head1);
-        HeadFrame(playerData.nowPlayerData.playerdatajsons[0].head1, playerData.nowPlayerData.playerdatajsons[0].head2);
+        HeadFrame(data.head1, data.head2);
         PlayerSet();
+        HeadJson();
         PlayerUISet();
         HPGage();
     }
@@ -93,6 +95,7 @@ public class ProjectManager : MonoBehaviour
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
+        HeadJson();
         HPGage();
     }
 
@@ -105,6 +108,23 @@ public class ProjectManager : MonoBehaviour
         {
             ui.skill2.transform.parent.gameObject.SetActive(true);
             ui.skill2.sprite = heads[0].ss.Skill2;
+        }
+    }
+    public void HeadJson()
+    {
+        skulData = FindObjectOfType<SkulData>();
+        int count = 0;
+        while(count < skulData.split.skul.Count)
+        {
+            if (heads[0].name != skulData.split.skul[count].itemskul)
+            {
+                count++;
+            }
+            else
+            {
+                PlayerBasket.Instance.skul = skulData.split.skul[count].itemskul;
+                break;
+            }
         }
     }
     public void Data()

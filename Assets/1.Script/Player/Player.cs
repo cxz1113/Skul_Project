@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class Player : MonoBehaviour
 {
@@ -42,12 +43,28 @@ public abstract class Player : MonoBehaviour
     bool isGround = true;
     bool jumped = false;
 
+    Collision2D collis;
+    //[SerializeField] private CapsuleCollider2D playerCollider;
+
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
 
     [HideInInspector] public bool isSwitched = false;
     [SerializeField] protected int switchIndex;
-    
+    public float curHp;
+    public float maxHp;
+    public float HP
+    {
+        get { return curHp; }
+        set
+        {
+            curHp = value;
+            ProjectManager.Instance.ui.hpGage.fillAmount = curHp / maxHp;
+            ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
+        }
+    }
+
+    public int item;
     public bool isPush;
     protected abstract void Init();
     public void SwitchInit(Player player)
@@ -78,6 +95,7 @@ public abstract class Player : MonoBehaviour
         Move();
         LookDir();
         JumpAnimation();
+        InputDownJump();
         Jump();
         Attack();
 
@@ -145,7 +163,7 @@ public abstract class Player : MonoBehaviour
 
     protected void Jump()
     {
-        if (!Input.GetKeyDown(KeyCode.C))
+        if (!Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)) 
             return;
 
         if (!isGround)
@@ -164,6 +182,25 @@ public abstract class Player : MonoBehaviour
 
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
+    }
+
+    protected void InputDownJump()
+    {
+        if (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)
+        {
+            if (collis != null && collis.gameObject.GetComponent<CompositeCollider2D>())
+            {
+                StartCoroutine(DownJump());
+            }
+        }
+    }
+
+    IEnumerator DownJump()
+    {
+            Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider);
+            yield return new WaitForSeconds(0.25f);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
     }
 
     protected IEnumerator Dash()
@@ -262,9 +299,9 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast(rigid.position, Vector2.down, 0.5f);
-        if (collision.gameObject.CompareTag("Ground") && hit.collider != null)
+        if (collision.gameObject.CompareTag("Ground"))
         {
+            collis = collision;
             isGround = true;
             animator.SetBool("IsGround", true);
             jumped = false;
@@ -275,6 +312,7 @@ public abstract class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            collis = null;
             isGround = false;
             animator.SetBool("IsGround", false);
         }
@@ -290,12 +328,12 @@ public abstract class Player : MonoBehaviour
         {
             isPush = false;
         }
-        if(Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyUp(KeyCode.F1))
         {
             PlayerBasket.Instance.HP -= 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyUp(KeyCode.F2))
         {
             PlayerBasket.Instance.HP += 20;
             Debug.Log(PlayerBasket.Instance.HP);

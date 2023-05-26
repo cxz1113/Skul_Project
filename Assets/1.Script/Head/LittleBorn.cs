@@ -12,6 +12,7 @@ public class LittleBorn : Head
         ss.headItem = headSprites[3];
         ss.skill1 = skillSprites[0];
         ss.Skill2 = skillSprites[1];
+        ss.json = skuljson;
     }
 
     // Start is called before the first frame update

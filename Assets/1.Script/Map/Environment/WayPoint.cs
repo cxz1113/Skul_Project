@@ -17,6 +17,7 @@ public class WayPoint : Environment
     void Start()
     {
         Initialize();
+        canvas.transform.GetChild(0).transform.localPosition = new Vector2(0f,20f);
         collider2D = GetComponent<BoxCollider2D>();
     }
     void Update()

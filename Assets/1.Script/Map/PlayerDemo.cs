@@ -78,6 +78,5 @@ public class PlayerDemo : MonoBehaviour
         {
             MapManager.Instance.gold.gameObject.SetActive(true);
         }
-
     }
 }

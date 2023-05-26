@@ -10,6 +10,7 @@ public class SkulData : MonoBehaviour
     public class Data
     {
         public string name;
+        public string itemskul;
         public string tier;
         public string type;
         public string intro;

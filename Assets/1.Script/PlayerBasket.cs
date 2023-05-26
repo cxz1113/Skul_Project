@@ -7,6 +7,8 @@ public class PlayerBasket : MonoBehaviour
     public static PlayerBasket Instance;
 
     public Player player;
+    public Head head;
+    public string skul;
     public float curHp;
     public float maxHp;
     public float HP
@@ -27,5 +29,6 @@ public class PlayerBasket : MonoBehaviour
     void Update()
     {
         player = ProjectManager.Instance.player;
+        head = ProjectManager.Instance.heads[0];
     }
 }
