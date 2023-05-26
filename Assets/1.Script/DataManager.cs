@@ -25,7 +25,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveData()
     {
-        ProjectManager.Instance.Data();
+        //ProjectManager.Instance.Data();
         data = JsonUtility.ToJson(playerData.nowPlayerData, true);
         Debug.Log(data);
         File.WriteAllText(path, data);

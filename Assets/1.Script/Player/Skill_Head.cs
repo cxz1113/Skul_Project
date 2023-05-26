@@ -15,6 +15,7 @@ public class Skill_Head : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>());
         rigid = GetComponent<Rigidbody2D>();
         Invoke("OffFlying", 1f);
         Invoke("Dest", coolTime);
@@ -27,11 +28,14 @@ public class Skill_Head : MonoBehaviour
             rigid.velocity = new Vector2(dir * speed, 0);
     }
 
-    void OffFlying()
+    IEnumerator OffFlying()
     {
         isFlying = false;
         rigid.gravityScale = 3;
-        rigid.velocity = Vector2.zero;
+        //rigid.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.5f);
+        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>(), false);
+        gameObject.layer = 0;
     }
 
     void Dest()
@@ -42,7 +46,7 @@ public class Skill_Head : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player"))
-            OffFlying();
+            StartCoroutine(OffFlying());
         else if (!isFlying)
         {
             player.ResetCool();

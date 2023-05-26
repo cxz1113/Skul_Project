@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371210583578863513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3371210585359935303}
   - component: {fileID: 3371210585359935298}
   - component: {fileID: 3371210585359935297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Wolf
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
   head1: 
   head2: 
   item: 0
+  isPush: 0
 --- !u!50 &3371210585359935303
 Rigidbody2D:
   serializedVersion: 4
@@ -166,7 +167,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4

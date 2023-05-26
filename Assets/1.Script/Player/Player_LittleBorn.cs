@@ -36,6 +36,7 @@ public class Player_LittleBorn : Player
 
     protected override IEnumerator Skill_1()
     {
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
         canSkill_1 = false;
         animator.SetTrigger("Skill_1");
         yield return new WaitForSeconds(5f);
