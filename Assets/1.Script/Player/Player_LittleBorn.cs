@@ -64,6 +64,7 @@ public class Player_LittleBorn : Player
         }
     }
 
+    //스킬1 - 머리를 날리는 순간 event
     void EventSkill()
     {
         head = Instantiate(prefab_Head, firePos);
@@ -73,6 +74,7 @@ public class Player_LittleBorn : Player
         head.transform.SetParent(head_Parent);
     }
 
+    //스킬1 - 애니메이션 끝나기 1프레임 전 event
     void EventSwitchAnimation()
     {
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];

@@ -7,6 +7,7 @@ public class Skill_Head : MonoBehaviour
     public float coolTime;
     public int dir;
 
+    float originalGravity;
     float speed = 40f;
     bool isFlying = true;
     Rigidbody2D rigid;
@@ -15,8 +16,11 @@ public class Skill_Head : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //플레이어와 충돌 방지
         Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>());
         rigid = GetComponent<Rigidbody2D>();
+        originalGravity = rigid.gravityScale;
+        rigid.gravityScale = 0;
         Invoke("OffFlying", 1f);
         Invoke("Dest", coolTime);
     }
@@ -31,8 +35,7 @@ public class Skill_Head : MonoBehaviour
     IEnumerator OffFlying()
     {
         isFlying = false;
-        rigid.gravityScale = 3;
-        //rigid.velocity = Vector2.zero;
+        rigid.gravityScale = originalGravity;
         yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>(), false);
         gameObject.layer = 0;
@@ -50,6 +53,7 @@ public class Skill_Head : MonoBehaviour
         else if (!isFlying)
         {
             player.ResetCool();
+            //animators[0] = 리틀본 애니메이션
             player.animator.runtimeAnimatorController = player.animators[0];
             Dest();
         }

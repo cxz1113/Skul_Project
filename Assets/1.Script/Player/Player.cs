@@ -145,11 +145,11 @@ public abstract class Player : MonoBehaviour
 
     protected void Move()
     {
+        //대쉬중이거나 공격(점프공격 제외)중 이동 불가
         if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
         float x = Input.GetAxisRaw("Horizontal");
-        //transform.Translate(transform.right * (x * Time.deltaTime * moveSpeed));
         rigid.velocity = new Vector2( x * moveSpeed, rigid.velocity.y);
 
         if(x == 0)
@@ -163,6 +163,7 @@ public abstract class Player : MonoBehaviour
 
     protected void Jump()
     {
+        //점프키를 안 누르거나 아래방향+점프 
         if (!Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)) 
             return;
 
@@ -181,13 +182,14 @@ public abstract class Player : MonoBehaviour
         animator.SetBool("Dash", false);
 
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
-        rigid.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
+        rigid.velocity = new Vector2(rigid.velocity.x, jumpPower);
     }
 
     protected void InputDownJump()
     {
         if (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)
         {
+            //collis = 현재 닿아있는 태그가 "Ground"인 collision
             if (collis != null && collis.gameObject.GetComponent<CompositeCollider2D>())
             {
                 StartCoroutine(DownJump());
@@ -195,6 +197,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    //플레이어 콜라이더 변경시 수정필요
     IEnumerator DownJump()
     {
             Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
@@ -283,14 +286,16 @@ public abstract class Player : MonoBehaviour
     }
 
     
-
+    //공격 A,B - 무기를 휘두르는 순간 event
     protected void EventMoveAttack()
     {
+        //공격시, 바라보는 방향을 입력하고있으면 전진
         if ((Input.GetAxisRaw("Horizontal") > 0 && playerDir_past == PlayerDir.right)||
             (Input.GetAxisRaw("Horizontal") < 0 && playerDir_past == PlayerDir.left))
             rigid.velocity = transform.right * moveSpeed + transform.up * rigid.velocity.y;
     }
 
+    //공격 A,B - 무기를 휘두른 직후 event
     protected void EventStopMoveAttack()
     {
         if (!isDashing)
@@ -317,7 +322,7 @@ public abstract class Player : MonoBehaviour
             animator.SetBool("IsGround", false);
         }
     }
-
+    //
     void Test()
     {
         if(Input.GetKeyDown(KeyCode.F))
