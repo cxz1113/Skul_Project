@@ -37,6 +37,7 @@ public class ProjectManager : MonoBehaviour
     }
     void PlayerSet()
     {
+        // 플레이어 Data를 playerBasket 전달
         playerBasket = FindObjectOfType<PlayerBasket>();
 
         playerBasket.curHp = data.curhp;
@@ -46,6 +47,7 @@ public class ProjectManager : MonoBehaviour
 
     void PlayerUISet()
     {
+        // 플레이어 인터페이스 UI set
         PlayerHeadSet(data.head1, data.head2);
         ui.curHpTxt.text = string.Format($"{playerBasket.HP}");
         ui.maxHpTxt.text = string.Format($"{playerBasket.maxHp}");
@@ -70,6 +72,7 @@ public class ProjectManager : MonoBehaviour
 
     public void PlayerHeadSet(string main, string sub)
     {
+        // 플레이어 헤드프리펩 설정 
         heads[0] = Resources.Load<Head>(string.Format("Prefab/{0}", main));
         heads[0].Init();
         if (heads[1] == null)
@@ -81,10 +84,12 @@ public class ProjectManager : MonoBehaviour
 
     void Init(string main)
     {
+        // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
         player = Instantiate(Resources.Load<Player>(string.Format("Player/{0}",main)), playerStart);
     }
     public void HeadSwap()
     {
+        // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
         Head headTemp = heads[0];
         heads[0] = heads[1];
         heads[1] = headTemp;
@@ -101,6 +106,7 @@ public class ProjectManager : MonoBehaviour
 
     void SkillUI()
     {
+        // 플레이어 인터페이스 Skill UI set
         ui.skill1.sprite = heads[0].ss.skill1;
         if (heads[0].ss.Skill2 == null)
             ui.skill2.transform.parent.gameObject.SetActive(false);
@@ -129,7 +135,8 @@ public class ProjectManager : MonoBehaviour
     }
     public void Data()
     {
-        PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
+        // 저장할 변수들 직렬화 함수
+        //PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
         data.curhp = playerBasket.curHp;
         data.head1 = heads[0].name;
         data.head2 = heads[1].name;
