@@ -10,7 +10,7 @@ public class ItemUI : MonoBehaviour
 
     [SerializeField] Image itemspname;
 
-    [SerializeField] TMP_Text name;
+    [SerializeField] TMP_Text itemname;
     [SerializeField] TMP_Text intro;
     [SerializeField] TMP_Text itemdetail;
     [SerializeField] TMP_Text tier;
@@ -28,7 +28,7 @@ public class ItemUI : MonoBehaviour
 
     public void Init()
     {
-        name.text = itemData.name;
+        itemname.text = itemData.name;
         tier.text = itemData.tier;
         tier.text = itemData.tier;
         value1.text = itemData.value1;

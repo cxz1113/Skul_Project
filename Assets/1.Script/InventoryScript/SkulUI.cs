@@ -13,7 +13,7 @@ public class SkulUI : MonoBehaviour
     [SerializeField] Image mainsSrite;
     [SerializeField] Image skillsprite;
 
-    [SerializeField] TMP_Text name;
+    [SerializeField] TMP_Text skulname;
     [SerializeField] TMP_Text tier;
     [SerializeField] TMP_Text type;
     [SerializeField] TMP_Text intro;
@@ -30,7 +30,7 @@ public class SkulUI : MonoBehaviour
 
     public void Init()
     {
-        name.text = skulData.name;
+        skulname.text = skulData.name;
         tier.text = skulData.tier;
         type.text = skulData.type;
         intro.text = skulData.intro;

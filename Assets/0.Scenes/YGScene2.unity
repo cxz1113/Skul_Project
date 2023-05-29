@@ -897,7 +897,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d04f1674d7c742afbeb57464fc445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scan: 0
+  scan: {fileID: 1988177240}
+  rigid: {fileID: 0}
+  anim: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  target: {fileID: 0}
   nextMove: 0
 --- !u!1 &1154371361
 GameObject:
@@ -1382,6 +1386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 1101825135}
   tans: {fileID: 1988177238}
+  knight: {fileID: 1101825141}
+  scanP: 0
 --- !u!1 &2074807294
 GameObject:
   m_ObjectHideFlags: 0

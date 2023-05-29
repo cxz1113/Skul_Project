@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class KnightMove : MonoBehaviour
 {
-    Rigidbody2D rigid;
-    Animator anim;
-    SpriteRenderer spriteRenderer;
-    Transform target;
+    [SerializeField] Scan scan;
+    public Rigidbody2D rigid;
+    public Animator anim;
+    public SpriteRenderer spriteRenderer;
+    public Transform target;
 
-    public bool scan;
     public int nextMove;
 
     void Awake()
@@ -19,6 +19,19 @@ public class KnightMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         Invoke("Think", 2);
+    }
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        if (scan.scanP == true)
+        {
+            CancelInvoke("Think");
+        }
     }
 
     void FixedUpdate()
@@ -36,7 +49,7 @@ public class KnightMove : MonoBehaviour
        
     }
     // 몬스터 움직임 AI
-    void Think()
+    public void Think()
     {
         //다음 움직임 방향 * 속도
         nextMove = Random.Range(-1, 2) * 3;
@@ -66,34 +79,24 @@ public class KnightMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         target = collision.gameObject.transform;
-        if (scan == true)
+        if (collision.gameObject.tag == "Player")
         {
-            CancelInvoke("Think");
-            spriteRenderer.flipX = target.position.x > transform.position.x ? false : true;
-            Invoke("AttackStart", 0);
+            OnDamage(collision.transform.position);
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (scan == false)
-        {
-            CancelInvoke("AttackStart");
-            anim.SetBool("Attack", false);
-            Think();
-        }
+       
     }
 
     void OnDamage(Vector2 targetPos)
     {
         anim.SetBool("Hit", true);
-        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-        rigid.AddForce(new Vector2(dirc, 1) *7, ForceMode2D.Impulse);
+        int dirc = transform.position.x - targetPos.x > 0 ? 3 : -3;
+        rigid.AddForce(new Vector2(dirc + 5, 1) *7, ForceMode2D.Impulse);
     }
 
-    void AttackStart()
-    {
-        nextMove = 0;
-        anim.SetBool("Attack", true);
-    }
+    
+
 }

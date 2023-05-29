@@ -10,7 +10,7 @@ public class EssenceUI : MonoBehaviour
 
     [SerializeField] Image essencespname;
 
-    [SerializeField] TMP_Text name;
+    [SerializeField] TMP_Text essencename;
     [SerializeField] TMP_Text tier;
     [SerializeField] TMP_Text cooltime;
     [SerializeField] TMP_Text intro;
@@ -26,7 +26,7 @@ public class EssenceUI : MonoBehaviour
 
     public void Init()
     {
-        name.text = essenceData.name;
+        essencename.text = essenceData.name;
         tier.text = essenceData.tier;
         cooltime.text = essenceData.cooltime.ToString();
         intro.text = essenceData.intro;
