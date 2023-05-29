@@ -9,16 +9,14 @@ public class KnightMove : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Transform target;
 
+    public bool scan;
     public int nextMove;
-    bool hit;
-    bool attack;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        attack = false;
 
         Invoke("Think", 2);
     }
@@ -67,18 +65,28 @@ public class KnightMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        target = collision.gameObject.transform;
+        if (scan == true)
         {
             CancelInvoke("Think");
+            if (target.position.x > transform.position.x)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (target.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
             Invoke("AttackStart", 0);
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (scan == false)
         {
             CancelInvoke("AttackStart");
+            anim.SetBool("Attack", false);
             Think();
         }
     }
@@ -92,14 +100,7 @@ public class KnightMove : MonoBehaviour
 
     void AttackStart()
     {
+        nextMove = 0;
         anim.SetBool("Attack", true);
-        if (target.position.x > transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (target.position.x < transform.position.x)
-        {
-            spriteRenderer.flipX = false;
-        }
     }
 }
