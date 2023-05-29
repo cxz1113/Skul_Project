@@ -51,20 +51,7 @@ public abstract class Player : MonoBehaviour
 
     [HideInInspector] public bool isSwitched = false;
     [SerializeField] protected int switchIndex;
-    public float curHp;
-    public float maxHp;
-    public float HP
-    {
-        get { return curHp; }
-        set
-        {
-            curHp = value;
-            ProjectManager.Instance.ui.hpGage.fillAmount = curHp / maxHp;
-            ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
-        }
-    }
-
-    public int item;
+    
     public bool isPush;
     protected abstract void Init();
     public void SwitchInit(Player player)
@@ -93,9 +80,7 @@ public abstract class Player : MonoBehaviour
         }
 
         Move();
-        LookDir();
         JumpAnimation();
-        InputDownJump();
         Jump();
         Attack();
 
@@ -160,13 +145,20 @@ public abstract class Player : MonoBehaviour
             animator.SetBool("Walk", true);
             playerDir = x > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
         }
+
+        LookDir();
     }
 
     protected void Jump()
     {
         //점프키를 안 누르거나 아래방향+점프 
-        if (!Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)) 
+        if (!Input.GetKeyDown(KeyCode.C))  
             return;
+        else if((Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0))
+        {
+            DownJump();
+            return;
+        }
 
         if (!isGround)
         {
@@ -179,17 +171,15 @@ public abstract class Player : MonoBehaviour
         rigid.velocity = Vector2.zero;
         SetGravity(true);
         animator.SetBool("Dash", false);
-
-        //rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.velocity = new Vector2(rigid.velocity.x, jumpPower);
     }
 
-    protected void InputDownJump()
+    protected void DownJump()
     {
         if (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)
         {
             //collis = 현재 닿아있는 태그가 "Ground"인 collision
-            if (collis != null && collis.gameObject.GetComponent<CompositeCollider2D>())
+            if (collis != null && collis.gameObject.GetComponent<PlatformEffector2D>())
             {
                 StartCoroutine(CDownJump());
             }
@@ -201,7 +191,7 @@ public abstract class Player : MonoBehaviour
     {
         Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
         Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
     }
 

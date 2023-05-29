@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class FireFlower : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Animator animator;
+    [SerializeField] CheckCollider checkCollider;
+    public int pattern;
+    float fireDelay = 2f;
+    float delayTime = 0f;
+
     void Start()
     {
         
@@ -13,6 +18,17 @@ public class FireFlower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        delayTime += Time.deltaTime;
+        if (delayTime >= fireDelay && checkCollider.active)  
+        {
+            FIre();
+            delayTime = 0;
+        }
     }
+
+    public void FIre()
+    {
+        animator.SetTrigger("Attack");
+    }
+    
 }
