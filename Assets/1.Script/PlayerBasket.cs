@@ -18,7 +18,7 @@ public class PlayerBasket : MonoBehaviour
         {
             curHp = value;
             ProjectManager.Instance.ui.hpGage.fillAmount = curHp / maxHp;
-            ProjectManager.Instance.ui.curHpTxt.text = string.Format("{0}", curHp);
+            ProjectManager.Instance.ui.curHpTxt.text = $"{curHp}";
         }
     }
 

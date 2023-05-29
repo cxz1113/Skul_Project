@@ -29,14 +29,14 @@ public class ProjectManager : MonoBehaviour
         PlayerSet();
         HeadJson();
         PlayerUISet();
-        InvenJson();
+        //InvenJson();
         HPGage();
     }
 
     void HeadFrame(string main, string sub)
     {
-        heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", main)));
-        heads.Add(Resources.Load<Head>(string.Format("Prefab/{0}", sub)));
+        heads.Add(Resources.Load<Head>($"Prefab/{main}"));
+        heads.Add(Resources.Load<Head>($"Prefab/{sub}"));
     }
     void PlayerSet()
     {
@@ -52,17 +52,12 @@ public class ProjectManager : MonoBehaviour
     {
         // 플레이어 인터페이스 UI set
         PlayerHeadSet(data.head1, data.head2);
-        ui.curHpTxt.text = $"{playerBasket.HP}";
-        ui.maxHpTxt.text = $"{playerBasket.maxHp}";
+        TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
-        if (heads[1] == null)
-        {
-            ui.head2.color = new Color(1f, 1f, 1f, 1f/255f);
-        }
+        if (heads.Count < 1)
+            ui.head2.color = new Color(1f, 1f, 1f, 1f/255f);               
         else
-        {
-            ui.head2.sprite = heads[1].ss.headStatus2;
-        }
+            ui.head2.sprite = heads[1].ss.headStatus2;      
         SkillUI();
     }
 
@@ -76,12 +71,12 @@ public class ProjectManager : MonoBehaviour
     public void PlayerHeadSet(string main, string sub)
     {
         // 플레이어 헤드프리펩 설정 
-        heads[0] = Resources.Load<Head>(string.Format("Prefab/{0}", main));
+        heads[0] = Resources.Load<Head>($"Prefab/{main}");
         heads[0].Init();
         if (heads[1] == null)
             return;
         
-        heads[1] = Resources.Load<Head>(string.Format("Prefab/{0}", sub));
+        heads[1] = Resources.Load<Head>($"Prefab/{sub}");
         heads[1].Init();
     }
 
@@ -98,13 +93,18 @@ public class ProjectManager : MonoBehaviour
         heads[1] = headTemp;
         player = FindObjectOfType<Player>();
         PlayerHeadSet(heads[0].name, heads[1].name);
-        ui.curHpTxt.text = string.Format($"{playerBasket.HP}");
-        ui.maxHpTxt.text = string.Format($"{playerBasket.maxHp}");
+        TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
         HeadJson();
         HPGage();
+    }
+
+    void TextSet()
+    {
+        ui.curHpTxt.text = $"{playerBasket.HP}";
+        ui.maxHpTxt.text = $"{playerBasket.maxHp}";
     }
 
     void SkillUI()
@@ -141,11 +141,12 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
-        Sprite sprite;
-        if (heads[1] == null)
-            //inven.skulIcon.sprite = sprite.name.Equals("Inventory_Deactivate");
-        inven.skulIcon.sprite = heads[0].ss.headInven;
+        if (heads.Count <= 1)
+            inven.skulIcon.sprite = inven.nullSprite;
+        else
+            inven.skulIcon.sprite = heads[1].ss.headInven;
     }
+
     public void Data()
     {
         // 저장할 변수들 직렬화 함수

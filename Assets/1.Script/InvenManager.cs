@@ -6,6 +6,7 @@ using TMPro;
 public class InvenManager : MonoBehaviour
 {
     public Image skulIcon;
+    public Sprite nullSprite;
     public List<Image> skuls = new List<Image>();
     public List<Image> items = new List<Image>();
     public List<TMP_Text> testx = new List<TMP_Text>();
