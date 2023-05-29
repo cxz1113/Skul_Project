@@ -10,10 +10,12 @@ public class ProjectManager : MonoBehaviour
     public Player player;
     public PlayerBasket playerBasket;
     public Transform playerStart;
+    public PlayerUI ui;
+    public InvenManager inven;
+    public List<Head> heads = new List<Head>();
     public PlayerData playerData;
     public SkulData skulData;
-    public PlayerUI ui;
-    public List<Head> heads = new List<Head>();
+    public ItemData itemData;
     PlayerData.PlayerDataJson data;
     void Awake() => Instance = this;
 
@@ -27,6 +29,7 @@ public class ProjectManager : MonoBehaviour
         PlayerSet();
         HeadJson();
         PlayerUISet();
+        InvenJson();
         HPGage();
     }
 
@@ -116,6 +119,7 @@ public class ProjectManager : MonoBehaviour
             ui.skill2.sprite = heads[0].ss.Skill2;
         }
     }
+
     public void HeadJson()
     {
         skulData = FindObjectOfType<SkulData>();
@@ -132,6 +136,15 @@ public class ProjectManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void InvenJson()
+    {
+        itemData = FindObjectOfType<ItemData>();
+        Sprite sprite;
+        if (heads[1] == null)
+            //inven.skulIcon.sprite = sprite.name.Equals("Inventory_Deactivate");
+        inven.skulIcon.sprite = heads[0].ss.headInven;
     }
     public void Data()
     {

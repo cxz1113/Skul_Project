@@ -600,14 +600,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1529705903951460394, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575809771951203560, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6052666482318647743, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
       propertyPath: m_Group
       value: 
@@ -804,25 +796,21 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 206659455}
-    - target: {fileID: 8082961765042824015, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 6481521819075707275, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8603727173587854498, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
+    - target: {fileID: 6481521819075707275, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8603727173781575999, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 6481521819075707275, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8603727174679693760, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8603727174965283612, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
+    - target: {fileID: 6481521819075707275, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5479634edbe92f64a8ed0db87f2156bb, type: 3}
