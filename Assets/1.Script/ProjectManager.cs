@@ -52,8 +52,8 @@ public class ProjectManager : MonoBehaviour
     {
         // 플레이어 인터페이스 UI set
         PlayerHeadSet(data.head1, data.head2);
-        ui.curHpTxt.text = string.Format($"{playerBasket.HP}");
-        ui.maxHpTxt.text = string.Format($"{playerBasket.maxHp}");
+        ui.curHpTxt.text = $"{playerBasket.HP}";
+        ui.maxHpTxt.text = $"{playerBasket.maxHp}";
         ui.head1.sprite = heads[0].ss.headStatus1;
         if (heads[1] == null)
         {

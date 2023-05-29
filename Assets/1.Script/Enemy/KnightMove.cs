@@ -69,14 +69,7 @@ public class KnightMove : MonoBehaviour
         if (scan == true)
         {
             CancelInvoke("Think");
-            if (target.position.x > transform.position.x)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else if (target.position.x < transform.position.x)
-            {
-                spriteRenderer.flipX = true;
-            }
+            spriteRenderer.flipX = target.position.x > transform.position.x ? false : true;
             Invoke("AttackStart", 0);
         }
     }

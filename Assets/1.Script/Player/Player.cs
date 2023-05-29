@@ -146,7 +146,8 @@ public abstract class Player : MonoBehaviour
     protected void Move()
     {
         //대쉬중이거나 공격(점프공격 제외)중 이동 불가
-        if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
+        if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && 
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -171,17 +172,15 @@ public abstract class Player : MonoBehaviour
         {
             if (jumped)
                 return;
-            else
-            {
-                jumped = true;
-            }
+
+            jumped = true;
         }
 
         rigid.velocity = Vector2.zero;
         SetGravity(true);
         animator.SetBool("Dash", false);
 
-        rigid.velocity = new Vector2(rigid.velocity.x, 0);
+        //rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.velocity = new Vector2(rigid.velocity.x, jumpPower);
     }
 
@@ -192,18 +191,18 @@ public abstract class Player : MonoBehaviour
             //collis = 현재 닿아있는 태그가 "Ground"인 collision
             if (collis != null && collis.gameObject.GetComponent<CompositeCollider2D>())
             {
-                StartCoroutine(DownJump());
+                StartCoroutine(CDownJump());
             }
         }
     }
 
     //플레이어 콜라이더 변경시 수정필요
-    IEnumerator DownJump()
+    IEnumerator CDownJump()
     {
-            Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider);
-            yield return new WaitForSeconds(0.25f);
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
+        Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
+        Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider);
+        yield return new WaitForSeconds(0.25f);
+        Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
     }
 
     protected IEnumerator Dash()
