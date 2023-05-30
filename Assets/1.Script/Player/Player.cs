@@ -332,5 +332,9 @@ public abstract class Player : MonoBehaviour
             PlayerBasket.Instance.HP += 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(true);
+        }
     }
 }
