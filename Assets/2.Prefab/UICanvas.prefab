@@ -2201,96 +2201,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &674082826644267684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 242597731328220975}
-  - component: {fileID: 3508670020567998459}
-  - component: {fileID: 2797353316157372170}
-  - component: {fileID: 3332639310906724356}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &242597731328220975
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674082826644267684}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3356390174963180088}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 968, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3508670020567998459
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674082826644267684}
-  m_CullTransparentMesh: 1
---- !u!114 &2797353316157372170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674082826644267684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
---- !u!114 &3332639310906724356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674082826644267684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &755544500463057076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,7 +3249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainsSrite: {fileID: 6481521818154038043}
   skillsprite: {fileID: 891981088322662564}
-  name: {fileID: 5451003582569958579}
+  skulname: {fileID: 0}
   tier: {fileID: 5177968378565459704}
   type: {fileID: 5816395252086537158}
   intro: {fileID: 6998450731091001551}
@@ -4973,7 +4883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 5485648488797447877}
+  itemname: {fileID: 0}
   intro: {fileID: 5357693099904136669}
   itemdetail: {fileID: 5987955797421447239}
   tier: {fileID: 5801630430689428946}
@@ -6598,7 +6508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 8353456628043010836}
+  itemname: {fileID: 0}
   intro: {fileID: 4603475062518110790}
   itemdetail: {fileID: 1191587475986870555}
   tier: {fileID: 2288018755877071809}
@@ -8774,7 +8684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 2579981608855623805}
+  itemname: {fileID: 0}
   intro: {fileID: 7696095709888005374}
   itemdetail: {fileID: 1361728119311565276}
   tier: {fileID: 5043602108165104279}
@@ -9031,7 +8941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 2884063547465493282}
+  itemname: {fileID: 0}
   intro: {fileID: 2526928274178431708}
   itemdetail: {fileID: 3669543199174810031}
   tier: {fileID: 1401139564648250085}
@@ -22206,7 +22116,7 @@ RectTransform:
   m_GameObject: {fileID: 6481521819093729718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6481521818154038040}
@@ -22218,7 +22128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 970, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6481521819093729707
@@ -24692,7 +24602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainsSrite: {fileID: 6481521818154038043}
   skillsprite: {fileID: 8603727174965283615}
-  name: {fileID: 8603727174219202790}
+  skulname: {fileID: 0}
   tier: {fileID: 8603727173337934434}
   type: {fileID: 8603727173044237981}
   intro: {fileID: 8603727174586588324}
@@ -25947,8 +25857,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 242597731328220975}
+  m_Children: []
   m_Father: {fileID: 4621429057578843199}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26052,7 +25961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 1209829477902226367}
+  itemname: {fileID: 0}
   intro: {fileID: 5927929727155463725}
   itemdetail: {fileID: 3271025020416796277}
   tier: {fileID: 6541952482789729572}
@@ -26308,7 +26217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemspname: {fileID: 6481521818154038043}
-  name: {fileID: 9102695172467662368}
+  itemname: {fileID: 0}
   intro: {fileID: 9102695171119477391}
   itemdetail: {fileID: 9102695172294772259}
   tier: {fileID: 9102695170677072014}
