@@ -7,7 +7,7 @@ public class Scan : MonoBehaviour
     [SerializeField] GameObject EnemyObj;
     [SerializeField] Transform tans;
 
-    [SerializeField] KnightMove knight;
+    Enemy enemy;
 
     public bool scanP;
     void Update()
@@ -20,21 +20,24 @@ public class Scan : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             scanP = true;
-            knight.spriteRenderer.flipX = knight.target.position.x > transform.position.x ? false : true;
+            enemy.ed.spriterenderer.flipX = enemy.ed.target.position.x < transform.position.x ? false : true;
             Invoke("AttackStart", 0);
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        CancelInvoke("AttackStart");
-        knight.anim.SetBool("Attack", false);
-        knight.Think();
+        if (collision.gameObject.tag == "Player")
+        {
+            CancelInvoke("AttackStart");
+            enemy.ed.anim.SetBool("Attack", false);
+            enemy.Think();
+        }
     }
 
     void AttackStart()
     {
-        knight.nextMove = 0;
-        knight.anim.SetBool("Attack", true);
+        enemy.nextMove = 0;
+        enemy.ed.anim.SetBool("Attack", true);
     }
 }

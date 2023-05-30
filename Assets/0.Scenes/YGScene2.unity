@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32898107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.04, y: -2.46, z: 0}
+  m_LocalPosition: {x: -8.56, y: -2.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -897,11 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d04f1674d7c742afbeb57464fc445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scan: {fileID: 1988177240}
-  rigid: {fileID: 0}
-  anim: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  target: {fileID: 0}
+  scan: {fileID: 1988177237}
   nextMove: 0
 --- !u!1 &1154371361
 GameObject:
@@ -1132,6 +1128,70 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1655838100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655838102}
+  - component: {fileID: 1655838103}
+  - component: {fileID: 1655838101}
+  m_Layer: 7
+  m_Name: Scan (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1655838101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655838100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edf945da23c6604a90ae8fd4f115d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyObj: {fileID: 2090222980}
+  tans: {fileID: 1655838102}
+  scanP: 0
+--- !u!4 &1655838102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655838100}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.68, y: 1.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2090222985}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1655838103
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655838100}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &1840668431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 1101825135}
   tans: {fileID: 1988177238}
-  knight: {fileID: 1101825141}
   scanP: 0
 --- !u!1 &2074807294
 GameObject:
@@ -1430,12 +1489,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2090222985}
-  - component: {fileID: 2090222986}
+  - component: {fileID: 2090222988}
   - component: {fileID: 2090222984}
   - component: {fileID: 2090222983}
   - component: {fileID: 2090222982}
   - component: {fileID: 2090222981}
-  - component: {fileID: 2090222987}
   m_Layer: 7
   m_Name: Tanker
   m_TagString: Enemy
@@ -1477,7 +1535,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25, y: 2.25}
+  m_Offset: {x: 0, y: 2.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.07}
@@ -1571,15 +1629,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090222980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.49, y: 6.33, z: -1}
+  m_LocalPosition: {x: 6.27, y: 6.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 66940891}
+  - {fileID: 1655838102}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2090222986
+--- !u!114 &2090222988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1591,21 +1650,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2d685234a4b144a04f52647c3734b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scan: {fileID: 1655838100}
   nextMove: 0
-  time: 0
---- !u!58 &2090222987
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090222980}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.25, y: 2.2}
-  serializedVersion: 2
-  m_Radius: 5
