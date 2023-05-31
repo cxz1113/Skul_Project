@@ -67,6 +67,6 @@ public class InvenManager : MonoBehaviour
     {
         mySequence = DOTween.Sequence();
         yield return new WaitForSeconds(1);
-        mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1700, 1080), 1f, true));
+        mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1720, 1080), 1f, true));
     }
 }
