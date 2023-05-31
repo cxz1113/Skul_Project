@@ -29,7 +29,7 @@ public class ProjectManager : MonoBehaviour
         PlayerSet();
         HeadJson();
         PlayerUISet();
-        //InvenJson();
+        InvenJson();
         HPGage();
     }
 
@@ -141,10 +141,8 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
-        if (heads.Count <= 1)
-            inven.skulIcon.sprite = inven.nullSprite;
-        else
-            inven.skulIcon.sprite = heads[1].ss.headInven;
+        inven.imagesItem[0].sprite = heads[0].ss.headItem;
+        inven.imagesItem[1].sprite = heads[1].ss.headItem;
     }
 
     public void Data()

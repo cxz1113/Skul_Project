@@ -3,34 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
+
 public class InvenManager : MonoBehaviour
 {
     [SerializeField] public Canvas invenCanvas;
-    [SerializeField] Image inven;
-    [SerializeField] Image scroll;
-    public Image skulIcon;
+    [SerializeField] GameObject scroll;
+    public SkulData skulData;
+    public ItemData itemData;
+    public Sequence mySequence;
     public Sprite nullSprite;
-    public List<Image> skuls = new List<Image>();
-    public List<Image> items = new List<Image>();
-    public List<TMP_Text> testx = new List<TMP_Text>();
 
+
+    #region MainSkulDataType1
+    [Header("MainSkulDataType1")]
+    public List<Image> imagesType1 = new List<Image>();
+    public Dictionary<int, string> dicType1 = new Dictionary<int, string>();
+   
+    #endregion
+
+    #region MainSkulDataType2
+    [Header("MainSkulDataType2")]
+    public List<Image> imagesType2 = new List<Image>();
+    public Dictionary<int, string> dicType2 = new Dictionary<int, string>();
+    #endregion
+
+    #region Item
+    [Header("Item")]
+    public List<Image> imagesItem = new List<Image>();
+    #endregion
     void Start()
     {
-        //inven.rectTransform.localScale = new Vector3(1, 1, 1);   
-        StartCoroutine("ScrollAction");
-    }
-    void Update()
-    {
-
+        StartCoroutine(DotweenScroll());
+        InvenType1();
+        InvenType2();
     }
 
-    IEnumerable ScrollAction()
+    void InvenType1()
     {
-        for(int i = 0; i <= 10; i++)
+        string[] dataName = { "skulName", "rank", "type", "intro", "detail", "ability", "skillname1", "skillname2", 
+            "skillname1_1", "skillNmae2_1", "skill1Detail", "skill2Detail", "ability1", "abilityDetail", "coolTime" };
+        for(int i = 0; i < dicType1.Count; i++)
         {
-            inven.rectTransform.localScale += new Vector3(i, 1 , 1);
-            yield return new WaitForSeconds(0.1f);
+            dicType1.Add(i, dataName[i]);
         }
-        yield return new WaitForSeconds(0.1f);
+    }
+
+    void InvenType2()
+    {
+        string[] dataName = { "skulName", "rank", "type", "intro", "detail", "ability", "skillname1", 
+            "skillname1_1", "skill1Detail", "ability1", "abilityDetail", "coolTime" };
+        for (int i = 0; i < dicType1.Count; i++)
+        {
+            dicType1.Add(i, dataName[i]);
+        }
+    }
+
+    void InvenData()
+    {
+        
+    }
+    IEnumerator DotweenScroll()
+    {
+        mySequence = DOTween.Sequence();
+        yield return new WaitForSeconds(1);
+        mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1700, 1080), 1f, true));
     }
 }
