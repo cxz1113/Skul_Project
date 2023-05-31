@@ -22,7 +22,11 @@ public class Player_Wolf : Player
 
     protected override IEnumerator Skill_1()
     {
-        yield break;
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+        canSkill_1 = false;
+        animator.SetTrigger("Skill_1");
+        yield return new WaitForSeconds(5f);
+        canSkill_1 = true;
     }
 
     protected override IEnumerator Skill_2()
