@@ -2003,6 +2003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3371210583578863514, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3371210585359935300, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2047,9 +2051,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3371210585359935304, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
+      propertyPath: capCol
+      value: 
+      objectReference: {fileID: 1805076089}
     - target: {fileID: 3371210585359935305, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
       propertyPath: m_Name
       value: Player_Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371210585359935305, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371210585359935305, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
@@ -24764,7 +24780,7 @@ GameObject:
   - component: {fileID: 1550321663}
   - component: {fileID: 1550321665}
   - component: {fileID: 1550321664}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -26319,7 +26335,7 @@ GameObject:
   - component: {fileID: 1565475986}
   - component: {fileID: 1565475990}
   - component: {fileID: 1565475989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -42655,7 +42671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257343673998533856, guid: 6d520afb13b99534bbc5dc3c6200f927, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4257343673998533869, guid: 6d520afb13b99534bbc5dc3c6200f927, type: 3}
       propertyPath: m_RootOrder
@@ -43083,6 +43099,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768300529}
   m_CullTransparentMesh: 1
+--- !u!70 &1805076089 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3371210585359935297, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
+  m_PrefabInstance: {fileID: 495656250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1848754394
 GameObject:
   m_ObjectHideFlags: 0

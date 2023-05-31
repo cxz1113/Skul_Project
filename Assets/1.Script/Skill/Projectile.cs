@@ -24,14 +24,12 @@ public abstract class Projectile : MonoBehaviour
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
-        Debug.Log(4124);
 
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
-        Debug.Log(4124);
 
     }
 }

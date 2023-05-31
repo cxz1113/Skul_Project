@@ -9,10 +9,7 @@ public class Player_LittleBorn : Player
     [SerializeField] Transform head_Parent;
 
     protected override void Init()
-    {
-        prefab_Head = Resources.Load<Skill_Head>("Prefab/Head");
-        firePos = transform.GetChild(0);
-        
+    {  
         if (GameObject.Find("Head_Parent"))
             head_Parent = GameObject.Find("Head_Parent").transform;
         else
@@ -39,7 +36,7 @@ public class Player_LittleBorn : Player
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         canSkill_1 = false;
         animator.SetTrigger("Skill_1");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         canSkill_1 = true;
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
     }
@@ -80,11 +77,24 @@ public class Player_LittleBorn : Player
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
     }
 
+    //교대 - 애니메이션 시작하자마자 event
+    IEnumerator EventSwitched_LB()
+    {
+        canInput = false;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            float dir = playerDir == PlayerDir.right ? 1 : -1;
+            rigid.velocity = new Vector2(dir * moveSpeed, rigid.velocity.y);
+            yield return new WaitForFixedUpdate();
+        }
+        canInput = true;
+    }
+
     protected override void SwitchSkill()
     {
         LookDir();
         animator.SetTrigger("Switch");
     }
 
-   
+    
 }

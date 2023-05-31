@@ -142,17 +142,13 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
   - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
   - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
+  capCol: {fileID: 4257343673998533864}
   moveSpeed: 15
   isSwitched: 0
   switchIndex: 0
-  curHp: 0
-  maxHp: 0
-  head1: 
-  head2: 
-  item: 0
   isPush: 0
-  prefab_Head: {fileID: 0}
-  firePos: {fileID: 0}
+  prefab_Head: {fileID: 8719836836145597690, guid: 7308071d6a302e244ac78fdc54c63cb8, type: 3}
+  firePos: {fileID: 4257343673292514352}
   head_Parent: {fileID: 0}
 --- !u!50 &4257343673998533870
 Rigidbody2D:

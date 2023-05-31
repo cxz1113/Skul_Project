@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371210583578863513}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3371210585359935303}
   - component: {fileID: 3371210585359935298}
   - component: {fileID: 3371210585359935297}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player_Wolf
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -141,14 +141,10 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
   - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
   - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
+  capCol: {fileID: 3371210585359935297}
   moveSpeed: 15
   isSwitched: 0
   switchIndex: 0
-  curHp: 0
-  maxHp: 0
-  head1: 
-  head2: 
-  item: 0
   isPush: 0
 --- !u!50 &3371210585359935303
 Rigidbody2D:

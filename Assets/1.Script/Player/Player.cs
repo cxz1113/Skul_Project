@@ -19,19 +19,21 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public PlayerDir playerDir = PlayerDir.right;
     protected PlayerDir playerDir_past;
 
-    protected Rigidbody2D rigid;
     [HideInInspector] public Animator animator;
+    protected Rigidbody2D rigid;
 
+    //inspector에서 직접 넣어줄 것들
     public List<Player> players;
     public List<RuntimeAnimatorController> animators;
+    [SerializeField] protected CapsuleCollider2D capCol;
 
-    protected Skill_Head head;
-    protected IEnumerator cor;
-
+    protected bool canInput = true;
     protected float originalGravity = 6;
 
+    //Move
     public float moveSpeed = 15f;
 
+    //Dash
     int maxDashCount = 2;
     float dashPower = 30f;
     float dashCoolTime = 0.8f;
@@ -39,16 +41,22 @@ public abstract class Player : MonoBehaviour
     protected bool canDash = true;
     bool isDashing = false;
 
+    //Jump
     float jumpPower = 24f;
     bool isGround = true;
     bool jumped = false;
 
+    //DownJump
     Collision2D collis;
-    //[SerializeField] private CapsuleCollider2D playerCollider;
 
+    //Skill
+    protected Skill_Head head;
+    protected IEnumerator cor;
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
 
+
+    //Switch
     [HideInInspector] public bool isSwitched = false;
     [SerializeField] protected int switchIndex;
     
@@ -70,17 +78,12 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Skill"))
+        JumpAnimation();
+
+        if (!canInput)
             return;
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player Switch"))
-        {
-            float dir = playerDir == PlayerDir.right ? 1 : -1;
-            transform.Translate(dir * transform.right * (Time.deltaTime * moveSpeed));
-            return;
-        }
 
         Move();
-        JumpAnimation();
         Jump();
         Attack();
 
@@ -135,15 +138,15 @@ public abstract class Player : MonoBehaviour
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        rigid.velocity = new Vector2( x * moveSpeed, rigid.velocity.y);
+        float dir = Input.GetAxisRaw("Horizontal");
+        rigid.velocity = new Vector2( dir * moveSpeed, rigid.velocity.y);
 
-        if(x == 0)
+        if(dir == 0)
             animator.SetBool("Walk", false);
         else
         {
             animator.SetBool("Walk", true);
-            playerDir = x > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
+            playerDir = dir > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
         }
 
         LookDir();
@@ -274,7 +277,18 @@ public abstract class Player : MonoBehaviour
         rigid.gravityScale = On ? originalGravity : 0;
     }
 
-    
+    //범용 - 현재 실행중 애니메이션이 끝날때까지 입력 불가
+    protected IEnumerator EventStopInput()
+    {
+        canInput = false;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        canInput = true;
+    }
+
+
     //공격 A,B - 무기를 휘두르는 순간 event
     protected void EventMoveAttack()
     {
