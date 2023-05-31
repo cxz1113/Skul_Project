@@ -57,10 +57,6 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (scan.GetComponent<Scan>().scanP == true)
-        {
-            CancelInvoke("Think");
-        }
     }
 
     public void Think()
@@ -87,10 +83,35 @@ public abstract class Enemy : MonoBehaviour
         Invoke("Think", 2);
     }
 
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            CancelInvoke("Think");
+            ed.spriterenderer.flipX = ed.target.position.x > transform.position.x ? false : true;
+            Invoke("AttackStart", 0);
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            CancelInvoke("Think");
+            Invoke("Think",1);
+            CancelInvoke("AttackStart");
+            ed.anim.SetBool("Attack", false);
+        }
+    }
+
     void OnDamage(Vector2 targetPos)
     {
         ed.anim.SetBool("Hit", true);
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         ed.rigid.AddForce(new Vector2(dirc, 1) * 7, ForceMode2D.Impulse);
+    }
+    void AttackStart()
+    {
+        nextMove = 0;
+        ed.anim.SetBool("Attack", true);
     }
 }
