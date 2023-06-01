@@ -26,7 +26,7 @@ public enum EnemyType
 public abstract class Enemy : MonoBehaviour
 {
     public EnemyData ed = new EnemyData();
-    [SerializeField] public GameObject scan;
+    Transform child;
    
     public int nextMove;
 
@@ -91,6 +91,12 @@ public abstract class Enemy : MonoBehaviour
             ed.spriterenderer.flipX = ed.target.position.x > transform.position.x ? false : true;
             Invoke("AttackStart", 0);
         }
+
+        if (child.GetChild(1).GetComponent<Scan>().hit == true) ;
+        {
+            CancelInvoke();
+            OnDamage(collision.transform.position);
+        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
@@ -103,9 +109,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    void OnDamage(Vector2 targetPos)
+    public void OnDamage(Vector2 targetPos)
     {
-        ed.anim.SetBool("Hit", true);
+        ed.anim.SetTrigger("Hit");
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         ed.rigid.AddForce(new Vector2(dirc, 1) * 7, ForceMode2D.Impulse);
     }

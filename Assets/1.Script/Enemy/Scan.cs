@@ -9,7 +9,11 @@ public class Scan : MonoBehaviour
 
     Enemy enemy;
 
-    public bool scanP;
+    public bool hit;
+    private void Start()
+    {
+        hit = false;
+    }
     void Update()
     {
         tans.position = EnemyObj.transform.position;
@@ -17,10 +21,12 @@ public class Scan : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        hit = true;
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        hit = false;
     }
 
    

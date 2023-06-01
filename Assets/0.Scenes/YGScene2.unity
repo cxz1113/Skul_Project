@@ -845,6 +845,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1840668432}
+  - {fileID: 1988177238}
   m_Father: {fileID: 2074807295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -868,6 +869,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1101825141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d04f1674d7c742afbeb57464fc445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scan: {fileID: 1988177237}
   nextMove: 0
 --- !u!58 &1101825142
 CircleCollider2D:
@@ -1022,6 +1023,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &1595092884
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1158,7 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 2090222980}
   tans: {fileID: 1655838102}
-  scanP: 0
+  hit: 0
 --- !u!4 &1655838102
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,11 +1409,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988177237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.925802, y: -4.6660557, z: -1.0756037}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2074807295}
+  m_Father: {fileID: 1101825139}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1988177240
@@ -1428,7 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 1101825135}
   tans: {fileID: 1988177238}
-  scanP: 0
+  hit: 0
 --- !u!70 &1988177241
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1474,7 +1476,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1101825139}
-  - {fileID: 1988177238}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1519,6 +1520,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &2090222982
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1647,5 +1649,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2d685234a4b144a04f52647c3734b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scan: {fileID: 1655838100}
   nextMove: 0

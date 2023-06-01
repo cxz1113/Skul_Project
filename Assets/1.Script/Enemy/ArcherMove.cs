@@ -22,10 +22,6 @@ public class ArcherMove : MonoBehaviour
     }
     void Update()
     {
-        if (scan.scanP == true)
-        {
-            CancelInvoke("Think");
-        }
     }
 
     void FixedUpdate()
