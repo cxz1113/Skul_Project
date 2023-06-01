@@ -92,11 +92,6 @@ public abstract class Enemy : MonoBehaviour
             Invoke("AttackStart", 0);
         }
 
-        if (child.GetChild(1).GetComponent<Scan>().hit == true) ;
-        {
-            CancelInvoke();
-            OnDamage(collision.transform.position);
-        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
@@ -109,12 +104,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void OnDamage(Vector2 targetPos)
-    {
-        ed.anim.SetTrigger("Hit");
-        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-        ed.rigid.AddForce(new Vector2(dirc, 1) * 7, ForceMode2D.Impulse);
-    }
+   
     void AttackStart()
     {
         nextMove = 0;
