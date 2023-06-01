@@ -13,11 +13,13 @@ public class ProjectManager : MonoBehaviour
     public PlayerUI ui;
     public InvenManager inven;
     public List<Item> heads = new List<Item>();
-    public List<Item> Items = new List<Item>();
+    public List<Item> essences = new List<Item>();
+    public List<Item> items = new List<Item>();
     public PlayerData playerData;
     public SkulData skulData;
     public ItemData itemData;
     PlayerData.PlayerDataJson data;
+    
     void Awake() => Instance = this;
 
     void Start()
@@ -26,7 +28,6 @@ public class ProjectManager : MonoBehaviour
 
         data = playerData.nowPlayerData.playerdatajsons[0];
         Init(playerData.nowPlayerData.playerdatajsons[0].head1);
-        HeadFrame(data.head1, data.head2);
         PlayerSet();
         HeadJson();
         PlayerUISet();
@@ -34,16 +35,28 @@ public class ProjectManager : MonoBehaviour
         HPGage();
     }
 
-    void HeadFrame(string main, string sub)
+    void HeadFrametaSet()
     {
-        heads.Add(Resources.Load<Item>($"Prefab/{main}"));
-        heads.Add(Resources.Load<Item>($"Prefab/{sub}"));
+        string[] str = { data.head1, data.head2 };
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (str[i] == string.Empty)
+                break;
+            else
+            {
+                heads.Add(Resources.Load<Item>($"Prefab/{str[i]}"));
+                foreach (var item in heads)
+                {
+                    item.Init();
+                }
+            }
+        }
     }
     void PlayerSet()
     {
         // 플레이어 Data를 playerBasket 전달
         playerBasket = FindObjectOfType<PlayerBasket>();
-
+        HeadFrametaSet();
         playerBasket.curHp = data.curhp;
         playerBasket.maxHp = data.maxhp;
         playerBasket.item = data.item0;
@@ -93,7 +106,7 @@ public class ProjectManager : MonoBehaviour
         heads[0] = heads[1];
         heads[1] = headTemp;
         player = FindObjectOfType<Player>();
-        PlayerHeadSet(heads[0].name, heads[1].name);
+        PlayerHeadSet(data.head1, data.head2);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
@@ -125,15 +138,15 @@ public class ProjectManager : MonoBehaviour
     {
         skulData = FindObjectOfType<SkulData>();
         int count = 0;
-        while(count < skulData.split.skul.Count)
+        while(count < skulData.skulDataJson.skul.Count)
         {
-            if (heads[0].name != skulData.split.skul[count].itemskul)
+            if (heads[0].name != skulData.skulDataJson.skul[count].itemskul)
             {
                 count++;
             }
             else
             {
-                PlayerBasket.Instance.skul = skulData.split.skul[count].itemskul;
+                PlayerBasket.Instance.skul = skulData.skulDataJson.skul[count].itemskul;
                 break;
             }
         }
@@ -142,13 +155,27 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
-        if (heads.Count == 0 || Items.Count == 0)
-            return;
-        //inven.imagesItem[0].sprite = heads[0].ss.headItem;
-        //inven.imagesItem[1].sprite = heads[1].ss.headItem;
-        
+        ItemSet();
+        inven.ItemBox(heads, essences, items);
     }
 
+    void ItemSet()
+    {
+        string[] str = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
+        for(int i = 0; i < str.Length; i++)
+        {
+            if (str[i] == string.Empty)
+                break;
+            else
+            {
+                items.Add(Resources.Load<Item>($"Prefab/{str[i]}"));
+                foreach (var item in items)
+                {
+                    item.Init();
+                }
+            }
+        }
+    }
     public void Data()
     {
         // 저장할 변수들 직렬화 함수
@@ -156,6 +183,6 @@ public class ProjectManager : MonoBehaviour
         data.curhp = playerBasket.curHp;
         data.head1 = heads[0].name;
         data.head2 = heads[1].name;
-        data.item0 = Items[0].name;
+        data.item0 = items[0].name;
     }
 }

@@ -43,7 +43,7 @@ public abstract class Item : MonoBehaviour
 
         else if (collision.CompareTag("Player") && isItem)
         {
-            ProjectManager.Instance.Items.Add(this);
+            ProjectManager.Instance.items.Add(this);
             DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].item0 = gameObject.name;
             transform.gameObject.SetActive(false);
         }

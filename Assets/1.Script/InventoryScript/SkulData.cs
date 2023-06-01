@@ -23,23 +23,16 @@ public class SkulData : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Split
+    public class SkulDataJson
     {
         public List<Data> skul;
     }
 
     [SerializeField] TextAsset skulJson;
-    public Split split;
-
-
+    public SkulDataJson skulDataJson;
 
     void Start()
     {
-        split = JsonUtility.FromJson<Split>(skulJson.text);
-    }
-
-    public void OnSkulData()
-    {
-        SkulUI.Instance.SetData(split.skul[0]);
+        skulDataJson = JsonUtility.FromJson<SkulDataJson>(skulJson.text);
     }
 }

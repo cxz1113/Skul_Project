@@ -6,7 +6,6 @@ using System.IO;
 public class PlayerData : MonoBehaviour
 {
     public TextAsset playerJson;
-
     public NowPlayerData nowPlayerData;
 
     [Serializable]
@@ -16,6 +15,7 @@ public class PlayerData : MonoBehaviour
         public float maxhp;
         public string head1;
         public string head2;
+        public string essence;
         public string item0;
         public string item1;
         public string item2;

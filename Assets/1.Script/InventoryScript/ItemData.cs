@@ -8,35 +8,27 @@ public class ItemData : MonoBehaviour
     public class Data
     {
         public string name;
-        public string itemspname;
+        public string itempname;
+        public string tier;
         public string intro;
         public string itemdetail;
-        public string tier;
-        public string value1;
-        public string value2;
         public string abillity1;
         public string abillity2;
-        public int physical;
-        public int magic;
-        public int defence;
+        
     }
 
     [System.Serializable]
-    public class Split
+    public class ItemDatajson
     {
         public List<Data> item;
     }
 
-    public Split split;
+    public ItemDatajson itemDatajson;
     [SerializeField] TextAsset itemJson;
 
     void Start()
     {
-        split = JsonUtility.FromJson<Split>(itemJson.text);
+        itemDatajson = JsonUtility.FromJson<ItemDatajson>(itemJson.text);
     }
 
-    public void OnItemData()
-    {
-        //ItemUI.Instance.SetData(split.item[0]);
-    }
 }

@@ -15,6 +15,7 @@ public class InvenManager : MonoBehaviour
     public ItemData itemData;
     public Sequence mySequence;
     public Sprite nullSprite;
+    public Item[,] itemsBox = new Item[4, 3];
 
     #region MainSkulDataType1
     [Header("MainSkulDataType1")]
@@ -31,13 +32,12 @@ public class InvenManager : MonoBehaviour
 
     #region MainItemData
     [Header("MainItemData")]
-    public List<Image> imagesitem = new List<Image>();
+    public List<Image> imagesitemData = new List<Image>();
 
     #endregion
 
     [Header("ItemBox")]
-    public List<Item>[,] itemsBox = new List<Item>[4, 3];
-
+    public List<Image> imagesItem = new List<Image>();
 
 
     void Start()
@@ -71,6 +71,7 @@ public class InvenManager : MonoBehaviour
     {
         
     }
+
     IEnumerator DotweenScroll()
     {
         mySequence = DOTween.Sequence();
@@ -78,8 +79,32 @@ public class InvenManager : MonoBehaviour
         mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1720, 1080), 1f, true));
     }
 
-    void ItemBox()
+    public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
     {
-        
+        for(int i = 0; i < items1.Count; i ++)
+        {
+            itemsBox[0, i] = items1[i]; 
+        }
+        for(int i = 0; i < items2.Count; i++)
+        {
+            if (items2.Count == 0)
+                itemsBox[1, i] = null;
+            else
+                itemsBox[1, i] = items2[i];
+        }
+        for (int i = 2; i < 4; i++)
+        {
+            for (int j = 0; j < items3.Count; j++)
+            {
+                itemsBox[i, j] = items3[j];
+            }
+        }
+    }
+    public void ItemBoxSprite(List<Item> items1, List<Item> items2, List<Item> items3)
+    {
+        int count = 0;
+        while(count < 10)
+        {
+        }
     }
 }
