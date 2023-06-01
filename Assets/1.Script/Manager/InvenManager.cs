@@ -69,4 +69,9 @@ public class InvenManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1720, 1080), 1f, true));
     }
+
+    void ItemBox()
+    {
+        //int[] 
+    }
 }

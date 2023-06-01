@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class PlayerDemo : MonoBehaviour
 {
-    public Head head;
+    //public Head head;
     float speed = 5;
     public List<Sprite> idle;
     public List<Sprite> attack;

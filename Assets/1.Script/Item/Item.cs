@@ -13,21 +13,29 @@ public struct SkulStatus
     public SkulData json;
     public int attack;
 }
-public abstract class Head : MonoBehaviour
+public struct ItemStatus
+{
+    public Sprite Inven;
+    public Sprite passive;
+    public Sprite item;
+}
+
+public abstract class Item : MonoBehaviour
 {
     public SkulStatus ss = new SkulStatus();
+    public ItemStatus id = new ItemStatus();
     public List<Sprite> headSprites = new List<Sprite>();
     public List<Sprite> skillSprites = new List<Sprite>();
-    public Player player;
-    public SkulData skuljson;
+    public List<Sprite> itemSprites = new List<Sprite>();
+
     public bool isHead { get; set; }
     public abstract void Init();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") )
+        if (collision.CompareTag("Player"))
         {
-            ProjectManager.Instance.heads[1] = this;
+            //ProjectManager.Instance.heads[1] = this;
             DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].head2 = gameObject.name;
             transform.gameObject.SetActive(false);
         }

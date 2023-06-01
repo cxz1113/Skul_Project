@@ -12,7 +12,7 @@ public class ProjectManager : MonoBehaviour
     public Transform playerStart;
     public PlayerUI ui;
     public InvenManager inven;
-    public List<Head> heads = new List<Head>();
+    public List<Item> heads = new List<Item>();
     public PlayerData playerData;
     public SkulData skulData;
     public ItemData itemData;
@@ -35,8 +35,8 @@ public class ProjectManager : MonoBehaviour
 
     void HeadFrame(string main, string sub)
     {
-        heads.Add(Resources.Load<Head>($"Prefab/{main}"));
-        heads.Add(Resources.Load<Head>($"Prefab/{sub}"));
+        heads.Add(Resources.Load<Item>($"Prefab/{main}"));
+        heads.Add(Resources.Load<Item>($"Prefab/{sub}"));
     }
     void PlayerSet()
     {
@@ -71,12 +71,12 @@ public class ProjectManager : MonoBehaviour
     public void PlayerHeadSet(string main, string sub)
     {
         // 플레이어 헤드프리펩 설정 
-        heads[0] = Resources.Load<Head>($"Prefab/{main}");
+        heads[0] = Resources.Load<Item>($"Prefab/{main}");
         heads[0].Init();
         if (heads[1] == null)
             return;
         
-        heads[1] = Resources.Load<Head>($"Prefab/{sub}");
+        heads[1] = Resources.Load<Item>($"Prefab/{sub}");
         heads[1].Init();
     }
 
@@ -88,7 +88,7 @@ public class ProjectManager : MonoBehaviour
     public void HeadSwap()
     {
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
-        Head headTemp = heads[0];
+        Item headTemp = heads[0];
         heads[0] = heads[1];
         heads[1] = headTemp;
         player = FindObjectOfType<Player>();
