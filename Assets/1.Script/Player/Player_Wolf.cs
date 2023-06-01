@@ -23,7 +23,7 @@ public class Player_Wolf : Player
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         canSkill_1 = false;
         animator.SetTrigger("Skill_1");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         canSkill_1 = true;
     }
 
