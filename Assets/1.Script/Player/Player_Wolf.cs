@@ -6,6 +6,7 @@ public class Player_Wolf : Player
 {
     protected override void Init()
     {
+        base.Init();
         animator = GetComponent<Animator>();
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.wolf];
         rigid = GetComponent<Rigidbody2D>();
@@ -18,16 +19,17 @@ public class Player_Wolf : Player
         switchIndex = 0;
     }
 
-    protected override IEnumerator Skill_1()
+    protected override IEnumerator CSkill_1()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         canSkill_1 = false;
         animator.SetTrigger("Skill_1");
+        StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.skill1_Mask, 1));
         yield return new WaitForSeconds(1f);
         canSkill_1 = true;
     }
 
-    protected override IEnumerator Skill_2()
+    protected override IEnumerator CSkill_2()
     {
         yield break;
     }

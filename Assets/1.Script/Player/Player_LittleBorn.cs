@@ -7,9 +7,13 @@ public class Player_LittleBorn : Player
     [SerializeField] Skill_Head prefab_Head;
     [SerializeField] Transform firePos;
     [SerializeField] Transform head_Parent;
+    protected Skill_Head head;
+    protected IEnumerator corSkill_1;
+    protected IEnumerator cor_CoolUi;
 
     protected override void Init()
-    {  
+    {
+        base.Init();
         if (GameObject.Find("Head_Parent"))
             head_Parent = GameObject.Find("Head_Parent").transform;
         else
@@ -31,17 +35,26 @@ public class Player_LittleBorn : Player
         switchIndex = 1;
     }
 
-    protected override IEnumerator Skill_1()
+    protected override IEnumerator CSkill_1()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         canSkill_1 = false;
         animator.SetTrigger("Skill_1");
+        cor_CoolUi = CCoolDown_UI(ProjectManager.Instance.ui.skill1_Mask, 3);
+        StartCoroutine(cor_CoolUi);
         yield return new WaitForSeconds(3f);
         canSkill_1 = true;
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
     }
+    public void ResetCool()
+    {
+        StopCoroutine(corSkill_1);
+        StopCoroutine(cor_CoolUi);
+        ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
+        canSkill_1 = true;
+    }
 
-    protected override IEnumerator Skill_2()
+    protected override IEnumerator CSkill_2()
     {
         canSkill_2 = false;
         transform.position = head.transform.position;
@@ -49,15 +62,34 @@ public class Player_LittleBorn : Player
         ResetCool();
         head = null;
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.skill2_Mask, 5));
         yield return new WaitForSeconds(5f);
         canSkill_2 = true;
+    }
+
+    protected override void InputSkill_1()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
+        {
+            corSkill_1 = CSkill_1();
+            StartCoroutine(corSkill_1);
+        }
     }
 
     protected override void InputSkill_2()
     {
         if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
         {
-            StartCoroutine(Skill_2());
+            StartCoroutine(CSkill_2());
+        }
+    }
+    protected override void SkulSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            base.SkulSwitch();
+            if (head != null)
+                Destroy(head.gameObject);
         }
     }
 
@@ -65,7 +97,7 @@ public class Player_LittleBorn : Player
     void EventSkill()
     {
         head = Instantiate(prefab_Head, firePos);
-        head.coolTime = 5;
+        head.coolTime = 3;
         head.dir = playerDir == PlayerDir.right ? 1 : -1;
         head.player = this;
         head.transform.SetParent(head_Parent);
