@@ -8,7 +8,7 @@ public class Skill_Head : MonoBehaviour
     public int dir;
 
     float originalGravity;
-    float speed = 40f;
+    float speed = 50f;
     bool isFlying = true;
     Rigidbody2D rigid;
     public Player_LittleBorn player;

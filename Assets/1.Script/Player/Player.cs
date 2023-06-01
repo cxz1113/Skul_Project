@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public abstract class Player : MonoBehaviour
@@ -50,8 +51,7 @@ public abstract class Player : MonoBehaviour
     Collision2D collis;
 
     //Skill
-    protected Skill_Head head;
-    protected IEnumerator cor;
+    
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
 
@@ -61,7 +61,11 @@ public abstract class Player : MonoBehaviour
     [SerializeField] protected int switchIndex;
     
     public bool isPush;
-    protected abstract void Init();
+    protected virtual void Init()
+    {
+        ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
+        ProjectManager.Instance.ui.skill2_Mask.fillAmount = 0;
+    }
     public void SwitchInit(Player player)
     {
         animators = player.animators;
@@ -88,7 +92,7 @@ public abstract class Player : MonoBehaviour
         Attack();
 
         if (Input.GetKeyDown(KeyCode.Z) && canDash)
-            StartCoroutine("Dash");
+            StartCoroutine("CDash");
 
         InputSkill_1();
         InputSkill_2();
@@ -198,7 +202,7 @@ public abstract class Player : MonoBehaviour
         Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
     }
 
-    protected IEnumerator Dash()
+    protected IEnumerator CDash()
     {
         float inputDir = Input.GetAxisRaw("Horizontal");
 
@@ -233,42 +237,44 @@ public abstract class Player : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    protected abstract IEnumerator Skill_1();
-    protected abstract IEnumerator Skill_2();
+    protected abstract IEnumerator CSkill_1();
+    protected abstract IEnumerator CSkill_2();
     protected abstract void SwitchSkill();
 
     protected virtual void InputSkill_1()
     {
         if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-        {
-            cor = Skill_1();
-            StartCoroutine(cor);
-        }
+            StartCoroutine(CSkill_1());
     }
 
     protected virtual void InputSkill_2()
     {
         if (Input.GetKeyDown(KeyCode.S) && canSkill_2)
-            StartCoroutine(Skill_2());
+            StartCoroutine(CSkill_2());
     }
 
-    public void ResetCool()
+    protected IEnumerator CCoolDown_UI(Image mask,float coolTime)
     {
-        StopCoroutine(cor);
-        canSkill_1 = true;
+        float coolDowned = 0;
+
+        while (coolDowned < coolTime)
+        {
+            yield return new WaitForFixedUpdate();
+            coolDowned += Time.deltaTime;
+            mask.fillAmount = (coolTime - coolDowned) / coolTime;
+        }
+        
     }
 
-    protected void SkulSwitch()
+    protected virtual void SkulSwitch()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //수정 필요(임시)
             Player player = Instantiate(players[switchIndex], transform);
             player.transform.SetParent(null);
             player.SwitchInit(this);
             Destroy(gameObject);
-
-            if (head != null)
-                Destroy(head.gameObject);
         }
     }
 
@@ -278,7 +284,7 @@ public abstract class Player : MonoBehaviour
     }
 
     //범용 - 현재 실행중 애니메이션이 끝날때까지 입력 불가
-    protected IEnumerator EventStopInput()
+    protected IEnumerator EventCStopInput()
     {
         canInput = false;
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) 
