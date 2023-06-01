@@ -13,6 +13,7 @@ public class ProjectManager : MonoBehaviour
     public PlayerUI ui;
     public InvenManager inven;
     public List<Item> heads = new List<Item>();
+    public List<Item> Items = new List<Item>();
     public PlayerData playerData;
     public SkulData skulData;
     public ItemData itemData;
@@ -45,7 +46,7 @@ public class ProjectManager : MonoBehaviour
 
         playerBasket.curHp = data.curhp;
         playerBasket.maxHp = data.maxhp;
-        playerBasket.item = data.item;
+        playerBasket.item = data.item0;
     }
 
     void PlayerUISet()
@@ -141,8 +142,11 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
-        inven.imagesItem[0].sprite = heads[0].ss.headItem;
-        inven.imagesItem[1].sprite = heads[1].ss.headItem;
+        if (heads.Count == 0 || Items.Count == 0)
+            return;
+        //inven.imagesItem[0].sprite = heads[0].ss.headItem;
+        //inven.imagesItem[1].sprite = heads[1].ss.headItem;
+        
     }
 
     public void Data()
@@ -152,5 +156,6 @@ public class ProjectManager : MonoBehaviour
         data.curhp = playerBasket.curHp;
         data.head1 = heads[0].name;
         data.head2 = heads[1].name;
+        data.item0 = Items[0].name;
     }
 }

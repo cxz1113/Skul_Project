@@ -22,7 +22,7 @@ public class PlayerBasket : MonoBehaviour
         }
     }
 
-    public int item;
+    public string item;
 
     void Awake() => Instance = this;
 

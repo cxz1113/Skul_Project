@@ -16,7 +16,12 @@ public class PlayerData : MonoBehaviour
         public float maxhp;
         public string head1;
         public string head2;
-        public int item;
+        public string item0;
+        public string item1;
+        public string item2;
+        public string item3;
+        public string item4;
+        public string item5;
     }
 
     [Serializable]

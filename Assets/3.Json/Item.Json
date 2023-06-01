@@ -2,46 +2,31 @@
   "item": 
   [
     {
-      "name": "",
-      "itemspname": "",
-      "intro": "",
-      "itemdetail": "",
-      "tier": "",
-      "value1": "",
-      "value2": "",
-      "ability1": "",
-      "ability2": "",
-      "physical": 0,
-      "magic": 0,
-      "defence": 0
+      "name": "버려진 결혼반지",
+      "itempname": "WeddingRing",
+      "tier": "일반",
+      "intro": "빼놓은 지 얼마나 되었을까? 한기가 도는 반지이다.",
+      "itemdetail": "스킬 쿨다운 속도가 25% 증가합니다. 적에게 기본공격 시 2% 확률로 빙결을 부여합니다.",
+      "ability1": "가보",
+      "ability2": "절대영도"
     },
     {
       "name": "",
       "itemspname": "",
+      "tier": "",
       "intro": "",
       "itemdetail": "",
-      "tier": "",
-      "value1": "",
-      "value2": "",
       "ability1": "",
-      "ability2": "",
-      "physical": 0,
-      "magic": 0,
-      "defence": 0
+      "ability2": ""
     },
     {
       "name": "",
       "itemspname": "",
+      "tier": "",
       "intro": "",
       "itemdetail": "",
-      "tier": "",
-      "value1": "",
-      "value2": "",
       "ability1": "",
-      "ability2": "",
-      "physical": 0,
-      "magic": 0,
-      "defence": 0
+      "ability2": ""
     }
   ]
 }

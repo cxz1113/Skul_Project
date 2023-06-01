@@ -29,14 +29,22 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> itemSprites = new List<Sprite>();
 
     public bool isHead { get; set; }
+    public bool isItem { get; set; }
     public abstract void Init();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isHead)
         {
-            //ProjectManager.Instance.heads[1] = this;
+            ProjectManager.Instance.heads[1] = this;
             DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].head2 = gameObject.name;
+            transform.gameObject.SetActive(false);
+        }
+
+        else if (collision.CompareTag("Player") && isItem)
+        {
+            ProjectManager.Instance.Items.Add(this);
+            DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].item0 = gameObject.name;
             transform.gameObject.SetActive(false);
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using System;
+
 
 public class InvenManager : MonoBehaviour
 {
@@ -13,7 +15,6 @@ public class InvenManager : MonoBehaviour
     public ItemData itemData;
     public Sequence mySequence;
     public Sprite nullSprite;
-
 
     #region MainSkulDataType1
     [Header("MainSkulDataType1")]
@@ -28,10 +29,17 @@ public class InvenManager : MonoBehaviour
     public Dictionary<int, string> dicType2 = new Dictionary<int, string>();
     #endregion
 
-    #region Item
-    [Header("Item")]
-    public List<Image> imagesItem = new List<Image>();
+    #region MainItemData
+    [Header("MainItemData")]
+    public List<Image> imagesitem = new List<Image>();
+
     #endregion
+
+    [Header("ItemBox")]
+    public List<Item>[,] itemsBox = new List<Item>[4, 3];
+
+
+
     void Start()
     {
         StartCoroutine(DotweenScroll());
@@ -72,6 +80,6 @@ public class InvenManager : MonoBehaviour
 
     void ItemBox()
     {
-        //int[] 
+        
     }
 }
