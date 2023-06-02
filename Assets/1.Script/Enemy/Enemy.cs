@@ -9,11 +9,11 @@ public struct EnemyData
     public Animator anim;
     public SpriteRenderer spriterenderer;
     public Transform target;
-
-    public float hp;
-    public float maxhp;
-    public float damage;
     public float rayY;
+
+    public float maxhp;
+    public float hp;
+    public float damage;
 }
 
 public enum EnemyType
@@ -26,9 +26,9 @@ public enum EnemyType
 public abstract class Enemy : MonoBehaviour
 {
     public EnemyData ed = new EnemyData();
-    Transform child;
    
     public int nextMove;
+    public bool isDead;
 
     void Awake()
     {
@@ -36,6 +36,8 @@ public abstract class Enemy : MonoBehaviour
         ed.spriterenderer = GetComponent<SpriteRenderer>();
         ed.anim = GetComponent<Animator>();
         ed.target = GameObject.Find("Player").transform;
+        isDead = false;
+
         Invoke("Think", 2);
     }
     public abstract void Init();
@@ -57,6 +59,11 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (isDead == true)
+        {
+            CancelInvoke();
+            ed.anim.SetBool("Dead", true);
+        }
     }
 
     public void Think()

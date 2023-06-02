@@ -8,6 +8,10 @@ public class KnightMove : Enemy
     {
         ed.entype = EnemyType.knigt;
         ed.rayY = 1.2f;
+
+        ed.maxhp = 50;
+        ed.hp = ed.maxhp;
+        ed.damage = 5;
     }
 
     void Start()

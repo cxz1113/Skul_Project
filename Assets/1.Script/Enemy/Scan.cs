@@ -17,18 +17,28 @@ public class Scan : MonoBehaviour
     {
         if (hitcollision.gameObject.tag == "Player")
         {
-            OnDamage();
+            if (enemy.ed.entype != EnemyType.Tanker)
+            {
+                OnDamage();
+            }
+            
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
     }
+
     public void OnDamage()
     {
+        //enemy.ed.hp -= Player.Damage;
         enemy.ed.anim.SetTrigger("Hit");
-        int dirc = transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x > 0 ? 3 : -3;
-        enemy.ed.rigid.AddForce(new Vector2(dirc, 1) * 7, ForceMode2D.Impulse);
+        int dirc = transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x > 0 ? 1 : -1;
+        enemy.ed.rigid.AddForce(new Vector2(dirc, 3) * 1 , ForceMode2D.Impulse);
+        if (enemy.ed.hp == 0)
+        {
+            enemy.isDead = true;
+        }
     }
 
 }
