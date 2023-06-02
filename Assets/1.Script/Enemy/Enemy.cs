@@ -37,7 +37,6 @@ public abstract class Enemy : MonoBehaviour
         ed.anim = GetComponent<Animator>();
         ed.target = GameObject.Find("Player").transform;
         isDead = false;
-
         Invoke("Think", 2);
     }
     public abstract void Init();
@@ -59,11 +58,14 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (isDead == true)
+        if (isDead == true || ed.hp <= 0)
         {
-            CancelInvoke();
+            CancelInvoke("Think");
+            CancelInvoke("AttackStart");
+            nextMove = 0;
             ed.anim.SetBool("Dead", true);
         }
+        DamageTest();
     }
 
     public void Think()
@@ -110,11 +112,18 @@ public abstract class Enemy : MonoBehaviour
             ed.anim.SetBool("Attack", false);
         }
     }
-
    
     void AttackStart()
     {
         nextMove = 0;
         ed.anim.SetBool("Attack", true);
+    }
+
+    void DamageTest()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ed.hp -= 100;
+        }
     }
 }

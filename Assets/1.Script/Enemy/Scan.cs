@@ -35,7 +35,7 @@ public class Scan : MonoBehaviour
         enemy.ed.anim.SetTrigger("Hit");
         int dirc = transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x > 0 ? 1 : -1;
         enemy.ed.rigid.AddForce(new Vector2(dirc, 3) * 1 , ForceMode2D.Impulse);
-        if (enemy.ed.hp == 0)
+        if (enemy.ed.hp <= 0)
         {
             enemy.isDead = true;
         }

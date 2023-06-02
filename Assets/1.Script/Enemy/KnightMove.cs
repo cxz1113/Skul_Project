@@ -10,7 +10,7 @@ public class KnightMove : Enemy
         ed.rayY = 1.2f;
 
         ed.maxhp = 50;
-        ed.hp = ed.maxhp;
+        ed.hp = 50;
         ed.damage = 5;
     }
 
