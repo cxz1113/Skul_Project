@@ -7,6 +7,7 @@ public class Player_Wolf : Player
     protected override void Init()
     {
         base.Init();
+        Damage = 15;
         animator = GetComponent<Animator>();
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.wolf];
         rigid = GetComponent<Rigidbody2D>();

@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
         ed.rigid = GetComponent<Rigidbody2D>();
         ed.spriterenderer = GetComponent<SpriteRenderer>();
         ed.anim = GetComponent<Animator>();
-        ed.target = GameObject.Find("Player").transform;
+        ed.target = GameObject.FindWithTag("Player").transform;
         isDead = false;
         Invoke("Think", 2);
     }

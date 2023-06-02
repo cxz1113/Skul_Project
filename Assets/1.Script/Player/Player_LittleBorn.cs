@@ -14,6 +14,7 @@ public class Player_LittleBorn : Player
     protected override void Init()
     {
         base.Init();
+        Damage = 15;
         if (GameObject.Find("Head_Parent"))
             head_Parent = GameObject.Find("Head_Parent").transform;
         else

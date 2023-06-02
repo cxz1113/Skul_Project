@@ -26,6 +26,7 @@ public abstract class Player : MonoBehaviour
     //inspector에서 직접 넣어줄 것들
     public List<Player> players;
     public List<RuntimeAnimatorController> animators;
+    public Attack_Box_Player atBox;
     [SerializeField] protected CapsuleCollider2D capCol;
 
     protected bool canInput = true;
@@ -50,6 +51,9 @@ public abstract class Player : MonoBehaviour
     //DownJump
     Collision2D collis;
 
+    //Atack
+    public float Damage { get; set; }  
+
     //Skill
     
     protected bool canSkill_1 = true;
@@ -65,6 +69,7 @@ public abstract class Player : MonoBehaviour
     {
         ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
         ProjectManager.Instance.ui.skill2_Mask.fillAmount = 0;
+        atBox.player = this;
     }
     public void SwitchInit(Player player)
     {
@@ -309,6 +314,11 @@ public abstract class Player : MonoBehaviour
     {
         if (!isDashing)
             rigid.velocity = new Vector2(0, rigid.velocity.y);
+    }
+
+    protected void EventDamage()
+    {
+        atBox.gameObject.SetActive(true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
