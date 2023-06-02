@@ -106,7 +106,7 @@ public class ProjectManager : MonoBehaviour
         heads[0] = heads[1];
         heads[1] = headTemp;
         player = FindObjectOfType<Player>();
-        PlayerHeadSet(data.head1, data.head2);
+        PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;

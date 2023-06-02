@@ -22,6 +22,8 @@ public class PlayerBasket : MonoBehaviour
         }
     }
 
+    public bool isInven { get; set; }
+
     public string item;
 
     void Awake() => Instance = this;

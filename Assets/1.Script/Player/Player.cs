@@ -87,6 +87,8 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
+        if (PlayerBasket.Instance.isInven)
+            return;
         JumpAnimation();
 
         if (!canInput)
@@ -362,8 +364,9 @@ public abstract class Player : MonoBehaviour
             PlayerBasket.Instance.HP += 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
+            PlayerBasket.Instance.isInven = true;
             ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(true);
         }
     }
