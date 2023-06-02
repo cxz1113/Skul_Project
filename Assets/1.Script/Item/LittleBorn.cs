@@ -12,6 +12,7 @@ public class LittleBorn : Item
         ss.headItem = headSprites[3];
         ss.skill1 = skillSprites[0];
         ss.Skill2 = skillSprites[1];
+        ss.it = ItemType.Head;
     }
 
     // Start is called before the first frame update

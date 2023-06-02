@@ -9,6 +9,7 @@ public class WeddingRing : Item
         id.Inven = itemSprites[0];
         id.passive = itemSprites[1];
         id.item = itemSprites[2];
+        id.it = ItemType.Item;
     }
 
     void Start()

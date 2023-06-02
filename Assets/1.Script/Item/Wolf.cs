@@ -12,6 +12,7 @@ public class Wolf : Item
         ss.headItem = headSprites[3];
         ss.skill1 = skillSprites[0];
         ss.Skill2 = null;
+        ss.it = ItemType.Head;
     }
 
     // Start is called before the first frame update

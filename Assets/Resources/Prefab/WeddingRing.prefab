@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21791bf52d902cd4ca0defdd7bd18117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  it: 3
   headSprites: []
   skillSprites: []
   itemSprites:

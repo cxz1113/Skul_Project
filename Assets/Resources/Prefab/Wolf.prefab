@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082a3f4d56b400a4a81d75626189f62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  it: 1
   headSprites:
   - {fileID: 21300000, guid: 7a7461917f3b6124593d5fdd37d12c10, type: 3}
   - {fileID: 21300000, guid: 896401d72c46c5845b2e54d62fd3104d, type: 3}
@@ -52,8 +53,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46acf7ff1fe0e21469cc5591ce62b4f0, type: 3}
   skillSprites:
   - {fileID: 21300000, guid: d1563eff6ed87524495196c85587f06c, type: 3}
-  player: {fileID: 3371210585359935304, guid: 599261afbcfae464aa42cec7ad83ea99, type: 3}
-  skuljson: {fileID: 0}
+  itemSprites: []
 --- !u!212 &8702535881000204997
 SpriteRenderer:
   m_ObjectHideFlags: 0

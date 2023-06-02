@@ -10,7 +10,7 @@ public struct SkulStatus
     public Sprite headItem;
     public Sprite skill1;
     public Sprite Skill2;
-    public SkulData json;
+    public ItemType it;
     public int attack;
 }
 public struct ItemStatus
@@ -18,12 +18,22 @@ public struct ItemStatus
     public Sprite Inven;
     public Sprite passive;
     public Sprite item;
+    public ItemType it;
+}
+
+public enum ItemType
+{
+    None,
+    Head,
+    Essence,
+    Item
 }
 
 public abstract class Item : MonoBehaviour
 {
     public SkulStatus ss = new SkulStatus();
     public ItemStatus id = new ItemStatus();
+    public ItemType it;
     public List<Sprite> headSprites = new List<Sprite>();
     public List<Sprite> skillSprites = new List<Sprite>();
     public List<Sprite> itemSprites = new List<Sprite>();
