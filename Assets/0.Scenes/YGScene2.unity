@@ -1137,10 +1137,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655838102}
-  - component: {fileID: 1655838103}
   - component: {fileID: 1655838101}
+  - component: {fileID: 1655838103}
   m_Layer: 7
-  m_Name: Scan (1)
+  m_Name: HitCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 2090222980}
   tans: {fileID: 1655838102}
-  hit: 0
+  enemy: {fileID: 2090222988}
 --- !u!4 &1655838102
 Transform:
   m_ObjectHideFlags: 0
@@ -1169,15 +1169,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655838100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.68, y: 1.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2090222985}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1655838103
-CircleCollider2D:
+--- !u!61 &1655838103
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1189,9 +1189,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.68, y: 1.8}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 5
+  m_Size: {x: 5, y: 4}
+  m_EdgeRadius: 0
 --- !u!1 &1840668431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 1101825135}
   tans: {fileID: 1988177238}
-  hit: 0
+  enemy: {fileID: 1101825141}
 --- !u!70 &1988177241
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1491,8 +1501,8 @@ GameObject:
   - component: {fileID: 2090222988}
   - component: {fileID: 2090222984}
   - component: {fileID: 2090222983}
-  - component: {fileID: 2090222982}
   - component: {fileID: 2090222981}
+  - component: {fileID: 2090222989}
   m_Layer: 7
   m_Name: Tanker
   m_TagString: Enemy
@@ -1521,32 +1531,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &2090222982
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090222980}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.25}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.07}
-    oldSize: {x: 6.8125, y: 6.125}
-    newSize: {x: 0.34, y: 0.55}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6, y: 5}
-  m_EdgeRadius: 0
 --- !u!50 &2090222983
 Rigidbody2D:
   serializedVersion: 4
@@ -1650,3 +1634,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 0
+--- !u!58 &2090222989
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090222980}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.25, y: 2.2}
+  serializedVersion: 2
+  m_Radius: 5
