@@ -156,7 +156,11 @@ public class ProjectManager : MonoBehaviour
     {
         itemData = FindObjectOfType<ItemData>();
         ItemSet();
+        EssenceSet();
         inven.ItemBox(heads, essences, items);
+        //inven.ItemBox1(heads);
+        //inven.ItemBox1(essences);
+        //inven.ItemBox1(items);
     }
 
     void ItemSet()
@@ -175,6 +179,14 @@ public class ProjectManager : MonoBehaviour
                 }
             }
         }
+    }
+    void EssenceSet()
+    {
+        string str = data.essence;
+        if (str == string.Empty)
+            return;
+
+        essences.Add(Resources.Load<Item>($"Prefab/{str}"));
     }
     public void Data()
     {

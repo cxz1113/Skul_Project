@@ -18,6 +18,7 @@ public class PlayerUI : MonoBehaviour
     public Image skill2_Mask;
     public Sprite nullSprite;
     public Image selectImage;
+
     #region MainSkulDataType1
     [Header("MainSkulDataType1")]
     public List<Image> imagesType1 = new List<Image>();

@@ -5,7 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-
+public enum Direct
+{
+    Left,
+    Right,
+    Up,
+    Down
+}
 public class InvenManager : MonoBehaviour
 {
     [SerializeField] public Canvas invenCanvas;
@@ -16,10 +22,10 @@ public class InvenManager : MonoBehaviour
     public ItemData itemData;
     public Sequence mySequence;
     public Item[,] itemsBox = new Item[4, 3];
-
-    int indexX = 0;
+    public Item iss;
+    Direct dir;
+    int indexX = 1;
     int indexY = 0;
-
     void Start()
     {
         StartCoroutine(DotweenScroll());
@@ -30,7 +36,8 @@ public class InvenManager : MonoBehaviour
     {
         if(PlayerBasket.Instance.isInven)
         {
-            keySelect();
+            SelectItem();
+            //keySelect();
             //SelectKey();
         }
     }
@@ -43,7 +50,6 @@ public class InvenManager : MonoBehaviour
 
     public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
     {
-        //keySelect();
         for (int i = 0; i < items1.Count; i ++)
         {
             if (items1[i] == null)
@@ -58,25 +64,30 @@ public class InvenManager : MonoBehaviour
             else
                 itemsBox[1, i] = items2[i];
         }
-        for (int i = 2; i < 4; i++)
+        for (int i = 0; i < items3.Count; i++)
         {
-            for (int j = 0; j < items3.Count; j++)
-            {
-                if (items3[j] == null)
-                    break;
-                else
-                    itemsBox[i, j] = items3[j];
-            }
+            if (items3[i] == null)
+                break;
+            else
+                itemsBox[2, i] = items3[i];
+            
+        }
+        for (int i = 3; i < items3.Count; i++)
+        {
+            if (items3[i] == null)
+                break;
+            else
+                itemsBox[3, i] = items3[i];
+
         }
         InvenData();
-        //keySelect();
     }
     void InvenData()
     {
         ui.imagesitemData[0].sprite = itemsBox[0,0].ss.headItem;
         ui.imagesitemData[1].sprite = itemsBox[0, 1].ss.headItem;
         //ui.imagesitemData[2].sprite = itemsBox[1, 0].ss.headItem;
-        
+        ui.imagesitemData[3].sprite = itemsBox[2, 0].id.item;
     }
 
     void SelcetData()
@@ -86,35 +97,51 @@ public class InvenManager : MonoBehaviour
     
     void keySelect()
     {
-        int x = (int)Input.GetAxisRaw("Horizontal");
-        int y = (int)Input.GetAxisRaw("Vertical");
-
-        int saveX = 0;
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        switch(dir)
         {
-            indexX++;
-        }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            indexX--;
+            case Direct.Left:
+                indexX--;
+                break;
+            case Direct.Right:
+                indexX++;
+                break;
+            case Direct.Up:
+                indexY--;
+                break;
+            case Direct.Down:
+                indexY++;
+                break;
         }
     }
 
-    void SelectKey()
-    {
-        int x = (int)Input.GetAxisRaw("Horizontal");
-        int y = (int)Input.GetAxisRaw("Vertical");
-        int indexX = 0;
-        int indexY = 0;
-        indexX += x < 0 ? x-- : x++;
-        indexY += y < 0 ? y-- : y++;
-        int saveX = indexX;
-        int saveY = indexY;
-        Item ss = itemsBox[saveX, saveY];
-        Debug.Log(saveX);
-        
-    }
+
     void SelectItem()
     {
+        if(Input.GetKeyDown(KeyCode.RightArrow) &&  indexX < 2)
+        {
+            dir = Direct.Right;
+            keySelect();
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) && indexX > 0)
+        {
+            dir = Direct.Left;
+            keySelect();
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && indexY > 0)
+        {
+            dir = Direct.Up;
+            keySelect();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && indexY < 3)
+        {
+            dir = Direct.Down;
+            keySelect();
+        }
+        iss = itemsBox[indexY, indexX];
+        Debug.Log(indexX);
+        //Debug.Log(indexY);
+
+        Debug.Log(itemsBox[indexY, indexX]);
     }
+
 }
