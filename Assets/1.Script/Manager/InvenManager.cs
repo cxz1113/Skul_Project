@@ -14,6 +14,7 @@ public enum Direct
 }
 public class InvenManager : MonoBehaviour
 {
+    public static InvenManager Instance;
     [SerializeField] public Canvas invenCanvas;
     [SerializeField] GameObject scroll;
     [SerializeField] PlayerUI ui;
@@ -21,15 +22,17 @@ public class InvenManager : MonoBehaviour
     public SkulData skulData;
     public ItemData itemData;
     public Sequence mySequence;
-    public Item[,] itemsBox = new Item[4, 3];
-    public Item iss;
+    public Item[][] itemBox = new Item[4][];
+    public Item itemSelect;
+    public Image selectImage;
     Direct dir;
-    int indexX = 1;
+    int indexX = 0;
     int indexY = 0;
+    void Awake() => Instance = this;
+
     void Start()
     {
         StartCoroutine(DotweenScroll());
-        keySelect();
     }
 
     void Update()
@@ -37,8 +40,6 @@ public class InvenManager : MonoBehaviour
         if(PlayerBasket.Instance.isInven)
         {
             SelectItem();
-            //keySelect();
-            //SelectKey();
         }
     }
     IEnumerator DotweenScroll()
@@ -50,74 +51,65 @@ public class InvenManager : MonoBehaviour
 
     public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
     {
-        for (int i = 0; i < items1.Count; i ++)
+        itemBox[0] = new Item[2];
+        itemBox[1] = new Item[1];
+        itemBox[2] = new Item[3];
+        itemBox[3] = new Item[3];
+        for (int i = 0; i < items1.Count; i++)
         {
-            if (items1[i] == null)
-                break;
-            else
-                itemsBox[0, i] = items1[i];
+            itemBox[0][i] = items1[i];
         }
-        for(int i = 0; i < items2.Count; i++)
+        for (int i = 0; i < items2.Count; i++)
         {
-            if (items1[i] == null)
-                break;
-            else
-                itemsBox[1, i] = items2[i];
+            itemBox[1][i] = items2[i];
         }
         for (int i = 0; i < items3.Count; i++)
         {
-            if (items3[i] == null)
-                break;
-            else
-                itemsBox[2, i] = items3[i];
-            
+            itemBox[2][i] = items3[i];
         }
-        for (int i = 3; i < items3.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (items3[i] == null)
-                break;
-            else
-                itemsBox[3, i] = items3[i];
-
+            for(int j = 3; j < items3.Count; j++)
+            itemBox[3][i] = items3[j];
         }
         InvenData();
     }
-    void InvenData()
-    {
-        ui.imagesitemData[0].sprite = itemsBox[0,0].ss.headItem;
-        ui.imagesitemData[1].sprite = itemsBox[0, 1].ss.headItem;
-        //ui.imagesitemData[2].sprite = itemsBox[1, 0].ss.headItem;
-        ui.imagesitemData[3].sprite = itemsBox[2, 0].id.item;
-    }
 
-    void SelcetData()
+    public void InvenData()
     {
-        keySelect();
-    }
-    
-    void keySelect()
-    {
-        switch(dir)
+        for (int i = 0; i < itemBox[0].Length; i++)
         {
-            case Direct.Left:
-                indexX--;
-                break;
-            case Direct.Right:
-                indexX++;
-                break;
-            case Direct.Up:
-                indexY--;
-                break;
-            case Direct.Down:
-                indexY++;
-                break;
+            if (itemBox[0][i] == null)
+                ui.imagesItem[0][i].sprite = ui.nullSprite;
+            else
+                ui.imagesItem[0][i].sprite = itemBox[0][i].ss.headItem;
+        }
+        for (int i = 0; i < itemBox[1].Length; i++)
+        {
+            if (itemBox[1][i] == null)
+                ui.imagesItem[1][i].sprite = ui.nullSprite;
+            else
+                ui.imagesItem[1][i].sprite = itemBox[1][i].id.item;
+        }
+        for (int i = 0; i < itemBox[2].Length; i++)
+        {
+            if (itemBox[2][i] == null)
+                ui.imagesItem[2][i].sprite = ui.nullSprite;
+            else
+                ui.imagesItem[2][i].sprite = itemBox[2][i].id.item;
+        }
+        for (int i = 0; i < itemBox[3].Length; i++)
+        {
+            if (itemBox[3][i] == null)
+                ui.imagesItem[3][i].sprite = ui.nullSprite;
+            else
+                ui.imagesItem[3][i].sprite = itemBox[3][i+3].id.item;
         }
     }
 
-
-    void SelectItem()
+    public Item SelectItem()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow) &&  indexX < 2)
+        if(Input.GetKeyDown(KeyCode.RightArrow) &&  indexX < itemBox[indexY].Length - 1)
         {
             dir = Direct.Right;
             keySelect();
@@ -137,11 +129,39 @@ public class InvenManager : MonoBehaviour
             dir = Direct.Down;
             keySelect();
         }
-        iss = itemsBox[indexY, indexX];
-        Debug.Log(indexX);
-        //Debug.Log(indexY);
+       
+        if (indexY == 1)
+        {
+            indexX = 0;
+            itemSelect = itemBox[indexY][indexX];
+        }
+        else
+            itemSelect = itemBox[indexY][indexX];
 
-        Debug.Log(itemsBox[indexY, indexX]);
+        selectImage.transform.position = ui.imagesItem[indexY][indexX].transform.position;
+
+        Debug.Log(indexX);
+        Debug.Log(indexY);
+        Debug.Log(itemSelect);
+        return itemSelect;
     }
 
+    void keySelect()
+    {
+        switch (dir)
+        {
+            case Direct.Left:
+                indexX--;
+                break;
+            case Direct.Right:
+                indexX++;
+                break;
+            case Direct.Up:
+                indexY--;
+                break;
+            case Direct.Down:
+                indexY++;
+                break;
+        }
+    }
 }

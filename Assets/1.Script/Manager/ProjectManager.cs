@@ -155,12 +155,10 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
+        ui.ImageSet();
         ItemSet();
         EssenceSet();
         inven.ItemBox(heads, essences, items);
-        //inven.ItemBox1(heads);
-        //inven.ItemBox1(essences);
-        //inven.ItemBox1(items);
     }
 
     void ItemSet()

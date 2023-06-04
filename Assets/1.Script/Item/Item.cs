@@ -11,7 +11,6 @@ public struct SkulStatus
     public Sprite skill1;
     public Sprite Skill2;
     public ItemType it;
-    public int attack;
 }
 public struct ItemStatus
 {
@@ -37,6 +36,8 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> headSprites = new List<Sprite>();
     public List<Sprite> skillSprites = new List<Sprite>();
     public List<Sprite> itemSprites = new List<Sprite>();
+    public SkulData skulJson;
+    public ItemData itemJson;
 
     public bool isHead { get; set; }
     public bool isItem { get; set; }
