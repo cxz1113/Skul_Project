@@ -29,6 +29,7 @@ public abstract class Enemy : MonoBehaviour
    
     public int nextMove;
     public bool isDead;
+    public float DestroyTime;
 
     void Awake()
     {
@@ -60,10 +61,15 @@ public abstract class Enemy : MonoBehaviour
     {
         if (isDead == true || ed.hp <= 0)
         {
+            DestroyTime += Time.deltaTime;
             CancelInvoke("Think");
             CancelInvoke("AttackStart");
             nextMove = 0;
             ed.anim.SetBool("Dead", true);
+            if (DestroyTime == 1)
+            {
+                Destroy(gameObject);
+            }
         }
         DamageTest();
     }
