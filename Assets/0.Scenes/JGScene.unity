@@ -6591,7 +6591,7 @@ GameObject:
   - component: {fileID: 293618591}
   - component: {fileID: 293618590}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: coolTime'
+  m_Name: cooltime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8194,7 +8194,7 @@ GameObject:
   - component: {fileID: 431798118}
   - component: {fileID: 431798117}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: SkillName'
+  m_Name: skillname1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11090,7 +11090,7 @@ GameObject:
   - component: {fileID: 600699685}
   - component: {fileID: 600699684}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: SkillName'
+  m_Name: skillname1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12676,7 +12676,7 @@ GameObject:
   - component: {fileID: 747182010}
   - component: {fileID: 747182009}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Type'
+  m_Name: type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13663,7 +13663,7 @@ GameObject:
   - component: {fileID: 780985792}
   - component: {fileID: 780985791}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: SkulName'
+  m_Name: skulname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14331,7 +14331,7 @@ GameObject:
   - component: {fileID: 812084460}
   - component: {fileID: 812084459}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Rank'
+  m_Name: tier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14914,7 +14914,7 @@ GameObject:
   - component: {fileID: 829394117}
   - component: {fileID: 829394116}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: AbillityDetail'
+  m_Name: abillitydetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16178,7 +16178,7 @@ GameObject:
   - component: {fileID: 958724661}
   - component: {fileID: 958724660}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Detail'
+  m_Name: detail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16427,7 +16427,7 @@ GameObject:
   - component: {fileID: 966288897}
   - component: {fileID: 966288896}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Intro'
+  m_Name: intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17368,7 +17368,7 @@ GameObject:
   - component: {fileID: 1097249941}
   - component: {fileID: 1097249940}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: coolTime'
+  m_Name: cooltime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18890,7 +18890,7 @@ GameObject:
   - component: {fileID: 1182998327}
   - component: {fileID: 1182998326}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: skillDetail'
+  m_Name: skillname2detail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20405,7 +20405,7 @@ GameObject:
   - component: {fileID: 1301557798}
   - component: {fileID: 1301557797}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Abillity'
+  m_Name: abillity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20720,6 +20720,18 @@ MonoBehaviour:
   playerData: {fileID: 0}
   skulData: {fileID: 0}
   itemData: {fileID: 0}
+  data:
+    curhp: 0
+    maxhp: 0
+    head1: 
+    head2: 
+    essence: 
+    item0: 
+    item1: 
+    item2: 
+    item3: 
+    item4: 
+    item5: 
 --- !u!1 &1322946507
 GameObject:
   m_ObjectHideFlags: 0
@@ -20732,7 +20744,7 @@ GameObject:
   - component: {fileID: 1322946510}
   - component: {fileID: 1322946509}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: SkillName'
+  m_Name: skillname2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20935,7 +20947,7 @@ GameObject:
   - component: {fileID: 1355327886}
   - component: {fileID: 1355327885}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: Ability'
+  m_Name: ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23834,8 +23846,43 @@ MonoBehaviour:
   skill2_Mask: {fileID: 8359202866565550446}
   nullSprite: {fileID: 21300000, guid: fff1462f5b0b0b149afb6f3e16059151, type: 3}
   selectImage: {fileID: 112208363}
+  item: {fileID: 0}
+  skulData: {fileID: 0}
+  data:
+    name: 
+    tier: 
+    type: 
+    intro: 
+    detail: 
+    passive: 
+    ability: 
+    skillname1: 
+    skillname2: 
+    abilitydetail: 
+    skillname1detail: 
+    skillname2detail: 
+    cooltime: 
+    itemskul: 
   type1: {fileID: 687439672}
   imagesType1: []
+  txtType1:
+  - {fileID: 780985791}
+  - {fileID: 812084459}
+  - {fileID: 747182009}
+  - {fileID: 966288896}
+  - {fileID: 958724660}
+  - {fileID: 1355327885}
+  - {fileID: 600699684}
+  - {fileID: 1322946509}
+  txtskillType1:
+  - {fileID: 1301557797}
+  - {fileID: 829394116}
+  - {fileID: 431798117}
+  - {fileID: 2138432304}
+  - {fileID: 1097249940}
+  - {fileID: 1832542948}
+  - {fileID: 1182998326}
+  - {fileID: 293618590}
   type2: {fileID: 503291191}
   imagesType2:
   - {fileID: 0}
@@ -60936,7 +60983,7 @@ GameObject:
   - component: {fileID: 1832542949}
   - component: {fileID: 1832542948}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: SkillName'
+  m_Name: skillname2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89665,7 +89712,7 @@ GameObject:
   - component: {fileID: 2138432305}
   - component: {fileID: 2138432304}
   m_Layer: 5
-  m_Name: 'Text (TMP) :: skillDetail'
+  m_Name: skillname1detail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

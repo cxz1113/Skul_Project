@@ -31,6 +31,5 @@ public class PlayerBasket : MonoBehaviour
     void Update()
     {
         player = ProjectManager.Instance.player;
-        headframe = ProjectManager.Instance.heads[0];
     }
 }

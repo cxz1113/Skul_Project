@@ -36,7 +36,7 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> headSprites = new List<Sprite>();
     public List<Sprite> skillSprites = new List<Sprite>();
     public List<Sprite> itemSprites = new List<Sprite>();
-    public SkulData skulJson;
+    public SkulData.Data skulJson;
     public ItemData itemJson;
 
     public bool isHead { get; set; }

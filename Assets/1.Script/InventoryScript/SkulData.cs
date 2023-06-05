@@ -5,31 +5,32 @@ using UnityEngine.UI;
 
 public class SkulData : MonoBehaviour
 {
+    public TextAsset skulJson;
+    public SkulDataJson skulDataJson;
     
     [System.Serializable]
     public class Data
     {
         public string name;
-        public string itemskul;
         public string tier;
         public string type;
         public string intro;
-        public string detail;
+        public string passive;
         public string ability;
-        public string skillname;
-        public string skillspname;
-        public string skillintrodetail;
-        public string skilldetail;
+        public string skillname1;
+        public string skillname2;
+        public string abilitydetail;
+        public string skillname1detail;
+        public string skillname2detail;
+        public string cooltime;
+        public string itemskul;
     }
 
     [System.Serializable]
     public class SkulDataJson
     {
-        public List<Data> skul;
+        public List<Data> skul = new List<Data>();
     }
-
-    [SerializeField] TextAsset skulJson;
-    public SkulDataJson skulDataJson;
 
     void Start()
     {

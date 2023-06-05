@@ -21,5 +21,6 @@ public class Wolf : Item
         Init();
         isHead = true;
         GetComponent<SpriteRenderer>().sprite = ss.headItem;
+        //  skulJson = FindObjectOfType<SkulData>();
     }
 }

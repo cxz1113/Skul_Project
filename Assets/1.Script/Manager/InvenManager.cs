@@ -71,8 +71,6 @@ public class InvenManager : MonoBehaviour
         {
             itemBox[3][i] = items3[i + 3];
         }
-        Debug.Log(items3.Count);
-
         InvenData();
     }
 

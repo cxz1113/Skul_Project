@@ -89,6 +89,7 @@ public abstract class Player : MonoBehaviour
     {
         if (PlayerBasket.Instance.isInven)
             return;
+        
         JumpAnimation();
 
         if (!canInput)
@@ -106,6 +107,7 @@ public abstract class Player : MonoBehaviour
 
         SkulSwitch();
         Test();
+        
     }
 
     protected void LookDir()

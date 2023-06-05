@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac15f8ed20a03443b100db0be071990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  split:
+  itemDatajson:
     item: []
   itemJson: {fileID: 4900000, guid: 17861f0582d6d4142a53b7a5697c0e0a, type: 3}
 --- !u!4 &1481486611
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skulJson: {fileID: 4900000, guid: 2f99c88e46eac8c43ae2c115456f3ff8, type: 3}
-  split:
+  skulDataJson:
     skul: []
 --- !u!4 &1963772654
 Transform:

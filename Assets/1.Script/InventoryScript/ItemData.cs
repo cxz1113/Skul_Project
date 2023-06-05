@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
+    public TextAsset itemJson;
+    public ItemDatajson itemDatajson;
+
     [System.Serializable]
     public class Data
     {
@@ -22,13 +25,4 @@ public class ItemData : MonoBehaviour
     {
         public List<Data> item;
     }
-
-    public ItemDatajson itemDatajson;
-    [SerializeField] TextAsset itemJson;
-
-    void Start()
-    {
-        itemDatajson = JsonUtility.FromJson<ItemDatajson>(itemJson.text);
-    }
-
 }

@@ -18,9 +18,9 @@ public class ProjectManager : MonoBehaviour
     public PlayerData playerData;
     public SkulData skulData;
     public ItemData itemData;
-    PlayerData.PlayerDataJson data;
-    
-    void Awake() => Instance = this;
+    public PlayerData.PlayerDataJson data;
+
+    void Awake() =>Instance = this;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class ProjectManager : MonoBehaviour
         data = playerData.nowPlayerData.playerdatajsons[0];
         Init(playerData.nowPlayerData.playerdatajsons[0].head1);
         PlayerSet();
-        HeadJson();
+        //HeadJson();
         PlayerUISet();
         InvenJson();
         HPGage();
@@ -111,7 +111,7 @@ public class ProjectManager : MonoBehaviour
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
-        HeadJson();
+        //HeadJson();
         HPGage();
     }
 
@@ -137,6 +137,8 @@ public class ProjectManager : MonoBehaviour
     public void HeadJson()
     {
         skulData = FindObjectOfType<SkulData>();
+        skulData.skulDataJson = JsonUtility.FromJson<SkulData.SkulDataJson>(skulData.skulJson.text);
+
         int count = 0;
         while(count < skulData.skulDataJson.skul.Count)
         {
@@ -146,7 +148,7 @@ public class ProjectManager : MonoBehaviour
             }
             else
             {
-                PlayerBasket.Instance.skul = skulData.skulDataJson.skul[count].itemskul;
+                inven.itemSelect.skulJson = skulData.skulDataJson.skul[count];
                 break;
             }
         }
@@ -155,6 +157,21 @@ public class ProjectManager : MonoBehaviour
     public void InvenJson()
     {
         itemData = FindObjectOfType<ItemData>();
+        itemData.itemDatajson = JsonUtility.FromJson<ItemData.ItemDatajson>(itemData.itemJson.text);
+
+        /*int count = 0;
+        while (count < itemData.itemDatajson.item.Count)
+        {
+            if (items[0].name != itemData.itemDatajson.item[count].)
+            {
+                count++;
+            }
+            else
+            {
+                inven.itemSelect.skulJson = skulData.skulDataJson.skul[count];
+                break;
+            }
+        }*/
         ui.ImageSet();
         ItemSet();
         EssenceSet();
@@ -163,6 +180,8 @@ public class ProjectManager : MonoBehaviour
 
     void ItemSet()
     {
+        itemData.itemDatajson = JsonUtility.FromJson<ItemData.ItemDatajson>(itemData.itemJson.text);
+
         string[] str = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
         for(int i = 0; i < str.Length; i++)
         {

@@ -14,7 +14,8 @@
       "skillname2": "머리가 본체",
       "abilitydetail": "교대 시 뼈를 들고 회전해 물리데미지를 입힙니다.",
       "skillname1detail": "자신의 머리를 던져 마법데미지를 입힙니다. 던전 머리를 회수하면 쿨타임이 초기화됩니다.",
-      "skillname2detail": "머리가 없는 상태일 때, 머리로 이동합니다."
+      "skillname2detail": "머리가 없는 상태일 때, 머리로 이동합니다.",
+      "cooltime": 5
     },
     {
       "name": "울프",

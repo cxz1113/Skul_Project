@@ -20,5 +20,6 @@ public class LittleBorn : Item
     {
         Init();
         GetComponent<SpriteRenderer>().sprite = ss.headItem;
+        //skulJson. = FindObjectOfType<SkulData>();
     }
 }

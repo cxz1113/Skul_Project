@@ -19,12 +19,18 @@ public class PlayerUI : MonoBehaviour
     public Sprite nullSprite;
     public Image selectImage;
     public Image[][] imagesItem = new Image[4][];
+    public Item item;
+    public SkulData skulData;
+    public SkulData.Data data;
 
     #region MainSkulDataType1
     [Header("MainSkulDataType1")]
     public GameObject type1;
     public List<Image> imagesType1 = new List<Image>();
-    public Dictionary<int, string> dicType1 = new Dictionary<int, string>();
+    public List<TMP_Text> txtType1 = new List<TMP_Text>();
+    public List<TMP_Text> txtskillType1 = new List<TMP_Text>();
+    public Dictionary<string, string> dicType1_1 = new Dictionary<string, string>();
+    public Dictionary<string, string> dicType1_2 = new Dictionary<string, string>();
     #endregion
 
     #region MainSkulDataType2
@@ -53,6 +59,10 @@ public class PlayerUI : MonoBehaviour
     public bool IsType2 { get; set; }
     public bool IsType3 { get; set; }
 
+    void Start()
+    {
+        
+    }
     void Update()
     {
        if (PlayerBasket.Instance.isInven)
@@ -60,22 +70,33 @@ public class PlayerUI : MonoBehaviour
     }
     void InvenType1()
     {
-        string[] dataName = { "skulName", "rank", "type", "intro", "detail", "ability", "skillname1", "skillname2",
-            "skillname1_1", "skillNmae2_1", "skill1Detail", "skill2Detail", "ability1", "abilityDetail", "coolTime" };
-        for (int i = 0; i < dicType1.Count; i++)
+        int count = 0;
+        data = item.skulJson;
+        string[] dataName = { "name", "tier", "type", "intro", "passive", "ability", "skillname1", "skillname2"};
+        string[] jsonData = {data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1, data.skillname2};
+        InputData(dataName, jsonData, dicType1_1);
+
+        /*while(count < skulData.skulDataJson.skul.Count)
         {
-            dicType1.Add(i, dataName[i]);
-        }
+            if(dicType1_1.ContainsKey(txtType1[count].name))
+            {
+                count++;
+                txtType1[count].text = dicType1_1[dataName[count]];
+            }
+            break;
+        }*/
+
+        //InputData(dataName, jsonData, dicType1_2);
     }
 
     void InvenType2()
     {
-
+        data = item.skulJson;
         string[] dataName = { "skulName", "rank", "type", "intro", "detail", "ability", "skillname1",
             "skillname1_1", "skill1Detail", "ability1", "abilityDetail", "coolTime" };
-        for (int i = 0; i < dicType1.Count; i++)
+        for (int i = 0; i < dicType2.Count; i++)
         {
-            dicType1.Add(i, dataName[i]);
+            //dicType1.Add(dataName[i], dataName[i]);
         }
     }
 
@@ -86,12 +107,18 @@ public class PlayerUI : MonoBehaviour
 
     void DataSet()
     {
-        ProjectManager.Instance.HeadJson();
-        Item item = InvenManager.Instance.itemSelect;
+        item = InvenManager.Instance.itemSelect;
+        
         if (item == null)
-            return;
-        if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
+            type1.gameObject.SetActive(false);
+            type2.gameObject.SetActive(false);
+            type3.gameObject.SetActive(false);
+        }
+        else if (item.it == ItemType.Head && item.ss.Skill2 != null)
+        {
+            ProjectManager.Instance.HeadJson();
+
             type1.gameObject.SetActive(true);
             type2.gameObject.SetActive(false);
             type3.gameObject.SetActive(false);
@@ -100,6 +127,8 @@ public class PlayerUI : MonoBehaviour
         }
         else if (item.it == ItemType.Head && item.ss.Skill2 == null)
         {
+            ProjectManager.Instance.HeadJson();
+
             type1.gameObject.SetActive(false);
             type2.gameObject.SetActive(true);
             type3.gameObject.SetActive(false);
@@ -108,12 +137,14 @@ public class PlayerUI : MonoBehaviour
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
+
             type1.gameObject.SetActive(false);
             type2.gameObject.SetActive(false);
             type3.gameObject.SetActive(true);
 
-            InvenItem();
+            //InvenItem();
         }
+        
     }
     public void ImageSet()
     {
@@ -136,6 +167,31 @@ public class PlayerUI : MonoBehaviour
         for (int i = 0; i < imagesItem2Data.Count; i++)
         {
             imagesItem[3][i] = imagesItem2Data[i];
+        }
+    }
+
+    void InputData(string[] str, string[] strJson, Dictionary<string, string> dic)
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            dic.Add(str[i], i.ToString());
+        }
+        Debug.Log(dic["name"]);
+    }
+    /*void InputData(string[] str, Dictionary<string, SkulData.Data> dic)
+    {
+        for (int i = 0; i <= ; i++)
+        {
+            dic.Add(str[i], );
+            Debug.Log(dic["name"]);
+        }
+    }*/
+
+    void InputData(Image[][] virtualBox, List<Image> imagesBox, int a)
+    {
+        for(int i = 0; i < imagesBox.Count; i++)
+        {
+            virtualBox[a][i] = imagesBox[i];
         }
     }
 }
