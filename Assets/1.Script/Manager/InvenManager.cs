@@ -67,15 +67,16 @@ public class InvenManager : MonoBehaviour
         {
             itemBox[2][i] = items3[i];
         }
-        for (int i = 0; i < 3; i++)
+        for(int i = 0; i < items3.Count-1; i++)
         {
-            for(int j = 3; j < items3.Count; j++)
-            itemBox[3][i] = items3[j];
+            itemBox[3][i] = items3[i + 3];
         }
+        Debug.Log(items3.Count);
+
         InvenData();
     }
 
-    public void InvenData()
+    void InvenData()
     {
         for (int i = 0; i < itemBox[0].Length; i++)
         {
@@ -103,11 +104,11 @@ public class InvenManager : MonoBehaviour
             if (itemBox[3][i] == null)
                 ui.imagesItem[3][i].sprite = ui.nullSprite;
             else
-                ui.imagesItem[3][i].sprite = itemBox[3][i+3].id.item;
+                ui.imagesItem[3][i].sprite = itemBox[3][i + 3].id.item;
         }
     }
 
-    public Item SelectItem()
+    public void SelectItem()
     {
         if(Input.GetKeyDown(KeyCode.RightArrow) &&  indexX < itemBox[indexY].Length - 1)
         {
@@ -139,11 +140,6 @@ public class InvenManager : MonoBehaviour
             itemSelect = itemBox[indexY][indexX];
 
         selectImage.transform.position = ui.imagesItem[indexY][indexX].transform.position;
-
-        Debug.Log(indexX);
-        Debug.Log(indexY);
-        Debug.Log(itemSelect);
-        return itemSelect;
     }
 
     void keySelect()

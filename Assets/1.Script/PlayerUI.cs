@@ -25,7 +25,6 @@ public class PlayerUI : MonoBehaviour
     public GameObject type1;
     public List<Image> imagesType1 = new List<Image>();
     public Dictionary<int, string> dicType1 = new Dictionary<int, string>();
-
     #endregion
 
     #region MainSkulDataType2
@@ -50,11 +49,14 @@ public class PlayerUI : MonoBehaviour
     public List<Image> imagesItem2Data = new List<Image>();
     #endregion
 
+    public bool IsType1 { get; set; }
+    public bool IsType2 { get; set; }
+    public bool IsType3 { get; set; }
 
     void Update()
     {
-        //if (PlayerBasket.Instance.isInven)
-            //DataSet();
+       if (PlayerBasket.Instance.isInven)
+            DataSet();
     }
     void InvenType1()
     {
@@ -68,6 +70,7 @@ public class PlayerUI : MonoBehaviour
 
     void InvenType2()
     {
+
         string[] dataName = { "skulName", "rank", "type", "intro", "detail", "ability", "skillname1",
             "skillname1_1", "skill1Detail", "ability1", "abilityDetail", "coolTime" };
         for (int i = 0; i < dicType1.Count; i++)
@@ -83,14 +86,34 @@ public class PlayerUI : MonoBehaviour
 
     void DataSet()
     {
-        //ProjectManager.Instance.HeadJson();
-        Item item = InvenManager.Instance.SelectItem();
+        ProjectManager.Instance.HeadJson();
+        Item item = InvenManager.Instance.itemSelect;
+        if (item == null)
+            return;
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
+        {
+            type1.gameObject.SetActive(true);
+            type2.gameObject.SetActive(false);
+            type3.gameObject.SetActive(false);
+
             InvenType1();
+        }
         else if (item.it == ItemType.Head && item.ss.Skill2 == null)
+        {
+            type1.gameObject.SetActive(false);
+            type2.gameObject.SetActive(true);
+            type3.gameObject.SetActive(false);
+
             InvenType2();
+        }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
+        {
+            type1.gameObject.SetActive(false);
+            type2.gameObject.SetActive(false);
+            type3.gameObject.SetActive(true);
+
             InvenItem();
+        }
     }
     public void ImageSet()
     {
