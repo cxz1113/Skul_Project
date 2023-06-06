@@ -303,6 +303,11 @@ public abstract class Player : MonoBehaviour
         canInput = true;
     }
 
+    //공격 A,B - 애니메이션 첫 프레임 event
+    protected void EventStopMove()
+    {
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+    }
 
     //공격 A,B - 무기를 휘두르는 순간 event
     protected void EventMoveAttack()
@@ -320,9 +325,15 @@ public abstract class Player : MonoBehaviour
             rigid.velocity = new Vector2(0, rigid.velocity.y);
     }
 
+    //공격 A,B 데미지 판정 event
     protected void EventDamage()
     {
         atBox.gameObject.SetActive(true);
+    }
+
+    protected void EventDamage_end()
+    {
+        atBox.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

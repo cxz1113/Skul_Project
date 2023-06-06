@@ -59,6 +59,9 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (ed.target == null) 
+        ed.target = GameObject.FindWithTag("Player").transform;
+
         if (isDead == true || ed.hp <= 0)
         {
             DestroyTime += Time.deltaTime;

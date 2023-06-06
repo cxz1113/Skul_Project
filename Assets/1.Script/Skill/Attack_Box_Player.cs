@@ -25,6 +25,7 @@ public class Attack_Box_Player :MonoBehaviour
         {
             enemy = collision.GetComponent<Enemy>();
             SetDamage(enemy, player.Damage);
+            enemy.ed.anim.SetTrigger("Hit");
             gameObject.SetActive(false);
         }
     }
