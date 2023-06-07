@@ -20,9 +20,8 @@ public class ProjectManager : MonoBehaviour
     public List<Item> heads = new List<Item>();
     public List<Item> essences = new List<Item>();
     public List<Item> items1 = new List<Item>();
-    public List<Item> items2 = new List<Item>();
 
-    void Awake() =>Instance = this;
+    void Awake() => Instance = this;
 
     void Start()
     {
@@ -31,8 +30,8 @@ public class ProjectManager : MonoBehaviour
         data = playerData.nowPlayerData.playerdatajsons[0];
         Init(playerData.nowPlayerData.playerdatajsons[0].head1);
         PlayerSet();
-        InventorySet();
         PlayerUISet();
+        InventorySet();
         HPGage();
     }
 
@@ -98,14 +97,11 @@ public class ProjectManager : MonoBehaviour
     void Init(string main)
     {
         // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
-        player = Instantiate(Resources.Load<Player>(string.Format($"Player/{main}")), playerStart);
+        player = Instantiate(Resources.Load<Player>(string.Format($"Player/{main}")));
     }
     public void HeadSwap()
     {
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
-        //Item headTemp = heads[0];
-        //heads[0] = heads[1];
-        //heads[1] = headTemp;
         HeadChage(heads, InvenManager.Instance.itemBox, ui.imagesItem); 
         player = FindObjectOfType<Player>();
         PlayerHeadSet(heads[0].name, heads[1].name);
@@ -137,7 +133,6 @@ public class ProjectManager : MonoBehaviour
 
     public void InventorySet()
     {
-        
         ui.ImageSet();
         ItemSet();
         EssenceSet();

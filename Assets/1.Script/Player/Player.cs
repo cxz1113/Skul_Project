@@ -65,6 +65,7 @@ public abstract class Player : MonoBehaviour
     [SerializeField] protected int switchIndex;
     
     public bool isPush;
+
     protected virtual void Init()
     {
         ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
@@ -356,31 +357,39 @@ public abstract class Player : MonoBehaviour
             animator.SetBool("IsGround", false);
         }
     }
-    //
+    
     void Test()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             isPush = true;
         }
-        if (Input.GetKeyUp(KeyCode.F))
+        else if (Input.GetKeyUp(KeyCode.F))
         {
             isPush = false;
         }
-        if (Input.GetKeyUp(KeyCode.F1))
+        else if (Input.GetKeyUp(KeyCode.F1))
         {
             PlayerBasket.Instance.HP -= 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
-        if (Input.GetKeyUp(KeyCode.F2))
+        else if(Input.GetKeyUp(KeyCode.F2))
         {
             PlayerBasket.Instance.HP += 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        else if(Input.GetKeyDown(KeyCode.Tab))
         {
-            PlayerBasket.Instance.isInven = true;
-            ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(true);
+            PlayerBasket.Instance.invectoryActivated = !PlayerBasket.Instance.invectoryActivated;
+
+            if (PlayerBasket.Instance.invectoryActivated)
+            {
+                ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(true);
+                StartCoroutine(ProjectManager.Instance.inven.DotweenScroll());
+                InvenManager.Instance.indexX = InvenManager.Instance.indexY = 0;
+                PlayerBasket.Instance.isInven = true;
+            }
         }
     }
 }

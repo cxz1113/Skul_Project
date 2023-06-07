@@ -6591,7 +6591,7 @@ GameObject:
   - component: {fileID: 293618591}
   - component: {fileID: 293618590}
   m_Layer: 5
-  m_Name: cooltime
+  m_Name: cooltime2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16025,9 +16025,9 @@ RectTransform:
   m_Father: {fileID: 482704442}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &951313114
@@ -17356,7 +17356,7 @@ GameObject:
   - component: {fileID: 1097249941}
   - component: {fileID: 1097249940}
   m_Layer: 5
-  m_Name: cooltime
+  m_Name: cooltime1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18782,6 +18782,9 @@ MonoBehaviour:
   itemData: {fileID: 0}
   itemSelect: {fileID: 0}
   selectImage: {fileID: 112208363}
+  indexX: 0
+  indexY: 0
+  isItemC: 0
 --- !u!1 &1173448041
 GameObject:
   m_ObjectHideFlags: 0
@@ -20702,9 +20705,6 @@ MonoBehaviour:
   playerStart: {fileID: 679899243}
   ui: {fileID: 1590804651}
   inven: {fileID: 1171652192}
-  heads: []
-  essences: []
-  items: []
   playerData: {fileID: 0}
   skulData: {fileID: 0}
   itemData: {fileID: 0}
@@ -20720,6 +20720,9 @@ MonoBehaviour:
     item3: 
     item4: 
     item5: 
+  heads: []
+  essences: []
+  items1: []
 --- !u!1 &1322946507
 GameObject:
   m_ObjectHideFlags: 0
@@ -23825,8 +23828,8 @@ MonoBehaviour:
   head1: {fileID: 1457096528}
   head2: {fileID: 996481952}
   hpGage: {fileID: 1957769284}
-  skill1: {fileID: 236627151}
-  skill2: {fileID: 477381107}
+  skill1Sprite: {fileID: 236627151}
+  skill2Sprite: {fileID: 477381107}
   curHpTxt: {fileID: 207763184}
   maxHpTxt: {fileID: 1784941400}
   player: {fileID: 2798456014967218647, guid: 5b21d466900c8bd4785efe07c17cdbe1, type: 3}
@@ -23835,8 +23838,7 @@ MonoBehaviour:
   nullSprite: {fileID: 21300000, guid: fff1462f5b0b0b149afb6f3e16059151, type: 3}
   selectImage: {fileID: 112208363}
   item: {fileID: 0}
-  skulData: {fileID: 0}
-  data:
+  dataSkul:
     name: 
     tier: 
     type: 
@@ -23848,10 +23850,26 @@ MonoBehaviour:
     abilitydetail: 
     skillname1detail: 
     skillname2detail: 
-    cooltime: 
+    cooltime1: 
+    cooltime2: 
     itemskul: 
+  dataItem:
+    name: 
+    itemname: 
+    tier: 
+    intro: 
+    itemdetail: 
+    abillity1: 
+    abillity2: 
   type1: {fileID: 687439672}
-  imagesType1: []
+  type1Skill: {fileID: 247568189}
+  skulIconType1: {fileID: 999977290}
+  imagesType1:
+  - {fileID: 963871817}
+  - {fileID: 623494498}
+  imagesSkillType1:
+  - {fileID: 358980449}
+  - {fileID: 214781017}
   txtType1:
   - {fileID: 780985791}
   - {fileID: 812084459}
@@ -23861,22 +23879,48 @@ MonoBehaviour:
   - {fileID: 1355327885}
   - {fileID: 600699684}
   - {fileID: 1322946509}
-  txtskillType1:
+  txtSkillType1:
   - {fileID: 1301557797}
   - {fileID: 829394116}
   - {fileID: 431798117}
-  - {fileID: 2138432304}
-  - {fileID: 1097249940}
   - {fileID: 1832542948}
+  - {fileID: 2138432304}
   - {fileID: 1182998326}
+  - {fileID: 1097249940}
   - {fileID: 293618590}
+  strType1: []
+  strType1Skill: []
   type2: {fileID: 503291191}
-  imagesType2:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  type2Skill: {fileID: 1237315795}
+  skulIconType2: {fileID: 1400937108}
+  imagesType2: {fileID: 1212722641}
+  imagesSkillType2: {fileID: 1659267927}
+  txtType2:
+  - {fileID: 804492584}
+  - {fileID: 1818231123}
+  - {fileID: 2108850953}
+  - {fileID: 194923054}
+  - {fileID: 756930996}
+  - {fileID: 273466060}
+  - {fileID: 1999174747}
+  txtSkillType2:
+  - {fileID: 351243051}
+  - {fileID: 32930917}
+  - {fileID: 823431969}
+  - {fileID: 184428461}
+  - {fileID: 53698689}
+  strType2: []
+  strType2Skill: []
   type3: {fileID: 1563106365}
-  imagesItemMain: []
+  type3Icon: {fileID: 1185461365}
+  txtType3:
+  - {fileID: 749504607}
+  - {fileID: 1396530393}
+  - {fileID: 1187179726}
+  - {fileID: 2071932357}
+  - {fileID: 439027678}
+  - {fileID: 222473557}
+  strType3: []
   imagesItemHeadData:
   - {fileID: 12336541}
   - {fileID: 1221309306}
@@ -60173,6 +60217,8 @@ MonoBehaviour:
   skul: 
   curHp: 0
   maxHp: 0
+  invectoryActivated: 0
+  isHeadChange: 0
   item: 
 --- !u!4 &1779611885
 Transform:
@@ -61495,9 +61541,9 @@ RectTransform:
   m_Father: {fileID: 482704442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1969559418
@@ -87528,9 +87574,9 @@ RectTransform:
   m_Father: {fileID: 482704442}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -350}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1980144552
@@ -89606,9 +89652,9 @@ RectTransform:
   m_Father: {fileID: 482704442}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2113821508

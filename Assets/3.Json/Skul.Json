@@ -15,7 +15,8 @@
       "abilitydetail": "교대 시 뼈를 들고 회전해 물리데미지를 입힙니다.",
       "skillname1detail": "자신의 머리를 던져 마법데미지를 입힙니다. 던전 머리를 회수하면 쿨타임이 초기화됩니다.",
       "skillname2detail": "머리가 없는 상태일 때, 머리로 이동합니다.",
-      "cooltime": 5
+      "cooltime1": "5",
+      "cooltime2": "7"
     },
     {
       "name": "울프",
@@ -28,9 +29,11 @@
       "ability": "야생의 질주",
       "skillname1": "찢기",
       "skillname2": "",
-      "abilitydetail": "",
-      "skillname1detail": "",
-      "skillname2detail": ""
+      "abilitydetail": "교대 시 무적상태로 돌진하여 물리데미지를 입힙니다.",
+      "skillname1detail": "양손으로 적을 찢어 마법데미지를 입힙니다.",
+      "skillname2detail": "",
+      "cooltime1": "4",
+      "cooltime2": ""
     },
     {
       "name": "a",
@@ -45,7 +48,9 @@
       "skillname2": "",
       "abilitydetail": "",
       "skillname1detail": "",
-      "skillname2detail": ""
+      "skillname2detail": "",
+      "cooltime1": "",
+      "cooltime2": ""
     },
     {
       "name": "a",
@@ -60,7 +65,9 @@
       "skillname2": "",
       "abilitydetail": "",
       "skillname1detail": "",
-      "skillname2detail": ""
+      "skillname2detail": "",
+      "cooltime1": "",
+      "cooltime2": ""
     },
     {
       "name": "a",
@@ -75,7 +82,9 @@
       "skillname2": "",
       "abilitydetail": "",
       "skillname1detail": "",
-      "skillname2detail": ""
+      "skillname2detail": "",
+      "cooltime1": "",
+      "cooltime2": ""
     }
   ]
 }

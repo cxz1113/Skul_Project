@@ -22,7 +22,8 @@ public class SkulData : MonoBehaviour
         public string abilitydetail;
         public string skillname1detail;
         public string skillname2detail;
-        public string cooltime;
+        public string cooltime1;
+        public string cooltime2;
         public string itemskul;
     }
 

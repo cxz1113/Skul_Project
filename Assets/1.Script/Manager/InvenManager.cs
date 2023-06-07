@@ -25,27 +25,33 @@ public class InvenManager : MonoBehaviour
     public Item[][] itemBox = new Item[4][];
     public Item itemSelect;
     public Image selectImage;
+    public int indexX = 0;
+    public int indexY = 0;
+    public bool isItemC = false;
     Direct dir;
-    int indexX = 0;
-    int indexY = 0;
     void Awake() => Instance = this;
-
-    void Start()
-    {
-        StartCoroutine(DotweenScroll());
-    }
 
     void Update()
     {
         if(PlayerBasket.Instance.isInven)
         {
             SelectItem();
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(false);
+                scroll.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 1080);
+                PlayerBasket.Instance.isInven = false;
+            }
+            else if (Input.GetKey(KeyCode.D))
+                PlayerBasket.Instance.isDetail1 = true;
+            else if(Input.GetKeyUp(KeyCode.D))
+                PlayerBasket.Instance.isDetail1 = false;
         }
     }
-    IEnumerator DotweenScroll()
+    public IEnumerator DotweenScroll()
     {
         mySequence = DOTween.Sequence();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1720, 1080), 1f, true));
     }
 
@@ -99,7 +105,10 @@ public class InvenManager : MonoBehaviour
             itemSelect = itemBox[indexY][indexX];
         }
         else
+        {
+            isItemC = true;
             itemSelect = itemBox[indexY][indexX];
+        }
 
         JsonSet(itemSelect);
         selectImage.transform.position = ui.imagesItem[indexY][indexX].transform.position;

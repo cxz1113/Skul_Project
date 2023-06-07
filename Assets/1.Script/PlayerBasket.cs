@@ -21,8 +21,11 @@ public class PlayerBasket : MonoBehaviour
             ProjectManager.Instance.ui.curHpTxt.text = $"{curHp}";
         }
     }
-
+    public bool invectoryActivated = false;
+    public bool isHeadChange = false;
     public bool isInven { get; set; }
+    public bool isDetail1 { get; set; }
+
 
     public string item;
 
