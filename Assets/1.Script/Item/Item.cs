@@ -37,7 +37,7 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> skillSprites = new List<Sprite>();
     public List<Sprite> itemSprites = new List<Sprite>();
     public SkulData.Data skulJson;
-    public ItemData itemJson;
+    public ItemData.Data itemJson;
 
     public bool isHead { get; set; }
     public bool isItem { get; set; }
@@ -54,7 +54,7 @@ public abstract class Item : MonoBehaviour
 
         else if (collision.CompareTag("Player") && isItem)
         {
-            ProjectManager.Instance.items.Add(this);
+            ProjectManager.Instance.items1.Add(this);
             DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].item0 = gameObject.name;
             transform.gameObject.SetActive(false);
         }

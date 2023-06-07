@@ -15,7 +15,6 @@ public class LittleBorn : Item
         ss.it = ItemType.Head;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Init();

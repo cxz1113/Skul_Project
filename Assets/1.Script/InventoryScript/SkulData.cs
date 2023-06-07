@@ -31,8 +31,7 @@ public class SkulData : MonoBehaviour
     {
         public List<Data> skul = new List<Data>();
     }
-
-    void Start()
+    private void Start()
     {
         skulDataJson = JsonUtility.FromJson<SkulDataJson>(skulJson.text);
     }

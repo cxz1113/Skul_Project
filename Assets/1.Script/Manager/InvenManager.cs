@@ -51,59 +51,20 @@ public class InvenManager : MonoBehaviour
 
     public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
     {
-        itemBox[0] = new Item[2];
-        itemBox[1] = new Item[1];
-        itemBox[2] = new Item[3];
-        itemBox[3] = new Item[3];
-        for (int i = 0; i < items1.Count; i++)
-        {
-            itemBox[0][i] = items1[i];
-        }
-        for (int i = 0; i < items2.Count; i++)
-        {
-            itemBox[1][i] = items2[i];
-        }
-        for (int i = 0; i < items3.Count; i++)
-        {
-            itemBox[2][i] = items3[i];
-        }
-        for(int i = 0; i < items3.Count-1; i++)
-        {
-            itemBox[3][i] = items3[i + 3];
-        }
+        InputData(itemBox, items1, 0, 2);
+        InputData(itemBox, items2, 1, 1);
+        InputData(itemBox, items3, 2, 3);
+        InputData(itemBox, items3, 3, 3);
+
         InvenData();
     }
 
     void InvenData()
     {
-        for (int i = 0; i < itemBox[0].Length; i++)
-        {
-            if (itemBox[0][i] == null)
-                ui.imagesItem[0][i].sprite = ui.nullSprite;
-            else
-                ui.imagesItem[0][i].sprite = itemBox[0][i].ss.headItem;
-        }
-        for (int i = 0; i < itemBox[1].Length; i++)
-        {
-            if (itemBox[1][i] == null)
-                ui.imagesItem[1][i].sprite = ui.nullSprite;
-            else
-                ui.imagesItem[1][i].sprite = itemBox[1][i].id.item;
-        }
-        for (int i = 0; i < itemBox[2].Length; i++)
-        {
-            if (itemBox[2][i] == null)
-                ui.imagesItem[2][i].sprite = ui.nullSprite;
-            else
-                ui.imagesItem[2][i].sprite = itemBox[2][i].id.item;
-        }
-        for (int i = 0; i < itemBox[3].Length; i++)
-        {
-            if (itemBox[3][i] == null)
-                ui.imagesItem[3][i].sprite = ui.nullSprite;
-            else
-                ui.imagesItem[3][i].sprite = itemBox[3][i + 3].id.item;
-        }
+        InputData(ui.imagesItem, itemBox, 0);
+        InputData(ui.imagesItem, itemBox, 1);
+        InputData(ui.imagesItem, itemBox, 2);
+        InputData(ui.imagesItem, itemBox, 3);
     }
 
     public void SelectItem()
@@ -128,7 +89,10 @@ public class InvenManager : MonoBehaviour
             dir = Direct.Down;
             keySelect();
         }
-       
+    }
+
+    public Item ItemIn()
+    {
         if (indexY == 1)
         {
             indexX = 0;
@@ -137,7 +101,84 @@ public class InvenManager : MonoBehaviour
         else
             itemSelect = itemBox[indexY][indexX];
 
+        JsonSet(itemSelect);
         selectImage.transform.position = ui.imagesItem[indexY][indexX].transform.position;
+        
+        return itemSelect;
+    }
+
+    public void JsonSet(Item itemS)
+    {
+        itemData = FindObjectOfType<ItemData>();
+        skulData = FindObjectOfType<SkulData>();
+
+        int count = 0;
+        if (itemS == null)
+            return;
+        if (itemS.it == ItemType.Item)
+        {
+            while (count < itemData.itemDatajson.item.Count)
+            {
+                if (itemS.name != itemData.itemDatajson.item[count].itemname)
+                {
+                    count++;
+                }
+                else
+                {
+                    itemS.itemJson = itemData.itemDatajson.item[count];
+                    break;
+                }
+            }
+        }
+        else if (itemS.it == ItemType.Head)
+        {
+            while (count < skulData.skulDataJson.skul.Count)
+            {
+                if (itemS.name != skulData.skulDataJson.skul[count].itemskul)
+                {
+                    count++;
+                }
+                else
+                {
+                    itemS.skulJson = skulData.skulDataJson.skul[count];
+                    break;
+                }
+            }
+        }
+    }
+    void InputData(Item[][] itemsBox, List<Item> items, int a, int b)
+    {
+        itemsBox[a] = new Item[b];
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null)
+                break;
+            else if (a == 3 && items.Count < 3)
+                break;
+            else if(a == 3 && items.Count > 2)
+                itemsBox[a][i] = items[i+3];
+            else
+                itemsBox[a][i] = items[i];
+        }
+    }
+
+    void InputData(Image[][] images, Item[][] itemsBox, int a)
+    {
+        for (int i = 0; i < itemsBox[a].Length; i++)
+        {
+            if (itemsBox[a][i] == null)
+                images[a][i].sprite = ui.nullSprite;
+            else
+            {
+                if(a == 0)
+                    images[a][i].sprite = itemsBox[a][i].ss.headItem;
+                else if (a == 3)
+                    images[a][i].sprite = itemsBox[a][i + 3].id.item;
+                else
+                    images[a][i].sprite = itemsBox[a][i].id.item;
+            }
+        }
     }
 
     void keySelect()
