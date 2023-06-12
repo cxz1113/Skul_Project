@@ -26,7 +26,8 @@ public enum EnemyType
 public abstract class Enemy : MonoBehaviour
 {
     public EnemyData ed = new EnemyData();
-   
+    public WayPoint2 way2;
+
     public int nextMove;
     public bool isDead;
     public float DestroyTime;
@@ -37,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
         ed.spriterenderer = GetComponent<SpriteRenderer>();
         ed.anim = GetComponent<Animator>();
         ed.target = GameObject.FindWithTag("Player").transform;
+        way2 = FindObjectOfType<WayPoint2>();
         isDead = false;
         Invoke("Think", 2);
     }
@@ -69,8 +71,9 @@ public abstract class Enemy : MonoBehaviour
             CancelInvoke("AttackStart");
             nextMove = 0;
             ed.anim.SetBool("Dead", true);
-            if (DestroyTime == 1)
+            if (DestroyTime >= 2)
             {
+                way2.killCount++;
                 Destroy(gameObject);
             }
         }

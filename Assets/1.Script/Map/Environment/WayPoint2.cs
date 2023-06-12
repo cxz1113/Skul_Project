@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class WayPoint2 : Environment
 {
-    public BoxCollider2D collider2D;
+    public BoxCollider2D waycollider2D;
     public Canvas canvas;
     public Player player;
-    public List<Enemy> enemies;
+    public Enemy enemy;
+
+    public int killCount;
 
     public override void Initialize()
     {
@@ -18,16 +20,15 @@ public class WayPoint2 : Environment
     {
         Initialize();
         canvas.transform.GetChild(0).transform.localPosition = new Vector2(0f, 20f);
-        collider2D = GetComponent<BoxCollider2D>();
+        waycollider2D = GetComponent<BoxCollider2D>();
+        enemy = GetComponent<Enemy>();
+        MapManager.Instance.killCheck = MapManager.Instance.enemies.Count;
+        MapManager.Instance.killCount = killCount;
     }
 
     void Update()
     {
         player = ProjectManager.Instance.player;
-        if (enemies.Count <= 0)
-        {
-
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +36,6 @@ public class WayPoint2 : Environment
         if (collision.CompareTag("Player"))
         {
             canvas.gameObject.SetActive(true);
-            MapManager.Instance.isTown = MapManager.Instance.isBoss = true;
         }
     }
 
