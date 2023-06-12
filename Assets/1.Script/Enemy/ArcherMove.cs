@@ -68,7 +68,8 @@ public class ArcherMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        target = collision.gameObject.transform;
+
+            target = collision.gameObject.transform;
         if (collision.gameObject.tag == "Player")
         {
             OnDamage(collision.transform.position);

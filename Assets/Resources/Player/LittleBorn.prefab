@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4257343673998533870}
   - component: {fileID: 4257343673998533867}
   - component: {fileID: 4257343673998533864}
-  - component: {fileID: 1339323305}
+  - component: {fileID: -1424643324025631487}
   m_Layer: 8
   m_Name: LittleBorn
   m_TagString: Player
@@ -210,7 +210,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.02266407, y: 0.97238874}
   m_Size: {x: 0.70642185, y: 1.991015}
   m_Direction: 0
---- !u!251 &1339323305
+--- !u!251 &-1424643324025631487
 PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,7 +223,7 @@ PlatformEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RotationalOffset: 0
-  m_UseOneWay: 0
+  m_UseOneWay: 1
   m_UseOneWayGrouping: 0
   m_SurfaceArc: 180
   m_UseSideFriction: 0

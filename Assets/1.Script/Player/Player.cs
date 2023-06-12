@@ -365,11 +365,11 @@ public abstract class Player : MonoBehaviour
     void Test()
     {
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             isPush = true;
         }
-        else if (Input.GetKeyUp(KeyCode.F))
+        else if (Input.GetKeyUp(KeyCode.D))
         {
             isPush = false;
         }
