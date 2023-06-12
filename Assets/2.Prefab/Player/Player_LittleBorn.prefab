@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4257343673292514352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4257343673292514355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.471, z: 0}
+  m_LocalPosition: {x: 0, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4257343673998533867}
   - component: {fileID: 4257343673998533864}
   - component: {fileID: 1339323305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_LittleBorn
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ CapsuleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02266407, y: 0.97238874}
   m_Size: {x: 0.70642185, y: 1.991015}
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77daf150a53f7f94b8e9956873d0b738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
   player: {fileID: 0}
 --- !u!61 &2109533968353187280
 BoxCollider2D:

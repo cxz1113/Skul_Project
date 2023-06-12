@@ -15,6 +15,7 @@ public class Scan : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitcollision)
     {
+        /*
         if (hitcollision.gameObject.tag == "Player")
         {
             if (enemy.ed.entype != EnemyType.Tanker)
@@ -22,7 +23,7 @@ public class Scan : MonoBehaviour
                 OnDamage();
             }
             
-        }
+        }*/
     }
 
     void OnTriggerExit2D(Collider2D collision)

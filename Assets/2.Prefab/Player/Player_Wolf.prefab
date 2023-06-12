@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371210583578863513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3371210585359935303}
   - component: {fileID: 3371210585359935298}
   - component: {fileID: 3371210585359935297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_Wolf
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 4565006925143262504}
   - component: {fileID: 3369096424308386005}
   - component: {fileID: 7720313947384369818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Attack_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}

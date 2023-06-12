@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack_Box_Player :MonoBehaviour
 {
-    Enemy enemy;
+    [HideInInspector] public List<Enemy> enemies = new List<Enemy>();
     public Player player;
 
     // Start is called before the first frame update
@@ -21,17 +21,13 @@ public class Attack_Box_Player :MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            enemy = collision.GetComponent<Enemy>();
-            SetDamage(enemy, player.Damage);
-            enemy.ed.anim.SetTrigger("Hit");
-            gameObject.SetActive(false);
-        }
+        if (collision.CompareTag("Enemy") && !enemies.Contains(collision.GetComponent<Enemy>()))
+            enemies.Add(collision.GetComponent<Enemy>());
     }
 
-    void SetDamage(Enemy enemy, float damage)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        enemy.ed.hp -= damage;
+        if (collision.CompareTag("Enemy"))
+            enemies.Remove(collision.GetComponent<Enemy>());
     }
 }

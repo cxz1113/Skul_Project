@@ -70,10 +70,12 @@ public abstract class Enemy : MonoBehaviour
             CancelInvoke("Think");
             CancelInvoke("AttackStart");
             nextMove = 0;
+
+            ed.anim.ResetTrigger("Hit");
             ed.anim.SetBool("Dead", true);
             if (DestroyTime >= 2)
             {
-                way2.killCount++;
+                //way2.killCount++;
                 Destroy(gameObject);
             }
         }

@@ -107,6 +107,7 @@ public class Player_LittleBorn : Player
     //스킬1 - 애니메이션 끝나기 1프레임 전 event
     void EventSwitchAnimation()
     {
+        canInput = true;
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
     }
 

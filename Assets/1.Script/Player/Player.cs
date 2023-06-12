@@ -326,15 +326,19 @@ public abstract class Player : MonoBehaviour
             rigid.velocity = new Vector2(0, rigid.velocity.y);
     }
 
-    //공격 A,B 데미지 판정 event
+    //공격 데미지 판정 event
     protected void EventDamage()
     {
-        atBox.gameObject.SetActive(true);
+        foreach (var enemy in atBox.enemies)
+        {
+            SetDamage(enemy, Damage);
+        }
     }
 
-    protected void EventDamage_end()
+    public void SetDamage(Enemy enemy, float damage)
     {
-        atBox.gameObject.SetActive(false);
+        enemy.ed.hp -= damage;
+        enemy.transform.GetComponentInChildren<Scan>().OnDamage();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
