@@ -10,7 +10,9 @@ public abstract class Player : MonoBehaviour
     {
         littleborn,
         nohead,
-        wolf
+        wolf,
+        calleon,
+        sword
     }
     public enum PlayerDir
     {

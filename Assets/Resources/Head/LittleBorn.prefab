@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7522084485357394255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.16, y: -42.84, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,6 +55,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e60f0ce408ea1c7409ed83341095cca5, type: 3}
   - {fileID: 21300000, guid: 8dbce63677b39474abb79baaa6a70e66, type: 3}
   itemSprites: []
+  skulJson:
+    name: 
+    tier: 
+    type: 
+    intro: 
+    passive: 
+    ability: 
+    skillname1: 
+    skillname2: 
+    abilitydetail: 
+    skillname1detail: 
+    skillname2detail: 
+    cooltime1: 
+    cooltime2: 
+    itemskul: 
+  itemJson:
+    name: 
+    itemname: 
+    tier: 
+    intro: 
+    itemdetail: 
+    abillity1: 
+    abillity2: 
 --- !u!212 &7522084485357394252
 SpriteRenderer:
   m_ObjectHideFlags: 0
