@@ -12,11 +12,8 @@ public class MapManager : MonoBehaviour
     public GameObject gold;
     public List<WayPoint> wayPoints = new List<WayPoint>();
     public List<WayPoint2> wayPoint2 = new List<WayPoint2>();
-    public List<Enemy> enemies;
-    
+    public WayPoint2 waycheck;
 
-    public int killCheck { get; set; }
-    public int killCount { get; set; }
     public bool isActive { get; set; }
 
     public bool isWay { get; set; }
@@ -42,13 +39,15 @@ public class MapManager : MonoBehaviour
                 isTown = isBoss = false;
             }
         }
-        if (killCheck <= killCount)
+        /*if (waycheck.killcount == waycheck.enemies.Count)
         {
+            waycheck.GetComponent<SpriteAnimation>().SetSprite(waycheck.GetComponent<WayPoint2>().active, 0.1f);
+            waycheck.GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
             foreach (var way2 in wayPoint2)
             {
                 way2.GetComponent<SpriteAnimation>().SetSprite(way2.GetComponent<WayPoint2>().active, 0.1f);
                 way2.GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
             }
-        }
+        }*/
     }
 }
