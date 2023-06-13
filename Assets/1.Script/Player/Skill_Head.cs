@@ -68,6 +68,6 @@ public class Skill_Head : MonoBehaviour
     void SetDamage(Enemy enemy, float damage)
     {
         enemy.ed.hp -= damage;
-        enemy.ed.anim.SetTrigger("Hit");
+        enemy.anim.SetTrigger("Hit");
     }
 }

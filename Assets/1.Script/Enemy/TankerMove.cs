@@ -6,7 +6,7 @@ public class TankerMove : Enemy
 {
     public override void Init()
     {
-        ed.entype = EnemyType.Tanker;
+        ed.type = EnemyType.Tanker;
         ed.rayY = 0;
 
         ed.maxhp = 150;

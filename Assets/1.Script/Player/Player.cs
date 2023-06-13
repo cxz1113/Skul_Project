@@ -338,7 +338,6 @@ public abstract class Player : MonoBehaviour
     public void SetDamage(Enemy enemy, float damage)
     {
         enemy.ed.hp -= damage;
-        enemy.transform.GetComponentInChildren<Scan>().OnDamage();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

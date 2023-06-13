@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ArcherMove : MonoBehaviour
 {
-    [SerializeField] Scan scan;
     public Rigidbody2D rigid;
     public Animator anim;
     public SpriteRenderer spriteRenderer;
