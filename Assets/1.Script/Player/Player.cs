@@ -207,9 +207,9 @@ public abstract class Player : MonoBehaviour
     IEnumerator CDownJump()
     {
         Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
-        Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider);
+        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), platformCollider);
         yield return new WaitForSeconds(0.3f);
-        Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), platformCollider, false);
+        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), platformCollider, false);
     }
 
     protected IEnumerator CDash()
@@ -338,6 +338,8 @@ public abstract class Player : MonoBehaviour
     public void SetDamage(Enemy enemy, float damage)
     {
         enemy.ed.hp -= damage;
+        enemy.anim.SetTrigger("Hit");
+        enemy.ed.state = EnemyState.Hit;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

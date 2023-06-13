@@ -44,6 +44,8 @@ public abstract class Enemy : MonoBehaviour
 
     public int nextMove;
     public float destroyTime;
+    private bool isAttack = false;
+    private bool canThink = true;
 
     Coroutine coroutine;
 
@@ -52,11 +54,15 @@ public abstract class Enemy : MonoBehaviour
         target = GameObject.FindWithTag("Player").transform;
         way2 = FindObjectOfType<WayPoint2>();
         ed.isDead = false;
-        Invoke("Think", 2);
+        Think();
+
+        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), target.gameObject.GetComponent<CapsuleCollider2D>());
     }
     public abstract void Init();
     void FixedUpdate()
     {
+        if (ed.state == EnemyState.Hit || ed.state == EnemyState.Attack)
+            return;
         //Move
         if(rigid.bodyType == RigidbodyType2D.Dynamic)
             rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
@@ -84,7 +90,8 @@ public abstract class Enemy : MonoBehaviour
         {
             destroyTime += Time.deltaTime;
             CancelInvoke("Think");
-            StopCoroutine(coroutine);
+            if (coroutine != null)
+                StopCoroutine(coroutine);
             
             nextMove = 0;
 
@@ -99,37 +106,47 @@ public abstract class Enemy : MonoBehaviour
         DamageTest();
 
         // 공격 거리 체크
-        if (Vector3.Distance(transform.position, target.position) < ed.atkRange && ed.state == EnemyState.Idle)
+        if (Vector3.Distance(transform.position, target.position) < ed.atkRange)
         {
-            CancelInvoke("Think");
+            nextMove = 0;
             spriterenderer.flipX = target.position.x > transform.position.x ? false : true;
             ed.state = EnemyState.Attack;
-            coroutine = StartCoroutine(AttackStart(0.2f));
+            coroutine = StartCoroutine(AttackStart(0));
         }
+        /*
         else if(ed.state == EnemyState.Idle)
         {
             ed.state = EnemyState.Move;
-
             CancelInvoke("Think");
             Invoke("Think", 1);
+            Think();
             if(coroutine != null)
                 StopCoroutine(coroutine);
-            anim.SetBool("Attack", false);
+        }*/
+        else if (canThink && ed.state != EnemyState.Attack)
+        {
+            StartCoroutine("Think");
         }
+
     }
 
-    public void Think()
+    public IEnumerator Think()
     {
+        Debug.Log("Think");
+        canThink = false;
+
         //다음 움직임 방향 * 속도
         nextMove = Random.Range(-1, 2) * 3;
-
+        ed.state = nextMove == 0 ? EnemyState.Idle : EnemyState.Move;
         anim.SetInteger("Walk", nextMove);
 
         //스프라이트 Flip.x
         if (nextMove != 0)
             spriterenderer.flipX = nextMove == -3;
 
-        StartCoroutine(SetState(Random.Range(0, 3)));
+        yield return new WaitForSeconds(Random.Range(1, 3));
+
+        canThink = true;
     }
 
     IEnumerator SetState(float delayTime)
@@ -149,6 +166,7 @@ public abstract class Enemy : MonoBehaviour
         Invoke("Think", 2);
     }
 
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -167,13 +185,21 @@ public abstract class Enemy : MonoBehaviour
             capsuleColl.isTrigger = false;
         }
     }
-
+    */
 
     IEnumerator AttackStart(float delayTime)
     {
         nextMove = 0;
         yield return new WaitForSeconds(delayTime);
-        anim.SetBool("Attack", true);
+        anim.SetTrigger("Attack");
+        isAttack = true;
+    }
+
+    void EventAttackEnd()
+    {
+        isAttack = false;
+        ed.state = EnemyState.Idle;
+        anim.ResetTrigger("Attack");
     }
 
     void DamageTest()
