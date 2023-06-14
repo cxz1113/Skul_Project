@@ -14,7 +14,7 @@ public class WayPoint2 : Environment
 
     public override void Initialize()
     {
-
+        evd.obj = this.gameObject;
     }
 
     void Start()
@@ -27,7 +27,7 @@ public class WayPoint2 : Environment
 
     void Update()
     {
-        GetComponent<SpriteAnimation>().SetSprite(GetComponent<WayPoint2>().active, 0.2f);
+        GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
         GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
         //player = ProjectManager.Instance.player;
         if (killcount == enemies.Count)

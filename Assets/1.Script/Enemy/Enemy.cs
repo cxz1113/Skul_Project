@@ -44,7 +44,6 @@ public abstract class Enemy : MonoBehaviour
 
     public int nextMove;
     public float destroyTime;
-    private bool isAttack = false;
     private bool canThink = true;
 
     Coroutine coroutine;
@@ -113,16 +112,6 @@ public abstract class Enemy : MonoBehaviour
             ed.state = EnemyState.Attack;
             coroutine = StartCoroutine(AttackStart(0));
         }
-        /*
-        else if(ed.state == EnemyState.Idle)
-        {
-            ed.state = EnemyState.Move;
-            CancelInvoke("Think");
-            Invoke("Think", 1);
-            Think();
-            if(coroutine != null)
-                StopCoroutine(coroutine);
-        }*/
         else if (canThink && ed.state != EnemyState.Attack)
         {
             StartCoroutine("Think");
@@ -166,38 +155,15 @@ public abstract class Enemy : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            rigid.bodyType = RigidbodyType2D.Static;
-            capsuleColl.isTrigger = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Player")
-        {
-            rigid.bodyType = RigidbodyType2D.Dynamic;
-            capsuleColl.isTrigger = false;
-        }
-    }
-    */
-
     IEnumerator AttackStart(float delayTime)
     {
         nextMove = 0;
         yield return new WaitForSeconds(delayTime);
         anim.SetTrigger("Attack");
-        isAttack = true;
     }
 
     void EventAttackEnd()
     {
-        isAttack = false;
         ed.state = EnemyState.Idle;
         anim.ResetTrigger("Attack");
     }
