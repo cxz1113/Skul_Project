@@ -63,8 +63,7 @@ public abstract class Enemy : MonoBehaviour
         if (ed.state == EnemyState.Hit || ed.state == EnemyState.Attack)
             return;
         //Move
-        if(rigid.bodyType == RigidbodyType2D.Dynamic)
-            rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
         //Platform Check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.75f, rigid.position.y - ed.rayY);
@@ -74,11 +73,13 @@ public abstract class Enemy : MonoBehaviour
         {
             Turn();
         }
-
     }
 
     void Update()
     {
+        if (ed.state == EnemyState.Attack)
+            return;
+
         if (target == null)
         {
             target = GameObject.FindWithTag("Player").transform;
@@ -107,21 +108,18 @@ public abstract class Enemy : MonoBehaviour
         // 공격 거리 체크
         if (Vector3.Distance(transform.position, target.position) < ed.atkRange)
         {
-            nextMove = 0;
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
             spriterenderer.flipX = target.position.x > transform.position.x ? false : true;
-            ed.state = EnemyState.Attack;
-            coroutine = StartCoroutine(AttackStart(0));
+            AttackStart();
         }
         else if (canThink && ed.state != EnemyState.Attack)
         {
             StartCoroutine("Think");
         }
-
     }
 
     public IEnumerator Think()
     {
-        Debug.Log("Think");
         canThink = false;
 
         //다음 움직임 방향 * 속도
@@ -155,11 +153,11 @@ public abstract class Enemy : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    IEnumerator AttackStart(float delayTime)
+    void AttackStart()
     {
         nextMove = 0;
-        yield return new WaitForSeconds(delayTime);
         anim.SetTrigger("Attack");
+        ed.state = EnemyState.Attack;
     }
 
     void EventAttackEnd()
