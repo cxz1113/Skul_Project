@@ -337,12 +337,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void SetDamage(Enemy enemy, float damage)
-    {
-        enemy.ed.hp -= damage;
-        enemy.anim.SetTrigger("Hit");
-        enemy.ed.state = EnemyState.Hit;
-    }
+    public void SetDamage(Enemy enemy, float damage) => enemy.Damaged(damage);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

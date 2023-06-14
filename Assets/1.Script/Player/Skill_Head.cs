@@ -9,7 +9,7 @@ public class Skill_Head : MonoBehaviour
 
     float originalGravity;
     float speed = 50;
-    float damage = 50;
+    float damage = 40;
     bool isFlying = true;
     Rigidbody2D rigid;
     public Player_LittleBorn player;
@@ -52,7 +52,7 @@ public class Skill_Head : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.CompareTag("Enemy") && isFlying)
-                SetDamage(collision.gameObject.GetComponent<Enemy>(), damage);
+                collision.gameObject.GetComponent<Enemy>().Damaged(damage);
 
             StartCoroutine(OffFlying());
         }
@@ -63,11 +63,5 @@ public class Skill_Head : MonoBehaviour
             player.animator.runtimeAnimatorController = player.animators[0];
             Dest();
         }
-    }
-
-    void SetDamage(Enemy enemy, float damage)
-    {
-        enemy.ed.hp -= damage;
-        enemy.anim.SetTrigger("Hit");
     }
 }

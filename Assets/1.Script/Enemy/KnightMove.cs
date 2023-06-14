@@ -15,6 +15,7 @@ public class KnightMove : Enemy
         ed.damage = 5;
 
         ed.atkRange = 3;
+        ed.atkDelay = 3;
     }
 
     void Start()
