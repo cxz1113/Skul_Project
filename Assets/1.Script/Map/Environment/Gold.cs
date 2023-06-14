@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class Gold : MonoBehaviour
 {
@@ -24,11 +26,6 @@ public class Gold : MonoBehaviour
         }
     }
 
-    void GoldDorp()
-    {
-
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") && player.isPush)
@@ -36,7 +33,7 @@ public class Gold : MonoBehaviour
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
             MapManager.Instance.gate.GetComponent<BoxCollider2D>().enabled = false;
-            Destroy(transform.gameObject);
+            transform.gameObject.SetActive(false);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -46,4 +43,6 @@ public class Gold : MonoBehaviour
             canvas.gameObject.SetActive(false);
         }
     }
+
+
 }
