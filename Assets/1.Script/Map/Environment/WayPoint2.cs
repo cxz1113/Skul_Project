@@ -23,21 +23,19 @@ public class WayPoint2 : Environment
         canvas.transform.GetChild(0).transform.localPosition = new Vector2(0f, 20f);
         waycollider2D = GetComponent<BoxCollider2D>();
         enemy = GetComponent<Enemy>();
+        
     }
 
     void Update()
     {
-        GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
-        GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
         //player = ProjectManager.Instance.player;
+
+        // 게이트 열림
         if (killcount == enemies.Count)
         {
-           
-            /*foreach (var way2 in wayPoint2)
-            {
-                way2.GetComponent<SpriteAnimation>().SetSprite(way2.GetComponent<WayPoint2>().active, 0.1f);
-                way2.GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
-            }*/
+            GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
+            GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
+            killcount = 0;
         }
     }
 
@@ -73,5 +71,4 @@ public class WayPoint2 : Environment
             }
         }
     }
-
 }
