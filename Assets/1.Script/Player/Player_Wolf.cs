@@ -64,7 +64,7 @@ public class Player_Wolf : Player
         float tempDis;
         int layer = 1<<LayerMask.NameToLayer("Ground");
         RaycastHit2D hit1 = Physics2D.Raycast(gameObject.transform.position, transform.right, distance , layer);
-        RaycastHit2D hit2 = Physics2D.Raycast(gameObject.transform.position + (capCol.size.y) * transform.up, transform.right, distance, layer);
+        RaycastHit2D hit2 = Physics2D.Raycast(gameObject.transform.position + (playerCol.size.y) * transform.up, transform.right, distance, layer);
 
         if (!hit1 && !hit2)
         {
@@ -74,7 +74,7 @@ public class Player_Wolf : Player
         else if (hit1 == hit2)
         {
             //transform.Translate((hit1.distance - capCol.size.x / 2) * Vector2.right);
-            tempDis = hit1.distance - capCol.size.x / 2;
+            tempDis = hit1.distance - playerCol.size.x / 2;
         }
         else
         {
@@ -84,7 +84,7 @@ public class Player_Wolf : Player
         }
 
         int layer2 = 1 << LayerMask.NameToLayer("Enemy");
-        RaycastHit2D[] hit3 = Physics2D.RaycastAll(gameObject.transform.position + (capCol.size.y / 2) * transform.up, transform.right, tempDis, layer2);
+        RaycastHit2D[] hit3 = Physics2D.RaycastAll(gameObject.transform.position + (playerCol.size.y / 2) * transform.up, transform.right, tempDis, layer2);
         
         foreach (var item in hit3)
         {
@@ -95,6 +95,7 @@ public class Player_Wolf : Player
             }
         }
 
+        tempDis -= playerCol.size.x / 2;
         transform.Translate(tempDis * Vector2.right);
     }
 }

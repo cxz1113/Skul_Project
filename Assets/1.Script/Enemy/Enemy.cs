@@ -42,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
     public SpriteRenderer spriterenderer;
     public Transform target;
     public WayPoint2 way2;
+    public Attack_Box_Enemy atkBox;
 
     public int nextMove;
     private bool canThink = true;
@@ -89,6 +90,7 @@ public abstract class Enemy : MonoBehaviour
             //nextMove = 0;
             anim.SetBool("Dead", true);
             ed.state = EnemyState.Dead;
+            rigid.velocity = Vector2.zero;
 
             Invoke("Die", 2f);
         }
@@ -105,7 +107,7 @@ public abstract class Enemy : MonoBehaviour
 
             if (canAttack)
                 AttackStart();
-            else
+            else if (Vector3.Distance(transform.position, target.position) > ed.atkRange)
             {
                 nextMove = spriterenderer.flipX ? -3 : 3;
                 anim.SetInteger("Walk", nextMove);
@@ -160,6 +162,12 @@ public abstract class Enemy : MonoBehaviour
         canAttack = true;
     }
 
+    void EventDamage()
+    {
+        if (atkBox.player)
+            atkBox.player.GetComponent<Player>().Damaged(ed.damage);
+    }
+
     //공격 끝나는 시점, hit 끝나는 시점
     void EventAttackEnd()
     {
@@ -178,7 +186,7 @@ public abstract class Enemy : MonoBehaviour
             ed.state = EnemyState.Hit;
             rigid.velocity = new Vector2(0, rigid.velocity.y);
             int dir = spriterenderer.flipX ? -1 : 1;
-            rigid.AddForce(new Vector2(dir, 1) * 5 * rigid.mass, ForceMode2D.Impulse);
+            //rigid.AddForce(new Vector2(0, 1) * 5 * rigid.mass, ForceMode2D.Impulse);
         }
 
         nextMove = 0;

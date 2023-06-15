@@ -29,10 +29,11 @@ public abstract class Player : MonoBehaviour
     public List<Player> players;
     public List<RuntimeAnimatorController> animators;
     public Attack_Box_Player atBox;
-    [SerializeField] protected CapsuleCollider2D capCol;
+    [SerializeField] protected CapsuleCollider2D playerCol;
 
     protected bool canInput = true;
     protected float originalGravity = 6;
+    protected bool isDead = false;
 
     //Move
     public float moveSpeed = 15f;
@@ -90,7 +91,7 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        if (PlayerBasket.Instance.isInven)
+        if (PlayerBasket.Instance.isInven || isDead)
             return;
         
         JumpAnimation();
@@ -336,6 +337,22 @@ public abstract class Player : MonoBehaviour
             SetDamage(enemy, Damage);
         }
     }
+    public void Damaged(float damage)
+    {
+        if (isDead)
+            return;
+
+        PlayerBasket.Instance.HP -= damage;
+        if (PlayerBasket.Instance.HP <= 0)
+        {
+            PlayerBasket.Instance.HP = 0;
+            animator.SetTrigger("Dead");
+            rigid.velocity = Vector2.zero;
+            isDead = true;
+        }
+    }
+
+
 
     public void SetDamage(Enemy enemy, float damage) => enemy.Damaged(damage);
 
@@ -373,7 +390,8 @@ public abstract class Player : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.F1))
         {
-            PlayerBasket.Instance.HP -= 20;
+            Damaged(20);
+            //PlayerBasket.Instance.HP -= 20;
             Debug.Log(PlayerBasket.Instance.HP);
         }
         else if(Input.GetKeyUp(KeyCode.F2))
