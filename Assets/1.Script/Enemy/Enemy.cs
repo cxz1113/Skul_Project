@@ -39,7 +39,6 @@ public abstract class Enemy : MonoBehaviour
     public Rigidbody2D rigid;
     public CapsuleCollider2D capsuleColl;
     public Animator anim;
-    public SpriteRenderer spriterenderer;
     public Transform target;
     public WayPoint2 way2;
     public Attack_Box_Enemy atkBox;
@@ -47,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
     public int nextMove;
     private bool canThink = true;
     private bool canAttack = true;
+    private bool flipX;
 
     Coroutine coroutine;
 
@@ -103,13 +103,14 @@ public abstract class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) < ed.atkRange)
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            spriterenderer.flipX = target.position.x > transform.position.x ? false : true;
+            
+            flipX = target.position.x > transform.position.x ? false : true;
 
             if (canAttack)
                 AttackStart();
             else if (Vector3.Distance(transform.position, target.position) > ed.atkRange)
             {
-                nextMove = spriterenderer.flipX ? -3 : 3;
+                nextMove = flipX ? -3 : 3;
                 anim.SetInteger("Walk", nextMove);
             }
         }
@@ -117,6 +118,7 @@ public abstract class Enemy : MonoBehaviour
         {
             StartCoroutine("Think");
         }
+        transform.localScale = flipX ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
     }
 
     public IEnumerator Think()
@@ -130,7 +132,7 @@ public abstract class Enemy : MonoBehaviour
 
         //스프라이트 Flip.x
         if (nextMove != 0)
-            spriterenderer.flipX = nextMove == -3;
+            flipX = nextMove == -3;
 
         yield return new WaitForSeconds(Random.Range(1, 3));
 
@@ -140,7 +142,7 @@ public abstract class Enemy : MonoBehaviour
     public void Turn()
     {
         nextMove *= -1;
-        spriterenderer.flipX = nextMove == -3;
+        flipX = nextMove == -3;
 
         CancelInvoke();
 
@@ -185,7 +187,7 @@ public abstract class Enemy : MonoBehaviour
             anim.SetTrigger("Hit");
             ed.state = EnemyState.Hit;
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            int dir = spriterenderer.flipX ? -1 : 1;
+            int dir = flipX ? -1 : 1;
             //rigid.AddForce(new Vector2(0, 1) * 5 * rigid.mass, ForceMode2D.Impulse);
         }
 
