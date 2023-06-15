@@ -22,7 +22,8 @@ public class PlayerBasket : MonoBehaviour
         }
     }
     public bool invectoryActivated = false;
-    public bool isHeadChange = false;
+
+    public bool isHeadChange { get; set; }
     public bool isInven { get; set; }
     public bool isDetail1 { get; set; }
 

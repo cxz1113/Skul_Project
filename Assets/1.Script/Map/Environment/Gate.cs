@@ -19,7 +19,21 @@ public class Gate : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            MapManager.Instance.gold.gameObject.SetActive(true);
+            int rand = Random.Range(0, 101);
+            MapManager.Instance.isHead = true;
+            MapManager.Instance.coinParent.gameObject.SetActive(true);
+
+            /*if(rand > 33)
+            {
+                MapManager.Instance.isHead = true;
+                MapManager.Instance.coinParent.gameObject.SetActive(true);
+            }
+            else
+            {
+                MapManager.Instance.isGold = true;
+                MapManager.Instance.goldParent.gameObject.SetActive(true);
+            }*/
+
             MapManager.Instance.isActive = true;
         }
     }

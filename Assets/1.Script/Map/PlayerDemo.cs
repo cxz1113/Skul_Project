@@ -76,7 +76,7 @@ public class PlayerDemo : MonoBehaviour
     {
         if (collision.CompareTag("Gate"))
         {
-            MapManager.Instance.gold.gameObject.SetActive(true);
+            //MapManager.Instance.goldParent.gameObject.SetActive(true);
         }
     }
 }

@@ -11,6 +11,8 @@ public struct SkulStatus
     public Sprite skill1;
     public Sprite Skill2;
     public ItemType it;
+    public GameObject obj;
+    public string name;
 }
 public struct ItemStatus
 {
@@ -38,25 +40,36 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> itemSprites = new List<Sprite>();
     public SkulData.Data skulJson;
     public ItemData.Data itemJson;
-
     public bool isHead { get; set; }
     public bool isItem { get; set; }
     public abstract void Init();
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && isHead)
-        {
-            ProjectManager.Instance.heads[1] = this;
-            DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].head2 = gameObject.name;
-            transform.gameObject.SetActive(false);
-        }
 
-        else if (collision.CompareTag("Player") && isItem)
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && it == ItemType.Head)
         {
-            ProjectManager.Instance.items1.Add(this);
-            DataManager.Instance.playerData.nowPlayerData.playerdatajsons[0].item0 = gameObject.name;
-            transform.gameObject.SetActive(false);
+            if (ProjectManager.Instance.player.isPush)
+            {
+                ProjectManager.Instance.player.isPush = false;
+                //ss.obj.SetActive(false);
+                Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
+                ItemHead();
+                Destroy(ss.obj);
+                Debug.Log(ProjectManager.Instance.heads[0]);
+            }
         }
+    }
+
+    void ItemHead()
+    {
+        string name = ss.name;
+        ProjectManager.Instance.heads.RemoveAt(0);
+        
+        ProjectManager.Instance.heads.Add(Resources.Load<Item>(string.Format($"Head/{name}")));
+        Debug.Log(transform.gameObject.name);
+        Item itemHead = ProjectManager.Instance.heads[0];
+        ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
+        ProjectManager.Instance.heads[1] = itemHead;
     }
 }

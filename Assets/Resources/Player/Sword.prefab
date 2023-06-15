@@ -40,8 +40,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371210585359935300}
+  - component: {fileID: 6636321905261318360}
   - component: {fileID: 3371210585359935301}
-  - component: {fileID: 3371210585359935304}
   - component: {fileID: 3371210585359935303}
   - component: {fileID: 3371210585359935298}
   - component: {fileID: 3371210585359935297}
@@ -69,6 +69,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6636321905261318360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371210585359935305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda0ec500cd2e7b418e2a5bdbf939283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDir: 1
+  animator: {fileID: 0}
+  players:
+  - {fileID: 6378543024873178240, guid: 222f2f16ba8ab344dbda1a630c45d703, type: 3}
+  - {fileID: 3371210585359935304, guid: 6709e1f4a4749d14c99e4957b6819255, type: 3}
+  - {fileID: 6636321905261318360}
+  animators:
+  - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
+  - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
+  - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
+  - {fileID: 9100000, guid: 30973a5ad3a2a8e408b86b44de675e70, type: 2}
+  atBox: {fileID: 0}
+  playerCol: {fileID: 0}
+  moveSpeed: 15
+  isSwitched: 0
+  switchIndex: 0
+  isPush: 0
 --- !u!212 &3371210585359935301
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121,33 +150,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3371210585359935304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3371210585359935305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f6260f9e63a4ee45a99e0e6b0a3729d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDir: 1
-  animator: {fileID: 0}
-  players:
-  - {fileID: 6378543024873178240, guid: 6d520afb13b99534bbc5dc3c6200f927, type: 3}
-  - {fileID: 3371210585359935304}
-  animators:
-  - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
-  - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
-  - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
-  atBox: {fileID: 3369096424308386005}
-  capCol: {fileID: 3371210585359935297}
-  moveSpeed: 15
-  isSwitched: 0
-  switchIndex: 0
-  isPush: 0
 --- !u!50 &3371210585359935303
 Rigidbody2D:
   serializedVersion: 4

@@ -110,7 +110,7 @@ public abstract class Player : MonoBehaviour
         InputSkill_2();
 
         SkulSwitch();
-        Test();
+        InvenActive();
         
     }
 
@@ -377,7 +377,7 @@ public abstract class Player : MonoBehaviour
         }
     }
     
-    void Test()
+    void InvenActive()
     {
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -386,19 +386,9 @@ public abstract class Player : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.D))
         {
-            isPush = false;
+            //isPush = false;
         }
-        else if (Input.GetKeyUp(KeyCode.F1))
-        {
-            Damaged(20);
-            //PlayerBasket.Instance.HP -= 20;
-            Debug.Log(PlayerBasket.Instance.HP);
-        }
-        else if(Input.GetKeyUp(KeyCode.F2))
-        {
-            PlayerBasket.Instance.HP += 20;
-            Debug.Log(PlayerBasket.Instance.HP);
-        }
+
         else if(Input.GetKeyDown(KeyCode.Tab))
         {
             PlayerBasket.Instance.invectoryActivated = !PlayerBasket.Instance.invectoryActivated;

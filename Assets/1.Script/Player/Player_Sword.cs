@@ -10,7 +10,7 @@ public class Player_Sword : Player
         base.Init();
         Damage = 15;
         animator = GetComponent<Animator>();
-        //animator.runtimeAnimatorController = animators[(int)AnimationIndex.sword];
+        animator.runtimeAnimatorController = animators[(int)AnimationIndex.sword];
         rigid = GetComponent<Rigidbody2D>();
 
         if (isSwitched)
@@ -18,7 +18,7 @@ public class Player_Sword : Player
             SwitchSkill();
         }
 
-        switchIndex = 0;
+        switchIndex = 2;
     }
 
     protected override IEnumerator CSkill_1()

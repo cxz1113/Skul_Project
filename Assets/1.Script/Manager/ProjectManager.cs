@@ -102,7 +102,7 @@ public class ProjectManager : MonoBehaviour
     public void HeadSwap()
     {
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
-        HeadChage(heads, InvenManager.Instance.itemBox, ui.imagesItem); 
+        InvenHeadChage(heads, InvenManager.Instance.itemBox, ui.imagesItem); 
         player = FindObjectOfType<Player>();
         PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
@@ -167,7 +167,7 @@ public class ProjectManager : MonoBehaviour
         essences.Add(Resources.Load<Item>($"Prefab/{str}"));
     }
 
-    void HeadChage(List<Item> item, Item[][] itemBoxes, Image[][] images)
+    void InvenHeadChage(List<Item> item, Item[][] itemBoxes, Image[][] images)
     {
         // In Game UI HeadChange
         Item headTemp = item[0];
