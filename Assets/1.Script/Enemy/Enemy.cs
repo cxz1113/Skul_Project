@@ -6,7 +6,6 @@ public struct EnemyData
 {
     public EnemyType type;
     public EnemyState state;
-    public float rayY;
     public float maxhp;
     public float hp;
     public float damage;
@@ -19,8 +18,8 @@ public struct EnemyData
 public enum EnemyType
 {
     Tanker,
-    Acher,
-    knigt
+    Archer,
+    Knight
 }
 
 public enum EnemyState
@@ -214,7 +213,7 @@ public abstract class Enemy : MonoBehaviour
 
     void PlatformCheck()
     {
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.75f, rigid.position.y - ed.rayY);
+        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.75f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
         if (rayHit.collider == null)

@@ -8,7 +8,6 @@ public class TankerMove : Enemy
     {
         ed.type = EnemyType.Tanker;
         ed.state = EnemyState.Idle;
-        ed.rayY = 0;
 
         ed.maxhp = 150;
         ed.hp = ed.maxhp;

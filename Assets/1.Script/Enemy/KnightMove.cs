@@ -6,15 +6,14 @@ public class KnightMove : Enemy
 {
     public override void Init()
     {
-        ed.type = EnemyType.knigt;
+        ed.type = EnemyType.Knight;
         ed.state = EnemyState.Idle;
-        ed.rayY = 1.2f;
 
         ed.maxhp = 50;
-        ed.hp = 50;
+        ed.hp = ed.maxhp;
         ed.damage = 5;
 
-        ed.atkRange = 3;
+        ed.atkRange = 2.5f;
         ed.atkDelay = 3;
     }
 

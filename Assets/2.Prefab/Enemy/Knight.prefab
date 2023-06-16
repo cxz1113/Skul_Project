@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8256884230393117123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.56, y: -4.41, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55,6 +55,7 @@ MonoBehaviour:
   anim: {fileID: 8256884230393117144}
   target: {fileID: 0}
   way2: {fileID: 0}
+  killCheck: {fileID: 0}
   atkBox: {fileID: 807427732409242173}
   nextMove: 0
 --- !u!212 &8256884230393117150
@@ -164,8 +165,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: -0.07}
-  m_Size: {x: 1.6, y: 2.8}
+  m_Offset: {x: 0.025127888, y: 1.532803}
+  m_Size: {x: 2.125, y: 3.4375}
   m_Direction: 0
 --- !u!114 &5585630910039142523
 MonoBehaviour:
@@ -182,7 +183,7 @@ MonoBehaviour:
   prfHP: {fileID: 1469167122332539356, guid: abea31fe7aa221a4590a664f6d479e0b, type: 3}
   canvas: {fileID: 0}
   enemy: {fileID: 8256884230393117145}
-  height: 2
+  height: 0.75
   hpBar_width: 200
 --- !u!1 &8546529618561827156
 GameObject:
@@ -230,7 +231,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.27, y: 1.41}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
