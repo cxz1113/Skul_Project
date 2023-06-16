@@ -65,10 +65,21 @@ public class PlayerUI : MonoBehaviour
     public List<Image> imagesItem2Data = new List<Image>();
     #endregion
 
+    #region
+    [Header("ScrollView")]
+    public CountCheck countCheck;
+    public TMP_Text killTxt;
+    public TMP_Text boneTxt;
+    public TMP_Text goldTxt;
+    public TMP_Text gemTxt;
+    #endregion
+
     void Update()
     {
         if (PlayerBasket.Instance.isInven)
             DataType();
+
+        ScrollViewCountTxt();
     }
 
     public void SetData()
@@ -249,5 +260,13 @@ public class PlayerUI : MonoBehaviour
                 typePos.anchoredPosition = new Vector2(4, 4);
                 break;
         }
+    }
+
+    void ScrollViewCountTxt()
+    {
+        killTxt.text = countCheck.killCount.ToString();
+        boneTxt.text = countCheck.boneCount.ToString();
+        goldTxt.text = countCheck.goldCount.ToString();
+        gemTxt.text = countCheck.gemCount.ToString();
     }
 }

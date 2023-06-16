@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour
     public Animator anim;
     public Transform target;
     public WayPoint2 way2;
+    public CountCheck killCheck;
     public Attack_Box_Enemy atkBox;
 
     public int nextMove;
@@ -54,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
     {
         target = GameObject.FindWithTag("Player").transform;
         way2 = FindObjectOfType<WayPoint2>();
+        killCheck = FindObjectOfType<CountCheck>();
         ed.isDead = false;
         Think();
 
@@ -91,6 +93,7 @@ public abstract class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
             ed.state = EnemyState.Dead;
             rigid.velocity = Vector2.zero;
+            killCheck.killCount++;
 
             Invoke("Die", 2f);
         }

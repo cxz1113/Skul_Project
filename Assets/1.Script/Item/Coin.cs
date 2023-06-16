@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class Coin : Environment
 {
+    public CountCheck goldCheck;
     public override void Initialize()
     {
         evd.obj = transform.gameObject;
@@ -14,7 +15,9 @@ public class Coin : Environment
     {
         Initialize();
         GetComponent<SpriteAnimation>().SetSprite(active, 0.05f);
+        goldCheck = FindObjectOfType<CountCheck>();
         CoinObject();
+        Invoke("GoldPickUp", 3f);
     }
 
     void CoinObject()
@@ -34,5 +37,11 @@ public class Coin : Environment
             rigid.AddForce(new Vector2(x, 1) * 450);
         }
         evd.obj.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    void GoldPickUp()
+    {
+        goldCheck.goldCount++;
+        Destroy(gameObject);
     }
 }
