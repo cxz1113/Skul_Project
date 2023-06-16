@@ -1117,7 +1117,12 @@ MonoBehaviour:
   player: {fileID: 0}
   playerStart: {fileID: 1229306345}
   gate: {fileID: 0}
-  gold: {fileID: 0}
+  goldParent: {fileID: 0}
+  coinParent: {fileID: 0}
+  coin: {fileID: 0}
+  head: {fileID: 0}
+  coinTrans: {fileID: 0}
+  headTrans: {fileID: 0}
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -55631,7 +55636,6 @@ MonoBehaviour:
   curHp: 0
   maxHp: 0
   invectoryActivated: 0
-  isHeadChange: 0
   item: 
 --- !u!4 &2007217002
 Transform:

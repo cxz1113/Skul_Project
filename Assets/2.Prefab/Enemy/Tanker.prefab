@@ -181,7 +181,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prfHP: {fileID: 1469167122332539356, guid: abea31fe7aa221a4590a664f6d479e0b, type: 3}
   canvas: {fileID: 0}
-  height: 0
+  enemy: {fileID: 2173261828830240608}
+  height: 1
+  hpBar_width: 300
 --- !u!1 &4049870821770333314
 GameObject:
   m_ObjectHideFlags: 0
