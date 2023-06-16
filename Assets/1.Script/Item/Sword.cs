@@ -14,7 +14,8 @@ public class Sword : Item
         ss.Skill2 = null;
         ss.it = ItemType.Head;
         ss.obj = gameObject;
-        ss.name = ss.obj.name;
+        ss.itobj = this;
+        ss.name = ss.itobj.name;
     }
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class Sword : Item
     {
         Init();
         isHead = true;
+        //ss.itobj = this;
         GetComponent<SpriteRenderer>().sprite = ss.headItem;
         StartCoroutine(ItemDrop());
     }

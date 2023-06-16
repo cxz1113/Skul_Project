@@ -31,7 +31,6 @@ public class HeadParent : MonoBehaviour
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
             player.isPush = false;
-            Debug.Log(MapManager.Instance.isHead);
 
             MapManager.Instance.gate.GetComponent<BoxCollider2D>().enabled = false;
             transform.gameObject.SetActive(false);

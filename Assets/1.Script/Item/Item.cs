@@ -12,6 +12,7 @@ public struct SkulStatus
     public Sprite Skill2;
     public ItemType it;
     public GameObject obj;
+    public Item itobj;
     public string name;
 }
 public struct ItemStatus
@@ -40,11 +41,18 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> itemSprites = new List<Sprite>();
     public SkulData.Data skulJson;
     public ItemData.Data itemJson;
+    public Item item;
+    public Item dropItem;
+    public string pName;
     public bool isHead { get; set; }
     public bool isItem { get; set; }
     public abstract void Init();
 
-
+    void Update()
+    {
+        //item = FindObjectOfType<MapManager>().head;
+        //dropItem = FindObjectOfType<MapManager>().dropHead;
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && it == ItemType.Head)
@@ -52,24 +60,103 @@ public abstract class Item : MonoBehaviour
             if (ProjectManager.Instance.player.isPush)
             {
                 ProjectManager.Instance.player.isPush = false;
-                //ss.obj.SetActive(false);
-                Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
                 ItemHead();
-                Destroy(ss.obj);
-                Debug.Log(ProjectManager.Instance.heads[0]);
+                //PlayerChange(dropItem);
+                //Destroy(ss.obj);
             }
         }
+
     }
 
     void ItemHead()
     {
-        string name = ss.name;
-        ProjectManager.Instance.heads.RemoveAt(0);
-        
-        ProjectManager.Instance.heads.Add(Resources.Load<Item>(string.Format($"Head/{name}")));
-        Debug.Log(transform.gameObject.name);
-        Item itemHead = ProjectManager.Instance.heads[0];
-        ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
-        ProjectManager.Instance.heads[1] = itemHead;
+        MapManager map = FindObjectOfType<MapManager>();
+        if(map.dropHead != null)
+        {
+            map.head = Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
+        }
+        else
+        {
+            map.dropHead = Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
+        }
+        if(map.itemCount == 0)
+        {
+            map.head.Init();
+            ProjectManager.Instance.heads.Add(map.head);
+            ProjectManager.Instance.heads.RemoveAt(0);
+            Item itemHead = ProjectManager.Instance.heads[0];
+            ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
+            ProjectManager.Instance.heads[1] = itemHead;
+            map.itemCount++;
+            //Destroy(ss.obj);
+        }
+        else if(map.itemCount != 0)
+        {
+            map.dropHead.Init();
+            Debug.Log(map.dropHead);
+
+            ProjectManager.Instance.heads.Add(map.dropHead);
+            ProjectManager.Instance.heads.RemoveAt(0);
+            Item itemHead = ProjectManager.Instance.heads[0];
+            ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
+            ProjectManager.Instance.heads[1] = itemHead;
+            map.itemCount = 0;
+            map.dropHead = null;
+        }
+    }
+
+    void PlayerChange(Item item)
+    {
+        Player player = FindObjectOfType<Player>();
+        int count = 0;
+        while(count < player.players.Count)
+        {
+            if (ProjectManager.Instance.heads[0].name != player.players[count].name)
+                count++;
+            else
+            {
+                player = Instantiate(player.players[count], player.transform);
+                player.transform.SetParent(null);
+                player.SwitchInit(player);
+                Destroy(Find(item));
+                break;
+            }
+        }
+    }
+
+    Item ItemFind()
+    {
+        PlayerBasket basket = FindObjectOfType<PlayerBasket>();
+        int count = 0;
+        while(count < basket.heads.Count)
+        {
+            if (ss.obj.name != basket.heads[count].name)
+                count++;
+            else
+            {
+                item = basket.heads[count];
+                Debug.Log(basket.heads[count]);
+                break;
+            }
+        }
+        Debug.Log(item);
+        return item;
+    }
+    GameObject Find(Item desItem)
+    {
+        Player player = FindObjectOfType<Player>();
+        GameObject desPlayer = player.gameObject;
+        int count = 0;
+        while(count < player.players.Count)
+        {
+            if (desItem.name != player.players[count].name)
+                count++;
+            else
+            {
+                desPlayer = player.players[count].gameObject;
+                break;
+            }
+        }
+        return desPlayer;
     }
 }

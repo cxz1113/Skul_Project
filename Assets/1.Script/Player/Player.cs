@@ -65,7 +65,7 @@ public abstract class Player : MonoBehaviour
 
     //Switch
     [HideInInspector] public bool isSwitched = false;
-    [SerializeField] protected int switchIndex;
+    [SerializeField] public int switchIndex;
     
     public bool isPush;
 

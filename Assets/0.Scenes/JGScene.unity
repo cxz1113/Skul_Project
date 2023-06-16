@@ -60427,6 +60427,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   headframe: {fileID: 0}
+  heads:
+  - {fileID: 7522084485357394253, guid: e015f0788e9404b4b8bb698e7dd9d098, type: 3}
+  - {fileID: 5520206839598635109, guid: ce47d7a5f1c2d3447aefc6181edf86aa, type: 3}
+  - {fileID: 8032292793034194660, guid: db2b27494fcbe8045812599efad6e4d5, type: 3}
   skul: 
   curHp: 0
   maxHp: 0

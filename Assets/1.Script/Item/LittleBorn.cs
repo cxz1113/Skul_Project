@@ -13,7 +13,8 @@ public class LittleBorn : Item
         ss.skill1 = skillSprites[0];
         ss.Skill2 = skillSprites[1];
         ss.it = ItemType.Head;
-        ss.obj = transform.gameObject;
+        ss.obj = gameObject;
+        ss.name = ss.obj.name;
     }
 
     void Start()

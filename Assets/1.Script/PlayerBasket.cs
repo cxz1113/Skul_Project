@@ -8,6 +8,7 @@ public class PlayerBasket : MonoBehaviour
 
     public Player player;
     public Item headframe;
+    public List<Item> heads = new List<Item>();
     public string skul;
     public float curHp;
     public float maxHp;
