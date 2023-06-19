@@ -52,12 +52,15 @@ public abstract class Enemy : MonoBehaviour
 
     void Awake()
     {
-        target = GameObject.FindWithTag("Player").transform;
         way2 = FindObjectOfType<WayPoint2>();
         killCheck = FindObjectOfType<CountCheck>();
         ed.isDead = false;
         Think();
 
+    }
+    private void Start()
+    {
+        target = GameObject.FindWithTag("Player").transform;
         Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), target.gameObject.GetComponent<CapsuleCollider2D>());
     }
     public abstract void Init();
@@ -75,6 +78,7 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+
         if (ed.state == EnemyState.Dead)
             return;
 

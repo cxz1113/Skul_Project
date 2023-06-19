@@ -61,8 +61,8 @@ public abstract class Item : MonoBehaviour
             {
                 ProjectManager.Instance.player.isPush = false;
                 ItemHead();
-                //PlayerChange(dropItem);
-                //Destroy(ss.obj);
+                PlayerChange();
+                Destroy(ss.obj);
             }
         }
 
@@ -71,43 +71,46 @@ public abstract class Item : MonoBehaviour
     void ItemHead()
     {
         MapManager map = FindObjectOfType<MapManager>();
-        if(map.dropHead != null)
-        {
-            map.head = Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
-        }
-        else
-        {
-            map.dropHead = Instantiate(Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}")), MapManager.Instance.headTrans);
-        }
+        map.ItemDrop();
         if(map.itemCount == 0)
         {
             map.head.Init();
-            ProjectManager.Instance.heads.Add(map.head);
-            ProjectManager.Instance.heads.RemoveAt(0);
-            Item itemHead = ProjectManager.Instance.heads[0];
-            ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
-            ProjectManager.Instance.heads[1] = itemHead;
+            HeadChange(map.head);
             map.itemCount++;
-            //Destroy(ss.obj);
         }
         else if(map.itemCount != 0)
         {
             map.dropHead.Init();
             Debug.Log(map.dropHead);
-
-            ProjectManager.Instance.heads.Add(map.dropHead);
-            ProjectManager.Instance.heads.RemoveAt(0);
-            Item itemHead = ProjectManager.Instance.heads[0];
-            ProjectManager.Instance.heads[0] = ProjectManager.Instance.heads[1];
-            ProjectManager.Instance.heads[1] = itemHead;
+            HeadChange(map.dropHead);
             map.itemCount = 0;
             map.dropHead = null;
         }
     }
 
-    void PlayerChange(Item item)
+    void HeadChange(Item item)
+    {
+        ProjectManager manager = FindObjectOfType<ProjectManager>();
+        manager.heads.Add(item);
+        manager.heads.RemoveAt(0);
+        Item itemHead = manager.heads[0];
+        manager.heads[0] = manager.heads[1];
+        manager.heads[1] = itemHead;
+    }
+
+    void PlayerChange()
+    {
+        MapManager map = FindObjectOfType<MapManager>();
+        if (map.itemCount == 0)
+            PlayerFind(map.head);
+        else if (map.itemCount == 1)
+            PlayerFind(map.dropHead);
+    }
+
+    void PlayerFind(Item item)
     {
         Player player = FindObjectOfType<Player>();
+        Player desPlayer = FindObjectOfType<Player>();
         int count = 0;
         while(count < player.players.Count)
         {
@@ -115,10 +118,7 @@ public abstract class Item : MonoBehaviour
                 count++;
             else
             {
-                player = Instantiate(player.players[count], player.transform);
-                player.transform.SetParent(null);
-                player.SwitchInit(player);
-                Destroy(Find(item));
+                player.TestSwitch(player.players[count]);
                 break;
             }
         }

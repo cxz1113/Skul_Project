@@ -82,37 +82,31 @@ public class PlayerUI : MonoBehaviour
         ScrollViewCountTxt();
     }
 
-    public void SetData()
+    public void SetData(Item item)
     {
-        item = InvenManager.Instance.ItemIn();
         if (item == null)
             return;
 
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
-            string[] jsonData = { dataSkul.name, dataSkul.tier, dataSkul.type, dataSkul.intro, dataSkul.passive, dataSkul.ability, dataSkul.skillname1, dataSkul.skillname2 };
-            string[] jsonSkillData = { dataSkul.ability, dataSkul.abilitydetail, dataSkul.skillname1, dataSkul.skillname2, dataSkul.skillname1detail, dataSkul.skillname2detail,
-            dataSkul.cooltime1, dataSkul.cooltime2};
-            if(strType1.Count < 8 && strType1Skill.Count < 8)
-            {
-                InputData(strType1, jsonData);
-                InputData(strType1Skill, jsonSkillData);
-            }
+            SkulData.Data data = item.skulJson;
+            string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1, data.skillname2 };
+            string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname2, data.skillname1detail, data.skillname2detail,
+            data.cooltime1, data.cooltime2};
+            ActiveObjChange(strType1, strType1Skill, jsonData, jsonSkillData);
         }
-        else if(item.it == ItemType.Head && item.ss.Skill2 == null)
+        else if (item.it == ItemType.Head && item.ss.Skill2 == null)
         {
-            string[] jsonData1 = { dataSkul.name, dataSkul.tier, dataSkul.type, dataSkul.intro, dataSkul.passive, dataSkul.ability, dataSkul.skillname1};
-            string[] jsonSkillData1 = { dataSkul.ability, dataSkul.abilitydetail, dataSkul.skillname1, dataSkul.skillname1detail, dataSkul.cooltime1};
-            if (strType2.Count < 8 && strType2Skill.Count < 5)
-            {
-                InputData(strType2, jsonData1);
-                InputData(strType2Skill, jsonSkillData1);
-            }
+            SkulData.Data data = item.skulJson;
+            string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1 };
+            string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname1detail, data.cooltime1 };
+            ActiveObjChange(strType2, strType2Skill, jsonData, jsonSkillData);
         }
-        else if(item.it == ItemType.Item || item.it == ItemType.Essence)
+        else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
-            string[] jsonData = { dataItem.name, dataItem.tier, dataItem.intro, dataItem.itemdetail, dataItem.abillity1, dataItem.abillity2 };
-            if(strType3.Count < 6)
+            ItemData.Data data = item.itemJson;
+            string[] jsonData = { data.name, data.tier, data.intro, data.itemdetail, data.abillity1, data.abillity2 };
+            if (strType3.Count < 1)
                 InputData(strType3, jsonData);
         }
     }
@@ -159,9 +153,7 @@ public class PlayerUI : MonoBehaviour
         item = FindObjectOfType<InvenManager>().ItemIn();
         if (item == null)
         {
-            type1.gameObject.SetActive(false);
-            type2.gameObject.SetActive(false);
-            type3.gameObject.SetActive(false);
+            ActiveObj(false, false, false);
             return;
         }
 
@@ -170,33 +162,51 @@ public class PlayerUI : MonoBehaviour
         
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
-
-            type1.gameObject.SetActive(true);
-            type2.gameObject.SetActive(false);
-            type3.gameObject.SetActive(false);
-
-            SetData();
+            ActiveObj(true, false, false);
+            SetData(item);
             InvenType1();
         }
         else if (item.it == ItemType.Head && item.ss.Skill2 == null)
         {
-
-            type2.gameObject.SetActive(true);
-            type1.gameObject.SetActive(false);
-            type3.gameObject.SetActive(false);
-
-            SetData();
+            
+            ActiveObj(false, true, false);
+            SetData(item);
             InvenType2();
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
-
-            type1.gameObject.SetActive(false);
-            type2.gameObject.SetActive(false);
-            type3.gameObject.SetActive(true);
-
-            SetData();
+            ActiveObj(false, false, true);
+            SetData(item);
             InvenItem();
+        }
+    }
+
+    void ActiveObj(bool isType1, bool isType2, bool isType3)
+    {
+        type1.gameObject.SetActive(isType1);
+        type2.gameObject.SetActive(isType2);
+        type3.gameObject.SetActive(isType3);
+    }
+
+    void ActiveObjChange(List<string> strList, List<string> strSkillList, string[] jsonStr, string[] jsonSkillStr)
+    {
+        InvenManager inven = FindObjectOfType<InvenManager>();
+        if (!inven.isIndex && strList.Count < 1 && strSkillList.Count < 1)
+        {
+            InputData(strList, jsonStr);
+            InputData(strSkillList, jsonSkillStr);
+        }
+        else if (inven.isIndex)
+        {
+            strList.Clear();
+            strSkillList.Clear();
+
+            inven.isIndex = false;
+            if (strList.Count < 1 && strSkillList.Count < 1)
+            {
+                InputData(strList, jsonStr);
+                InputData(strSkillList, jsonSkillStr);
+            }
         }
     }
 
@@ -258,6 +268,11 @@ public class PlayerUI : MonoBehaviour
                 type.sprite = item.ss.headInven;
                 type.SetNativeSize();
                 typePos.anchoredPosition = new Vector2(4, 4);
+                break;
+            case "Sword":
+                type.sprite = item.ss.headInven;
+                type.SetNativeSize();
+                typePos.anchoredPosition = new Vector2(0, 4);
                 break;
         }
     }

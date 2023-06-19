@@ -1121,8 +1121,12 @@ MonoBehaviour:
   coinParent: {fileID: 0}
   coin: {fileID: 0}
   head: {fileID: 0}
+  dropHead: {fileID: 0}
+  seconDrop: {fileID: 0}
   coinTrans: {fileID: 0}
   headTrans: {fileID: 0}
+  itemName: 
+  itemCount: 0
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -1134,7 +1138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80172003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.602146, y: -35.8981, z: -0.79026926}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52093,6 +52097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667190014}
+  - component: {fileID: 1667190017}
   - component: {fileID: 1667190016}
   - component: {fileID: 1667190015}
   m_Layer: 5
@@ -52166,6 +52171,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1667190017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667190013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1469035c57740742b397d7d2277ecb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount: 0
+  boneCount: 0
+  goldCount: 0
+  gemCount: 0
 --- !u!1 &1680747928
 GameObject:
   m_ObjectHideFlags: 0
@@ -53357,6 +53378,11 @@ MonoBehaviour:
   - {fileID: 1877452529}
   - {fileID: 902229645}
   - {fileID: 350062823}
+  countCheck: {fileID: 1667190017}
+  killTxt: {fileID: 270010147}
+  boneTxt: {fileID: 425957598}
+  goldTxt: {fileID: 117179893}
+  gemTxt: {fileID: 1680747930}
 --- !u!4 &1745886258
 Transform:
   m_ObjectHideFlags: 0
@@ -54173,12 +54199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerBasket: {fileID: 0}
-  playerStart: {fileID: 1229306345}
   ui: {fileID: 1745886257}
   inven: {fileID: 1790900336}
   playerData: {fileID: 0}
-  skulData: {fileID: 0}
-  itemData: {fileID: 0}
   data:
     curhp: 0
     maxhp: 0
@@ -54249,6 +54272,7 @@ MonoBehaviour:
   indexX: 0
   indexY: 0
   isItemC: 0
+  isIndex: 0
 --- !u!4 &1790900337
 Transform:
   m_ObjectHideFlags: 0
@@ -55632,6 +55656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   headframe: {fileID: 0}
+  heads: []
   skul: 
   curHp: 0
   maxHp: 0

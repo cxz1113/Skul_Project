@@ -11,8 +11,8 @@ public abstract class Player : MonoBehaviour
         littleborn,
         nohead,
         wolf,
-        calleon,
-        sword
+        sword,
+        calleon
     }
     public enum PlayerDir
     {
@@ -289,16 +289,22 @@ public abstract class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TestSwitch();
-        }
-    }
-
-    public void TestSwitch()
-    {
-            Player player = Instantiate(players[switchIndex], transform);
+            Player player = Instantiate(Resources.Load<Player>($"Player/{ProjectManager.Instance.heads[1].name}"), transform);
             player.transform.SetParent(null);
             player.SwitchInit(this);
             Destroy(gameObject);
+        }
+    }
+
+    public void TestSwitch(Player plaerN)
+    {
+        Player player = Instantiate(Resources.Load<Player>($"Player/{plaerN.name}"), transform);
+        player.transform.SetParent(null);
+        animators = player.animators;
+        isSwitched = true;
+        playerDir = player.playerDir;
+        ProjectManager.Instance.ItemHeadChange();
+        Destroy(gameObject);
     }
 
     protected void SetGravity(bool On)
@@ -368,6 +374,7 @@ public abstract class Player : MonoBehaviour
 
     IEnumerator UnbeatTime()
     {
+        isUnbeat = true;
         for (int i = 0; i < unbeatTime * 10; ++i)
         {
             if (i % 2 == 0)
@@ -379,9 +386,7 @@ public abstract class Player : MonoBehaviour
         }
 
         spriteRd.color = new Color32(255, 255, 255, 255);
-
         isUnbeat = false;
-
         yield return null;
     }
 

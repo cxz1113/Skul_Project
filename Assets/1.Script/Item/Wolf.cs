@@ -13,13 +13,14 @@ public class Wolf : Item
         ss.skill1 = skillSprites[0];
         ss.Skill2 = null;
         ss.it = ItemType.Head;
+        ss.obj = gameObject;
+        ss.name = ss.obj.name;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Init();
-        isHead = true;
         GetComponent<SpriteRenderer>().sprite = ss.headItem;
         StartCoroutine(ItemDrop());
     }

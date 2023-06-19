@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack_Box_Player :MonoBehaviour
 {
     [HideInInspector] public List<Enemy> enemies = new List<Enemy>();
-    Player player;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()

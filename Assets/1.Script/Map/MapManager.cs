@@ -80,6 +80,20 @@ public class MapManager : MonoBehaviour
         Instantiate(head, headTrans);
     }
 
+    public void ItemDrop()
+    {
+        if (dropHead != null)
+        {
+            head = Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}"));
+            Instantiate(head, headTrans);
+        }
+        else
+        {
+            dropHead = Resources.Load<Item>(string.Format($"Head/{ProjectManager.Instance.heads[0].name}"));
+            Instantiate(dropHead, headTrans);
+        }
+    }
+
     public string ItemName()
     {
         int count = 0;

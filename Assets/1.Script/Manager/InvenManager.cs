@@ -28,6 +28,7 @@ public class InvenManager : MonoBehaviour
     public int indexX = 0;
     public int indexY = 0;
     public bool isItemC = false;
+    public bool isIndex = false;
     Direct dir;
     void Awake() => Instance = this;
 
@@ -195,15 +196,19 @@ public class InvenManager : MonoBehaviour
         switch (dir)
         {
             case Direct.Left:
+                isIndex = true;
                 indexX--;
                 break;
             case Direct.Right:
+                isIndex = true;
                 indexX++;
                 break;
             case Direct.Up:
+                isIndex = true;
                 indexY--;
                 break;
             case Direct.Down:
+                isIndex = true;
                 indexY++;
                 break;
         }

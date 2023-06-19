@@ -10,12 +10,9 @@ public class ProjectManager : MonoBehaviour
     public static ProjectManager Instance;
     public Player player;
     public PlayerBasket playerBasket;
-    public Transform playerStart;
     public PlayerUI ui;
     public InvenManager inven;
     public PlayerData playerData;
-    public SkulData skulData;
-    public ItemData itemData;
     public PlayerData.PlayerDataJson data;
     public List<Item> heads = new List<Item>();
     public List<Item> essences = new List<Item>();
@@ -104,6 +101,18 @@ public class ProjectManager : MonoBehaviour
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
         InvenHeadChage(heads, InvenManager.Instance.itemBox, ui.imagesItem); 
         player = FindObjectOfType<Player>();
+        PlayerHeadSet(heads[0].name, heads[1].name);
+        TextSet();
+        ui.head1.sprite = heads[0].ss.headStatus1;
+        ui.head2.sprite = heads[1].ss.headStatus2;
+        SkillUI();
+        HPGage();
+    }
+
+    public void ItemHeadChange()
+    {
+        player = FindObjectOfType<Player>();
+        inven.ItemBox(heads, essences, items1);
         PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
