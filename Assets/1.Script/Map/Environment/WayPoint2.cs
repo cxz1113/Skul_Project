@@ -20,7 +20,7 @@ public class WayPoint2 : Environment
     void Start()
     {
         Initialize();
-        canvas.transform.GetChild(0).transform.localPosition = new Vector2(0f, 20f);
+        canvas.transform.GetChild(0).transform.localPosition = new Vector2(22f, 0f);
         waycollider2D = GetComponent<BoxCollider2D>();
         enemy = GetComponent<Enemy>();
         
@@ -28,7 +28,7 @@ public class WayPoint2 : Environment
 
     void Update()
     {
-        //player = ProjectManager.Instance.player;
+        player = ProjectManager.Instance.player;
 
         // 게이트 열림
         if (killcount == enemies.Count)
