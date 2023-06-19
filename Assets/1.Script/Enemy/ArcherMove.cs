@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArcherMove : Enemy
 {
+    [SerializeField] Enemy_Projectile arrowPrf;
+
     public override void Init()
     {
         ed.type = EnemyType.Archer;
@@ -13,12 +15,20 @@ public class ArcherMove : Enemy
         ed.hp = ed.maxhp;
         ed.damage = 5;
 
-        ed.atkRange = 3;
+        ed.atkRange = 8;
         ed.atkDelay = 3;
     }
 
     void Start()
     {
         Init();
+    }
+
+    void EventFire()
+    {
+        Enemy_Projectile arrow = Instantiate(arrowPrf, transform);
+        arrow.transform.position += Vector3.up * capsuleColl.size.y * 0.5f;
+        arrow.dir = transform.localScale.x > 0 ? 1 : -1;
+        arrow.transform.SetParent(null);
     }
 }

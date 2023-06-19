@@ -29,11 +29,11 @@ public abstract class Player : MonoBehaviour
     public List<Player> players;
     public List<RuntimeAnimatorController> animators;
     public Attack_Box_Player atBox;
+    [SerializeField] protected SpriteRenderer spriteRd;
     [SerializeField] protected CapsuleCollider2D playerCol;
 
     protected bool canInput = true;
     protected float originalGravity = 6;
-    protected bool isDead = false;
 
     //Move
     public float moveSpeed = 15f;
@@ -55,10 +55,16 @@ public abstract class Player : MonoBehaviour
     Collision2D collis;
 
     //Atack
-    public float Damage { get; set; }  
+    public float Damage { get; set; }
+
+    //Damaged
+    protected bool isDead = false;
+    protected bool isUnbeat = false;
+    protected float unbeatTime = 1f;
+    
 
     //Skill
-    
+
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
 
@@ -283,12 +289,16 @@ public abstract class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //수정 필요(임시)
+            TestSwitch();
+        }
+    }
+
+    public void TestSwitch()
+    {
             Player player = Instantiate(players[switchIndex], transform);
             player.transform.SetParent(null);
             player.SwitchInit(this);
             Destroy(gameObject);
-        }
     }
 
     protected void SetGravity(bool On)
@@ -339,7 +349,7 @@ public abstract class Player : MonoBehaviour
     }
     public void Damaged(float damage)
     {
-        if (isDead)
+        if (isDead || isUnbeat)
             return;
 
         PlayerBasket.Instance.HP -= damage;
@@ -350,8 +360,30 @@ public abstract class Player : MonoBehaviour
             rigid.velocity = Vector2.zero;
             isDead = true;
         }
+        else
+        {
+            StartCoroutine("UnbeatTime");
+        }
     }
 
+    IEnumerator UnbeatTime()
+    {
+        for (int i = 0; i < unbeatTime * 10; ++i)
+        {
+            if (i % 2 == 0)
+                spriteRd.color = new Color32(255, 255, 255, 90);
+            else
+                spriteRd.color = new Color32(255, 255, 255, 180);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        spriteRd.color = new Color32(255, 255, 255, 255);
+
+        isUnbeat = false;
+
+        yield return null;
+    }
 
 
     public void SetDamage(Enemy enemy, float damage) => enemy.Damaged(damage);

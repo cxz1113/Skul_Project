@@ -144,6 +144,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
   - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
   atBox: {fileID: 7774792293177527182}
+  spriteRd: {fileID: 4257343673998533868}
   playerCol: {fileID: 4257343673998533864}
   moveSpeed: 15
   isSwitched: 0
