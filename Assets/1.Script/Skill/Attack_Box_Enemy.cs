@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Attack_Box_Enemy : MonoBehaviour
 {
-    public GameObject player;
+    Player player;
+    Enemy enemy;
+
+    private void Start()
+    {
+        enemy = transform.parent.GetComponent<Enemy>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-            player = collision.gameObject;
-
+        if (collision.gameObject.CompareTag("Player") && player == null)
+        {
+            player = collision.GetComponent<Player>();
+            player.Damaged(enemy.ed.damage);
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-            player = null;
-
-    }
+    private void OnEnable() => player = null;
 }

@@ -44,9 +44,9 @@ public abstract class Enemy : MonoBehaviour
     public Attack_Box_Enemy atkBox;
 
     public int nextMove;
-    private bool canThink = true;
-    private bool canAttack = true;
-    private bool flipX;
+    protected bool canThink = true;
+    protected bool canAttack = true;
+    protected bool flipX;
 
     Coroutine coroutine;
 
@@ -121,6 +121,7 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine("Think");
         }
         transform.localScale = flipX ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
     }
 
     public IEnumerator Think()
@@ -151,7 +152,7 @@ public abstract class Enemy : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    void AttackStart()
+    protected virtual void AttackStart()
     {
         StartCoroutine("AttackCoolDown");
         nextMove = 0;
@@ -168,8 +169,7 @@ public abstract class Enemy : MonoBehaviour
 
     void EventDamage()
     {
-        if (atkBox.player)
-            atkBox.player.GetComponent<Player>().Damaged(ed.damage);
+        
     }
 
     //공격 끝나는 시점, hit 끝나는 시점

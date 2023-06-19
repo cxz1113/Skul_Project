@@ -17,8 +17,36 @@ public class TankerMove : Enemy
         ed.atkDelay = 3;
     }
 
+    bool canTackle = true;
+    float tackleDelay = 10;
+
     void Start()
     {
         Init();
+    }
+    protected override void AttackStart()
+    {
+        StartCoroutine("AttackCoolDown");
+        nextMove = 0;
+
+        if (canTackle)
+        {
+            StartCoroutine("TackleCoolDown");
+            anim.SetTrigger("Tackle");
+            ed.state = EnemyState.Attack;
+        }
+        else
+        {
+            anim.SetTrigger("Attack");
+            ed.state = EnemyState.Attack;
+        }
+
+    }
+
+    IEnumerator TackleCoolDown()
+    {
+        canTackle = false;
+        yield return new WaitForSeconds(tackleDelay);
+        canTackle = true;
     }
 }

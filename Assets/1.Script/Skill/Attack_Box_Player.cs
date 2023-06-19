@@ -5,29 +5,23 @@ using UnityEngine;
 public class Attack_Box_Player :MonoBehaviour
 {
     [HideInInspector] public List<Enemy> enemies = new List<Enemy>();
-    public Player player;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        player = transform.parent.GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy") && !enemies.Contains(collision.GetComponent<Enemy>()))
-            enemies.Add(collision.GetComponent<Enemy>());
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemies.Add(enemy);
+            enemy.Damaged(player.Damage);
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-            enemies.Remove(collision.GetComponent<Enemy>());
-    }
+    private void OnEnable() => enemies.Clear();
 }
