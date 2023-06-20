@@ -23,7 +23,6 @@ public class WayPoint2 : Environment
         canvas.transform.GetChild(0).transform.localPosition = new Vector2(22f, 0f);
         waycollider2D = GetComponent<BoxCollider2D>();
         enemy = GetComponent<Enemy>();
-        
     }
 
     void Update()
@@ -31,7 +30,7 @@ public class WayPoint2 : Environment
         player = ProjectManager.Instance.player;
 
         // 게이트 열림
-        if (killcount == enemies.Count)
+        if (killcount == 23)
         {
             GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
             GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
