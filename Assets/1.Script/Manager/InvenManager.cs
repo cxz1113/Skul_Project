@@ -19,8 +19,6 @@ public class InvenManager : MonoBehaviour
     [SerializeField] GameObject scroll;
     [SerializeField] PlayerUI ui;
     public Transform itemT;
-    public SkulData skulData;
-    public ItemData itemData;
     public Sequence mySequence;
     public Item[][] itemBox = new Item[4][];
     public Item itemSelect;
@@ -119,8 +117,8 @@ public class InvenManager : MonoBehaviour
 
     public void JsonSet(Item itemS)
     {
-        itemData = FindObjectOfType<ItemData>();
-        skulData = FindObjectOfType<SkulData>();
+        ItemData itemData = FindObjectOfType<ItemData>();
+        SkulData skulData = FindObjectOfType<SkulData>();
 
         int count = 0;
         if (itemS == null)

@@ -7,7 +7,6 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
     public Player player;
-    public Transform playerStart;
     public GameObject gate;
     public GameObject goldParent;
     public GameObject coinParent;
@@ -16,10 +15,11 @@ public class MapManager : MonoBehaviour
     public Item dropHead;
     public Transform coinTrans;
     public Transform headTrans;
-    public string itemName;
     public int itemCount = 0;
     public List<WayPoint> wayPoints = new List<WayPoint>();
-    int count = 24;
+    public List<Enemy> enemies = new List<Enemy>();
+    public List<Transform> enemyTrans = new List<Transform>();
+    public int spawnCount = 20;
 
     public bool isActive { get; set; }
 
@@ -34,6 +34,10 @@ public class MapManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
+    void Start()
+    {
+        EnemySpawn();
+    }
     void Update()
     {
         player = ProjectManager.Instance.player;
@@ -65,6 +69,7 @@ public class MapManager : MonoBehaviour
             isTown = isBoss = false;
         }
     }
+
     void CoinDrop()
     {
         for(int i = 0; i < 80; i++)
@@ -110,5 +115,15 @@ public class MapManager : MonoBehaviour
                 count++;
         }
         return item;
+    }
+
+    void EnemySpawn()
+    {
+        for(int i = 0; i < spawnCount; i++)
+        {
+            Enemy enemy = enemies[Random.Range(0, 3)];
+            enemy.Init();
+            Instantiate(enemy, enemyTrans[Random.Range(0, enemyTrans.Count)]);
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Gold : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && player.isPush)
+        if(collision.CompareTag("Player") && player.isPush && MapManager.Instance.spawnCount == 0)
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;

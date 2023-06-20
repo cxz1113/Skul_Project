@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/0.Scenes/MainScene.unity
     guid: 86f8e09896a466d45ae4a4eb92ff6618
   - enabled: 1
+    path: Assets/0.Scenes/JGScene.unity
+    guid: 6d143038710f6984bb3a1bcfb8562b26
+  - enabled: 1
     path: Assets/0.Scenes/YGScene3.unity
     guid: cfebc23501aebe540a7866cb4464e30b
   - enabled: 1
     path: Assets/0.Scenes/GMScene1.unity
     guid: 465088ccf870f1f48b3d15effeb5ecf7
-  - enabled: 1
-    path: Assets/0.Scenes/JGScene.unity
-    guid: 6d143038710f6984bb3a1bcfb8562b26
   - enabled: 1
     path: Assets/0.Scenes/JGScene1.unity
     guid: 166d15ca4dc41c94c9ac1f1c2e6fd396

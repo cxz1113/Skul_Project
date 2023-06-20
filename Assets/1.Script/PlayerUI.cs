@@ -6,6 +6,11 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
+    public Image[][] imagesItem = new Image[4][];
+    public Item item;
+
+    #region InGameUI
+    [Header("InGameUI")]
     public Image head1;
     public Image head2;
     public Image hpGage;
@@ -13,15 +18,10 @@ public class PlayerUI : MonoBehaviour
     public Image skill2Sprite;
     public TMP_Text curHpTxt;
     public TMP_Text maxHpTxt;
-    public PlayerDemo player;
     public Image skill1_Mask;
     public Image skill2_Mask;
     public Sprite nullSprite;
-    public Image selectImage;
-    public Image[][] imagesItem = new Image[4][];
-    public Item item;
-    public SkulData.Data dataSkul;
-    public ItemData.Data dataItem;
+    #endregion
 
     #region MainSkulDataType1
     [Header("MainSkulDataType1")]
@@ -78,15 +78,13 @@ public class PlayerUI : MonoBehaviour
     {
         if (PlayerBasket.Instance.isInven)
             DataType();
-
+        else if(!PlayerBasket.Instance.isInven)
+            ClearList(strType1, strType1Skill, strType2, strType2Skill);
         ScrollViewCountTxt();
     }
 
     public void SetData(Item item)
     {
-        if (item == null)
-            return;
-
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
             SkulData.Data data = item.skulJson;
@@ -156,10 +154,6 @@ public class PlayerUI : MonoBehaviour
             ActiveObj(false, false, false);
             return;
         }
-
-        dataSkul = item.skulJson;
-        dataItem = item.itemJson;
-        
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
             ActiveObj(true, false, false);
@@ -263,7 +257,6 @@ public class PlayerUI : MonoBehaviour
                 type.SetNativeSize();
                 typePos.anchoredPosition = new Vector2(0, 4);
                 break;
-
             case "Wolf":
                 type.sprite = item.ss.headInven;
                 type.SetNativeSize();
@@ -275,6 +268,14 @@ public class PlayerUI : MonoBehaviour
                 typePos.anchoredPosition = new Vector2(0, 4);
                 break;
         }
+    }
+
+    void ClearList(List<string> strT1, List<string> strSkillT1, List<string> strT2, List<string> strSkillT2)
+    {
+        strT1.Clear();
+        strSkillT1.Clear();
+        strT2.Clear();
+        strSkillT2.Clear();
     }
 
     void ScrollViewCountTxt()

@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Coin : Environment
 {
     public CountCheck goldCheck;
+    float time = 0;
     public override void Initialize()
     {
         evd.obj = transform.gameObject;
@@ -15,14 +16,20 @@ public class Coin : Environment
     {
         Initialize();
         GetComponent<SpriteAnimation>().SetSprite(active, 0.05f);
-        goldCheck = FindObjectOfType<CountCheck>();
         CoinObject();
+        goldCheck = FindObjectOfType<CountCheck>();
         Invoke("GoldPickUp", 3f);
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time > 3)
+            GoldPickUp();
     }
 
     void CoinObject()
     {
-        int power = Random.Range(400, 500);
         Rigidbody2D rigid = evd.obj.GetComponent<Rigidbody2D>();
         int rand = Random.Range(0, 101);
         float x = Random.Range(-0.3f, 0.3f);
