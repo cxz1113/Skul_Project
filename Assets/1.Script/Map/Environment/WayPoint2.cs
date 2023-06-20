@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WayPoint2 : Environment
 {
@@ -8,9 +9,10 @@ public class WayPoint2 : Environment
     public Canvas canvas;
     public Player player;
     public Enemy enemy;
+    public CountCheck killcheck;
 
-    public int killcount = 0;
     bool open;
+    int rand;
 
     public override void Initialize()
     {
@@ -19,10 +21,12 @@ public class WayPoint2 : Environment
 
     void Start()
     {
+        rand = Random.Range(1, 3);
         Initialize();
         canvas.transform.GetChild(0).transform.localPosition = new Vector2(22f, 0f);
         waycollider2D = GetComponent<BoxCollider2D>();
         enemy = GetComponent<Enemy>();
+        killcheck = FindObjectOfType<CountCheck>();
     }
 
     void Update()
@@ -30,7 +34,7 @@ public class WayPoint2 : Environment
         player = ProjectManager.Instance.player;
 
         // 게이트 열림
-        if (killcount == 0)
+        if (killcheck.killCount == 0)
         {
             open = true;
             GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
@@ -64,9 +68,7 @@ public class WayPoint2 : Environment
             {
                 case "WayTown":
                     DataManager.Instance.SaveData();
-                    break;
-                case "WayBoss":
-                    DataManager.Instance.SaveData();
+                    SceneManager.LoadScene(rand);
                     break;
             }
         }

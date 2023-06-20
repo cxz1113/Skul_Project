@@ -8,6 +8,7 @@ public class Enemy_HPBar : MonoBehaviour
     public GameObject prfHP;
     public GameObject canvas;
     public Enemy enemy;
+    public Transform enemytrans;
 
     RectTransform hpBar_Rect;
     GameObject hpBar;

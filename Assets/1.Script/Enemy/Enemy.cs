@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct EnemyData
 {
@@ -35,6 +36,9 @@ public abstract class Enemy : MonoBehaviour
 {
     public EnemyData ed = new EnemyData();
 
+    [SerializeField] GameObject hpBar;
+    [SerializeField] Image hpBar_img;
+    public GameObject canvas;
     public Rigidbody2D rigid;
     public CapsuleCollider2D capsuleColl;
     public Animator anim;
@@ -42,6 +46,8 @@ public abstract class Enemy : MonoBehaviour
     public WayPoint2 way2;
     public CountCheck killCheck;
     public Attack_Box_Enemy atkBox;
+
+    
 
     public int nextMove;
     protected bool canThink = true;
@@ -52,7 +58,6 @@ public abstract class Enemy : MonoBehaviour
 
     void Awake()
     {
-        way2 = FindObjectOfType<WayPoint2>();
         killCheck = FindObjectOfType<CountCheck>();
         ed.isDead = false;
         Think();
@@ -203,8 +208,6 @@ public abstract class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        if(way2 !=null)
-            way2.killcount++;
     }
 
     void DamageTest()

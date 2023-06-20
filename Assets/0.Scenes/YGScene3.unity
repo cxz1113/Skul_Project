@@ -9451,6 +9451,7 @@ MonoBehaviour:
   - {fileID: 690447238}
   - {fileID: 231267278}
   prepab: {fileID: 8256884230393117145, guid: e683b9516440d2447aa9d783a16aca3e, type: 3}
+  enemycount: {fileID: 0}
 --- !u!1 &969193849
 GameObject:
   m_ObjectHideFlags: 0
@@ -11145,8 +11146,7 @@ MonoBehaviour:
   canvas: {fileID: 1276419037}
   player: {fileID: 0}
   enemy: {fileID: 0}
-  enemies: []
-  killcount: 0
+  killcheck: {fileID: 0}
 --- !u!1 &1133607324
 GameObject:
   m_ObjectHideFlags: 0
@@ -34462,7 +34462,6 @@ MonoBehaviour:
   coin: {fileID: 1381248284406182317, guid: 8129ebe082843a748b5ff01925a761f1, type: 3}
   head: {fileID: 503402620276073666, guid: db2b27494fcbe8045812599efad6e4d5, type: 3}
   dropHead: {fileID: 0}
-  seconDrop: {fileID: 0}
   coinTrans: {fileID: 0}
   headTrans: {fileID: 0}
   itemName: 
