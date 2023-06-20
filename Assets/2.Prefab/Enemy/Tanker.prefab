@@ -50,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2d685234a4b144a04f52647c3734b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  hpBar_img: {fileID: 0}
+  canvas: {fileID: 0}
   rigid: {fileID: 5619219158987456589}
   capsuleColl: {fileID: 7260427004930147196}
   anim: {fileID: 8116134813853603712}
@@ -183,6 +186,7 @@ MonoBehaviour:
   prfHP: {fileID: 1469167122332539356, guid: abea31fe7aa221a4590a664f6d479e0b, type: 3}
   canvas: {fileID: 0}
   enemy: {fileID: 2173261828830240608}
+  enemytrans: {fileID: 0}
   height: 1
   hpBar_width: 300
 --- !u!1 &4049870821770333314
@@ -256,4 +260,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2de64a22d16314593ee8d1bf61db44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}

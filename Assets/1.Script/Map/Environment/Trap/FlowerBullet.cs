@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlowerBullet : Projectile
+public class FlowerBullet : Enemy_Projectile
 {
     protected override void Init()
     {
         pd.speed = 20;
+        pd.damage = 5;
     }
 
     protected override void Move()
