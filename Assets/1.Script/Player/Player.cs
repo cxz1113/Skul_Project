@@ -296,7 +296,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void TestSwitch(Player plaerN)
+    public void ItemSwitch(Player plaerN)
     {
         Player player = Instantiate(Resources.Load<Player>($"Player/{plaerN.name}"), transform);
         player.transform.SetParent(null);

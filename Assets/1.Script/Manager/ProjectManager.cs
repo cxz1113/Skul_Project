@@ -204,4 +204,13 @@ public class ProjectManager : MonoBehaviour
         data.head2 = heads[1].name;
         data.item0 = items1[0].name;
     }
+
+    public void DataTest(List<Item> item)
+    {
+        List<string> str = new List<string>();
+        for(int i = 0; i < item.Count; i++)
+        {
+            str[i] = item[i].name;
+        }
+    }
 }

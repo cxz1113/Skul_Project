@@ -14,12 +14,12 @@ public class MapManager : MonoBehaviour
     public GameObject coin;
     public Item head;
     public Item dropHead;
-    public Item seconDrop;
     public Transform coinTrans;
     public Transform headTrans;
     public string itemName;
     public int itemCount = 0;
     public List<WayPoint> wayPoints = new List<WayPoint>();
+    int count = 24;
 
     public bool isActive { get; set; }
 
@@ -75,7 +75,7 @@ public class MapManager : MonoBehaviour
 
     void HeadDrop()
     {
-        head = Resources.Load<Item>($"Head/{ItemName()}");
+        head = ItemName();
         head.Init();
         Instantiate(head, headTrans);
     }
@@ -94,20 +94,21 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public string ItemName()
+    Item ItemName()
     {
         int count = 0;
-        string[] strs = { "Sword","LittleBorn", "Wolf"  };
-        while(count < strs.Length)
+        PlayerBasket basket = FindObjectOfType<PlayerBasket>();
+        Item item = FindObjectOfType<Item>();
+        while (count < basket.heads.Count)
         {
-            if (strs[count] != ProjectManager.Instance.heads[count].name)
+            if (!ProjectManager.Instance.heads.Contains(basket.heads[count]))
             {
-                itemName = strs[count];
+                item = basket.heads[count];
                 break;
             }
             else
                 count++;
         }
-        return itemName;
+        return item;
     }
 }

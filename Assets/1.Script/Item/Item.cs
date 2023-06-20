@@ -102,15 +102,14 @@ public abstract class Item : MonoBehaviour
     {
         MapManager map = FindObjectOfType<MapManager>();
         if (map.itemCount == 0)
-            PlayerFind(map.head);
+            PlayerFind();
         else if (map.itemCount == 1)
-            PlayerFind(map.dropHead);
+            PlayerFind();
     }
 
-    void PlayerFind(Item item)
+    void PlayerFind()
     {
         Player player = FindObjectOfType<Player>();
-        Player desPlayer = FindObjectOfType<Player>();
         int count = 0;
         while(count < player.players.Count)
         {
@@ -118,7 +117,7 @@ public abstract class Item : MonoBehaviour
                 count++;
             else
             {
-                player.TestSwitch(player.players[count]);
+                player.ItemSwitch(player.players[count]);
                 break;
             }
         }
