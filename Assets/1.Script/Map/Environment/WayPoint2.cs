@@ -8,9 +8,9 @@ public class WayPoint2 : Environment
     public Canvas canvas;
     public Player player;
     public Enemy enemy;
-    public List<Enemy> enemies;
 
     public int killcount = 0;
+    bool open;
 
     public override void Initialize()
     {
@@ -30,11 +30,12 @@ public class WayPoint2 : Environment
         player = ProjectManager.Instance.player;
 
         // 게이트 열림
-        if (killcount == 23)
+        if (killcount == 0)
         {
+            open = true;
             GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
             GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
-            killcount = 0;
+            open = false;
         }
     }
 

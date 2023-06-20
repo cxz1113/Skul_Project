@@ -6,10 +6,13 @@ public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] Transform[] spawnpoints;
     [SerializeField] Enemy prepab;
+    public CountCheck enemycount;
 
     void Start()
     {
         EnemySpawn();
+        enemycount = FindObjectOfType<CountCheck>();
+        enemycount.killCount = spawnpoints.Length;
     }
 
     void Update()

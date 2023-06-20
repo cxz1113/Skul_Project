@@ -96,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
             ed.state = EnemyState.Dead;
             rigid.velocity = Vector2.zero;
-            killCheck.killCount++;
+            killCheck.killCount--;
 
             Invoke("Die", 2f);
         }
