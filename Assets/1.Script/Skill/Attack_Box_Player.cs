@@ -5,9 +5,11 @@ using UnityEngine;
 public class Attack_Box_Player :MonoBehaviour
 {
     [HideInInspector] public List<Enemy> enemies = new List<Enemy>();
+    [HideInInspector] public int skillIndex;
     public Player player;
 
-    // Start is called before the first frame update
+    private void OnEnable() => enemies.Clear();
+
     void Start()
     {
         player = transform.parent.GetComponent<Player>();
@@ -19,9 +21,10 @@ public class Attack_Box_Player :MonoBehaviour
         {
             Enemy enemy = collision.GetComponent<Enemy>();
             enemies.Add(enemy);
-            enemy.Damaged(player.Damage);
+            float damage = skillIndex == 1 ? player.Damage_Skill1 : 
+                           skillIndex == 2 ? player.Damage_Skill2 : 
+                                             player.Damage;
+            enemy.Damaged(damage);
         }
     }
-
-    private void OnEnable() => enemies.Clear();
 }

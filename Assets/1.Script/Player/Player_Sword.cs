@@ -9,6 +9,7 @@ public class Player_Sword : Player
     {
         base.Init();
         Damage = 15;
+        Damage_Skill1 = 40;
         animator = GetComponent<Animator>();
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.sword];
         rigid = GetComponent<Rigidbody2D>();
@@ -30,13 +31,7 @@ public class Player_Sword : Player
         yield return new WaitForSeconds(1f);
         canSkill_1 = true;
     }
-    protected void EventDamage_Skill1()
-    {
-        foreach (var enemy in atBox.enemies)
-        {
-            SetDamage(enemy, 40);
-        }
-    }
+
 
     protected override IEnumerator CSkill_2()
     {
@@ -58,44 +53,5 @@ public class Player_Sword : Player
     void EventSwitchAnimation()
     {
         //Teleport_Attack(10);
-    }
-
-    void Teleport_Attack(float distance)
-    {
-        float tempDis;
-        int layer = 1 << LayerMask.NameToLayer("Ground");
-        RaycastHit2D hit1 = Physics2D.Raycast(gameObject.transform.position, transform.right, distance, layer);
-        RaycastHit2D hit2 = Physics2D.Raycast(gameObject.transform.position + (playerCol.size.y) * transform.up, transform.right, distance, layer);
-
-        if (!hit1 && !hit2)
-        {
-            //transform.Translate(distance * Vector2.right);
-            tempDis = distance;
-        }
-        else if (hit1 == hit2)
-        {
-            //transform.Translate((hit1.distance - capCol.size.x / 2) * Vector2.right);
-            tempDis = hit1.distance - playerCol.size.x / 2;
-        }
-        else
-        {
-            tempDis = hit1 ? hit1.distance : hit2.distance;
-            if (hit1 && hit2)
-                tempDis = hit1.distance < hit2.distance ? hit1.distance : hit2.distance;
-        }
-
-        int layer2 = 1 << LayerMask.NameToLayer("Enemy");
-        RaycastHit2D[] hit3 = Physics2D.RaycastAll(gameObject.transform.position + (playerCol.size.y / 2) * transform.up, transform.right, tempDis, layer2);
-
-        foreach (var item in hit3)
-        {
-            if (item.collider.gameObject.GetComponent<Enemy>())
-            {
-                Enemy enemy = item.collider.gameObject.GetComponent<Enemy>();
-                SetDamage(enemy, 40);
-            }
-        }
-
-        transform.Translate(tempDis * Vector2.right);
     }
 }

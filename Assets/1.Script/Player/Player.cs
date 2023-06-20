@@ -56,6 +56,8 @@ public abstract class Player : MonoBehaviour
 
     //Atack
     public float Damage { get; set; }
+    public float Damage_Skill1 { get; set; }
+    public float Damage_Skill2 { get; set; }
 
     //Damaged
     protected bool isDead = false;
@@ -227,6 +229,7 @@ public abstract class Player : MonoBehaviour
 
         canDash = false;
         isDashing = true;
+        isUnbeat = true;
        
         animator.SetBool("Dash", true);
         SetGravity(false);
@@ -242,6 +245,7 @@ public abstract class Player : MonoBehaviour
             rigid.velocity = Vector2.zero;
 
         isDashing = false;
+        isUnbeat = false;
         animator.SetBool("Dash", false);
 
         yield return new WaitForSeconds(dashCoolTime);
