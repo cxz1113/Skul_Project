@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherMove : Enemy
+public class Archer : Enemy
 {
     [SerializeField] Enemy_Projectile arrowPrf;
 

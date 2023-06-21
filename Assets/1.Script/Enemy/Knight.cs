@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightMove : Enemy
+public class Knight : Enemy
 {
     public override void Init()
     {
