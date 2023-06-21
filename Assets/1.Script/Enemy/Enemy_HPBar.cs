@@ -44,6 +44,7 @@ public class Enemy_HPBar : MonoBehaviour
             hpBar.SetActive(true);  
             hpBar_img.fillAmount = enemy.ed.hp / enemy.ed.maxhp;
             Vector3 hpBarPos = Camera.main.WorldToScreenPoint(transform.position - Vector3.up * height);
+            //앵커 왼쪽 아래, inGameCanvas와 해상도 연동 필요
             hpBar_Rect.anchoredPosition = hpBarPos;
         }
     }

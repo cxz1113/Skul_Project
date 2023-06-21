@@ -191,15 +191,14 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine("Think");
     }
 
-    public void Damaged(float damage)
+    public virtual void Damaged(float damage)
     {
         ed.hp -= damage;
-        if(ed.state != EnemyState.Attack && ed.state != EnemyState.Dead)
+        if(ed.state != EnemyState.Dead)
         {
             anim.SetTrigger("Hit");
             ed.state = EnemyState.Hit;
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            int dir = flipX ? -1 : 1;
         }
 
         nextMove = 0;

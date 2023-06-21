@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankerMove : Enemy
+public class Tanker : Enemy
 {
     public override void Init()
     {
@@ -41,6 +41,18 @@ public class TankerMove : Enemy
             ed.state = EnemyState.Attack;
         }
 
+    }
+    public override void Damaged(float damage)
+    {
+        ed.hp -= damage;
+        if (ed.state != EnemyState.Attack && ed.state != EnemyState.Dead)
+        {
+            anim.SetTrigger("Hit");
+            ed.state = EnemyState.Hit;
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+        }
+
+        nextMove = 0;
     }
 
     IEnumerator TackleCoolDown()
