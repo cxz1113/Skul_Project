@@ -38,6 +38,7 @@ public class MapManager : MonoBehaviour
     {
         EnemySpawn();
     }
+
     void Update()
     {
         player = ProjectManager.Instance.player;
@@ -119,11 +120,16 @@ public class MapManager : MonoBehaviour
 
     void EnemySpawn()
     {
-        for(int i = 0; i < spawnCount; i++)
+        SpawnFunction(enemies[0], 8, enemyTrans, 0);
+        SpawnFunction(enemies[2], 14, enemyTrans, 0);
+        SpawnFunction(enemies[1], 18, enemyTrans, 4);
+    }
+    void SpawnFunction(Enemy enemy, int spawnCountMax, List<Transform> trans, int pos)
+    {
+        for(int i = 0; i < spawnCount - spawnCountMax; i++)
         {
-            Enemy enemy = enemies[Random.Range(0, 3)];
-            enemy.Init();
-            Instantiate(enemy, enemyTrans[Random.Range(0, enemyTrans.Count)]);
+            //enemy.Init();
+            Instantiate(enemy, trans[Random.Range(pos, enemyTrans.Count)]);
         }
     }
 }

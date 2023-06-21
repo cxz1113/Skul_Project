@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eb179f2b0eda331468d54e64c0319da7, type: 3}
   - {fileID: 21300000, guid: 85d8f77dc5de8ca408ae451fedc6a5ab, type: 3}
   - {fileID: 21300000, guid: 0a056f0f6e7d5ff4b82cc1be92c0e7ed, type: 3}
+  goldCheck: {fileID: 0}
 --- !u!114 &1381248284406182326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +157,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005, y: 0}
+  m_Offset: {x: 0.03, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.3

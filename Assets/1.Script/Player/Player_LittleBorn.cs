@@ -128,6 +128,7 @@ public class Player_LittleBorn : Player
     {
         LookDir();
         animator.SetTrigger("Switch");
+        isSwitched = false;
     }
 
     

@@ -14,13 +14,11 @@ public class DataManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
+        path = Path.Combine(Application.streamingAssetsPath, "database.json");
+        //path = Path.Combine(Application.dataPath, "Assets/database.json");
 
-    void Start()
-    {
-        path = Path.Combine(Application.dataPath, "database.json");
         LoadData();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void SaveData()

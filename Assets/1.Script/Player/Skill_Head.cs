@@ -37,6 +37,7 @@ public class Skill_Head : MonoBehaviour
     {
         if (player.isSwitched)
             Dest();
+        player.isSwitched = false;
         isFlying = false;
         rigid.gravityScale = originalGravity;
         yield return new WaitForSeconds(0.5f);

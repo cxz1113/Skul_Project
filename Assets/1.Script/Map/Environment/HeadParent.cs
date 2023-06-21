@@ -6,10 +6,6 @@ public class HeadParent : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     public Player player;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -26,13 +22,12 @@ public class HeadParent : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && player.isPush && MapManager.Instance.spawnCount == 0)
+        if (collision.CompareTag("Player") && player.isPush )
         {
             MapManager.Instance.isActive = false;
             MapManager.Instance.isWay = true;
             player.isPush = false;
-
-            MapManager.Instance.gate.GetComponent<BoxCollider2D>().enabled = false;
+            MapManager.Instance.gate.GetComponent<BoxCollider2D>().enabled = false; 
             transform.gameObject.SetActive(false);
         }
     }

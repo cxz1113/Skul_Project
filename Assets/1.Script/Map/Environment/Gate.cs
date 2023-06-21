@@ -5,10 +5,6 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     public Player player;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -17,7 +13,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && MapManager.Instance.spawnCount == 0)
         {
             int rand = Random.Range(0, 101);
 

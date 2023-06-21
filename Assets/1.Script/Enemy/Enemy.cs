@@ -103,7 +103,7 @@ public abstract class Enemy : MonoBehaviour
             rigid.bodyType = RigidbodyType2D.Static;
             capsuleColl.isTrigger = true;
             killCheck.killCount--;
-
+            MapManager.Instance.spawnCount--;
             Invoke("Die", 2f);
         }
         DamageTest();

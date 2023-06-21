@@ -52,6 +52,7 @@ public class Player_Wolf : Player
     {
         LookDir();
         animator.SetTrigger("Switch");
+        isSwitched = false;
     }
 
     //스위치 시작하자마자 event
