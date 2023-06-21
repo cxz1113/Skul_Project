@@ -30914,6 +30914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932de598ff684a44cb16c2c7a8d3b3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 0}
   head1: {fileID: 1103655708}
   head2: {fileID: 1393039732}
   hpGage: {fileID: 1205485585}
@@ -30921,35 +30922,9 @@ MonoBehaviour:
   skill2Sprite: {fileID: 385189008}
   curHpTxt: {fileID: 1531520368}
   maxHpTxt: {fileID: 618657177}
-  player: {fileID: 2798456014967218647, guid: 5b21d466900c8bd4785efe07c17cdbe1, type: 3}
   skill1_Mask: {fileID: 806982299}
   skill2_Mask: {fileID: 62551760}
   nullSprite: {fileID: 21300000, guid: fff1462f5b0b0b149afb6f3e16059151, type: 3}
-  selectImage: {fileID: 1953139229}
-  item: {fileID: 0}
-  dataSkul:
-    name: 
-    tier: 
-    type: 
-    intro: 
-    passive: 
-    ability: 
-    skillname1: 
-    skillname2: 
-    abilitydetail: 
-    skillname1detail: 
-    skillname2detail: 
-    cooltime1: 
-    cooltime2: 
-    itemskul: 
-  dataItem:
-    name: 
-    itemname: 
-    tier: 
-    intro: 
-    itemdetail: 
-    abillity1: 
-    abillity2: 
   type1: {fileID: 807065121}
   type1Skill: {fileID: 1531221457}
   skulIconType1: {fileID: 1236315644}
@@ -33973,8 +33948,6 @@ MonoBehaviour:
   scroll: {fileID: 195569433}
   ui: {fileID: 1860073206}
   itemT: {fileID: 992645926}
-  skulData: {fileID: 0}
-  itemData: {fileID: 0}
   itemSelect: {fileID: 0}
   selectImage: {fileID: 1953139229}
   indexX: 0
@@ -34455,7 +34428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerStart: {fileID: 0}
   gate: {fileID: 0}
   goldParent: {fileID: 0}
   coinParent: {fileID: 0}
@@ -34464,11 +34436,13 @@ MonoBehaviour:
   dropHead: {fileID: 0}
   coinTrans: {fileID: 0}
   headTrans: {fileID: 0}
-  itemName: 
   itemCount: 0
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
+  enemies: []
+  enemyTrans: []
+  spawnCount: 20
 --- !u!4 &2139710001
 Transform:
   m_ObjectHideFlags: 0

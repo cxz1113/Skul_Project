@@ -37,8 +37,12 @@ public class WayPoint2 : Environment
         if (killcheck.killCount == 0)
         {
             open = true;
-            GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
-            GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
+            if (open == true)
+            {
+                GetComponent<SpriteAnimation>().SetSprite(active, 0.2f);
+                GetComponent<WayPoint2>().GetComponent<Collider2D>().enabled = true;
+                killcheck.killCount = -1;
+            }
             open = false;
         }
     }
