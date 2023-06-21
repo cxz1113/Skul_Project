@@ -100,6 +100,8 @@ public abstract class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
             ed.state = EnemyState.Dead;
             rigid.velocity = Vector2.zero;
+            rigid.bodyType = RigidbodyType2D.Static;
+            capsuleColl.isTrigger = true;
             killCheck.killCount--;
 
             Invoke("Die", 2f);
@@ -198,7 +200,6 @@ public abstract class Enemy : MonoBehaviour
             ed.state = EnemyState.Hit;
             rigid.velocity = new Vector2(0, rigid.velocity.y);
             int dir = flipX ? -1 : 1;
-            //rigid.AddForce(new Vector2(0, 1) * 5 * rigid.mass, ForceMode2D.Impulse);
         }
 
         nextMove = 0;

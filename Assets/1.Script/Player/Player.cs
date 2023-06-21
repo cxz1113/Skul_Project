@@ -203,24 +203,26 @@ public abstract class Player : MonoBehaviour
     }
 
     protected void DownJump()
-    {
+    {  
         if (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)
         {
-            //collis = 현재 닿아있는 태그가 "Ground"인 collision
-            if (collis != null && collis.gameObject.GetComponent<PlatformEffector2D>())
+            RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
+            if (!rayHit)
+                return;
+
+            if(rayHit.collider.GetComponent<PlatformEffector2D>())
             {
-                StartCoroutine(CDownJump());
+                StartCoroutine(CDownJump(rayHit.collider.GetComponent<CompositeCollider2D>()));
             }
         }
     }
 
     //플레이어 콜라이더 변경시 수정필요
-    IEnumerator CDownJump()
+    IEnumerator CDownJump(Collider2D col)
     {
-        Collider2D platformCollider = collis.gameObject.GetComponent<CompositeCollider2D>();
-        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), platformCollider);
+        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), col);
         yield return new WaitForSeconds(0.3f);
-        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), platformCollider, false);
+        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), col, false);
     }
 
     protected IEnumerator CDash()
