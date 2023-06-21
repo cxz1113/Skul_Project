@@ -83,16 +83,15 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
-
-        if (ed.state == EnemyState.Dead)
-            return;
-
         if (target == null)
         {
             target = GameObject.FindWithTag("Player").transform;
             Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), target.gameObject.GetComponent<CapsuleCollider2D>());
             return;
         }
+
+        if (ed.state == EnemyState.Dead)
+            return;
 
         if (ed.isDead == true || ed.hp <= 0)
         {
