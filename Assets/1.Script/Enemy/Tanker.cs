@@ -20,10 +20,6 @@ public class Tanker : Enemy
     bool canTackle = true;
     float tackleDelay = 10;
 
-    void Start()
-    {
-        Init();
-    }
     protected override void AttackStart()
     {
         StartCoroutine("AttackCoolDown");

@@ -20,6 +20,7 @@ public class PlayerUI : MonoBehaviour
     public TMP_Text maxHpTxt;
     public Image skill1_Mask;
     public Image skill2_Mask;
+    public Image switch_Mask;
     public Sprite nullSprite;
     #endregion
 

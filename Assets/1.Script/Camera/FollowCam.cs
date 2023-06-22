@@ -36,7 +36,7 @@ public class FollowCam : MonoBehaviour
         pos.y += 2;
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        transform.position = Vector3.Lerp(transform.position, pos, 10f);
+        transform.position = Vector3.Lerp(transform.position, pos, 5f*Time.deltaTime);
     }
 
 }

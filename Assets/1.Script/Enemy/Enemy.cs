@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public struct EnemyData
 {
@@ -38,6 +39,7 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] GameObject hpBar;
     [SerializeField] Image hpBar_img;
+    [SerializeField] TMP_Text damage_Text;
     public GameObject canvas;
     public Rigidbody2D rigid;
     public CapsuleCollider2D capsuleColl;
@@ -54,7 +56,7 @@ public abstract class Enemy : MonoBehaviour
     protected bool canAttack = true;
     protected bool flipX;
 
-    Coroutine coroutine;
+    
 
     void Awake()
     {
@@ -63,8 +65,10 @@ public abstract class Enemy : MonoBehaviour
         Think();
 
     }
-    private void Start()
+    void Start()
     {
+        Init();
+        canvas = GameObject.Find("Canvas");
         target = GameObject.FindWithTag("Player").transform;
         Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), target.gameObject.GetComponent<CapsuleCollider2D>());
     }
@@ -194,6 +198,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Damaged(float damage)
     {
         ed.hp -= damage;
+        CreateDamage_Text(damage);
         if(ed.state != EnemyState.Dead)
         {
             anim.SetTrigger("Hit");
@@ -202,6 +207,13 @@ public abstract class Enemy : MonoBehaviour
         }
 
         nextMove = 0;
+    }
+
+    public void CreateDamage_Text(float damage)
+    {
+        Vector3 pos = transform.position + Vector3.up * capsuleColl.size.y * 0.7f;
+        TMP_Text dmgTxt = Instantiate(damage_Text, pos, Quaternion.identity, canvas.transform);
+        dmgTxt.text = damage.ToString();
     }
 
     void Die()

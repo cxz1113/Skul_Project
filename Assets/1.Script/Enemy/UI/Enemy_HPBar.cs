@@ -37,7 +37,8 @@ public class Enemy_HPBar : MonoBehaviour
         {
             if (enemy.ed.hp <=0)
             {
-                Destroy(hpBar);
+                Destroy(hpBar_Rect.gameObject);
+                enabled = false;
                 return;
             }
 

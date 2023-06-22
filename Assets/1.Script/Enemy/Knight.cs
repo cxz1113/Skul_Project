@@ -16,9 +16,4 @@ public class Knight : Enemy
         ed.atkRange = 2.5f;
         ed.atkDelay = 3;
     }
-
-    void Start()
-    {
-        Init();
-    }
 }

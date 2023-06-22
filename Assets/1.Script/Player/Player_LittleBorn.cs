@@ -31,6 +31,7 @@ public class Player_LittleBorn : Player
         if (isSwitched)
         {
             SwitchSkill();
+            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 0));
         }
 
         switchIndex = 1;

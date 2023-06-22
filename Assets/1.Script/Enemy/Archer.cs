@@ -19,11 +19,6 @@ public class Archer : Enemy
         ed.atkDelay = 3;
     }
 
-    void Start()
-    {
-        Init();
-    }
-
     void EventFire()
     {
         Enemy_Projectile arrow = Instantiate(arrowPrf, transform);

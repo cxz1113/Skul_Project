@@ -73,6 +73,7 @@ public abstract class Player : MonoBehaviour
 
     //Switch
     [HideInInspector] public bool isSwitched = false;
+    [HideInInspector] public bool canSwitch = false;
     [SerializeField] public int switchIndex;
     
     public bool isPush;
@@ -81,6 +82,7 @@ public abstract class Player : MonoBehaviour
     {
         ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
         ProjectManager.Instance.ui.skill2_Mask.fillAmount = 0;
+        ProjectManager.Instance.ui.switch_Mask.fillAmount = 0;
         atBox.player = this;
     }
     public void SwitchInit(Player player)
@@ -280,25 +282,26 @@ public abstract class Player : MonoBehaviour
 
     protected IEnumerator CCoolDown_UI(Image mask,float coolTime)
     {
+        canSwitch = true;
         float coolDowned = 0;
-
         while (coolDowned < coolTime)
         {
             yield return new WaitForFixedUpdate();
             coolDowned += Time.deltaTime;
             mask.fillAmount = (coolTime - coolDowned) / coolTime;
         }
-        
+        canSwitch = false;
     }
 
     protected virtual void SkulSwitch()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !canSwitch)
         {
             Player player = Instantiate(Resources.Load<Player>($"Player/{ProjectManager.Instance.heads[1].name}"), transform);
             player.transform.SetParent(null);
             player.SwitchInit(this);
             Destroy(gameObject);
+            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 3));
         }
     }
 

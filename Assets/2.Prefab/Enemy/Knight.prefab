@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
   hpBar_img: {fileID: 0}
+  damage_Text: {fileID: 8809662476852892492, guid: 8949abbdaf2f2be468c70ee31c5b09b6, type: 3}
   canvas: {fileID: 0}
   rigid: {fileID: 8256884230393117149}
   capsuleColl: {fileID: 3051545686751339041}
