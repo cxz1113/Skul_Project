@@ -40,6 +40,8 @@ public class InvenManager : MonoBehaviour
                 ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(false);
                 scroll.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 1080);
                 PlayerBasket.Instance.isInven = false;
+                if (!PlayerBasket.Instance.isInven)
+                    Time.timeScale = 1;
             }
             else if (Input.GetKey(KeyCode.D))
                 PlayerBasket.Instance.isDetail1 = true;
