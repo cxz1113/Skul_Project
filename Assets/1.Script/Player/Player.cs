@@ -4,8 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
+public struct StPlayerData
+{
+    public PlayerType type;
+    public PlayerSkul skul;
+}
+
+public enum PlayerSkul
+{
+    LittleBorn,
+    Wolf,
+    Sword
+}
+
+public enum PlayerType
+{
+    Balance,
+    Speed,
+    Power
+}
+
+
 public abstract class Player : MonoBehaviour
 {
+    public StPlayerData stpd;
+
     protected enum AnimationIndex
     {
         littleborn,
@@ -85,6 +108,7 @@ public abstract class Player : MonoBehaviour
         ProjectManager.Instance.ui.switch_Mask.fillAmount = 0;
         atBox.player = this;
     }
+
     public void SwitchInit(Player player)
     {
         animators = player.animators;

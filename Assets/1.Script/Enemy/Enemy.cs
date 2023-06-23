@@ -40,6 +40,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] GameObject hpBar;
     [SerializeField] Image hpBar_img;
     [SerializeField] TMP_Text damage_Text;
+    [SerializeField] GameObject attack_Fx;
     public GameObject canvas;
     public Rigidbody2D rigid;
     public CapsuleCollider2D capsuleColl;
@@ -181,11 +182,6 @@ public abstract class Enemy : MonoBehaviour
         canAttack = true;
     }
 
-    void EventDamage()
-    {
-        
-    }
-
     //공격 끝나는 시점, hit 끝나는 시점
     void EventAttackEnd()
     {
@@ -196,11 +192,12 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public virtual void Damaged(float damage)
-    {
-        ed.hp -= damage;
-        CreateDamage_Text(damage);
-        if(ed.state != EnemyState.Dead)
+    {  
+        if (ed.state != EnemyState.Dead)
         {
+            ed.hp -= damage;
+            CreateDamage_Text(damage);
+            CreateFx_Effect();
             anim.SetTrigger("Hit");
             ed.state = EnemyState.Hit;
             rigid.velocity = new Vector2(0, rigid.velocity.y);
@@ -214,6 +211,19 @@ public abstract class Enemy : MonoBehaviour
         Vector3 pos = transform.position + Vector3.up * capsuleColl.size.y * 0.7f;
         TMP_Text dmgTxt = Instantiate(damage_Text, pos, Quaternion.identity, canvas.transform);
         dmgTxt.text = damage.ToString();
+    }
+
+    public void CreateFx_Effect()
+    {
+        float x = Random.Range(-capsuleColl.size.x, capsuleColl.size.x);
+        float y = Random.Range(0, capsuleColl.size.y);
+        Vector3 pos = transform.position + new Vector3(x,y);
+
+        GameObject attack_Effect = Instantiate(attack_Fx, pos, Quaternion.identity, FxManager.Instance.transform);
+        //int scaleX = transform.position.x >player;
+        //attack_Effect.transform.localScale = new Vector3(scaleX, attack_Effect.transform.localScale.y);
+
+        //GameObject attack_Effect2 = Instantiate(FxManager.Instance.FxByPlayer(), pos, Quaternion.identity, transform);
     }
 
     void Die()
