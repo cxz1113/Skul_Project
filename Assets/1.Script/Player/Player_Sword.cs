@@ -17,6 +17,7 @@ public class Player_Sword : Player
         if (isSwitched)
         {
             SwitchSkill();
+            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 0));
         }
 
         switchIndex = 2;

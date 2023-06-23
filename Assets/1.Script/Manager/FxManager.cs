@@ -12,7 +12,7 @@ public class FxManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        FindPlayer();
+        //FindPlayer();
     }
 
     // Update is called once per frame

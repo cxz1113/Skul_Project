@@ -32,6 +32,16 @@ public class ProjectManager : MonoBehaviour
         HPGage();
     }
 
+    void PlayerSet()
+    {
+        // 플레이어 Data를 playerBasket 전달
+        playerBasket = FindObjectOfType<PlayerBasket>();
+        HeadFrametaSet();
+        playerBasket.curHp = data.curhp;
+        playerBasket.maxHp = data.maxhp;
+        playerBasket.item = data.item0;
+    }
+
     void HeadFrametaSet()
     {
         string[] str = { data.head1, data.head2 };
@@ -48,15 +58,6 @@ public class ProjectManager : MonoBehaviour
                 }
             }
         }
-    }
-    void PlayerSet()
-    {
-        // 플레이어 Data를 playerBasket 전달
-        playerBasket = FindObjectOfType<PlayerBasket>();
-        HeadFrametaSet();
-        playerBasket.curHp = data.curhp;
-        playerBasket.maxHp = data.maxhp;
-        playerBasket.item = data.item0;
     }
 
     void PlayerUISet()
@@ -96,6 +97,7 @@ public class ProjectManager : MonoBehaviour
         // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
         player = Instantiate(Resources.Load<Player>(string.Format($"Player/{main}")));
     }
+
     public void HeadSwap()
     {
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
