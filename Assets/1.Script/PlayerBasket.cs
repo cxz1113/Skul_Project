@@ -24,7 +24,7 @@ public class PlayerBasket : MonoBehaviour
 
     public bool isHeadChange { get; set; }
     public bool isInven { get; set; }
-    public bool isDetail1 { get; set; }
+    public bool isDetail { get; set; }
 
 
     public string item;

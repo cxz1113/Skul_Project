@@ -1,10 +1,10 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 100.0,
+            "curhp": 10.0,
             "maxhp": 100.0,
-            "head1": "LittleBorn",
-            "head2": "Wolf",
+            "head1": "Wolf",
+            "head2": "LittleBorn",
             "essence": "",
             "item0": "WeddingRing",
             "item1": "",

@@ -16,7 +16,7 @@ public class ProjectManager : MonoBehaviour
     public PlayerData.PlayerDataJson data;
     public List<Item> heads = new List<Item>();
     public List<Item> essences = new List<Item>();
-    public List<Item> items1 = new List<Item>();
+    public List<Item> items = new List<Item>();
 
     void Awake() => Instance = this;
 
@@ -39,26 +39,8 @@ public class ProjectManager : MonoBehaviour
         HeadFrametaSet();
         playerBasket.curHp = data.curhp;
         playerBasket.maxHp = data.maxhp;
-        playerBasket.item = data.item0;
     }
 
-    void HeadFrametaSet()
-    {
-        string[] str = { data.head1, data.head2 };
-        for (int i = 0; i < str.Length; i++)
-        {
-            if (str[i] == string.Empty)
-                break;
-            else
-            {
-                heads.Add(Resources.Load<Item>($"Head/{str[i]}"));
-                foreach (var item in heads)
-                {
-                    item.Init();
-                }
-            }
-        }
-    }
 
     void PlayerUISet()
     {
@@ -114,7 +96,7 @@ public class ProjectManager : MonoBehaviour
     public void ItemHeadChange()
     {
         player = FindObjectOfType<Player>();
-        inven.ItemBox(heads, essences, items1);
+        inven.ItemBox(heads, essences, items);
         PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
@@ -147,21 +129,21 @@ public class ProjectManager : MonoBehaviour
         ui.ImageSet();
         ItemSet();
         EssenceSet();
-        inven.ItemBox(heads, essences, items1);
+        inven.ItemBox(heads, essences, items);
     }
 
-    void ItemSet()
+    void HeadFrametaSet()
     {
-        string[] str = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
-
+        // PlayerDataJson Head Set
+        string[] str = { data.head1, data.head2 };
         for (int i = 0; i < str.Length; i++)
         {
             if (str[i] == string.Empty)
                 break;
             else
             {
-                items1.Add(Resources.Load<Item>($"Item/{str[i]}"));
-                foreach (var item in items1)
+                heads.Add(Resources.Load<Item>($"Head/{str[i]}"));
+                foreach (var item in heads)
                 {
                     item.Init();
                 }
@@ -171,6 +153,7 @@ public class ProjectManager : MonoBehaviour
 
     void EssenceSet()
     {
+        // PlayerDataJson Essence Set
         string str = data.essence;
         if (str == string.Empty)
             return;
@@ -178,6 +161,27 @@ public class ProjectManager : MonoBehaviour
         essences.Add(Resources.Load<Item>($"Prefab/{str}"));
     }
 
+    void ItemSet()
+    {
+        // PlayerDataJson Item Set
+        string[] str = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
+
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (str[i] == string.Empty)
+                break;
+            else
+            {
+                items.Add(Resources.Load<Item>($"Item/{str[i]}"));
+                foreach (var item in items)
+                {
+                    item.Init();
+                }
+            }
+        }
+    }
+
+ 
     void InvenHeadChage(List<Item> item, Item[][] itemBoxes, Image[][] images)
     {
         // In Game UI HeadChange
@@ -202,17 +206,37 @@ public class ProjectManager : MonoBehaviour
         // 저장할 변수들 직렬화 함수
         //PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
         data.curhp = playerBasket.curHp;
-        data.head1 = heads[0].name;
-        data.head2 = heads[1].name;
-        data.item0 = items1[0].name;
+       // data.head1 = heads[0].name;
+        //data.head2 = heads[1].name;
+        DataSet(heads);
+        //DataSet(essences);
+        //data.essence = essences[0].name;
+        //DataSet(items);
+
     }
 
-    public void DataTest(List<Item> item)
+    void DataSet(List<Item> iList)
     {
-        List<string> str = new List<string>();
-        for(int i = 0; i < item.Count; i++)
+        string[] dataHead = { data.head1, data.head2 };
+        string[] dataEssence = { data.essence };
+        string[] dataItem = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
+
+        if (iList == heads)
+            DataTest(iList, dataHead);
+        else if (iList == essences)
+            DataTest(iList, dataEssence);
+        else if (iList == items)
+            DataTest(iList, dataItem);
+
+    }
+
+    public void DataTest(List<Item> itemType, string[] strs)
+    {
+        if (itemType.Count == 0)
+            return;
+        for (int i = 0; i < itemType.Count; i++)
         {
-            str[i] = item[i].name;
+            strs[i] = itemType[i].name;
         }
     }
 }

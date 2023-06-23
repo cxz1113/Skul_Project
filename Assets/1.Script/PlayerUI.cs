@@ -116,7 +116,7 @@ public class PlayerUI : MonoBehaviour
         ImageIconType(skulIconType1, item);
         ImageData(imagesType1, sprite);
         TextData(txtType1, strType1);
-        if(PlayerBasket.Instance.isDetail1)
+        if(PlayerBasket.Instance.isDetail)
         {
             type1Skill.SetActive(true);
             ImageData(imagesSkillType1, sprite);
@@ -131,7 +131,7 @@ public class PlayerUI : MonoBehaviour
         ImageIconType(skulIconType2, item);
         imagesType2.sprite = item.ss.skill1;
         TextData(txtType2, strType2);
-        if (PlayerBasket.Instance.isDetail1)
+        if (PlayerBasket.Instance.isDetail)
         {
             type2Skill.SetActive(true);
             imagesSkillType2.sprite = item.ss.skill1;

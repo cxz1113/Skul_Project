@@ -44,9 +44,9 @@ public class InvenManager : MonoBehaviour
                     Time.timeScale = 1;
             }
             else if (Input.GetKey(KeyCode.D))
-                PlayerBasket.Instance.isDetail1 = true;
+                PlayerBasket.Instance.isDetail = true;
             else if(Input.GetKeyUp(KeyCode.D))
-                PlayerBasket.Instance.isDetail1 = false;
+                PlayerBasket.Instance.isDetail = false;
         }
     }
     public IEnumerator DotweenScroll()

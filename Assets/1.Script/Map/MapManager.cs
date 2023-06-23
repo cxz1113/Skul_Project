@@ -19,7 +19,7 @@ public class MapManager : MonoBehaviour
     public List<WayPoint> wayPoints = new List<WayPoint>();
     public List<Enemy> enemies = new List<Enemy>();
     public List<Transform> enemyTrans = new List<Transform>();
-    public int spawnCount = 20;
+    public int spawnCount = 0;
 
     public bool isActive { get; set; }
 
