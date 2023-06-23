@@ -15,7 +15,6 @@ public class FightersKnuckle : Item
     void Start()
     {
         Init();
-        isItem = true;
         GetComponent<SpriteRenderer>().sprite = id.item;
     }
 }

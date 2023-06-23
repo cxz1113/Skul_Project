@@ -15,7 +15,6 @@ public class DioriteHeadband : Item
     void Start()
     {
         Init();
-        isItem = true;
         GetComponent<SpriteRenderer>().sprite = id.item;
     }
 }
