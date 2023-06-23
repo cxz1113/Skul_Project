@@ -22,8 +22,6 @@ public class Sword : Item
     void Start()
     {
         Init();
-        isHead = true;
-        //ss.itobj = this;
         GetComponent<SpriteRenderer>().sprite = ss.headItem;
         StartCoroutine(ItemDrop());
     }

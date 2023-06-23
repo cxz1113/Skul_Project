@@ -44,15 +44,9 @@ public abstract class Item : MonoBehaviour
     public Item item;
     public Item dropItem;
     public string pName;
-    public bool isHead { get; set; }
-    public bool isItem { get; set; }
+
     public abstract void Init();
 
-    void Update()
-    {
-        //item = FindObjectOfType<MapManager>().head;
-        //dropItem = FindObjectOfType<MapManager>().dropHead;
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && it == ItemType.Head)
@@ -65,7 +59,6 @@ public abstract class Item : MonoBehaviour
                 Destroy(ss.obj);
             }
         }
-
     }
 
     void ItemHead()
@@ -121,41 +114,5 @@ public abstract class Item : MonoBehaviour
                 break;
             }
         }
-    }
-
-    Item ItemFind()
-    {
-        PlayerBasket basket = FindObjectOfType<PlayerBasket>();
-        int count = 0;
-        while(count < basket.heads.Count)
-        {
-            if (ss.obj.name != basket.heads[count].name)
-                count++;
-            else
-            {
-                item = basket.heads[count];
-                Debug.Log(basket.heads[count]);
-                break;
-            }
-        }
-        Debug.Log(item);
-        return item;
-    }
-    GameObject Find(Item desItem)
-    {
-        Player player = FindObjectOfType<Player>();
-        GameObject desPlayer = player.gameObject;
-        int count = 0;
-        while(count < player.players.Count)
-        {
-            if (desItem.name != player.players[count].name)
-                count++;
-            else
-            {
-                desPlayer = player.players[count].gameObject;
-                break;
-            }
-        }
-        return desPlayer;
     }
 }
