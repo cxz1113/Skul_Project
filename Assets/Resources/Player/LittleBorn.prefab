@@ -95,8 +95,10 @@ MonoBehaviour:
   atBox: {fileID: 7774792293177527182}
   spriteRd: {fileID: 4257343673998533868}
   playerCol: {fileID: 4257343673998533864}
+  enemy: {fileID: 2173261828830240608, guid: ff8a2de80f4050244a427c450b017ad2, type: 3}
   moveSpeed: 15
   isSwitched: 0
+  canSwitch: 0
   switchIndex: 0
   isPush: 0
   prefab_Head: {fileID: 8719836836145597690, guid: 7308071d6a302e244ac78fdc54c63cb8, type: 3}
@@ -142,7 +144,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1248052513
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ccb5c43e903ab614695a4057b8bd0ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -277,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  skillIndex: 0
   player: {fileID: 0}
 --- !u!61 &2109533968353187280
 BoxCollider2D:

@@ -54,6 +54,7 @@ public abstract class Player : MonoBehaviour
     public Attack_Box_Player atBox;
     [SerializeField] protected SpriteRenderer spriteRd;
     [SerializeField] protected CapsuleCollider2D playerCol;
+    [SerializeField] Enemy enemy;
 
     protected bool canInput = true;
     protected float originalGravity = 6;
@@ -145,7 +146,13 @@ public abstract class Player : MonoBehaviour
 
         SkulSwitch();
         InvenActive();
-        
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            Instantiate(enemy, pos, Quaternion.identity);
+        }
+
     }
 
     protected void LookDir()

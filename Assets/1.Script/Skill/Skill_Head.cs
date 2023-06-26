@@ -13,12 +13,13 @@ public class Skill_Head : MonoBehaviour
     bool isFlying = true;
     Rigidbody2D rigid;
     public Player_LittleBorn player;
+    public CircleCollider2D headCol;
 
     // Start is called before the first frame update
     void Start()
     {
         //플레이어와 충돌 방지
-        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>());
+        Physics2D.IgnoreCollision(headCol, player.GetComponent<CapsuleCollider2D>());
         rigid = GetComponent<Rigidbody2D>();
         originalGravity = rigid.gravityScale;
         rigid.gravityScale = 0;

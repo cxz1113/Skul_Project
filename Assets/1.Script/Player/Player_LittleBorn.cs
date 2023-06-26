@@ -14,6 +14,7 @@ public class Player_LittleBorn : Player
     protected override void Init()
     {
         base.Init();
+        stpd.skul = PlayerSkul.LittleBorn;
         Damage = 15;
         if (GameObject.Find("Head_Parent"))
             head_Parent = GameObject.Find("Head_Parent").transform;
@@ -59,7 +60,9 @@ public class Player_LittleBorn : Player
     protected override IEnumerator CSkill_2()
     {
         canSkill_2 = false;
+        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
         transform.position = head.transform.position;
+        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
         Destroy(head.gameObject);
         ResetCool();
         head = null;

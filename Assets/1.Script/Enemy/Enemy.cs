@@ -99,18 +99,8 @@ public abstract class Enemy : MonoBehaviour
             return;
 
         if (ed.isDead == true || ed.hp <= 0)
-        {
-            StopAllCoroutines();
-            //nextMove = 0;
-            anim.SetBool("Dead", true);
-            ed.state = EnemyState.Dead;
-            rigid.velocity = Vector2.zero;
-            rigid.bodyType = RigidbodyType2D.Static;
-            capsuleColl.isTrigger = true;
-            killCheck.killCount--;
-            MapManager.Instance.spawnCount--;
-            Invoke("Die", 2f);
-        }
+            Die();
+
         DamageTest();
 
         if (ed.state == EnemyState.Attack)
@@ -215,18 +205,30 @@ public abstract class Enemy : MonoBehaviour
 
     public void CreateFx_Effect()
     {
-        float x = Random.Range(-capsuleColl.size.x, capsuleColl.size.x);
+        float x = Random.Range(-capsuleColl.size.x / 3, capsuleColl.size.x / 3);
         float y = Random.Range(0, capsuleColl.size.y);
         Vector3 pos = transform.position + new Vector3(x,y);
 
-        GameObject attack_Effect = Instantiate(attack_Fx, pos, Quaternion.identity, FxManager.Instance.transform);
-        //int scaleX = transform.position.x >player;
-        //attack_Effect.transform.localScale = new Vector3(scaleX, attack_Effect.transform.localScale.y);
-
-        //GameObject attack_Effect2 = Instantiate(FxManager.Instance.FxByPlayer(), pos, Quaternion.identity, transform);
+        Fx attack_Effect = Instantiate(FxManager.Instance.FxByPlayer(), pos, Quaternion.identity, FxManager.Instance.transform);
+        int scaleX = transform.position.x > target.position.x ? 1 : -1;
+        attack_Effect.transform.localScale = new Vector3(scaleX, attack_Effect.transform.localScale.y);
     }
 
     void Die()
+    {
+        StopAllCoroutines();
+        anim.SetBool("Dead", true);
+        ed.state = EnemyState.Dead;
+        FxManager.Instance.CreateFx_Effect_Tp(transform);
+        rigid.velocity = Vector2.zero;
+        rigid.bodyType = RigidbodyType2D.Static;
+        capsuleColl.isTrigger = true;
+        killCheck.killCount--;
+        MapManager.Instance.spawnCount--;
+        Invoke("Dest", 2f);
+    }
+
+    void Dest()
     {
         Destroy(gameObject);
     }
@@ -235,7 +237,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            ed.hp -= 100;
+            //ed.hp -= 100;
         }
     }
 

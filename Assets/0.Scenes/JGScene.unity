@@ -998,7 +998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fxs:
-  - {fileID: 5194224342375929532, guid: c4cde286a10861a4aaa3bf41f85aa34d, type: 3}
+  - {fileID: 8094914131348610440, guid: c4cde286a10861a4aaa3bf41f85aa34d, type: 3}
+  - {fileID: 7713912354917860984, guid: 3f54685dabca3d54a9eb78f3839ef11d, type: 3}
+  fx_tp: {fileID: 5660176173190742172, guid: b682a45662b58be4faca39681b6d348d, type: 3}
 --- !u!4 &37298763
 Transform:
   m_ObjectHideFlags: 0

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wolf_Fx : MonoBehaviour
+public class Fx_Slash : Fx
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Init()
     {
-        
+        //¿ïÇÁ, ½ºÄÌ·¹Åæ °Ë
+        fxIndex = FX_Index.Slash;
     }
 
     // Update is called once per frame

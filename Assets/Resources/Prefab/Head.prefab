@@ -118,6 +118,7 @@ MonoBehaviour:
   coolTime: 0
   dir: 0
   player: {fileID: 0}
+  headCol: {fileID: -1203569615508416848}
 --- !u!50 &1999186182
 Rigidbody2D:
   serializedVersion: 4

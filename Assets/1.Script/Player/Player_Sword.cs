@@ -8,6 +8,7 @@ public class Player_Sword : Player
     protected override void Init()
     {
         base.Init();
+        stpd.skul = PlayerSkul.Sword;
         Damage = 15;
         Damage_Skill1 = 40;
         animator = GetComponent<Animator>();

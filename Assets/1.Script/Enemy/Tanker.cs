@@ -40,14 +40,20 @@ public class Tanker : Enemy
     }
     public override void Damaged(float damage)
     {
-        if (ed.state != EnemyState.Attack && ed.state != EnemyState.Dead)
+        
+        if (ed.state != EnemyState.Dead)
         {
             ed.hp -= damage;
             CreateDamage_Text(damage);
+            //스컬에 따른 이펙트
             CreateFx_Effect();
-            anim.SetTrigger("Hit");
-            ed.state = EnemyState.Hit;
-            rigid.velocity = new Vector2(0, rigid.velocity.y);
+
+            if (ed.state != EnemyState.Attack)
+            {
+                anim.SetTrigger("Hit");
+                ed.state = EnemyState.Hit;
+                rigid.velocity = new Vector2(0, rigid.velocity.y);
+            }
         }
 
         nextMove = 0;
