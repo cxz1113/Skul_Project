@@ -17,6 +17,7 @@ public class ProjectManager : MonoBehaviour
     public List<Item> heads = new List<Item>();
     public List<Item> essences = new List<Item>();
     public List<Item> items = new List<Item>();
+    public bool isPasue = false;
 
     void Awake() => Instance = this;
 
@@ -25,18 +26,27 @@ public class ProjectManager : MonoBehaviour
         playerData = FindObjectOfType<PlayerData>();
 
         data = playerData.nowPlayerData.playerdatajsons[0];
-        Init(playerData.nowPlayerData.playerdatajsons[0].head1);
+        Init(data.playerhead[0].head);
         PlayerSet();
         PlayerUISet();
         InventorySet();
         HPGage();
     }
 
+    void Update()
+    {
+        if(isPasue || PlayerBasket.Instance.isInven)
+        {
+
+        }
+    }
     void PlayerSet()
     {
         // 플레이어 Data를 playerBasket 전달
         playerBasket = FindObjectOfType<PlayerBasket>();
         HeadFrametaSet();
+        ItemSet();
+        EssenceSet();
         playerBasket.curHp = data.curhp;
         playerBasket.maxHp = data.maxhp;
     }
@@ -45,7 +55,6 @@ public class ProjectManager : MonoBehaviour
     void PlayerUISet()
     {
         // 플레이어 인터페이스 UI set
-        PlayerHeadSet(data.head1, data.head2);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         if (heads.Count < 1)
@@ -62,18 +71,6 @@ public class ProjectManager : MonoBehaviour
         ui.hpGage.fillAmount = (hpEnergy / 10f);
     }
 
-    public void PlayerHeadSet(string main, string sub)
-    {
-        // 플레이어 헤드프리펩 설정 
-        heads[0] = Resources.Load<Item>($"Head/{main}");
-        heads[0].Init();
-        if (heads[1] == null)
-            return;
-        
-        heads[1] = Resources.Load<Item>($"Head/{sub}");
-        heads[1].Init();
-    }
-
     void Init(string main)
     {
         // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
@@ -85,24 +82,21 @@ public class ProjectManager : MonoBehaviour
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
         InvenHeadChage(heads, InvenManager.Instance.itemBox, ui.imagesItem); 
         player = FindObjectOfType<Player>();
-        PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
-        HPGage();
     }
 
     public void ItemHeadChange()
     {
+        // 플레이어가 새로운 Head를 먹었을 때 교체할 변수 및 함수
         player = FindObjectOfType<Player>();
         inven.ItemBox(heads, essences, items);
-        PlayerHeadSet(heads[0].name, heads[1].name);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
         SkillUI();
-        HPGage();
     }
 
     void TextSet()
@@ -127,15 +121,13 @@ public class ProjectManager : MonoBehaviour
     public void InventorySet()
     {
         ui.ImageSet();
-        ItemSet();
-        EssenceSet();
         inven.ItemBox(heads, essences, items);
     }
 
     void HeadFrametaSet()
     {
         // PlayerDataJson Head Set
-        string[] str = { data.head1, data.head2 };
+        string[] str = { data.playerhead[0].head, data.playerhead[1].head };
         for (int i = 0; i < str.Length; i++)
         {
             if (str[i] == string.Empty)
@@ -154,7 +146,7 @@ public class ProjectManager : MonoBehaviour
     void EssenceSet()
     {
         // PlayerDataJson Essence Set
-        string str = data.essence;
+        string str = data.playeressence[0].essence;
         if (str == string.Empty)
             return;
 
@@ -164,7 +156,7 @@ public class ProjectManager : MonoBehaviour
     void ItemSet()
     {
         // PlayerDataJson Item Set
-        string[] str = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
+        string[] str = { data.playeritem[0].item, data.playeritem[1].item, data.playeritem[2].item, data.playeritem[3].item, data.playeritem[4].item, data.playeritem[5].item};
 
         for (int i = 0; i < str.Length; i++)
         {
@@ -195,48 +187,32 @@ public class ProjectManager : MonoBehaviour
         itemBoxes[0][1] = BoxTemp;
 
         // ImageBox HeadChange
-
         Sprite imageTemp = images[0][0].sprite;
         images[0][0].sprite = images[0][1].sprite;
         images[0][1].sprite = imageTemp;
     }
 
-    public void Data()
+    public void Data(float hp)
     {
         // 저장할 변수들 직렬화 함수
-        //PlayerData.PlayerDataJson data = playerData.nowPlayerData.playerdatajsons[0];
-        data.curhp = playerBasket.curHp;
-       // data.head1 = heads[0].name;
-        //data.head2 = heads[1].name;
-        DataSet(heads);
-        //DataSet(essences);
-        //data.essence = essences[0].name;
-        //DataSet(items);
-
+        data.curhp = hp;
+        DataTest(heads);
+        DataTest(essences);
+        DataTest(items);
     }
 
-    void DataSet(List<Item> iList)
-    {
-        string[] dataHead = { data.head1, data.head2 };
-        string[] dataEssence = { data.essence };
-        string[] dataItem = { data.item0, data.item1, data.item2, data.item3, data.item4, data.item5 };
-
-        if (iList == heads)
-            DataTest(iList, dataHead);
-        else if (iList == essences)
-            DataTest(iList, dataEssence);
-        else if (iList == items)
-            DataTest(iList, dataItem);
-
-    }
-
-    public void DataTest(List<Item> itemType, string[] strs)
+    public void DataTest(List<Item> itemType)
     {
         if (itemType.Count == 0)
             return;
         for (int i = 0; i < itemType.Count; i++)
         {
-            strs[i] = itemType[i].name;
+            if(itemType == heads)
+                data.playerhead[i].head = itemType[i].name;
+            else if(itemType == essences)
+                data.playeressence[i].essence = itemType[i].name;
+            else if(itemType == items)
+                data.playeritem[i].item = itemType[i].name;
         }
     }
 }

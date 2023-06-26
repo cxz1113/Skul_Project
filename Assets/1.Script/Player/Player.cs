@@ -84,7 +84,7 @@ public abstract class Player : MonoBehaviour
     public float Damage_Skill2 { get; set; }
 
     //Damaged
-    protected bool isDead = false;
+    public bool isDead = false;
     protected bool isUnbeat = false;
     protected float unbeatTime = 1f;
     
@@ -153,6 +153,7 @@ public abstract class Player : MonoBehaviour
             Instantiate(enemy, pos, Quaternion.identity);
         }
 
+        Test();
     }
 
     protected void LookDir()
@@ -405,6 +406,7 @@ public abstract class Player : MonoBehaviour
             animator.SetTrigger("Dead");
             rigid.velocity = Vector2.zero;
             isDead = true;
+            DataManager.Instance.SaveData();
         }
         else
         {
@@ -456,7 +458,6 @@ public abstract class Player : MonoBehaviour
     
     void InvenActive()
     {
-
         if (Input.GetKeyDown(KeyCode.D))
         {
             isPush = true;
@@ -477,6 +478,14 @@ public abstract class Player : MonoBehaviour
                 InvenManager.Instance.indexX = InvenManager.Instance.indexY = 0;
                 PlayerBasket.Instance.isInven = true;
             }
+        }
+    }
+
+    void Test()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PauseManager.Instance.Pause();
         }
     }
 }

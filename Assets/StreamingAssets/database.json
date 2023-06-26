@@ -1,17 +1,41 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 25.0,
+            "curhp": 45.0,
             "maxhp": 100.0,
-            "head1": "Wolf",
-            "head2": "LittleBorn",
-            "essence": "",
-            "item0": "WeddingRing",
-            "item1": "",
-            "item2": "",
-            "item3": "",
-            "item4": "",
-            "item5": ""
+            "playerhead": [
+                {
+                    "head": "Wolf"
+                },
+                {
+                    "head": "LittleBorn"
+                }
+            ],
+            "playeressence": [
+                {
+                    "essence": ""
+                }
+            ],
+            "playeritem": [
+                {
+                    "item": "WeddingRing"
+                },
+                {
+                    "item": ""
+                },
+                {
+                    "item": ""
+                },
+                {
+                    "item": ""
+                },
+                {
+                    "item": ""
+                },
+                {
+                    "item": ""
+                }
+            ]
         }
     ]
 }

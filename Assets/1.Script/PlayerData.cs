@@ -13,15 +13,29 @@ public class PlayerData : MonoBehaviour
     {
         public float curhp;
         public float maxhp;
-        public string head1;
-        public string head2;
-        public string essence;
-        public string item0;
-        public string item1;
-        public string item2;
-        public string item3;
-        public string item4;
-        public string item5;
+
+        [Serializable]
+        public class playerDataHead
+        {
+            public string head;
+        }
+
+        [Serializable]
+        public class playerDataEssence
+        {
+            public string essence;
+        
+        }
+
+        [Serializable]
+        public class playerDataItem
+        {
+            public string item;
+        }
+
+        public List<playerDataHead> playerhead = new List<playerDataHead>();
+        public List<playerDataEssence> playeressence = new List<playerDataEssence>();
+        public List<playerDataItem> playeritem = new List<playerDataItem>();
     }
 
     [Serializable]

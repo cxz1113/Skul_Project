@@ -24,7 +24,11 @@ public class DataManager : MonoBehaviour
     public void SaveData()
     {
         // Data 저장 함수
-        ProjectManager.Instance.Data();
+        Player player = FindObjectOfType<Player>();
+        if(player.isDead)
+            ProjectManager.Instance.Data(100);
+        else
+            ProjectManager.Instance.Data(PlayerBasket.Instance.curHp);
         data = JsonUtility.ToJson(playerData.nowPlayerData, true);
         Debug.Log(data);
         File.WriteAllText(path, data);

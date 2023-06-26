@@ -1064,6 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b88fa38cb07d2248b5afa0258c28568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerJson: {fileID: 4900000, guid: 7d5edff877d36ff418dcb7bfe5126263, type: 3}
+  playerJson: {fileID: 4900000, guid: aa3f8118eeec3b543bfc5d3ec1bc28ee, type: 3}
   nowPlayerData:
     playerdatajsons: []

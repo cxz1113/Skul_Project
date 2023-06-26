@@ -92,11 +92,13 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b3d3eb06e827e8a47a732ec7190a657a, type: 2}
   - {fileID: 9100000, guid: 9631114b4e22eeb4fa7d352a5442c8c1, type: 2}
   - {fileID: 9100000, guid: 351db6329e80de242bb166ac4d276aa3, type: 2}
+  - {fileID: 9100000, guid: 30973a5ad3a2a8e408b86b44de675e70, type: 2}
   atBox: {fileID: 7774792293177527182}
   spriteRd: {fileID: 4257343673998533868}
   playerCol: {fileID: 4257343673998533864}
   enemy: {fileID: 2173261828830240608, guid: ff8a2de80f4050244a427c450b017ad2, type: 3}
   moveSpeed: 15
+  isDead: 0
   isSwitched: 0
   canSwitch: 0
   switchIndex: 0

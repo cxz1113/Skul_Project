@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
+    [HideInInspector] public int itemCount = 0;
     public Player player;
     public GameObject gate;
     public GameObject goldParent;
@@ -15,7 +16,6 @@ public class MapManager : MonoBehaviour
     public Item dropHead;
     public Transform coinTrans;
     public Transform headTrans;
-    public int itemCount = 0;
     public List<WayPoint> wayPoints = new List<WayPoint>();
     public List<Enemy> enemies = new List<Enemy>();
     public List<Transform> enemyTrans = new List<Transform>();
@@ -30,6 +30,7 @@ public class MapManager : MonoBehaviour
     public bool isBoss { get; set; }
 
     public bool isGold { get; set; }
+
     public bool isHead { get; set; }
 
     void Awake() => Instance = this;
