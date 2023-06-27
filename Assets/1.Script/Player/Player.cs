@@ -55,7 +55,7 @@ public abstract class Player : MonoBehaviour
     [SerializeField] protected SpriteRenderer spriteRd;
     [SerializeField] protected CapsuleCollider2D playerCol;
     [SerializeField] Enemy enemy;
-
+    [SerializeField] PlayerSound pSound;
     protected bool canInput = true;
     protected float originalGravity = 6;
 
@@ -228,6 +228,7 @@ public abstract class Player : MonoBehaviour
         SetGravity(true);
         animator.SetBool("Dash", false);
         rigid.velocity = new Vector2(rigid.velocity.x, jumpPower);
+        pSound.JUMP();
     }
 
     protected void DownJump()
@@ -475,13 +476,14 @@ public abstract class Player : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Tab))
         {
             PlayerBasket.Instance.invectoryActivated = !PlayerBasket.Instance.invectoryActivated;
-
+            pSound.InvenOpen();
             if (PlayerBasket.Instance.invectoryActivated)
             {
                 ProjectManager.Instance.inven.invenCanvas.gameObject.SetActive(true);
                 StartCoroutine(ProjectManager.Instance.inven.DotweenScroll());
                 InvenManager.Instance.indexX = InvenManager.Instance.indexY = 0;
                 PlayerBasket.Instance.isInven = true;
+                pSound.InvenClose();
             }
         }
     }

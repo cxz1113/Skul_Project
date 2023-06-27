@@ -46,10 +46,9 @@ public abstract class Enemy : MonoBehaviour
     public CapsuleCollider2D capsuleColl;
     public Animator anim;
     public Transform target;
-    public WayPoint2 way2;
     public CountCheck killCheck;
     public Attack_Box_Enemy atkBox;
-    public EnemySound enemysuond;
+    public EnemySound eSound;
     
 
     public int nextMove;
@@ -213,6 +212,7 @@ public abstract class Enemy : MonoBehaviour
         Fx attack_Effect = Instantiate(FxManager.Instance.FxByPlayer(), pos, Quaternion.identity, FxManager.Instance.transform);
         int scaleX = transform.position.x > target.position.x ? 1 : -1;
         attack_Effect.transform.localScale = new Vector3(scaleX, attack_Effect.transform.localScale.y);
+        eSound.Hit();
     }
 
     void Die()

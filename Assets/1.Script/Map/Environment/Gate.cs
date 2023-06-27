@@ -13,7 +13,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && MapManager.Instance.spawnCount == 0)
+        if(collision.CompareTag("Player") && MapManager.Instance.spawnCount <= 0)
         {
             int rand = Random.Range(0, 101);
 

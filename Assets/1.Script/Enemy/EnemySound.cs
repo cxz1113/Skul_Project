@@ -5,20 +5,12 @@ using UnityEngine;
 public class EnemySound : MonoBehaviour
 {
     public Enemy enemy;
+    public AudioSource audiosource;
     public AudioClip atkready;
     public AudioClip atksuond;
     public AudioClip tackleready;
     public AudioClip tackle;
-    public AudioSource audiosource;
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        
-    }
+    public AudioClip hit;
 
     public void AtkReady()
     {
@@ -35,14 +27,18 @@ public class EnemySound : MonoBehaviour
     }
     public void TackleReady()
     {
-        audiosource.clip = atksuond;
+        audiosource.clip = tackleready;
 
         audiosource.Play();
     }
     public void TackleStart()
     {
-        audiosource.clip = atksuond;
-
+        audiosource.clip = tackle;
+        audiosource.Play();
+    }
+    public void Hit()
+    {
+        audiosource.clip = hit;
         audiosource.Play();
     }
 

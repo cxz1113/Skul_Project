@@ -60,10 +60,9 @@ MonoBehaviour:
   capsuleColl: {fileID: 3051545686751339041}
   anim: {fileID: 8256884230393117144}
   target: {fileID: 0}
-  way2: {fileID: 0}
   killCheck: {fileID: 0}
   atkBox: {fileID: 0}
-  enemysuond: {fileID: 2055418423234448021}
+  eSound: {fileID: 2055418423234448021}
   nextMove: 0
   arrowPrf: {fileID: 7911167597606136015, guid: cd610e28f75e14549a0dc02f7de96e1f, type: 3}
 --- !u!212 &8256884230393117150
@@ -159,7 +158,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &3051545686751339041
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,9 +205,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7832189631165236641}
+  audiosource: {fileID: 2905407067647528089}
   atkready: {fileID: 8300000, guid: ae8e4738c8792704ab4dc342b42eea21, type: 3}
   atksuond: {fileID: 8300000, guid: 9a74c44c8d809914f91b79d8e2b0314b, type: 3}
-  audiosource: {fileID: 2905407067647528089}
+  tackleready: {fileID: 0}
+  tackle: {fileID: 0}
+  hit: {fileID: 8300000, guid: 509dd338cd4ff104ba4b19343295b4a0, type: 3}
 --- !u!82 &2905407067647528089
 AudioSource:
   m_ObjectHideFlags: 0
@@ -222,7 +223,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
