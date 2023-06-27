@@ -15,11 +15,7 @@ public class Player_Sword : Player
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.sword];
         rigid = GetComponent<Rigidbody2D>();
 
-        if (isSwitched)
-        {
-            SwitchSkill();
-            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 0));
-        }
+        StartCoroutine(Switched());
 
         switchIndex = 2;
     }

@@ -36,8 +36,15 @@ public class Tanker : Enemy
             anim.SetTrigger("Attack");
             ed.state = EnemyState.Attack;
         }
-
     }
+
+    IEnumerator EventTackle()
+    {
+        rigid.AddForce(transform.right * 30 * rigid.mass * transform.localScale.x, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.15f);
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+    }
+
     public override void Damaged(float damage)
     {
         
@@ -55,8 +62,6 @@ public class Tanker : Enemy
                 rigid.velocity = new Vector2(0, rigid.velocity.y);
             }
         }
-
-        nextMove = 0;
     }
 
     IEnumerator TackleCoolDown()

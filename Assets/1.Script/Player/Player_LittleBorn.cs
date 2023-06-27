@@ -29,11 +29,7 @@ public class Player_LittleBorn : Player
         animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
         rigid = GetComponent<Rigidbody2D>();
 
-        if (isSwitched)
-        {
-            SwitchSkill();
-            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 0));
-        }
+        StartCoroutine(Switched());
 
         switchIndex = 1;
     }
