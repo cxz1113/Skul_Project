@@ -147,13 +147,7 @@ public abstract class Player : MonoBehaviour
         SkulSwitch();
         InvenActive();
 
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            Instantiate(enemy, pos, Quaternion.identity);
-        }
-
-        Test();
+        //Test();
     }
 
     protected void LookDir()
@@ -496,6 +490,12 @@ public abstract class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             PauseManager.Instance.Pause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            Instantiate(enemy, pos, Quaternion.identity);
         }
     }
 }

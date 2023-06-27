@@ -80,7 +80,8 @@ public abstract class Enemy : MonoBehaviour
             return;
 
         //Move
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        if (ed.state != EnemyState.Attack)
+            rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
         //Platform Check
         PlatformCheck();
