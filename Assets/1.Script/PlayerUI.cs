@@ -50,7 +50,7 @@ public class PlayerUI : MonoBehaviour
     public List<string> strType2Skill = new List<string>();
     #endregion
 
-    #region
+    #region MainSkulDataType3
     [Header("MainItemData")]
     public GameObject type3;
     public Image type3Icon;
@@ -103,10 +103,22 @@ public class PlayerUI : MonoBehaviour
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
+            InvenManager inven = FindObjectOfType<InvenManager>();
+
             ItemData.Data data = item.itemJson;
             string[] jsonData = { data.name, data.tier, data.intro, data.itemdetail, data.abillity1, data.abillity2 };
-            if (strType3.Count < 1)
+            if (!inven.isIndexX && strType3.Count < 1 && inven.isIndexY)
+            {
                 InputData(strType3, jsonData);
+            }
+            else if(inven.isIndexX && inven.isIndexY)
+            {
+                strType3.Clear();
+                inven.isIndexX = false;
+                inven.isIndexY = false;
+                if (strType3.Count < 1)
+                    InputData(strType3, jsonData);
+            }
         }
     }
 
@@ -186,17 +198,17 @@ public class PlayerUI : MonoBehaviour
     void ActiveObjChange(List<string> strList, List<string> strSkillList, string[] jsonStr, string[] jsonSkillStr)
     {
         InvenManager inven = FindObjectOfType<InvenManager>();
-        if (!inven.isIndex && strList.Count < 1 && strSkillList.Count < 1)
+        if (!inven.isIndexX && strList.Count < 1 && strSkillList.Count < 1)
         {
             InputData(strList, jsonStr);
             InputData(strSkillList, jsonSkillStr);
         }
-        else if (inven.isIndex)
+        else if (inven.isIndexX)
         {
             strList.Clear();
             strSkillList.Clear();
 
-            inven.isIndex = false;
+            inven.isIndexX = false;
             if (strList.Count < 1 && strSkillList.Count < 1)
             {
                 InputData(strList, jsonStr);

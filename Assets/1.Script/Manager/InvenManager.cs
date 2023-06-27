@@ -26,7 +26,8 @@ public class InvenManager : MonoBehaviour
     public int indexX = 0;
     public int indexY = 0;
     public bool isItemC = false;
-    public bool isIndex = false;
+    public bool isIndexX = false;
+    public bool isIndexY = false;
     Direct dir;
     void Awake() => Instance = this;
 
@@ -58,10 +59,10 @@ public class InvenManager : MonoBehaviour
 
     public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
     {
-        InputData(itemBox, items1, 0, 2);
-        InputData(itemBox, items2, 1, 1);
-        InputData(itemBox, items3, 2, 3);
-        InputData(itemBox, items3, 3, 3);
+        InputData(itemBox, items1, 0, 2, 0);
+        InputData(itemBox, items2, 1, 1, 0);
+        InputData(itemBox, items3, 2, 3, 0);
+        InputData(itemBox, items3, 3, 3, 3);
 
         InvenData();
     }
@@ -156,7 +157,8 @@ public class InvenManager : MonoBehaviour
             }
         }
     }
-    void InputData(Item[][] itemsBox, List<Item> items, int a, int b)
+
+    void InputData(Item[][] itemsBox, List<Item> items, int a, int b, int c)
     {
         itemsBox[a] = new Item[b];
 
@@ -166,8 +168,8 @@ public class InvenManager : MonoBehaviour
                 break;
             else if (a == 3 && items.Count < 3)
                 break;
-            else if(a == 3 && items.Count > 2)
-                itemsBox[a][i] = items[i+3];
+            else if(a == 3 && items.Count > 3)
+                itemsBox[a][i] = items[i+c];
             else
                 itemsBox[a][i] = items[i];
         }
@@ -181,10 +183,12 @@ public class InvenManager : MonoBehaviour
                 images[a][i].sprite = ui.nullSprite;
             else
             {
-                if(a == 0)
+                if (a == 0)
                     images[a][i].sprite = itemsBox[a][i].ss.headItem;
-                else if (a == 3)
-                    images[a][i].sprite = itemsBox[a][i + 3].id.item;
+                else if (a == 3 && itemsBox.Length < 3)
+                    break;
+                /*else if(a == 3 && itemsBox[a].Length > 3)
+                    images[a][i].sprite = itemsBox[a][i + 3].id.item;*/
                 else
                     images[a][i].sprite = itemsBox[a][i].id.item;
             }
@@ -196,19 +200,19 @@ public class InvenManager : MonoBehaviour
         switch (dir)
         {
             case Direct.Left:
-                isIndex = true;
+                isIndexX = true;
                 indexX--;
                 break;
             case Direct.Right:
-                isIndex = true;
+                isIndexX = true;
                 indexX++;
                 break;
             case Direct.Up:
-                isIndex = true;
+                isIndexY = true;
                 indexY--;
                 break;
             case Direct.Down:
-                isIndex = true;
+                isIndexY = true;
                 indexY++;
                 break;
         }

@@ -19527,7 +19527,8 @@ MonoBehaviour:
   indexX: 0
   indexY: 0
   isItemC: 0
-  isIndex: 0
+  isIndeX: 0
+  isIndeY: 0
 --- !u!1 &1173448041
 GameObject:
   m_ObjectHideFlags: 0
@@ -22802,7 +22803,7 @@ MonoBehaviour:
   - {fileID: 454749581}
   - {fileID: 1098179397}
   - {fileID: 359964295}
-  spawnCount: 20
+  spawnCount: 0
 --- !u!4 &1401674939
 Transform:
   m_ObjectHideFlags: 0
