@@ -361,7 +361,7 @@ public abstract class Player : MonoBehaviour
     protected IEnumerator EventCStopInput()
     {
         canInput = false;
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) 
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9f) 
         {
             yield return new WaitForEndOfFrame();
         }
