@@ -6587,6 +6587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d64de7c2145af479656cfa1ac79a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemCount: 0
   player: {fileID: 0}
   gate: {fileID: 0}
   goldParent: {fileID: 0}
@@ -6596,7 +6597,6 @@ MonoBehaviour:
   dropHead: {fileID: 0}
   coinTrans: {fileID: 0}
   headTrans: {fileID: 0}
-  itemCount: 0
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -34524,6 +34524,7 @@ MonoBehaviour:
   heads: []
   essences: []
   items: []
+  isPasue: 0
 --- !u!4 &2096888941
 Transform:
   m_ObjectHideFlags: 0

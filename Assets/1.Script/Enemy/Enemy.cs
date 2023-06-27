@@ -49,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
     public WayPoint2 way2;
     public CountCheck killCheck;
     public Attack_Box_Enemy atkBox;
-
+    public EnemySound enemysuond;
     
 
     public int nextMove;
