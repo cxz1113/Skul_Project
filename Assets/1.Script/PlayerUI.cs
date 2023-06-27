@@ -103,11 +103,10 @@ public class PlayerUI : MonoBehaviour
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
-            InvenManager inven = FindObjectOfType<InvenManager>();
-
             ItemData.Data data = item.itemJson;
             string[] jsonData = { data.name, data.tier, data.intro, data.itemdetail, data.abillity1, data.abillity2 };
-            if (!inven.isIndexX && strType3.Count < 1 && inven.isIndexY)
+            ActiveObjChange(strType3, jsonData);
+            /*if (!inven.isIndexX && strType3.Count < 1)
             {
                 InputData(strType3, jsonData);
             }
@@ -115,10 +114,9 @@ public class PlayerUI : MonoBehaviour
             {
                 strType3.Clear();
                 inven.isIndexX = false;
-                inven.isIndexY = false;
                 if (strType3.Count < 1)
                     InputData(strType3, jsonData);
-            }
+            }*/
         }
     }
 
@@ -213,6 +211,24 @@ public class PlayerUI : MonoBehaviour
             {
                 InputData(strList, jsonStr);
                 InputData(strSkillList, jsonSkillStr);
+            }
+        }
+    }
+    void ActiveObjChange(List<string> strList, string[] jsonStr)
+    {
+        InvenManager inven = FindObjectOfType<InvenManager>();
+        if (!inven.isIndexX && strList.Count < 1)
+        {
+            InputData(strList, jsonStr);
+        }
+        else if (inven.isIndexX)
+        {
+            strList.Clear();
+
+            inven.isIndexX = false;
+            if (strList.Count < 1 )
+            {
+                InputData(strList, jsonStr);
             }
         }
     }

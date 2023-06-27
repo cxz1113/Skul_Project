@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309f06a5207dfc42a4c5c92acab1b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  it: 0
+  it: 3
   headSprites: []
   skillSprites: []
   itemSprites:
@@ -76,6 +76,9 @@ MonoBehaviour:
     itemdetail: 
     abillity1: 
     abillity2: 
+  item: {fileID: 0}
+  dropItem: {fileID: 0}
+  pName: 
 --- !u!212 &6432153061083966719
 SpriteRenderer:
   m_ObjectHideFlags: 0

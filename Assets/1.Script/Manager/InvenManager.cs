@@ -208,11 +208,11 @@ public class InvenManager : MonoBehaviour
                 indexX++;
                 break;
             case Direct.Up:
-                isIndexY = true;
+                //isIndexY = true;
                 indexY--;
                 break;
             case Direct.Down:
-                isIndexY = true;
+                //isIndexY = true;
                 indexY++;
                 break;
         }
