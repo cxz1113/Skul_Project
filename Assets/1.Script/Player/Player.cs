@@ -126,7 +126,7 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        if (PlayerBasket.Instance.isInven || isDead)
+        if (PlayerBasket.Instance.isInven || isDead || ProjectManager.Instance.isPasue)
             return;
         
         JumpAnimation();
@@ -147,7 +147,7 @@ public abstract class Player : MonoBehaviour
         SkulSwitch();
         InvenActive();
 
-        //Test();
+        Test();
     }
 
     protected void LookDir()
@@ -411,6 +411,7 @@ public abstract class Player : MonoBehaviour
             rigid.velocity = Vector2.zero;
             isDead = true;
             DataManager.Instance.SaveData();
+            PauseManager.Instance.Pause();
         }
         else
         {

@@ -18,7 +18,11 @@ public class DataManager : MonoBehaviour
         //path = Path.Combine(Application.dataPath, "Assets/database.json");
 
         LoadData();
-        DontDestroyOnLoad(this.gameObject);
+        var data = FindObjectsOfType<DataManager>();
+        if (data.Length == 1)
+            DontDestroyOnLoad(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void SaveData()

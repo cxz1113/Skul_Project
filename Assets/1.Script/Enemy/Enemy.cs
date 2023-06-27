@@ -69,7 +69,7 @@ public abstract class Enemy : MonoBehaviour
     void Start()
     {
         Init();
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("Fx_Canvas");
         target = GameObject.FindWithTag("Player").transform;
         Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), target.gameObject.GetComponent<CapsuleCollider2D>());
     }
