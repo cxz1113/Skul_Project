@@ -1,11 +1,11 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 15.0,
+            "curhp": 100.0,
             "maxhp": 100.0,
             "playerhead": [
                 {
-                    "head": "Sword"
+                    "head": "LittleBorn"
                 },
                 {
                     "head": "Wolf"

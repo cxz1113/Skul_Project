@@ -22805,7 +22805,7 @@ MonoBehaviour:
   - {fileID: 454749581}
   - {fileID: 1098179397}
   - {fileID: 359964295}
-  spawnCount: 0
+  spawnCount: 20
 --- !u!4 &1401674939
 Transform:
   m_ObjectHideFlags: 0
