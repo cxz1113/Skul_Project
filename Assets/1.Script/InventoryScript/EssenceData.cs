@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class EssenceData : MonoBehaviour
 {
+    public TextAsset essenceJson;
+    public EssenceDatajson essenceDatajson;
+
     [System.Serializable]
     public class Data
     {
@@ -17,21 +20,13 @@ public class EssenceData : MonoBehaviour
         public string essencespname;
     }
     [System.Serializable]
-    public class Split
+    public class EssenceDatajson
     {
-        public List<Data> essence;
+        public List<Data> essence = new List<Data>();
     }
-
-    public Split split;
-    [SerializeField] TextAsset essenceJson;
 
     void Start()
     {
-        split = JsonUtility.FromJson<Split>(essenceJson.text);
-    }
-
-    public void OnEssenceData()
-    {
-        //EssenceUI.Instance.SetData(split.essence[0]);
+        essenceDatajson = JsonUtility.FromJson<EssenceDatajson>(essenceJson.text);
     }
 }

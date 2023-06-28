@@ -77,6 +77,7 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
+        // bool값 인벤 true시 데이터
         if (PlayerBasket.Instance.isInven)
             DataType();
         else if(!PlayerBasket.Instance.isInven)
@@ -86,6 +87,7 @@ public class PlayerUI : MonoBehaviour
 
     public void SetData(Item item)
     {
+        // Item 타입에 또는 데이터 유뮤에 따라 UI에 input 해주는 코드
         if (item.it == ItemType.Head && item.ss.Skill2 != null)
         {
             SkulData.Data data = item.skulJson;
@@ -103,20 +105,23 @@ public class PlayerUI : MonoBehaviour
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
+            InvenManager inven = FindObjectOfType<InvenManager>();
+
             ItemData.Data data = item.itemJson;
             string[] jsonData = { data.name, data.tier, data.intro, data.itemdetail, data.abillity1, data.abillity2 };
-            ActiveObjChange(strType3, jsonData);
-            /*if (!inven.isIndexX && strType3.Count < 1)
+
+            if ((!inven.isIndexX || !inven.isIndexY) && strType3.Count < 1)
             {
                 InputData(strType3, jsonData);
             }
-            else if(inven.isIndexX && inven.isIndexY)
+            else if(inven.isIndexX || inven.isIndexY)
             {
                 strType3.Clear();
                 inven.isIndexX = false;
+                inven.isIndexY = false;
                 if (strType3.Count < 1)
                     InputData(strType3, jsonData);
-            }*/
+            }
         }
     }
 
@@ -159,6 +164,7 @@ public class PlayerUI : MonoBehaviour
 
     void DataType()
     {
+        // Item의 타입에 따라 Item UI 활성화
         item = FindObjectOfType<InvenManager>().ItemIn();
         if (item == null)
         {
@@ -195,40 +201,24 @@ public class PlayerUI : MonoBehaviour
 
     void ActiveObjChange(List<string> strList, List<string> strSkillList, string[] jsonStr, string[] jsonSkillStr)
     {
+        // 인벤토리에서 아이템 바뀔때마다 데이터 초기화
         InvenManager inven = FindObjectOfType<InvenManager>();
-        if (!inven.isIndexX && strList.Count < 1 && strSkillList.Count < 1)
+        if ((!inven.isIndexX || !inven.isIndexY) && strList.Count < 1 && strSkillList.Count < 1)
         {
             InputData(strList, jsonStr);
             InputData(strSkillList, jsonSkillStr);
         }
-        else if (inven.isIndexX)
+        else if (inven.isIndexX || inven.isIndexY)
         {
             strList.Clear();
             strSkillList.Clear();
 
             inven.isIndexX = false;
+            inven.isIndexY = false;
             if (strList.Count < 1 && strSkillList.Count < 1)
             {
                 InputData(strList, jsonStr);
                 InputData(strSkillList, jsonSkillStr);
-            }
-        }
-    }
-    void ActiveObjChange(List<string> strList, string[] jsonStr)
-    {
-        InvenManager inven = FindObjectOfType<InvenManager>();
-        if (!inven.isIndexX && strList.Count < 1)
-        {
-            InputData(strList, jsonStr);
-        }
-        else if (inven.isIndexX)
-        {
-            strList.Clear();
-
-            inven.isIndexX = false;
-            if (strList.Count < 1 )
-            {
-                InputData(strList, jsonStr);
             }
         }
     }
@@ -260,6 +250,7 @@ public class PlayerUI : MonoBehaviour
 
     void ImageData(List<Image> box, Sprite[] sprites)
     {
+        // Image input
         int count = 0;
         while (count < box.Count)
         {
@@ -270,6 +261,7 @@ public class PlayerUI : MonoBehaviour
 
     void TextData(List<TMP_Text> box, List<string> str)
     {
+        // Text input
         for (int i = 0; i < box.Count; i++)
         {
             box[i].text = str[i];
@@ -278,6 +270,7 @@ public class PlayerUI : MonoBehaviour
 
     void ImageIconType(Image type, Item item)
     {
+        // MainSkul Sprite 크기가 포지션 잡아주는 코드
         RectTransform typePos = type.GetComponent<RectTransform>();
         switch (item.skulJson.itemskul)
         {

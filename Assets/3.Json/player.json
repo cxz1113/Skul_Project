@@ -16,7 +16,7 @@
           "essence": ""
         }
       ],
-      "playeritem": [
+      "playeritem1": [
         {
           "item": "WeddingRing"
         },
@@ -25,7 +25,9 @@
         },
         {
           "item": ""
-        },
+        }
+      ],
+      "playeritem2": [
         {
           "item": ""
         },

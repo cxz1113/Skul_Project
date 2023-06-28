@@ -41,6 +41,7 @@ public abstract class Item : MonoBehaviour
     public List<Sprite> itemSprites = new List<Sprite>();
     public SkulData.Data skulJson;
     public ItemData.Data itemJson;
+    public EssenceData.Data essenceJson;
     public Item item;
     public Item dropItem;
     public string pName;

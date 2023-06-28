@@ -24,18 +24,24 @@ public class PlayerData : MonoBehaviour
         public class playerDataEssence
         {
             public string essence;
-        
         }
 
         [Serializable]
-        public class playerDataItem
+        public class playerDataItem1
+        {
+            public string item;
+        }
+
+        [Serializable]
+        public class playerDataItem2
         {
             public string item;
         }
 
         public List<playerDataHead> playerhead = new List<playerDataHead>();
         public List<playerDataEssence> playeressence = new List<playerDataEssence>();
-        public List<playerDataItem> playeritem = new List<playerDataItem>();
+        public List<playerDataItem1> playeritem1 = new List<playerDataItem1>();
+        public List<playerDataItem2> playeritem2 = new List<playerDataItem2>();
     }
 
     [Serializable]

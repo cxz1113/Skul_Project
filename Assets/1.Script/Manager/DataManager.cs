@@ -6,6 +6,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public SkulData skulData;
+    public EssenceData essenceData;
     public ItemData itemData;
     public PlayerData playerData;
 

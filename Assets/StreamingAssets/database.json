@@ -1,14 +1,14 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 55.0,
+            "curhp": 100.0,
             "maxhp": 100.0,
             "playerhead": [
                 {
-                    "head": "LittleBorn"
+                    "head": "Wolf"
                 },
                 {
-                    "head": "Wolf"
+                    "head": "Sword"
                 }
             ],
             "playeressence": [
@@ -16,18 +16,20 @@
                     "essence": ""
                 }
             ],
-            "playeritem": [
+            "playeritem1": [
                 {
-                    "item": "ManaGauntlet"
+                    "item": "WeddingRing"
                 },
                 {
-                    "item": ""
+                    "item": "CretanBull"
                 },
                 {
-                    "item": ""
-                },
+                    "item": "SwordOfSun"
+                }
+            ],
+            "playeritem2": [
                 {
-                    "item": ""
+                    "item": "FrostGiantsLeather"
                 },
                 {
                     "item": ""

@@ -21585,10 +21585,12 @@ MonoBehaviour:
     maxhp: 0
     playerhead: []
     playeressence: []
-    playeritem: []
+    playeritem1: []
+    playeritem2: []
   heads: []
   essences: []
-  items: []
+  items1: []
+  items2: []
   isPasue: 0
 --- !u!1 &1322946507
 GameObject:

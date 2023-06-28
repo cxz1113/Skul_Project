@@ -57,12 +57,12 @@ public class InvenManager : MonoBehaviour
         mySequence.Append(scroll.GetComponent<RectTransform>().DOSizeDelta(new Vector2(1720, 1080), 1f, true));
     }
 
-    public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3)
+    public void ItemBox(List<Item> items1, List<Item> items2, List<Item> items3, List<Item> items4)
     {
-        InputData(itemBox, items1, 0, 2, 0);
-        InputData(itemBox, items2, 1, 1, 0);
-        InputData(itemBox, items3, 2, 3, 0);
-        InputData(itemBox, items3, 3, 3, 3);
+        InputData(itemBox, items1, 0, 2);
+        InputData(itemBox, items2, 1, 1);
+        InputData(itemBox, items3, 2, 3);
+        InputData(itemBox, items4, 3, 3);
 
         InvenData();
     }
@@ -120,8 +120,10 @@ public class InvenManager : MonoBehaviour
 
     public void JsonSet(Item itemS)
     {
+        // Item 타입에 따라 Json 데이터 찾기 코드
         ItemData itemData = FindObjectOfType<ItemData>();
         SkulData skulData = FindObjectOfType<SkulData>();
+        EssenceData essenceData = FindObjectOfType<EssenceData>();
 
         int count = 0;
         if (itemS == null)
@@ -156,20 +158,32 @@ public class InvenManager : MonoBehaviour
                 }
             }
         }
+        else if(itemS.it == ItemType.Essence)
+        {
+            while(count < essenceData.essenceDatajson.essence.Count)
+            {
+                if (itemS.name != essenceData.essenceDatajson.essence[count].name)
+                {
+                    count++;
+                }
+                else
+                {
+                    itemS.essenceJson = essenceData.essenceDatajson.essence[count];
+                    break;
+                }
+            }
+        }
     }
 
-    void InputData(Item[][] itemsBox, List<Item> items, int a, int b, int c)
+    void InputData(Item[][] itemsBox, List<Item> items, int a, int b)
     {
+        // 가상의 ItemBox배열에 Item(head, essence, item) input하는 코드
         itemsBox[a] = new Item[b];
 
         for (int i = 0; i < items.Count; i++)
         {
             if (items[i] == null)
                 break;
-            else if (a == 3 && items.Count < 3)
-                break;
-            else if(a == 3 && items.Count > 3)
-                itemsBox[a][i] = items[i+c];
             else
                 itemsBox[a][i] = items[i];
         }
@@ -185,10 +199,6 @@ public class InvenManager : MonoBehaviour
             {
                 if (a == 0)
                     images[a][i].sprite = itemsBox[a][i].ss.headItem;
-                else if (a == 3 && itemsBox.Length < 3)
-                    break;
-                /*else if(a == 3 && itemsBox[a].Length > 3)
-                    images[a][i].sprite = itemsBox[a][i + 3].id.item;*/
                 else
                     images[a][i].sprite = itemsBox[a][i].id.item;
             }
@@ -208,11 +218,11 @@ public class InvenManager : MonoBehaviour
                 indexX++;
                 break;
             case Direct.Up:
-                //isIndexY = true;
+                isIndexY = true;
                 indexY--;
                 break;
             case Direct.Down:
-                //isIndexY = true;
+                isIndexY = true;
                 indexY++;
                 break;
         }

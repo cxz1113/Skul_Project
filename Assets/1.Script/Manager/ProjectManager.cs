@@ -16,7 +16,8 @@ public class ProjectManager : MonoBehaviour
     public PlayerData.PlayerDataJson data;
     public List<Item> heads = new List<Item>();
     public List<Item> essences = new List<Item>();
-    public List<Item> items = new List<Item>();
+    public List<Item> items1 = new List<Item>();
+    public List<Item> items2 = new List<Item>();
     public bool isPasue = false;
 
     void Awake() => Instance = this;
@@ -33,24 +34,19 @@ public class ProjectManager : MonoBehaviour
         HPGage();
     }
 
-    void Update()
-    {
-        if(isPasue || PlayerBasket.Instance.isInven)
-        {
-
-        }
-    }
     void PlayerSet()
     {
         // 플레이어 Data를 playerBasket 전달
         playerBasket = FindObjectOfType<PlayerBasket>();
-        HeadFrametaSet();
         ItemSet();
-        EssenceSet();
         playerBasket.curHp = data.curhp;
         playerBasket.maxHp = data.maxhp;
     }
-
+    void Init(string main)
+    {
+        // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
+        player = Instantiate(Resources.Load<Player>(string.Format($"Player/{main}")));
+    }
 
     void PlayerUISet()
     {
@@ -71,12 +67,6 @@ public class ProjectManager : MonoBehaviour
         ui.hpGage.fillAmount = (hpEnergy / 10f);
     }
 
-    void Init(string main)
-    {
-        // Scene 이동시 플레이어 json 헤드 이름에 따라 그와 관련된 플레이어 생성
-        player = Instantiate(Resources.Load<Player>(string.Format($"Player/{main}")));
-    }
-
     public void HeadSwap()
     {
         // 플레이어 헤드프레임 스왑시 교체할 변수 및 함수
@@ -92,7 +82,7 @@ public class ProjectManager : MonoBehaviour
     {
         // 플레이어가 새로운 Head를 먹었을 때 교체할 변수 및 함수
         player = FindObjectOfType<Player>();
-        inven.ItemBox(heads, essences, items);
+        inven.ItemBox(heads, essences, items1, items2);
         TextSet();
         ui.head1.sprite = heads[0].ss.headStatus1;
         ui.head2.sprite = heads[1].ss.headStatus2;
@@ -121,58 +111,45 @@ public class ProjectManager : MonoBehaviour
     public void InventorySet()
     {
         ui.ImageSet();
-        inven.ItemBox(heads, essences, items);
-    }
-
-    void HeadFrametaSet()
-    {
-        // PlayerDataJson Head Set
-        string[] str = { data.playerhead[0].head, data.playerhead[1].head };
-        for (int i = 0; i < str.Length; i++)
-        {
-            if (str[i] == string.Empty)
-                break;
-            else
-            {
-                heads.Add(Resources.Load<Item>($"Head/{str[i]}"));
-                foreach (var item in heads)
-                {
-                    item.Init();
-                }
-            }
-        }
-    }
-
-    void EssenceSet()
-    {
-        // PlayerDataJson Essence Set
-        string str = data.playeressence[0].essence;
-        if (str == string.Empty)
-            return;
-
-        essences.Add(Resources.Load<Item>($"Prefab/{str}"));
+        inven.ItemBox(heads, essences, items1, items2);
     }
 
     void ItemSet()
     {
-        // PlayerDataJson Item Set
-        string[] str = { data.playeritem[0].item, data.playeritem[1].item, data.playeritem[2].item, data.playeritem[3].item, data.playeritem[4].item, data.playeritem[5].item};
+        // PlayerDataJson Head, Essence, Item Set 
+        string[] strHead = { data.playerhead[0].head, data.playerhead[1].head };
+        string[] strEssence = { data.playeressence[0].essence };
+        string[] strItem1 = { data.playeritem1[0].item, data.playeritem1[1].item, data.playeritem1[2].item };
+        string[] strItem = { data.playeritem2[0].item, data.playeritem2[1].item, data.playeritem2[2].item };
 
-        for (int i = 0; i < str.Length; i++)
+        ItemSetting(strHead, heads);
+        ItemSetting(strEssence, essences);
+        ItemSetting(strItem1, items1);
+        ItemSetting(strItem, items2);
+    }
+    void ItemSetting(string[] strs, List<Item> item)
+    {
+        // ResouceLoad를 이용한 데이터 input코드
+        for(int i = 0; i < strs.Length; i++)
         {
-            if (str[i] == string.Empty)
+            if (strs[i] == string.Empty)
                 break;
             else
             {
-                items.Add(Resources.Load<Item>($"Item/{str[i]}"));
-                foreach (var item in items)
-                {
-                    item.Init();
-                }
+                if(item == heads)
+                    item.Add(Resources.Load<Item>($"Head/{strs[i]}"));
+                else if(item == essences)
+                    item.Add(Resources.Load<Item>($"Essence/{strs[i]}"));
+                else if (item == items1)
+                    item.Add(Resources.Load<Item>($"Item/{strs[i]}"));
+                else if(item == items2)
+                    item.Add(Resources.Load<Item>($"Item/{strs[i]}"));
+
+                foreach (var obj in item)
+                    obj.Init();
             }
         }
     }
-
  
     void InvenHeadChage(List<Item> item, Item[][] itemBoxes, Image[][] images)
     {
@@ -198,11 +175,13 @@ public class ProjectManager : MonoBehaviour
         data.curhp = hp;
         DataTest(heads);
         DataTest(essences);
-        DataTest(items);
+        DataTest(items1);
+        DataTest(items2);
     }
 
     public void DataTest(List<Item> itemType)
     {
+        // 저장할 데이터 직렬화 코드
         if (itemType.Count == 0)
             return;
         for (int i = 0; i < itemType.Count; i++)
@@ -211,8 +190,10 @@ public class ProjectManager : MonoBehaviour
                 data.playerhead[i].head = itemType[i].name;
             else if(itemType == essences)
                 data.playeressence[i].essence = itemType[i].name;
-            else if(itemType == items)
-                data.playeritem[i].item = itemType[i].name;
+            else if(itemType == items1)
+                data.playeritem1[i].item = itemType[i].name;
+            else if(itemType == items2)
+                data.playeritem2[i].item = itemType[i].name;
         }
     }
 }

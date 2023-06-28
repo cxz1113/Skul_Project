@@ -19,7 +19,7 @@ public class MainSceneManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(1);
         }

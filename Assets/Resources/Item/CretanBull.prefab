@@ -52,6 +52,7 @@ MonoBehaviour:
   itemSprites:
   - {fileID: 21300000, guid: 8d9aed1498cc6294e97bcac0a3ab8e6f, type: 3}
   - {fileID: 21300000, guid: d5ce18c77dbdb9b4fa314db5cd33d3ed, type: 3}
+  - {fileID: 21300000, guid: b8f4796b000a2034dbfa1a95934059a6, type: 3}
   skulJson:
     name: 
     tier: 
