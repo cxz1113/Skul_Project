@@ -1,0 +1,43 @@
+{
+    "playerdatajsons": [
+        {
+            "curhp": 100.0,
+            "maxhp": 100.0,
+            "playerhead": [
+                {
+                    "head": "LittleBorn"
+                },
+                {
+                    "head": "Wolf"
+                }
+            ],
+            "playeressence": [
+                {
+                    "essence": ""
+                }
+            ],
+            "playeritem1": [
+                {
+                    "item": "WeddingRing"
+                },
+                {
+                    "item": "CretanBull"
+                },
+                {
+                    "item": "SwordOfSun"
+                }
+            ],
+            "playeritem2": [
+                {
+                    "item": "FrostGiantsLeather"
+                },
+                {
+                    "item": ""
+                },
+                {
+                    "item": ""
+                }
+            ]
+        }
+    ]
+}
