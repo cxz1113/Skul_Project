@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skulData: {fileID: 1963772653}
-  essenceData: {fileID: 0}
+  essenceData: {fileID: 1930995996}
   itemData: {fileID: 1481486610}
   playerData: {fileID: 2013699551}
   data: 

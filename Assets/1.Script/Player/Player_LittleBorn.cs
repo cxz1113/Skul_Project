@@ -55,6 +55,7 @@ public class Player_LittleBorn : Player
 
     protected override IEnumerator CSkill_2()
     {
+        pSound.TELEPORT();
         canSkill_2 = false;
         FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
         transform.position = head.transform.position;

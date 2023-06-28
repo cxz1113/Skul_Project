@@ -17,6 +17,7 @@ public class PlayerSound : MonoBehaviour
     [Header("Player")]
     public AudioClip atkA;
     public AudioClip atkB;
+    public AudioClip atkC;
     public AudioClip Dash;
     public AudioClip Dead;
     public AudioClip Jump;
@@ -33,10 +34,15 @@ public class PlayerSound : MonoBehaviour
 
         audiosource.Play();
     }
-
     public void ATKB()
     {
         audiosource.clip = atkB;
+
+        audiosource.Play();
+    }
+    public void ATKC()
+    {
+        audiosource.clip = atkC;
 
         audiosource.Play();
     }

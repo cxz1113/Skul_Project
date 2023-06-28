@@ -55,7 +55,7 @@ public abstract class Player : MonoBehaviour
     [SerializeField] protected SpriteRenderer spriteRd;
     [SerializeField] protected CapsuleCollider2D playerCol;
     [SerializeField] Enemy enemy;
-    [SerializeField] PlayerSound pSound;
+    [SerializeField] public PlayerSound pSound;
     protected bool canInput = true;
     protected float originalGravity = 6;
 
@@ -116,6 +116,7 @@ public abstract class Player : MonoBehaviour
         isSwitched = true;
         playerDir = player.playerDir;
         ProjectManager.Instance.HeadSwap();
+        pSound.SWITCH();
     }
 
     void Start()

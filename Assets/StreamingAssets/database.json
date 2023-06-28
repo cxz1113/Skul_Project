@@ -1,14 +1,14 @@
 {
     "playerdatajsons": [
         {
-            "curhp": 100.0,
+            "curhp": 15.0,
             "maxhp": 100.0,
             "playerhead": [
                 {
-                    "head": "Wolf"
+                    "head": "Sword"
                 },
                 {
-                    "head": "Sword"
+                    "head": "Wolf"
                 }
             ],
             "playeressence": [
