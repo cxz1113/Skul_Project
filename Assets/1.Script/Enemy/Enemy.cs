@@ -101,8 +101,6 @@ public abstract class Enemy : MonoBehaviour
         if (ed.isDead == true || ed.hp <= 0)
             Die();
 
-        DamageTest();
-
         if (ed.state == EnemyState.Attack)
             return;
 
@@ -188,9 +186,20 @@ public abstract class Enemy : MonoBehaviour
             ed.hp -= damage;
             CreateDamage_Text(damage);
             CreateFx_Effect();
-            anim.SetTrigger("Hit");
-            ed.state = EnemyState.Hit;
-            rigid.velocity = new Vector2(0, rigid.velocity.y);
+
+            if (ed.type == EnemyType.Tanker &&
+                ed.state != EnemyState.Attack)
+            {
+                anim.SetTrigger("Hit");
+                ed.state = EnemyState.Hit;
+                rigid.velocity = new Vector2(0, rigid.velocity.y);
+            }
+            else
+            {
+                anim.SetTrigger("Hit");
+                ed.state = EnemyState.Hit;
+                rigid.velocity = new Vector2(0, rigid.velocity.y);
+            }
         }
 
         nextMove = 0;
@@ -232,14 +241,6 @@ public abstract class Enemy : MonoBehaviour
     void Dest()
     {
         Destroy(gameObject);
-    }
-
-    void DamageTest()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            //ed.hp -= 100;
-        }
     }
 
     void PlatformCheck()

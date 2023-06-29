@@ -69,10 +69,10 @@ public class InvenManager : MonoBehaviour
 
     void InvenData()
     {
-        InputData(ui.imagesItem, itemBox, 0);
-        InputData(ui.imagesItem, itemBox, 1);
-        InputData(ui.imagesItem, itemBox, 2);
-        InputData(ui.imagesItem, itemBox, 3);
+        for (int i = 0; i < 4; i++)
+        {
+            InputData(ui.imagesItem, itemBox, i);
+        }
     }
 
     public void SelectItem()
@@ -121,7 +121,6 @@ public class InvenManager : MonoBehaviour
     public void JsonSet(Item itemS)
     {
         // Item 타입에 따라 Json 데이터 찾기 코드
-        ItemData itemData = FindObjectOfType<ItemData>();
         SkulData skulData = FindObjectOfType<SkulData>();
         EssenceData essenceData = FindObjectOfType<EssenceData>();
 
@@ -130,15 +129,15 @@ public class InvenManager : MonoBehaviour
             return;
         if (itemS.it == ItemType.Item)
         {
-            while (count < itemData.itemDatajson.item.Count)
+            while (count < ItemData.Instance.itemDatajson.item.Count)
             {
-                if (itemS.name != itemData.itemDatajson.item[count].itemname)
+                if (itemS.name != ItemData.Instance.itemDatajson.item[count].itemname)
                 {
                     count++;
                 }
                 else
                 {
-                    itemS.itemJson = itemData.itemDatajson.item[count];
+                    itemS.itemJson = ItemData.Instance.itemDatajson.item[count];
                     break;
                 }
             }

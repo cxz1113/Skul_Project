@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
+    public static ItemData Instance;
+
     public TextAsset itemJson;
     public ItemDatajson itemDatajson;
 
@@ -28,5 +30,10 @@ public class ItemData : MonoBehaviour
     void Start()
     {
         itemDatajson = JsonUtility.FromJson<ItemDatajson>(itemJson.text);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 }

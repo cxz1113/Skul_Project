@@ -6,11 +6,8 @@ public class Player_Caleon : Player
 {
     protected override void Init()
     {
-        base.Init();
         Damage = 15;
-        animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.calleon];
-        rigid = GetComponent<Rigidbody2D>();
+        base.Init();
 
         if (isSwitched)
         {

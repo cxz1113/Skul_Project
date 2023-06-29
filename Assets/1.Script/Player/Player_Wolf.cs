@@ -6,16 +6,13 @@ public class Player_Wolf : Player
 {
     protected override void Init()
     {
-        base.Init();
         stpd.skul = PlayerSkul.Wolf;
         Damage = 15;
         Damage_Skill1 = 40;
-        animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.wolf];
-        rigid = GetComponent<Rigidbody2D>();
 
+        base.Init();
+        
         StartCoroutine(Switched());
-
         switchIndex = 0;
     }
 

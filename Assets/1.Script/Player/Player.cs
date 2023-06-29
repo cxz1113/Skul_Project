@@ -13,8 +13,10 @@ public struct StPlayerData
 public enum PlayerSkul
 {
     LittleBorn,
+    NoHead,
     Wolf,
-    Sword
+    Sword,
+    Calleon
 }
 
 public enum PlayerType
@@ -29,14 +31,6 @@ public abstract class Player : MonoBehaviour
 {
     public StPlayerData stpd;
 
-    protected enum AnimationIndex
-    {
-        littleborn,
-        nohead,
-        wolf,
-        sword,
-        calleon
-    }
     public enum PlayerDir
     {
         left,
@@ -87,13 +81,10 @@ public abstract class Player : MonoBehaviour
     public bool isDead = false;
     protected bool isUnbeat = false;
     protected float unbeatTime = 1f;
-    
 
     //Skill
-
     protected bool canSkill_1 = true;
     protected bool canSkill_2 = true;
-
 
     //Switch
     [HideInInspector] public bool isSwitched = false;
@@ -102,11 +93,20 @@ public abstract class Player : MonoBehaviour
     
     public bool isPush;
 
+    [HideInInspector] private float inputX;
+    [HideInInspector] private float inputY;
+
     protected virtual void Init()
     {
+        animator = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
+
+        animator.runtimeAnimatorController = animators[(int)stpd.skul];
+
         ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
         ProjectManager.Instance.ui.skill2_Mask.fillAmount = 0;
         ProjectManager.Instance.ui.switch_Mask.fillAmount = 0;
+
         atBox.player = this;
     }
 
@@ -129,7 +129,10 @@ public abstract class Player : MonoBehaviour
     {
         if (PlayerBasket.Instance.isInven || isDead || ProjectManager.Instance.isPasue)
             return;
-        
+
+        inputX = Input.GetAxisRaw("Horizontal");
+        inputY = Input.GetAxisRaw("Vertical");
+
         JumpAnimation();
 
         if (!canInput)
@@ -192,15 +195,14 @@ public abstract class Player : MonoBehaviour
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
-        float dir = Input.GetAxisRaw("Horizontal");
-        rigid.velocity = new Vector2( dir * moveSpeed, rigid.velocity.y);
+        rigid.velocity = new Vector2( inputX * moveSpeed, rigid.velocity.y);
 
-        if(dir == 0)
+        if(inputX == 0)
             animator.SetBool("Walk", false);
         else
         {
             animator.SetBool("Walk", true);
-            playerDir = dir > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
+            playerDir = inputX > 0 ? PlayerDir.right : playerDir = PlayerDir.left;
         }
 
         LookDir();
@@ -211,7 +213,7 @@ public abstract class Player : MonoBehaviour
         //점프키를 안 누르거나 아래방향+점프 
         if (!Input.GetKeyDown(KeyCode.C))  
             return;
-        else if((Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0))
+        else if((Input.GetKeyDown(KeyCode.C) && inputY < 0))
         {
             DownJump();
             return;
@@ -234,7 +236,7 @@ public abstract class Player : MonoBehaviour
 
     protected void DownJump()
     {  
-        if (Input.GetKeyDown(KeyCode.C) && Input.GetAxisRaw("Vertical") < 0)
+        if (Input.GetKeyDown(KeyCode.C) && inputY < 0)
         {
             RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
             if (!rayHit)
@@ -257,15 +259,13 @@ public abstract class Player : MonoBehaviour
 
     protected IEnumerator CDash()
     {
-        float inputDir = Input.GetAxisRaw("Horizontal");
-
         canDash = false;
         isDashing = true;
         isUnbeat = true;
        
         animator.SetBool("Dash", true);
         SetGravity(false);
-        playerDir = inputDir < 0 ? PlayerDir.left : inputDir > 0 ? PlayerDir.right : playerDir;
+        playerDir = inputX < 0 ? PlayerDir.left : inputX > 0 ? PlayerDir.right : playerDir;
         float dir = playerDir == PlayerDir.right ? 1 : -1;
         LookDir();
         rigid.velocity = new Vector2(dir * dashPower, 0);
@@ -380,8 +380,8 @@ public abstract class Player : MonoBehaviour
     protected void EventMoveAttack()
     {
         //공격시, 바라보는 방향을 입력하고있으면 전진
-        if ((Input.GetAxisRaw("Horizontal") > 0 && playerDir_past == PlayerDir.right)||
-            (Input.GetAxisRaw("Horizontal") < 0 && playerDir_past == PlayerDir.left))
+        if ((inputX > 0 && playerDir_past == PlayerDir.right)||
+            (inputX < 0 && playerDir_past == PlayerDir.left))
             rigid.velocity = transform.right * moveSpeed + transform.up * rigid.velocity.y;
     }
 
@@ -427,14 +427,14 @@ public abstract class Player : MonoBehaviour
         for (int i = 0; i < unbeatTime * 10; ++i)
         {
             if (i % 2 == 0)
-                spriteRd.color = new Color32(255, 255, 255, 90);
+                spriteRd.color = new Color(1f, 1f, 1f, 0.35f);
             else
-                spriteRd.color = new Color32(255, 255, 255, 180);
+                spriteRd.color = new Color(1f, 1f, 1f, 0.7f);
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        spriteRd.color = new Color32(255, 255, 255, 255);
+        spriteRd.color = new Color(1f, 1f, 1f, 1f);
         isUnbeat = false;
         yield return null;
     }
@@ -468,10 +468,6 @@ public abstract class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             isPush = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
-        {
-            //isPush = false;
         }
 
         else if(Input.GetKeyDown(KeyCode.Tab))

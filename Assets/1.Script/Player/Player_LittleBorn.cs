@@ -13,9 +13,11 @@ public class Player_LittleBorn : Player
 
     protected override void Init()
     {
-        base.Init();
         stpd.skul = PlayerSkul.LittleBorn;
         Damage = 15;
+
+        base.Init();
+        
         if (GameObject.Find("Head_Parent"))
             head_Parent = GameObject.Find("Head_Parent").transform;
         else
@@ -25,12 +27,7 @@ public class Player_LittleBorn : Player
             head_Parent = head_obj.transform;
         }
 
-        animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
-        rigid = GetComponent<Rigidbody2D>();
-
         StartCoroutine(Switched());
-
         switchIndex = 1;
     }
 
@@ -43,7 +40,7 @@ public class Player_LittleBorn : Player
         StartCoroutine(cor_CoolUi);
         yield return new WaitForSeconds(3f);
         canSkill_1 = true;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        animator.runtimeAnimatorController = animators[(int)PlayerSkul.LittleBorn];
     }
     public void ResetCool()
     {
@@ -63,7 +60,7 @@ public class Player_LittleBorn : Player
         Destroy(head.gameObject);
         ResetCool();
         head = null;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.littleborn];
+        animator.runtimeAnimatorController = animators[(int)PlayerSkul.LittleBorn];
         StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.skill2_Mask, 5));
         yield return new WaitForSeconds(5f);
         canSkill_2 = true;
@@ -109,7 +106,7 @@ public class Player_LittleBorn : Player
     void EventSwitchAnimation()
     {
         canInput = true;
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.nohead];
+        animator.runtimeAnimatorController = animators[(int)PlayerSkul.NoHead];
     }
 
     //교대 - 애니메이션 시작하자마자 event
@@ -131,6 +128,4 @@ public class Player_LittleBorn : Player
         animator.SetTrigger("Switch");
         isSwitched = false;
     }
-
-    
 }

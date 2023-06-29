@@ -88,20 +88,23 @@ public class PlayerUI : MonoBehaviour
     public void SetData(Item item)
     {
         // Item 타입에 또는 데이터 유뮤에 따라 UI에 input 해주는 코드
-        if (item.it == ItemType.Head && item.ss.Skill2 != null)
+        if (item.it == ItemType.Head)
         {
             SkulData.Data data = item.skulJson;
-            string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1, data.skillname2 };
-            string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname2, data.skillname1detail, data.skillname2detail,
-            data.cooltime1, data.cooltime2};
-            ActiveObjChange(strType1, strType1Skill, jsonData, jsonSkillData);
-        }
-        else if (item.it == ItemType.Head && item.ss.Skill2 == null)
-        {
-            SkulData.Data data = item.skulJson;
-            string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1 };
-            string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname1detail, data.cooltime1 };
-            ActiveObjChange(strType2, strType2Skill, jsonData, jsonSkillData);
+
+            if(item.ss.Skill2 != null)
+            {
+                string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1, data.skillname2 };
+                string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname2, data.skillname1detail, data.skillname2detail,
+                    data.cooltime1, data.cooltime2};
+                ActiveObjChange(strType1, strType1Skill, jsonData, jsonSkillData);
+            }
+            else if(item.ss.Skill2 == null)
+            {
+                string[] jsonData = { data.name, data.tier, data.type, data.intro, data.passive, data.ability, data.skillname1 };
+                string[] jsonSkillData = { data.ability, data.abilitydetail, data.skillname1, data.skillname1detail, data.cooltime1 };
+                ActiveObjChange(strType2, strType2Skill, jsonData, jsonSkillData);
+            }
         }
         else if (item.it == ItemType.Item || item.it == ItemType.Essence)
         {
@@ -117,8 +120,7 @@ public class PlayerUI : MonoBehaviour
             else if(inven.isIndexX || inven.isIndexY)
             {
                 strType3.Clear();
-                inven.isIndexX = false;
-                inven.isIndexY = false;
+                inven.isIndexY = inven.isIndexX = false;
                 if (strType3.Count < 1)
                     InputData(strType3, jsonData);
             }
@@ -272,21 +274,17 @@ public class PlayerUI : MonoBehaviour
     {
         // MainSkul Sprite 크기가 포지션 잡아주는 코드
         RectTransform typePos = type.GetComponent<RectTransform>();
+        type.sprite = item.ss.headInven;
+        type.SetNativeSize();
         switch (item.skulJson.itemskul)
         {
             case "LittleBorn":
-                type.sprite = item.ss.headInven;
-                type.SetNativeSize();
                 typePos.anchoredPosition = new Vector2(0, 4);
                 break;
             case "Wolf":
-                type.sprite = item.ss.headInven;
-                type.SetNativeSize();
                 typePos.anchoredPosition = new Vector2(4, 4);
                 break;
             case "Sword":
-                type.sprite = item.ss.headInven;
-                type.SetNativeSize();
                 typePos.anchoredPosition = new Vector2(0, 4);
                 break;
         }

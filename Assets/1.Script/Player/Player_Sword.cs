@@ -7,13 +7,11 @@ public class Player_Sword : Player
 
     protected override void Init()
     {
-        base.Init();
         stpd.skul = PlayerSkul.Sword;
         Damage = 15;
         Damage_Skill1 = 40;
-        animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = animators[(int)AnimationIndex.sword];
-        rigid = GetComponent<Rigidbody2D>();
+
+        base.Init();
 
         StartCoroutine(Switched());
 
