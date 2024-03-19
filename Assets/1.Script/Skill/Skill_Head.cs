@@ -19,7 +19,7 @@ public class Skill_Head : MonoBehaviour
     void Start()
     {
         //플레이어와 충돌 방지
-        Physics2D.IgnoreCollision(headCol, player.GetComponent<CapsuleCollider2D>());
+        Physics2D.IgnoreCollision(headCol, player.GetComponent<Collider2D>());
         rigid = GetComponent<Rigidbody2D>();
         originalGravity = rigid.gravityScale;
         rigid.gravityScale = 0;
@@ -42,7 +42,7 @@ public class Skill_Head : MonoBehaviour
         isFlying = false;
         rigid.gravityScale = originalGravity;
         yield return new WaitForSeconds(0.5f);
-        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<CapsuleCollider2D>(), false);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), false);
         gameObject.layer = 0;
     }
 

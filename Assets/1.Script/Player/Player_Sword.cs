@@ -9,7 +9,7 @@ public class Player_Sword : Player
     {
         stpd.skul = PlayerSkul.Sword;
         Damage = 15;
-        Damage_Skill1 = 40;
+        Damage_Skill1 = 30;
 
         base.Init();
 
@@ -18,6 +18,7 @@ public class Player_Sword : Player
         switchIndex = 2;
     }
 
+    #region 스킬1
     protected override IEnumerator CSkill_1()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
@@ -27,18 +28,16 @@ public class Player_Sword : Player
         yield return new WaitForSeconds(1f);
         canSkill_1 = true;
     }
+    #endregion
 
-
+    #region 스킬2
     protected override IEnumerator CSkill_2()
     {
         yield break;
     }
+    #endregion
 
-    protected void EventSkill()
-    {
-
-    }
-
+    #region 교대
     protected override void SwitchSkill()
     {
         LookDir();
@@ -46,9 +45,5 @@ public class Player_Sword : Player
         isSwitched = false;
     }
 
-    //스위치 시작하자마자 event
-    void EventSwitchAnimation()
-    {
-        //Teleport_Attack(10);
-    }
+    #endregion
 }

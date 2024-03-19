@@ -150,10 +150,10 @@ public abstract class Player : MonoBehaviour
 
         SkulSwitch();
         InvenActive();
-
-        Test();
     }
 
+    #region 이동
+    //바라보는 방향 설정
     protected void LookDir()
     {
         switch (playerDir)
@@ -168,36 +168,18 @@ public abstract class Player : MonoBehaviour
         }
         playerDir_past = playerDir;
     }
-
-    protected void JumpAnimation()
-    {
-        if (rigid.velocity.y > 0.05f)
-        {
-            animator.SetBool("Jump", true);
-            animator.SetBool("Fall", false);
-        }
-        else if (rigid.velocity.y < -0.05f)
-        {
-            animator.SetBool("Fall", true);
-            animator.SetBool("Jump", false);
-        }
-        else
-        {
-            animator.SetBool("Jump", false);
-            animator.SetBool("Fall", false);
-        }
-    }
-
+    
+    //기본 이동
     protected void Move()
     {
         //대쉬중이거나 공격(점프공격 제외)중 이동 불가
-        if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && 
+        if (isDashing || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Player Jump_Attack"))
             return;
 
-        rigid.velocity = new Vector2( inputX * moveSpeed, rigid.velocity.y);
+        rigid.velocity = new Vector2(inputX * moveSpeed, rigid.velocity.y);
 
-        if(inputX == 0)
+        if (inputX == 0)
             animator.SetBool("Walk", false);
         else
         {
@@ -208,12 +190,13 @@ public abstract class Player : MonoBehaviour
         LookDir();
     }
 
+    #region 점프
     protected void Jump()
     {
         //점프키를 안 누르거나 아래방향+점프 
-        if (!Input.GetKeyDown(KeyCode.C))  
+        if (!Input.GetKeyDown(KeyCode.C))
             return;
-        else if((Input.GetKeyDown(KeyCode.C) && inputY < 0))
+        else if ((Input.GetKeyDown(KeyCode.C) && inputY < 0))
         {
             DownJump();
             return;
@@ -235,34 +218,54 @@ public abstract class Player : MonoBehaviour
     }
 
     protected void DownJump()
-    {  
+    {
         if (Input.GetKeyDown(KeyCode.C) && inputY < 0)
         {
             RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
             if (!rayHit)
                 return;
 
-            if(rayHit.collider.GetComponent<PlatformEffector2D>())
+            if (rayHit.collider.GetComponent<PlatformEffector2D>())
             {
                 StartCoroutine(CDownJump(rayHit.collider.GetComponent<CompositeCollider2D>()));
             }
         }
     }
-
-    //플레이어 콜라이더 변경시 수정필요
     IEnumerator CDownJump(Collider2D col)
     {
-        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), col);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col);
         yield return new WaitForSeconds(0.3f);
-        Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), col, false);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col, false);
     }
 
+    //상승, 낙하에 따른 애니메이션
+    protected void JumpAnimation()
+    {
+        if (rigid.velocity.y > 0.05f)
+        {
+            animator.SetBool("Jump", true);
+            animator.SetBool("Fall", false);
+        }
+        else if (rigid.velocity.y < -0.05f)
+        {
+            animator.SetBool("Fall", true);
+            animator.SetBool("Jump", false);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
+        }
+    }
+    #endregion
+
+    //대쉬
     protected IEnumerator CDash()
     {
         canDash = false;
         isDashing = true;
         isUnbeat = true;
-       
+
         animator.SetBool("Dash", true);
         SetGravity(false);
         playerDir = inputX < 0 ? PlayerDir.left : inputX > 0 ? PlayerDir.right : playerDir;
@@ -283,91 +286,15 @@ public abstract class Player : MonoBehaviour
         yield return new WaitForSeconds(dashCoolTime);
         canDash = true;
     }
+    #endregion
 
+    #region 공격
     protected void Attack()
     {
         if (!Input.GetKeyDown(KeyCode.X) || isDashing)
             return;
 
         animator.SetTrigger("Attack");
-    }
-
-    protected abstract IEnumerator CSkill_1();
-    protected abstract IEnumerator CSkill_2();
-    protected abstract void SwitchSkill();
-
-    protected virtual void InputSkill_1()
-    {
-        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-            StartCoroutine(CSkill_1());
-    }
-
-    protected virtual void InputSkill_2()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && canSkill_2)
-            StartCoroutine(CSkill_2());
-    }
-
-    protected IEnumerator CCoolDown_UI(Image mask,float coolTime)
-    {
-        float coolDowned = 0;
-        while (coolDowned < coolTime)
-        {
-            yield return new WaitForFixedUpdate();
-            coolDowned += Time.deltaTime;
-            mask.fillAmount = (coolTime - coolDowned) / coolTime;
-        }
-    }
-
-    protected IEnumerator Switched()
-    {
-        if (isSwitched)
-        {
-            canSwitch = false;
-            SwitchSkill();
-            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 3));
-            yield return new WaitForSeconds(3);
-            canSwitch = true;
-        }
-    }
-
-    protected virtual void SkulSwitch()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && canSwitch)
-        {
-            Player player = Instantiate(Resources.Load<Player>($"Player/{ProjectManager.Instance.heads[1].name}"), transform);
-            player.transform.SetParent(null);
-            player.SwitchInit(this);
-            Destroy(gameObject);
-            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 3));
-        }
-    }
-
-    public void ItemSwitch(Player plaerN)
-    {
-        Player player = Instantiate(Resources.Load<Player>($"Player/{plaerN.name}"), transform);
-        player.transform.SetParent(null);
-        animators = player.animators;
-        isSwitched = true;
-        playerDir = player.playerDir;
-        ProjectManager.Instance.ItemHeadChange();
-        Destroy(gameObject);
-    }
-
-    protected void SetGravity(bool On)
-    {
-        rigid.gravityScale = On ? originalGravity : 0;
-    }
-
-    //범용 - 현재 실행중 애니메이션이 끝날때까지 입력 불가
-    protected IEnumerator EventCStopInput()
-    {
-        canInput = false;
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9f) 
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        canInput = true;
     }
 
     //공격 A,B - 애니메이션 첫 프레임 event
@@ -380,7 +307,7 @@ public abstract class Player : MonoBehaviour
     protected void EventMoveAttack()
     {
         //공격시, 바라보는 방향을 입력하고있으면 전진
-        if ((inputX > 0 && playerDir_past == PlayerDir.right)||
+        if ((inputX > 0 && playerDir_past == PlayerDir.right) ||
             (inputX < 0 && playerDir_past == PlayerDir.left))
             rigid.velocity = transform.right * moveSpeed + transform.up * rigid.velocity.y;
     }
@@ -400,6 +327,11 @@ public abstract class Player : MonoBehaviour
             SetDamage(enemy, Damage);
         }
     }
+
+    public void SetDamage(Enemy enemy, float damage) => enemy.Damaged(damage);
+    #endregion
+
+    #region 피격
     public void Damaged(float damage)
     {
         if (isDead || isUnbeat)
@@ -438,9 +370,96 @@ public abstract class Player : MonoBehaviour
         isUnbeat = false;
         yield return null;
     }
+    #endregion
 
+    #region 스킬(쿨다운UI 포함)
+    protected IEnumerator CCoolDown_UI(Image mask, float coolTime)
+    {
+        float coolDowned = 0;
+        while (coolDowned < coolTime)
+        {
+            yield return new WaitForFixedUpdate();
+            coolDowned += Time.deltaTime;
+            mask.fillAmount = (coolTime - coolDowned) / coolTime;
+        }
+    }
 
-    public void SetDamage(Enemy enemy, float damage) => enemy.Damaged(damage);
+    #region 스킬1
+    protected abstract IEnumerator CSkill_1();
+    protected virtual void InputSkill_1()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
+            StartCoroutine(CSkill_1());
+    }
+    #endregion
+
+    #region 스킬2
+    protected abstract IEnumerator CSkill_2();
+    protected virtual void InputSkill_2()
+    {
+        if (Input.GetKeyDown(KeyCode.S) && canSkill_2)
+            StartCoroutine(CSkill_2());
+    }
+    #endregion
+
+    #endregion
+
+    #region 교대
+    protected abstract void SwitchSkill();
+
+    protected IEnumerator Switched()
+    {
+        if (isSwitched)
+        {
+            canSwitch = false;
+            SwitchSkill();
+            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 3));
+            yield return new WaitForSeconds(3);
+            canSwitch = true;
+        }
+    }
+
+    protected virtual void SkulSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canSwitch)
+        {
+            Player player = Instantiate(Resources.Load<Player>($"Player/{ProjectManager.Instance.heads[1].name}"), transform);
+            player.transform.SetParent(null);
+            player.SwitchInit(this);
+            Destroy(gameObject);
+            StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.switch_Mask, 3));
+        }
+    }
+
+    #endregion
+    
+
+    public void ItemSwitch(Player plaerN)
+    {
+        Player player = Instantiate(Resources.Load<Player>($"Player/{plaerN.name}"), transform);
+        player.transform.SetParent(null);
+        animators = player.animators;
+        isSwitched = true;
+        playerDir = player.playerDir;
+        ProjectManager.Instance.ItemHeadChange();
+        Destroy(gameObject);
+    }
+
+    protected void SetGravity(bool On)
+    {
+        rigid.gravityScale = On ? originalGravity : 0;
+    }
+
+    //범용 - 현재 실행중 애니메이션이 끝날때까지 입력 불가
+    protected IEnumerator EventCStopInput()
+    {
+        canInput = false;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9f) 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        canInput = true;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -482,20 +501,6 @@ public abstract class Player : MonoBehaviour
                 PlayerBasket.Instance.isInven = true;
                 pSound.InvenClose();
             }
-        }
-    }
-
-    void Test()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            PauseManager.Instance.Pause();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            Instantiate(enemy, pos, Quaternion.identity);
         }
     }
 }

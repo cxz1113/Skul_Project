@@ -31,6 +31,17 @@ public class Player_LittleBorn : Player
         switchIndex = 1;
     }
 
+
+    #region 스킬1 (쿨타임 초기화 포함)
+    protected override void InputSkill_1()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
+        {
+            corSkill_1 = CSkill_1();
+            StartCoroutine(corSkill_1);
+        }
+    }
+
     protected override IEnumerator CSkill_1()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
@@ -41,55 +52,6 @@ public class Player_LittleBorn : Player
         yield return new WaitForSeconds(3f);
         canSkill_1 = true;
         animator.runtimeAnimatorController = animators[(int)PlayerSkul.LittleBorn];
-    }
-    public void ResetCool()
-    {
-        StopCoroutine(corSkill_1);
-        StopCoroutine(cor_CoolUi);
-        ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
-        canSkill_1 = true;
-    }
-
-    protected override IEnumerator CSkill_2()
-    {
-        pSound.TELEPORT();
-        canSkill_2 = false;
-        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
-        transform.position = head.transform.position;
-        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
-        Destroy(head.gameObject);
-        ResetCool();
-        head = null;
-        animator.runtimeAnimatorController = animators[(int)PlayerSkul.LittleBorn];
-        StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.skill2_Mask, 5));
-        yield return new WaitForSeconds(5f);
-        canSkill_2 = true;
-    }
-
-    protected override void InputSkill_1()
-    {
-        if (Input.GetKeyDown(KeyCode.A) && canSkill_1)
-        {
-            corSkill_1 = CSkill_1();
-            StartCoroutine(corSkill_1);
-        }
-    }
-
-    protected override void InputSkill_2()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
-        {
-            StartCoroutine(CSkill_2());
-        }
-    }
-    protected override void SkulSwitch()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            base.SkulSwitch();
-            if (head != null)
-                Destroy(head.gameObject);
-        }
     }
 
     //스킬1 - 머리를 날리는 순간 event
@@ -107,6 +69,51 @@ public class Player_LittleBorn : Player
     {
         canInput = true;
         animator.runtimeAnimatorController = animators[(int)PlayerSkul.NoHead];
+    }
+
+    public void ResetCool()
+    {
+        StopCoroutine(corSkill_1);
+        StopCoroutine(cor_CoolUi);
+        ProjectManager.Instance.ui.skill1_Mask.fillAmount = 0;
+        canSkill_1 = true;
+    }
+    #endregion
+
+    #region 스킬2
+    protected override void InputSkill_2()
+    {
+        if (Input.GetKeyDown(KeyCode.S) && canSkill_2 && head != null)
+        {
+            StartCoroutine(CSkill_2());
+        }
+    }
+    protected override IEnumerator CSkill_2()
+    {
+        pSound.TELEPORT();
+        canSkill_2 = false;
+        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
+        transform.position = head.transform.position;
+        FxManager.Instance.CreateFx_Effect_Tp(transform, playerCol.size.x, playerCol.size.y, 3);
+        Destroy(head.gameObject);
+        ResetCool();
+        head = null;
+        animator.runtimeAnimatorController = animators[(int)PlayerSkul.LittleBorn];
+        StartCoroutine(CCoolDown_UI(ProjectManager.Instance.ui.skill2_Mask, 5));
+        yield return new WaitForSeconds(5f);
+        canSkill_2 = true;
+    }
+    #endregion
+
+    #region 교대
+    protected override void SkulSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            base.SkulSwitch();
+            if (head != null)
+                Destroy(head.gameObject);
+        }
     }
 
     //교대 - 애니메이션 시작하자마자 event
@@ -128,4 +135,5 @@ public class Player_LittleBorn : Player
         animator.SetTrigger("Switch");
         isSwitched = false;
     }
+    #endregion
 }

@@ -16,6 +16,7 @@ public class Player_Wolf : Player
         switchIndex = 0;
     }
 
+    #region 스킬1
     protected override IEnumerator CSkill_1()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
@@ -26,11 +27,18 @@ public class Player_Wolf : Player
         canSkill_1 = true;
     }
 
+    #endregion
+
+    #region 스킬2
     protected override IEnumerator CSkill_2()
     {
         yield break;
     }
 
+    #endregion
+
+    #region 교대
+    //교대 스킬 발동
     protected override void SwitchSkill()
     {
         LookDir();
@@ -38,7 +46,7 @@ public class Player_Wolf : Player
         isSwitched = false;
     }
 
-    //스위치 시작하자마자 event
+    //교대 시작하자마자 event
     void EventSwitchAnimation()
     {
         Teleport_Attack(10);
@@ -47,8 +55,8 @@ public class Player_Wolf : Player
     void Teleport_Attack(float distance)
     {
         float tempDis;
-        int layer = 1<<LayerMask.NameToLayer("Ground");
-        RaycastHit2D hit1 = Physics2D.Raycast(gameObject.transform.position, transform.right, distance , layer);
+        int layer = 1 << LayerMask.NameToLayer("Ground");
+        RaycastHit2D hit1 = Physics2D.Raycast(gameObject.transform.position, transform.right, distance, layer);
         RaycastHit2D hit2 = Physics2D.Raycast(gameObject.transform.position + (playerCol.size.y) * transform.up, transform.right, distance, layer);
 
         if (!hit1 && !hit2)
@@ -64,13 +72,13 @@ public class Player_Wolf : Player
         else
         {
             tempDis = hit1 ? hit1.distance : hit2.distance;
-            if (hit1 && hit2) 
+            if (hit1 && hit2)
                 tempDis = hit1.distance < hit2.distance ? hit1.distance : hit2.distance;
         }
 
         int layer2 = 1 << LayerMask.NameToLayer("Enemy");
         RaycastHit2D[] hit3 = Physics2D.RaycastAll(gameObject.transform.position + (playerCol.size.y / 2) * transform.up, transform.right, tempDis, layer2);
-        
+
         foreach (var item in hit3)
         {
             if (item.collider.gameObject.GetComponent<Enemy>())
@@ -83,4 +91,5 @@ public class Player_Wolf : Player
         tempDis -= playerCol.size.x / 2;
         transform.Translate(tempDis * Vector2.right);
     }
+    #endregion
 }
